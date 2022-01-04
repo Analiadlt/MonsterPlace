@@ -1,18 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import React  from 'react';
 
-const initialState = {
+export default function Home() {
 
+    return (
+
+        <div className="home">
+            <h1>Hola</h1>
+        </div>
+    )
 }
-
-const Home = createSlice({
-    name: sliceName,
-    initialState,
-    reducers: {
-    
-    }
-});
-
-export const {
-
-} = Home.actions
-export default Home.reducer
