@@ -1,10 +1,15 @@
-import './App.css';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
+import Home from './components/Home'
+
+
+import './sass/app.scss'
 function App() {
+
   return (
     <div className="App">
-      <h1>Henry Pokemon</h1>
-      <h1>Hola</h1>
+      <Route path="/Home" component={Home} />
     </div>
   );
 }
