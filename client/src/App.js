@@ -1,5 +1,5 @@
 import './App.css';
-
+import './sass/app.scss'
 function App() {
   return (
     <div className="App">
