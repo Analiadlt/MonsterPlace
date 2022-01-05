@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Home from './components/Home'
 
 
