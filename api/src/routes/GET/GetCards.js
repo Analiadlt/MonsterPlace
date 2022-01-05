@@ -58,7 +58,7 @@ const cards = [{
 }
 //--------------------------------------------------------------
 //acá tenemos la ruta. CreateCards() esta solo para que tengamos una base de datos base.
-router.get("/", async (req, res) => {
+router.get("/get", async (req, res) => {
   try {
     CreateCards()
     const allCards = await Card.findAll({
