@@ -4,6 +4,8 @@ import { Carousel } from 'react-responsive-carousel';
 import "../../node_modules/react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import SliderContent from './SliderContent';
 
+// exporto el slider
+
 export default function Slider(){
     const dragon = useSelector(state => state.dragones)
 	return ( 
