@@ -1,3 +1,4 @@
+
 import {CAMBIAR_FONDO}  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
@@ -49,3 +50,12 @@ export default function Reducer(state=initialState, action){
             return state;
 
 }}
+
+const initialState = []
+
+export default function Reducer(state=initialState, action){
+    return(
+        <div></div>
+    )
+}
+
