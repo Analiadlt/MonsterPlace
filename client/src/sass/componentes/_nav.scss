@@ -1,0 +1,22 @@
+@use './estilosBase/variables' as v;
+
+.navContainer{
+    display: flex;
+   justify-content: space-between;
+   margin-top: 4rem;
+   align-items: center;
+   
+   .titulo{
+    color: v.$color-titulo;
+    font-size: 6rem;
+    
+    }
+
+    span{
+        font-size: 2.5rem;
+        color: v.$blanco;
+        margin: 2rem;
+    }
+
+
+}
