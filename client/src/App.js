@@ -6,10 +6,6 @@ import Home from './components/Home'
 
 
 
-import Home from './components/Home'
-
-
-
 import './sass/app.scss'
 function App() {
 

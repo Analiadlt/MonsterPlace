@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import "../../node_modules/react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
