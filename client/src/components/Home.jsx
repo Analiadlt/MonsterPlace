@@ -11,7 +11,6 @@ export default function Home() {
             <div className='slider-home' >
             <Slider/>
             </div>
-
         </div>
         
     )
