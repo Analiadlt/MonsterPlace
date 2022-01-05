@@ -18,7 +18,11 @@ body {
     @include m.tablet {
         height: 100%;
     }
+
+
+
     background-color: v.$negro;
+
     color: v.$blanco;
     font-family: v.$fuente-principal;
     font-size: 1.6rem;
