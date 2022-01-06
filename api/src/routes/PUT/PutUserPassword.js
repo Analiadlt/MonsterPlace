@@ -12,7 +12,7 @@ router.put("/putUserPassword", async (req, res) => {
     return res.status(200).send('Password Updated Successfully');
 
   } catch (e) {
-    res.status(404).send("Cant access DB. GET CARDS PROBLEMS");
+    res.status(404).send('Put Password route problems');
   }
 });
 
