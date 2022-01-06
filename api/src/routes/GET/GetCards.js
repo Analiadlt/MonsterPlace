@@ -53,7 +53,7 @@ const cards = [{
     condition: "fuego",
   }, 
 ]
-   const createCards =  await cards.map(g => Card.create(g))
+   const createCards =  await cards.map(g => Card.findOrCreate(g))
 
 }
 //--------------------------------------------------------------
