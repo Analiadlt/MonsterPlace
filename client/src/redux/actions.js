@@ -18,7 +18,7 @@ export function addUser(payload) {
   console.log("Datos para posteo", payload)
     return async (dispatch) => {
       try {
-        var json = await axios.post(`http://localhost:3001/user`, payload);
+        var json = await axios.post(`http://localhost:3001/users`, payload);
         return dispatch({
           type: ADD_USER, 
           payload: json,
@@ -34,7 +34,7 @@ export function addUser(payload) {
 export function getUser() {
   return function (dispatch) {
       dispatch({ type: LOADING, payload: 'Buscando Usuarios...' })
-      return axios.get('http://localhost:3001/user')
+      return axios.get('http://localhost:3001/users')
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
   }
