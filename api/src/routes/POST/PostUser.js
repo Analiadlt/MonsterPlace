@@ -1,5 +1,6 @@
 const express = require("express")
 const { User } = require("../../db")
+const bcrypt = require("bcryptjs")
 
 const server = express()
 
@@ -13,13 +14,14 @@ server.post("/", async (req, res) => {
             let user;
             user = await User.findOne({ where: { email: email }, })
             if (!user) {
+                const rondasHash = 12
                 user = await User.create({
                     email: email,
                     firstName: firstName,
                     lastName: lastName,
                     nickName: nickName,
                     dateBirth: dateBirth,
-                    password: password,
+                    password: await bcrypt.hash(password, rondasHash),
                     token: token
                 })
                 res.send("Usuario creado con exito").json(user)
@@ -34,3 +36,4 @@ server.post("/", async (req, res) => {
 
 
 module.exports = server
+
