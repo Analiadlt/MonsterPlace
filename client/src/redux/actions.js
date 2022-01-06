@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const CAMBIAR_FONDO = "CAMBIAR_FONDO"
 export const ADD_USER = "ADD_USER"
+export const GET_USER = "GET_USER"
+export const LOADING = "LOADING"
 
 
 export function cambiarFondo() {
@@ -27,4 +29,13 @@ export function addUser(payload) {
 
     }
 
+}
+
+export function getUser() {
+  return function (dispatch) {
+      dispatch({ type: LOADING, payload: 'Buscando Usuarios...' })
+      return axios.get('http://localhost:3001/user')
+          .then(res => res.data)
+          .then(data => dispatch({ type: GET_USER, payload: data }))
+  }
 }
