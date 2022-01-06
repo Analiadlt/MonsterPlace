@@ -13,7 +13,7 @@ const router = Router();
 
 router.use('/cards', getCards); 
 
-router.use('/user', getUser, postUser, putUserInformation, putUserPassword, deleteUser); 
+router.use('/users', getUser, postUser, putUserInformation, putUserPassword, deleteUser); 
 
 
 
