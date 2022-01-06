@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/Home" component={Home} />
+      <Route path="/" component={Home} />
       <div className="contenedor">
       <Route path="/Registro" component={FormRegistro} />
       </div>
