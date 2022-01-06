@@ -8,24 +8,23 @@ export default function Nav() {
     const dispatch =  useDispatch();
     
 
+
+
     return (
         
         <div>
             
             <div className="navContainer">
-                <div className="logo">
-                    <Link to='/home' className="titulo">
-                        <h1 className="titulo"><span className="span"></span>CryptoGame</h1>
+                <div >
+                    <Link to='/'>
+                        <h1 className="titulo">CryptoGame</h1>
                     </Link>
                 </div>
-
-        
                 <div>
-                    
-                    <Link to='/home' className="link-nav">
+                    <Link to='/home' >
                         <span>Home</span>
                     </Link>
-                    <Link to='/Create' className="link-nav">
+                    <Link to='/Create' >
                         <span >Tienda</span>
                     </Link>
                         {/*                     <button onClick={()=>{
