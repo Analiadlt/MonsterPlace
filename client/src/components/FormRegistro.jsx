@@ -1,5 +1,7 @@
 import React ,{useState} from 'react';
 import { useFormik } from 'formik';
+import { addUser } from '../redux/actions';
+
 
  const validate = values => {
 
@@ -80,6 +82,19 @@ import { useFormik } from 'formik';
 
 	  },
 	});
+
+	// formik.handleSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	formik.handleSubmit(addUser(formik.values));
+	// }
+	console.log(formik.values);
+	
+	formik.handleSubmit = (values) => {
+		console.log(values);
+		//formik.dispatch(addUser(values));
+		//setSubmitting(false);
+	  };
+
 	return (
 
 	  <form className= "formulario"onSubmit={formik.handleSubmit}>
