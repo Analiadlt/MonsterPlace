@@ -32,7 +32,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 const { User , Card} = sequelize.models;
-const { User , Card } = sequelize.models;
+
 
 User.belongsToMany(User, { foreingKey: 'id', as: 'idPlayer1',  through: 'Game'});
 User.belongsToMany(User, { foreignKey: 'id', as: 'idPlayer2', through: 'Game'});
