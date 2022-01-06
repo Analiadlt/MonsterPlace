@@ -1,5 +1,4 @@
 const {Router} = require ("express");
-const axios = require ("axios");
 const {User} = require("../../db");
 
 
@@ -14,7 +13,7 @@ router.put("/",async(req,res)=>{
                 email:email,
             },
         });
-        res.send(response)
+        res.send("Ususario actualizado")
     } catch (error) {
         res.send(error)
     }
