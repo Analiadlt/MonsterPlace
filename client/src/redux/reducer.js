@@ -63,7 +63,7 @@ export default function Reducer(state=initialState, action){
                 ...state,
                 loading:{
                     loading:true,
-                    message: payload
+                    message: action.payload
                 }
 
             }
@@ -78,12 +78,12 @@ export default function Reducer(state=initialState, action){
           case ADD_USER: 
             return {
                 ...state,
-                 user:action.payload 
+                 user: action.payload 
           }
           case GET_USER:
               return{
                     ...state,
-                    users: payload,
+                    users: action.payload,
                     loading:{
                         loading:false,
                         message:''
