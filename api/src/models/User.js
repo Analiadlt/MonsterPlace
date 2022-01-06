@@ -16,7 +16,8 @@ module.exports = (sequelize) => {
     nickName: { type: DataTypes.STRING, allowNull: false,},
     dateBirth: { type: DataTypes.DATEONLY, allowNull: false,}, 
     password: { type: DataTypes.STRING, allowNull: false, },
-    token: { type: DataTypes.STRING, allowNull: false,},
+    //token: { type: DataTypes.STRING, allowNull: false,},
+    token: { type: DataTypes.STRING,},
     rol: { type: DataTypes.INTEGER, default: 0 }, // vale 1-usuario logueado y confirmado - 2- administrador
   },
  );
