@@ -4,6 +4,7 @@ const { User } = require("../../db")
 const server = express()
 
 server.post("/", async (req, res) => {
+
     const { email, firstName, lastName, nickName, dateBirth, password, token } = req.body
 
     try {
