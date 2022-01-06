@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO}  from './actions'
+import {CAMBIAR_FONDO, ADD_USER}  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
 import dragon3 from '../img/recurso11.png'
@@ -35,7 +35,17 @@ const initialState = {
 
     }
 
-]
+],
+    user:{
+        firstName: '',
+		lastName: '',
+		email: '',
+		nickname: '',
+		dob: '',
+		password: '',
+
+
+}
 }
 
 export default function Reducer(state=initialState, action){    
@@ -49,6 +59,14 @@ export default function Reducer(state=initialState, action){
               'claro'
 
           }
+          case ADD_USER: {
+                return {
+                    ...state,
+                    user:action.payload
+                    
+                    
+          }
+        }
 
           default:
             return state;
