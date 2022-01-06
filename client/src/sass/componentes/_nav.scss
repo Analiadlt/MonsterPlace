@@ -20,6 +20,10 @@
             color: v.$color-titulo;
         }
     }
+    .activo{
+        color: v.$color-titulo;
+        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+    }
 
 
 }
