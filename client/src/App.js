@@ -9,8 +9,12 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/Home" component={Home} />
+
+     
+
+      <Route  exact path="/" component={Home} />
       <div className="contenedoor">
+
       <Route path="/Registro" component={FormRegistro} />
       </div>
     </div>

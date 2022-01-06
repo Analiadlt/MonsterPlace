@@ -1,2 +1,28 @@
 @use './estilosBase/variables' as v;
  
+.MuiMenuItem-root{
+    font-size: 2rem;
+}
+.MuiMenuItem-denso{
+    font-size: 2rem;
+}
+.Mui-focusVisible{
+    font-size: 2rem;
+}
+
+.log-usuario{
+    display: block;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: rgba(245, 245, 220, 0.541);
+}
+.menu{
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.781);
+    padding: 0 15px;
+}
+.setting{
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.781);
+    padding: 0 15px;
+}

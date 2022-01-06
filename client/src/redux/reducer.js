@@ -11,7 +11,8 @@ const initialState = {
         img: dragon1,
         atack:85,
         defense: 90,
-        type:'Legendary'
+        type:'Legendary',
+        price:200
 
     },
     {
@@ -19,7 +20,8 @@ const initialState = {
         img: dragon2,
         atack:85,
         defense: 90,
-        type:'Epic'
+        type:'Epic',
+        price:200
 
     },
     {
@@ -27,7 +29,9 @@ const initialState = {
         img: dragon3,
         atack:85,
         defense: 90,
-        type:'Rare'
+        type:'Rare',
+        price:200
+
 
     }
 

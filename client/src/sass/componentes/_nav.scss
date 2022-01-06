@@ -2,13 +2,13 @@
 
 .navContainer{
     display: flex;
-   justify-content: space-between;
-   margin-top: 4rem;
+   justify-content: space-around;
+   margin-top: 7rem;
    align-items: center;
    
    .titulo{
     color: v.$color-titulo;
-    font-size: 6rem;
+    font-size: 4.5rem;
     
     }
 
@@ -16,6 +16,9 @@
         font-size: 2.5rem;
         color: v.$blanco;
         margin: 2rem;
+        &:hover{
+            color: v.$color-titulo;
+        }
     }
 
 
