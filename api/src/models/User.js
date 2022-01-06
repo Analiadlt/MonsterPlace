@@ -11,16 +11,11 @@ module.exports = (sequelize) => {
       autoIncrement: true
     },
     email: { type: DataTypes.STRING, allowNull: false, validate: {isEmail: true,} },
-    userName: { type: DataTypes.STRING, allowNull: false,},
+    firstName: { type: DataTypes.STRING, allowNull: false,},
+    lastName: { type: DataTypes.STRING, allowNull: false,},
     nickName: { type: DataTypes.STRING, allowNull: false,},
-    dateBirth: { type: DataTypes.DATEONLY, allowNull: false,}, //validar que sea mayor a 18 años
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      set(value) {
-      this.setDataValue('password', hash(this.userName + value)); //ver qué hash usar
-      }
-      },
+    dateBirth: { type: DataTypes.DATEONLY, allowNull: false,}, 
+    password: { type: DataTypes.STRING, allowNull: false, },
     token: { type: DataTypes.STRING, allowNull: false,}, //ver este atributo!
   },
  );
