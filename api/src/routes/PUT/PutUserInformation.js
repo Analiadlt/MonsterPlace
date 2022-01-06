@@ -15,7 +15,7 @@ router.put("/",async(req,res)=>{
         });
         res.send("Ususario actualizado")
     } catch (error) {
-        res.send(error)
+        res.send("Error al actualizar usuario")
     }
 
 })
