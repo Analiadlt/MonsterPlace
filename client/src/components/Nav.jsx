@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {  useDispatch, useSelector } from 'react-redux';
 import { cambiarFondo } from "../redux/actions";
+import ProfileHome from "./ProfileHome"
 export default function Nav() {
     const modo = useSelector(state => state.modo)
     const dispatch =  useDispatch();
@@ -11,7 +12,7 @@ export default function Nav() {
         
         <div>
             
-            <div className="navContainer contenedor">
+            <div className="navContainer">
                 <div className="logo">
                     <Link to='/home' className="titulo">
                         <h1 className="titulo"><span className="span"></span>CryptoGame</h1>
@@ -20,13 +21,14 @@ export default function Nav() {
 
         
                 <div>
+                    
                     <Link to='/home' className="link-nav">
                         <span>Home</span>
                     </Link>
                     <Link to='/Create' className="link-nav">
                         <span >Tienda</span>
                     </Link>
-                    <button onClick={()=>{
+                        {/*                     <button onClick={()=>{
                         const color = document.getElementById('body')
 
                         if(modo === 'claro'){ 
@@ -38,8 +40,12 @@ export default function Nav() {
                     }
                     }}  >
                         Cambiar
-                    </button>
+                    </button> */}
+                
+                    
+                    
                 </div>
+                <ProfileHome/>
 
             </div>
        
