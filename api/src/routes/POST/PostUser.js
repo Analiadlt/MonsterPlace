@@ -6,10 +6,10 @@ const server = express()
 
 server.post("/", async (req, res) => {
 
-    const { email, firstName, lastName, nickName, dateBirth, password, token } = req.body
+    const { email, firstName, lastName, nickName, dateBirth, password } = req.body
 
     try {
-        if (!email || !firstName || !lastName || !nickName || !dateBirth || !password || !token) res.send(" Debe completar todos los campos")
+        if (!email || !firstName || !lastName || !nickName || !dateBirth || !password) res.send(" Debe completar todos los campos")
         else {
             let user;
             user = await User.findOne({ where: { email: email }, })
@@ -21,10 +21,9 @@ server.post("/", async (req, res) => {
                     lastName: lastName,
                     nickName: nickName,
                     dateBirth: dateBirth,
-                    password: await bcrypt.hash(password, rondasHash),
-                    token: token
+                    password: await bcrypt.hash(password, rondasHash)
                 })
-                res.send("Usuario creado con exito").json(user)
+                res.send("Usuario creado con exito")
             }
             else res.send("El usuario ya existe")
         }
