@@ -169,7 +169,9 @@ export default function Reducer(state=initialState, action){
             case ADD_CART:
                 return{
                     ...state,
-                    carrito: [...state.carrito, state.dragonesbd.find(dra=> dra.name === action.payload)]
+                    carrito: !state.carrito.find(dra=> dra.name === action.payload)?
+                        [...state.carrito, state.dragonesbd.find(dra=> dra.name === action.payload)]:
+                        state.carrito
                 }
           default:
             return state;
