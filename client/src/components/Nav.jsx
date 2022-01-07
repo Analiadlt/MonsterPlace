@@ -25,7 +25,7 @@ export default function Nav() {
                         <span className={window.location.pathname === '/' ? 'activo' : null} >Home</span>
                     </Link>
                     <Link to='/Tienda' >
-                        <span className={window.location.pathname === '/Tienda' ? 'activo' : null}>Tienda</span>
+                        <span className={window.location.pathname === '/Tienda' || window.location.pathname === '/Carrito' ? 'activo' : null}>Tienda</span>
                     </Link>
                         {/*                     <button onClick={()=>{
                         const color = document.getElementById('body')
