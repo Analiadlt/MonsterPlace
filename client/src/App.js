@@ -5,11 +5,13 @@ import Home from './components/Home'
 import FormRegistro from './components/FormRegistro'
 import Tienda from './components/Tienda';
 import './sass/app.scss'
+import Nav from './components/Nav';
 
 function App() {
 
   return (
     <div className="App">
+      <Route path="/" component={Nav} />
       <Route  exact path="/" component={Home} />
       <Route  exact path="/Tienda" component={Tienda} />
       <div className="contenedoor">
