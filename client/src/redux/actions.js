@@ -6,6 +6,7 @@ export const GET_USER = "GET_USER"
 export const LOGIN_USER = "LOGIN_USER"
 export const LOADING = "LOADING"
 export const ADD_CART = "ADD_CART"
+export const REMOVE_CART = "REMOVE_CART"
 
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
@@ -60,4 +61,7 @@ export function getUser() {
 
 export function addCart(card){
     return{ type: ADD_CART, payload: card} 
+}
+export function removeCart(card){
+  return{ type: REMOVE_CART, payload: card} 
 }
