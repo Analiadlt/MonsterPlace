@@ -90,12 +90,6 @@ const Formulario = () => {
 
 			setFormularioEnviado(true)
 			
-
-			//  (setTimeout(() => {
-   
-			// 	formularioEnviado && user.data !== '' ? Alerta() : null
-			   
-			// 			  } ,1000) 
 		},
 		
 
@@ -110,8 +104,6 @@ const Formulario = () => {
 		}
 		
 	}, [user])
-
-	console.log(formularioEnviado)
 
 	return (
 		<div >
