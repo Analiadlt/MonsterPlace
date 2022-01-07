@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ListaUi from "./listaUi";
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';export default function Seccion2(){
     return (
-        <div className="contenedor">
+        <div className="contenedor-seccion">
             <div className="seccion-grid">
                 <div className="tabla-container">
                     <h1>Ranking:</h1>

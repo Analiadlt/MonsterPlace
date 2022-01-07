@@ -6,7 +6,7 @@ export default function SliderContent({dragon}) {
 
     return(
         <div>
-            <section className='slider contenedor'>   
+            <section className='slider'>   
                 <div className='info-slider'>
                     <h1 id='nombre-slider'>
                         {dragon.name}

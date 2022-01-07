@@ -9,17 +9,19 @@ import SliderContent from './SliderContent';
 export default function Slider(){
     const dragon = useSelector(state => state.dragones)
 	return ( 
-            <Carousel autoPlay={true} autoFocus={true} transitionTime={2000} interval={5000} infiniteLoop={true} className='slider-cont'>
-                <div className='seccion-slider'>  
-                    <SliderContent dragon={dragon[0]}/>
-                </div>
-                <div className='seccion-slider'>
-                    <SliderContent dragon={dragon[1]}/>
-                </div>
-                <div className='seccion-slider'>
-                    <SliderContent dragon={dragon[2]}/>
-                </div>
-            </Carousel>
+            <div className='contenedor-slider'>
+                <Carousel autoPlay={true} autoFocus={true} transitionTime={2000} interval={5000} infiniteLoop={true} className='slider-cont'>
+                    <div className='seccion-slider'>  
+                        <SliderContent dragon={dragon[0]}/>
+                    </div>
+                    <div className='seccion-slider'>
+                        <SliderContent dragon={dragon[1]}/>
+                    </div>
+                    <div className='seccion-slider'>
+                        <SliderContent dragon={dragon[2]}/>
+                    </div>
+                </Carousel>
+            </div>
 		
 	)
 }
