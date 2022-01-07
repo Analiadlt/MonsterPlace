@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART}  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER }  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
 import dragon3 from '../img/recurso11.png'
@@ -141,6 +141,11 @@ const initialState = {
 		dob: '',
 		password: '',
 },
+    userLogin:{
+        email: '',
+        password: '',
+    },
+
     loading:{
 
         loading:false,
@@ -179,6 +184,13 @@ export default function Reducer(state=initialState, action){
                 ...state,
                  user: action.payload 
           }
+
+          case LOGIN_USER: 
+            return {
+                ...state,
+                 user: action.payload 
+          }
+
           case GET_USER:
               return{
                     ...state,
