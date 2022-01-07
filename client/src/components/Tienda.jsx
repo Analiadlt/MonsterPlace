@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "./Nav";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Card from '../components/Card'
 import { useSelector } from "react-redux";
@@ -8,7 +7,7 @@ export default function Tienda(){
     const carrito = useSelector(state => state.carrito)
     return(
         <div>
-            <Nav/>
+            
             <div className="contenedor-tienda">
                 <div className="titulo-tienda">
                     <h1>Tienda</h1>
