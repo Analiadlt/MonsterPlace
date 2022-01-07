@@ -11,13 +11,11 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/" component={Nav} />
+      
       <Route path="/Carrito" component={Carrito} />
       <Route  exact path="/" component={Home} />
       <Route  exact path="/Tienda" component={Tienda} />
-      <div className="contenedoor">
       <Route path="/Registro" component={FormRegistro} />
-      </div>
     </div>
   );
 }
