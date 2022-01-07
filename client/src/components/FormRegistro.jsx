@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useFormik } from 'formik';
 import { addUser } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Nav from './Nav';
 
@@ -67,6 +68,9 @@ const validate = values => {
 
 const Formulario = () => {
 	const dispatch = useDispatch()
+	const user = useSelector( state => state.user)
+
+	console.log('esto es user desde el componente ', user)
 
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
 
@@ -84,19 +88,30 @@ const Formulario = () => {
 			console.log(values)
 			dispatch(addUser(values));
 
-			setFormularioEnviado(true);
+			setFormularioEnviado(true)
+			
+
+			//  (setTimeout(() => {
+   
+			// 	formularioEnviado && user.data !== '' ? Alerta() : null
+			   
+			// 			  } ,1000) 
 		},
+		
 
 	});
 
+	useEffect(() => {
+		if(user.data === "El usuario ya existe" ){
+			Swal.fire('El usuario ya existe', '', 'error')
+		}
+		else if (user.data === 'Usuario creado con exito'){
+			Swal.fire('Te registraste con exito', '', 'success')
+		}
+		
+	}, [user])
 
-	const Alerta = () => {
-
-		Swal.fire('Te registraste con exito', '', 'success');
-
-	}
-
-
+	console.log(formularioEnviado)
 
 	return (
 		<div >
@@ -196,10 +211,10 @@ const Formulario = () => {
 							<div className="campoErr">{formik.errors.password}</div>
 						) : null}
 					</div>
-
-					{formularioEnviado ? Alerta() : null}
+					
+  		
 					<button type="submit" >Registrarse</button>
-					<button className='login' >Ya tengo cuenta</button>
+				 <Link to='/Login'><div className='login' >Ya tengo cuenta</div></Link>
 				</form>
 			</div>
 		</div>
