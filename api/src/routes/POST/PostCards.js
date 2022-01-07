@@ -27,7 +27,3 @@ router.post("/", async (req,res)=>{
 
 
 module.exports = router;
-
-// antes de pushear que hagan cambios en DB
-// PRIMARY KEY
-// RELACION SE CREA EN OTRA RUTA CUANDO COMPRAS CARTAS
