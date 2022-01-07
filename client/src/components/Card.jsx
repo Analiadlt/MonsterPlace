@@ -1,9 +1,18 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addCart } from "../redux/actions";
 
 
 export default function Card({ name, atack, defense, img , price }) {
-
+    const dispatch = useDispatch();
+    const card ={
+        name
+        , atack
+        , defense
+        , img 
+        , price
+    } 
     return (
         <div>
             <div className='card' >
@@ -30,7 +39,12 @@ export default function Card({ name, atack, defense, img , price }) {
                     </div>
                     <div className="btn-card">
                         <button className="btn-gl btn-ver-detalle">Ver Detalle</button>
-                        <button className="btn-gl btn-comprar">Comprar</button>
+                        {window.location.pathname === '/'?
+                            <Link to='/Tienda'>
+                                <button className="btn-gl btn-comprar">Comprar</button>
+                            </Link> :
+                            <button className="btn-gl btn-comprar" onClick={()=>dispatch(addCart(name))}>Comprar</button>
+                        }       
                     </div>
 
                 </div>

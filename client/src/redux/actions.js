@@ -4,7 +4,7 @@ export const CAMBIAR_FONDO = "CAMBIAR_FONDO"
 export const ADD_USER = "ADD_USER"
 export const GET_USER = "GET_USER"
 export const LOADING = "LOADING"
-
+export const ADD_CART = "ADD_CART"
 
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
@@ -38,4 +38,8 @@ export function getUser() {
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
   }
+}
+
+export function addCart(card){
+    return{ type: ADD_CART, payload: card} 
 }
