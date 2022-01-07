@@ -7,16 +7,18 @@ import dragon4 from '../img/recurso6.png'
 import dragon5 from '../img/recurso7.png'
 import dragon6 from '../img/recurso9.png'
 import dragon7 from '../img/recurso12.png'
-
+import dragon8 from '../img/recurso13.png'
+import dragon9 from '../img/recurso3.png'
 const initialState = {
     modo :'claro',
-    dragones:[{
-        name: 'gigadude',
-        img: dragon1,
+    dragones:[        {
+        name: 'oxonomy',
+        img: dragon6,
         atack:85,
         defense: 90,
-        type:'Legendary',
+        type:'Rare',
         price:200
+
 
     },
     {
@@ -29,8 +31,8 @@ const initialState = {
 
     },
     {
-        name: 'plover',
-        img: dragon3,
+        name: 'succotash',
+        img: dragon9,
         atack:85,
         defense: 90,
         type:'Rare',
@@ -100,6 +102,25 @@ const initialState = {
     
         },
         {
+            name: 'kerplunk',
+            img: dragon8,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        },
+        {
+            name: 'succotash',
+            img: dragon9,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        },        {
             name: 'peregrint',
             img: dragon7,
             atack:85,
@@ -109,6 +130,7 @@ const initialState = {
     
     
         }
+
     ],
 
     user:{
