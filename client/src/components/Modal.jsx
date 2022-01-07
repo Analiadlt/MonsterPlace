@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -13,12 +13,16 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { removeCart } from '../redux/actions';
+import CloseIcon from '@mui/icons-material/Close';
+
 const style = {
     position: 'absolute',
     top: '50%',
-    left: '50%',
+    left: '70%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
+    maxheight: 800,
     bgcolor: 'black',
     border: '2px solid #000',
     boxShadow: 24,
@@ -30,7 +34,7 @@ export default function Modal1() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const carrito = useSelector(state => state.carrito)
-
+    const dispatch = useDispatch()
     function sumarCarrito(carrito) {
         let total = 0;
         for (let i = 0; i < carrito.length; i++) {
@@ -40,7 +44,7 @@ export default function Modal1() {
     }
     return (
         <div>
-
+            
             <h3 className="carrito" onClick={handleOpen} ><span className="carrito-num" >{carrito.length}</span><ShoppingBasketIcon fontSize="5rem" /></h3>
 
             <Modal
@@ -50,12 +54,16 @@ export default function Modal1() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+                    <span style={{color:"red",position:"relative",left:"95%", cursor:'pointer'}} onClick={handleClose}> <CloseIcon fontSize='large'/></span>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         <h1 className='titulo-modal'>Carrito <span><AddShoppingCartOutlinedIcon fontSize="large" /></span></h1>
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         <ul className='container-modal' >
-                            {
+                            {carrito.length === 0?
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}><h3 style={{textAlign:'left',fontWeight:"normal"}}> Carrito Vacio</h3></Typography>:
+                            
+                            
                                 carrito.map(dragon =>
                                     <ListItem
 
@@ -75,7 +83,8 @@ export default function Modal1() {
                                                 <div className='nick-junto'>
 
                                                     <p className='precio-modal'>${dragon.price} 
-                                                        <span className='label'>
+                                                        <span className='label-modal' onClick={()=>dispatch(removeCart(dragon.name))}>
+
                                                             <DeleteForeverIcon fontSize='large'/>
                                                         </span>
                                                     </p>
