@@ -7,6 +7,7 @@ import Tienda from './components/Tienda';
 import './sass/app.scss'
 import Nav from './components/Nav';
 import Carrito from './components/Carrito';
+import ForLogin from './components/ForLogin';
 function App() {
 
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route  exact path="/" component={Home} />
       <Route  exact path="/Tienda" component={Tienda} />
       <Route path="/Registro" component={FormRegistro} />
+      <Route path="/Login" component={ForLogin} />
     </div>
   );
 }
