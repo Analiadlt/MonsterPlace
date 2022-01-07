@@ -1,0 +1,54 @@
+@use '../estilosBase/variables' as v;
+.container-modal{
+    display: grid;
+    grid-template-rows: repeat(1,1fr);
+}
+.titulo-modal{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    font-weight: normal;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    span{
+        position: relative;
+        top: 5px;
+        left: 5px;
+    }
+}
+.modal-contenido{
+    display: flex;
+    justify-content: space-between;
+}
+.total-modal{
+    display: flex;
+    margin-left: 15px;
+    justify-content: space-around;
+    align-items: center;
+    h1{
+        color: v.$color-titulo ;
+        font-size: 2.5rem;
+        font-weight: normal;
+        letter-spacing: 2px;
+    }
+    h3{        font-size: 2.5rem;
+        font-weight: normal;
+        letter-spacing: 2px;}
+}
+.precio-modal{
+    span{
+        font-size: 2rem;
+        color: red;
+        position: relative;
+        margin-left: 8px;
+        margin-bottom: 2px;
+        
+  
+        
+
+    }
+}
+.cartaModal{
+    display: flex;
+}
