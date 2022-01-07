@@ -1,6 +1,8 @@
 import React ,{useState} from 'react';
 import { useFormik } from 'formik';
 import { addUser } from '../redux/actions';
+import {useDispatch} from 'react-redux';
+import Swal from 'sweetalert2';
 
 
  const validate = values => {
@@ -64,6 +66,8 @@ import { addUser } from '../redux/actions';
   };
   
   const Formulario = () => {
+	const dispatch = useDispatch()
+
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
 
 	const formik = useFormik({
@@ -76,32 +80,23 @@ import { addUser } from '../redux/actions';
 		password: '',
 	  },
 	   validate,
-	  	onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-			setFormularioEnviado(true)
-			addUser(values)
-			},
-	  
-	});
-	//   handleSubmit: (values, { setSubmitting }) => {
-	// 	setTimeout(() => {
-	// 	  alert(JSON.stringify(values, null, 2));
-	// 	  setSubmitting(false);
-	// 	}, 1000)}
+	   	onSubmit: (values) => {
+			console.log(values)
+			dispatch(addUser(values));
 
-	// formik.handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	formik.handleSubmit(addUser(formik.values));
-	// }
+			setFormularioEnviado(true);
+		},
+		
+	});
 	
 	
-	// let handleSubmit = (values, { setSubmitting }) => {
-	// 	{
-	// 		values.preventDefault();
-	// 	  alert(JSON.stringify(values, null, 2));
-	// 	  setSubmitting(false);
-	// 	}
-	// }
+	const Alerta = () =>{
+
+		Swal.fire('Te registraste con exito','', 'success');
+
+	}
+	
+
 
 	return (
 
@@ -199,8 +194,9 @@ import { addUser } from '../redux/actions';
 		  <div className="campoErr">{formik.errors.password}</div>
 		) : null}
         </div>
-		{formularioEnviado?<p className="exito">Te registraste con exito </p>:null}
-		<button type="submit">Registrarse</button>
+		
+		{formularioEnviado?Alerta():null}
+		<button type="submit" >Registrarse</button>
 		<button className='login' >Ya tengo cuenta</button>
 	  </form>
 	);

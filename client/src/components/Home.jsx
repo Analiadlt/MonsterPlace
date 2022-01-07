@@ -9,7 +9,6 @@ export default function Home() {
 
     return (
         <div>
-            <Nav/>
             <div className='slider-home' >
             <Slider/>
             </div>
