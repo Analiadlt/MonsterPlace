@@ -1,6 +1,8 @@
 import React ,{useState} from 'react';
 import { useFormik } from 'formik';
 import { addUser } from '../redux/actions';
+import {useDispatch} from 'react-redux';
+import Swal from 'sweetalert2';
 
 
  const validate = values => {
@@ -9,9 +11,9 @@ import { addUser } from '../redux/actions';
 
 	const errors = {};
 
-	function calcularEdad(dob) {
+	function calcularEdad(dateBirth) {
 		var hoy = new Date();
-		var cumpleanos = new Date(dob);
+		var cumpleanos = new Date(dateBirth);
 		var edad = hoy.getFullYear() - cumpleanos.getFullYear();
 		var m = hoy.getMonth() - cumpleanos.getMonth();
 	  
@@ -35,10 +37,10 @@ import { addUser } from '../redux/actions';
 	  errors.lastName = 'El apellido solo puede contener letras y espacios.';
 	}
 
-	if (!values.nickname) {
-		errors.nickname = 'Campo obligatorio.';
-	  } else if (values.nickname.length > 20) {
-		errors.nickname = 'Hasta 20 caracteres';
+	if (!values.nickName) {
+		errors.nickName = 'Campo obligatorio.';
+	  } else if (values.nickName.length > 20) {
+		errors.nickName = 'Hasta 20 caracteres';
 	  }
   
 	if (!values.email) {
@@ -47,11 +49,11 @@ import { addUser } from '../redux/actions';
 	  errors.email = 'Email invalido';
 	}
 
-	if (!values.dob) {
-		errors.dob = 'Campo obligatorio.';
+	if (!values.dateBirth) {
+		errors.dateBirth = 'Campo obligatorio.';
 	
-	}else if (calcularEdad(values.dob)<18) {
-		errors.dob = 'Debes ser mayor de edad';
+	}else if (calcularEdad(values.dateBirth)<18) {
+		errors.dateBirth = 'Debes ser mayor de edad';
 	  }
 	
 	if (!values.password) {
@@ -64,6 +66,8 @@ import { addUser } from '../redux/actions';
   };
   
   const Formulario = () => {
+	const dispatch = useDispatch()
+
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
 
 	const formik = useFormik({
@@ -71,33 +75,32 @@ import { addUser } from '../redux/actions';
 		firstName: '',
 		lastName: '',
 		email: '',
-		nickname: '',
-		dob: '',
+		nickName: '',
+		dateBirth: '',
 		password: '',
 	  },
-	  validate,
-	  onSubmit: values => {
-		alert(JSON.stringify(values, null, 2));
-		setFormularioEnviado(true)
+	   validate,
+	   	onSubmit: (values) => {
+			console.log(values)
+			dispatch(addUser(values));
 
-	  },
+			setFormularioEnviado(true);
+		},
+		
 	});
-
-	// formik.handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	formik.handleSubmit(addUser(formik.values));
-	// }
-	console.log(formik.values);
 	
-	formik.handleSubmit = (values) => {
-		console.log(values);
-		//formik.dispatch(addUser(values));
-		//setSubmitting(false);
-	  };
+	
+	const Alerta = () =>{
+
+		Swal.fire('Te registraste con exito','', 'success');
+
+	}
+	
+
 
 	return (
 
-	  <form className= "formulario"onSubmit={formik.handleSubmit}>
+	  <form className= "formulario" onSubmit={formik.handleSubmit}>
           <h2 style={{color: 'black'}}>Registrarse</h2>
 		  
 		<div className="campo">
@@ -133,17 +136,17 @@ import { addUser } from '../redux/actions';
         </div>
 
         <div className="campo">
-		<label htmlFor="nickname">NickName</label>
+		<label htmlFor="nickName">NickName</label>
 		<input
-		  id="nickname"
-		  name="nickname"
+		  id="nickName"
+		  name="nickName"
 		  type="text"
 		  onChange={formik.handleChange}
 		  onBlur={formik.handleBlur}
-		  value={formik.values.nickname}
+		  value={formik.values.nickName}
 		/>
-		{formik.touched.nickname && formik.errors.nickname ? (
-		  <div className="campoErr">{formik.errors.nickname}</div>
+		{formik.touched.nickName && formik.errors.nickName ? (
+		  <div className="campoErr">{formik.errors.nickName}</div>
 		) : null}
         </div>
 
@@ -163,17 +166,17 @@ import { addUser } from '../redux/actions';
         </div>
 
         <div className="campo">
-		<label htmlFor="dob">Fecha de Nacimiento</label>
+		<label htmlFor="dateBirth">Fecha de Nacimiento</label>
 		<input
-		  id="dob"
-		  name="dob"
+		  id="dateBirth"
+		  name="dateBirth"
 		  type="date"
 		  onChange={formik.handleChange}
 		  onBlur={formik.handleBlur}
-		  value={formik.values.dob}
+		  value={formik.values.dateBirth}
 		/>
-		{formik.touched.dob && formik.errors.dob ? (
-		  <div className="campoErr">{formik.errors.dob}</div>
+		{formik.touched.dateBirth && formik.errors.dateBirth ? (
+		  <div className="campoErr">{formik.errors.dateBirth}</div>
 		) : null}
         </div>
         
@@ -191,8 +194,9 @@ import { addUser } from '../redux/actions';
 		  <div className="campoErr">{formik.errors.password}</div>
 		) : null}
         </div>
-		{formularioEnviado?<p className="exito">Te registraste con exito </p>:null}
-		<button type="submit">Registrarse</button>
+		
+		{formularioEnviado?Alerta():null}
+		<button type="submit" >Registrarse</button>
 		<button className='login' >Ya tengo cuenta</button>
 	  </form>
 	);

@@ -1,8 +1,12 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING}  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART}  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
 import dragon3 from '../img/recurso11.png'
+import dragon4 from '../img/recurso6.png'
+import dragon5 from '../img/recurso7.png'
+import dragon6 from '../img/recurso9.png'
+import dragon7 from '../img/recurso12.png'
 
 const initialState = {
     modo :'claro',
@@ -35,7 +39,78 @@ const initialState = {
 
     }
 
-],
+    ],
+    dragonesbd:[
+        {
+            name: 'warlockk',
+            img: dragon4,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        },
+        {
+            name: 'plover',
+            img: dragon3,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        },
+        {
+            name: 'gigadude',
+            img: dragon1,
+            atack:85,
+            defense: 90,
+            type:'Legendary',
+            price:200
+    
+        },
+        {
+            name: 'octopi',
+            img: dragon2,
+            atack:85,
+            defense: 90,
+            type:'Epic',
+            price:200
+    
+        },
+        {
+            name: 'ouster',
+            img: dragon5,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        },
+        {
+            name: 'oxonomy',
+            img: dragon6,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        },
+        {
+            name: 'peregrint',
+            img: dragon7,
+            atack:85,
+            defense: 90,
+            type:'Rare',
+            price:200
+    
+    
+        }
+    ],
+
     user:{
         firstName: '',
 		lastName: '',
@@ -51,7 +126,9 @@ const initialState = {
 
     },
 
-    users:[]
+    users:[],
+
+    carrito:[]
 
 }
 
@@ -89,8 +166,13 @@ export default function Reducer(state=initialState, action){
                         message:''
                     }
               }
-        
-
+            case ADD_CART:
+                return{
+                    ...state,
+                    carrito: !state.carrito.find(dra=> dra.name === action.payload)?
+                        [...state.carrito, state.dragonesbd.find(dra=> dra.name === action.payload)]:
+                        state.carrito
+                }
           default:
             return state;
 

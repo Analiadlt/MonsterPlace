@@ -3,7 +3,7 @@
 .navContainer{
     display: flex;
    justify-content: space-around;
-   margin-top: 7rem;
+   margin-top: 5rem;
    align-items: center;
    
    .titulo{
@@ -15,10 +15,14 @@
     span{
         font-size: 2.5rem;
         color: v.$blanco;
-        margin: 2rem;
+        margin-left: 2rem;
         &:hover{
             color: v.$color-titulo;
         }
+    }
+    .activo{
+        color: v.$color-titulo;
+        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
     }
 
 

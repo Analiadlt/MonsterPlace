@@ -1,0 +1,51 @@
+@use '../estilosBase/variables' as v;
+.titulo-tienda{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    h1{
+        font-weight: normal;
+        font-size: 5rem;
+    }
+}
+.contenedor-tienda{
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+.carrito{
+    font-size: 7rem;
+    font-weight: normal;
+    color: v.$color-titulo;
+    &:hover{
+        color: v.$blanco;
+    }
+}
+.contenedor-tarjetas{
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    height: 90rem;
+}
+.grid-tienda{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
+    width: 95%;
+    
+}
+.carrito-num{
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 36px;
+    height: 15px;
+    padding: 5px 10px;
+    position: relative;
+    left: 25px;
+    background: rgba(255, 24, 24, 0.678);
+    
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
