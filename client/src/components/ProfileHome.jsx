@@ -34,7 +34,7 @@ export default function ProfileHome() {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'rgba(0, 0, 0, 0.5)',":hover":'rgba(0, 0, 0)' }}>I</Avatar>
+                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>I</Avatar>
                             
                         </IconButton>
                         
@@ -80,7 +80,7 @@ export default function ProfileHome() {
                     }}
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >   <Link to='/LogIn'>
+                >   <Link to='/Login'>
                         <MenuItem >
                             <Avatar /> <p className='menu'> Iniciar Sesion </p>
                         </MenuItem>

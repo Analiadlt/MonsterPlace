@@ -25,6 +25,7 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.45.2",
     "styled-components": "^5.3.3",
+    "sweetalert2": "^11.3.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

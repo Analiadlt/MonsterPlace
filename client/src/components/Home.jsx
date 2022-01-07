@@ -9,15 +9,20 @@ export default function Home() {
 
     return (
         <div>
+            <div className='section'>
             <Nav/>
             <div className='slider-home' >
+            
             <Slider/>
             </div>
-            <div>
+            </div>
+            <div className='section'>
                 <Destacadas/>
             </div>
             <div className='ranking'>
-                <Seccion2/>
+                <div className='section'>
+                    <Seccion2/>
+                </div>
             </div>
         </div>
         

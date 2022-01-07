@@ -30,7 +30,10 @@ body {
     box-sizing: inherit;
 }
 .contenedor {
+    display: block;
     width: 95%;
+    min-height: 70rem;
+    max-height: 80rem;
     max-width: 1200px;
     margin: 0 auto;
 }

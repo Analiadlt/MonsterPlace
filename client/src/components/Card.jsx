@@ -1,9 +1,18 @@
 import React from "react";
-
-
-
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addCart } from "../redux/actions";
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 export default function Card({ name, atack, defense, img , price }) {
-
+    const dispatch = useDispatch();
+    const card ={
+        name
+        , atack
+        , defense
+        , img 
+        , price
+    } 
     return (
         <div>
             <div className='card' >
@@ -30,7 +39,14 @@ export default function Card({ name, atack, defense, img , price }) {
                     </div>
                     <div className="btn-card">
                         <button className="btn-gl btn-ver-detalle">Ver Detalle</button>
-                        <button className="btn-gl btn-comprar">Comprar</button>
+                        {window.location.pathname === '/'?
+                            <button className="btn-gl btn-comprar">
+                            <Link to='/Tienda' className="links" >
+                                Tienda <span style={{position:'relative', top:'3px'}}><LocalMallOutlinedIcon fontSize="large" /></span>
+                            </Link> </button> :
+                            <button className="btn-gl btn-comprar" onClick={()=>dispatch(addCart(name))}>Agregar <span style={{position:'relative', top:'3px'}}><AddShoppingCartOutlinedIcon fontSize="large" /></span></button>
+                        }  
+                    
                     </div>
 
                 </div>

@@ -21,11 +21,11 @@ export default function Nav() {
                     </Link>
                 </div>
                 <div>
-                    <Link to='/home' >
-                        <span>Home</span>
+                    <Link to='/' >
+                        <span className={window.location.pathname === '/' ? 'activo' : null} >Home</span>
                     </Link>
-                    <Link to='/Create' >
-                        <span >Tienda</span>
+                    <Link to='/Tienda' >
+                        <span className={window.location.pathname === '/Tienda' || window.location.pathname === '/Carrito' ? 'activo' : null}>Tienda</span>
                     </Link>
                         {/*                     <button onClick={()=>{
                         const color = document.getElementById('body')
@@ -40,7 +40,9 @@ export default function Nav() {
                     }}  >
                         Cambiar
                     </button> */}
-                
+                {window.location.pathname === '/'? console.log('estoy en el home') : 
+                window.location.pathname === '/Tienda' ? console.log('estoy en la tienda') : null
+                }
                     
                     
                 </div>
