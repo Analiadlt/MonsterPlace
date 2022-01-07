@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER }  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART }  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
 import dragon3 from '../img/recurso11.png'
@@ -206,6 +206,11 @@ export default function Reducer(state=initialState, action){
                     carrito: !state.carrito.find(dra=> dra.name === action.payload)?
                         [...state.carrito, state.dragonesbd.find(dra=> dra.name === action.payload)]:
                         state.carrito
+                }
+            case REMOVE_CART:
+                return{
+                    ...state,
+                    carrito: state.carrito.filter(card => card.name !== action.payload)
                 }
           default:
             return state;
