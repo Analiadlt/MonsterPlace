@@ -42,10 +42,11 @@ export default function Card({ name, atack, defense, img , price }) {
                         {window.location.pathname === '/'?
                             <button className="btn-gl btn-comprar">
                             <Link to='/Tienda' className="links" >
-                                Tienda 
-                            </Link> <span style={{position:'relative', top:'3px'}}><LocalMallOutlinedIcon fontSize="large" /></span></button>:
+                                Tienda <span style={{position:'relative', top:'3px'}}><LocalMallOutlinedIcon fontSize="large" /></span>
+                            </Link> </button> :
                             <button className="btn-gl btn-comprar" onClick={()=>dispatch(addCart(name))}>Agregar <span style={{position:'relative', top:'3px'}}><AddShoppingCartOutlinedIcon fontSize="large" /></span></button>
-                        }       
+                        }  
+                    
                     </div>
 
                 </div>
