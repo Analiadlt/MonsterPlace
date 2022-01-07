@@ -80,7 +80,7 @@ export default function ProfileHome() {
                     }}
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >   <Link to='/LogIn'>
+                >   <Link to='/Login'>
                         <MenuItem >
                             <Avatar /> <p className='menu'> Iniciar Sesion </p>
                         </MenuItem>
