@@ -113,11 +113,29 @@
     }
     .btn-ver-detalle{
         background-color: #FF8E00;
+       
+            &:hover{
+                transform: translateY(1px);
+                transition: 0.4s ease-out;
+                box-shadow: 0 15px 40px 0 #ff8c007e, 0 17px 17px rgba(255, 140, 0, 0.466);
+    
+            }
+
     }
     .btn-comprar{
         background-color: v.$boton-verde;
-     
+        &:hover{
+            transform: translateY(1px);
+            transition: 0.4s ease-out;
+            box-shadow: 0 15px 40px 0 #04ff004d, 0 17px 17px 0 #04ff0049;
+
+        }
     }
+}
+.links{
+    text-decoration: none;
+    width: auto;
+    color: rgba(0, 0, 0);
 }
 
 
