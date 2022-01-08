@@ -7,6 +7,7 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOADING = "LOADING"
 export const ADD_CART = "ADD_CART"
 export const REMOVE_CART = "REMOVE_CART"
+export const RESET_USER = "RESET_USER"
 
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
@@ -64,4 +65,16 @@ export function addCart(card){
 }
 export function removeCart(card){
   return{ type: REMOVE_CART, payload: card} 
+}
+export function reset(){
+  
+  return{ type: RESET_USER, payload: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    nickname: '',
+    dob: '',
+    password: '',
+  }   } 
+
 }
