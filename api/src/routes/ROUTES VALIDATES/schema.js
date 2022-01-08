@@ -17,7 +17,7 @@ module.exports = {
         firstName:Joi.string().required(),
         lastName:Joi.string().required(),
         nickName:Joi.string().required(),
-        dateBirth:Joi.date().iso().required(),
+        dateBirth:Joi.date().iso(),
         password:Joi.string().required()
     }),
 
