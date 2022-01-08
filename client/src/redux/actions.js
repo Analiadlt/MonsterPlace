@@ -43,11 +43,11 @@ export function loginUser(payload) {
   console.log('datos enviados para ac',payload)
   return async (dispatch) => {
     try {
-      var json = await axios.post(`http://localhost:3001/users/loginUser`, payload);
-      console.log("Datos para posteo", json)
+      var json = await axios.post(`http://localhost:3001/loginUser`, payload);
+      console.log("Datos para posteo", json.data)
         return dispatch({
           type: LOGIN_USER, 
-          payload: json,
+          payload: json.data,
         });
       } catch (error) {
         console.log(error);
@@ -72,10 +72,10 @@ export function getById(id) {
   return async (dispatch) => {
     try {
       var json = await axios.get(`http://localhost:3001/users/${id}`);
-      console.log("Desde Actions", json.data);
+      console.log("Data Desde Actions", json.data);
       return dispatch({
         type: GET_BY_ID,
-        payload: json.data[0],
+        payload: json.data,
       });
     } catch (error) {
       console.log(error);

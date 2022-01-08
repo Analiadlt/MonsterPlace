@@ -2,7 +2,7 @@ import React, { useState ,useEffect} from 'react';
 import { useFormik } from 'formik';
 import { loginUser } from '../redux/actions';
 import { useDispatch , useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
@@ -33,6 +33,8 @@ const validate = values => {
 
 const ForLogin = () => {
 	const dispatch = useDispatch()
+	const history = useHistory()
+
 
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
 	const [ojo, setojo] = useState(false);
@@ -45,10 +47,16 @@ const ForLogin = () => {
 		},
 		validate,
 		onSubmit: (values) => {
-			console.log(values)
+			console.log("Desde ForLogin", values)
 			dispatch(loginUser(values));
+			
 
 			setFormularioEnviado(true);
+			// setTimeout(() => {
+			// 	history.push('/Detail/')
+				 
+			// 	}, 2000);
+			
 		},
 
 	});
