@@ -1,4 +1,4 @@
-/* const users = [
+const users = [
     {
         id: 1,
         email: "zaraza@ameil.com",
@@ -56,4 +56,4 @@
 
 ]
 
-module.exports = users */
+module.exports = users

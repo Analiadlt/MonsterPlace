@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS }  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID }  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
 import dragon3 from '../img/recurso11.png'
@@ -156,7 +156,17 @@ const initialState = {
     users:[],
 
     carrito:[],
-    cartasbd:[]
+    cartasbd:[],
+    userDetail:{
+        firstName: '',
+		lastName: '',
+		email: '',
+		nickname: '',
+		dob: '',
+		password: '',
+
+    }
+
 
 }
 
@@ -206,6 +216,14 @@ export default function Reducer(state=initialState, action){
                         message:''
                     }
               }
+        case GET_BY_ID:
+                console.log("Desde Reducer ID", action.payload)
+            return {
+                 ...state, 
+                userDetail: action.payload,
+                
+            };
+
             case GET_CARDS:
                 return{
                 ...state,
