@@ -1,0 +1,25 @@
+
+.swiper{
+    width: 60%;
+    margin-top: 3rem;
+    height: 60rem;
+
+}
+.swiper-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-button-next ,.swiper-button-prev{
+    color: rgb(0, 0, 0);
+    background-color: #ffb52073 ;
+    padding: 5px 10px;
+    border-radius:50%;
+    width: 60px;
+    height: 60px;
+}
+
+.swiper-pagination-bullets{
+    margin-top: 3rem;
+}
