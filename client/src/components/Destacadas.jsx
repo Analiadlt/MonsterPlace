@@ -1,9 +1,18 @@
-import React from "react";
-import { useSelector } from 'react-redux';
+import React, {useEffect} from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Card from "./Card";
-
+import { getCard } from "../redux/actions";
 export default function Destacadas() {
     const dragones = useSelector(state => state.dragones)
+    const loading = useSelector(state => state.loading)
+    const cartasbd = useSelector(state => state.cartasbd)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (!cartasbd.length && !loading.loading) {
+            dispatch(getCard())
+        }
+    })
+
     return(
         <div className="destacadas">
             <div className="contenedor-destacadas">

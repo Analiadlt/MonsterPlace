@@ -18,6 +18,8 @@
     font-size: 7rem;
     font-weight: normal;
     color: v.$color-titulo;
+    cursor: pointer;
+    
     &:hover{
         color: v.$blanco;
     }

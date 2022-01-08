@@ -7,13 +7,14 @@ const putUserInformation = require('./PUT/PutUserInformation')
 const putUserPassword = require('./PUT/PutUserPassword') 
 const deleteUser = require('./DELETE/DeleteUser')
 const postCards = require('./POST/PostCards')
+const postLogin = require("./POST/PostLogin")
 
 
 const router = Router();
 
 router.use('/cards', getCards, postCards); 
 
-router.use('/users', getUser, postUser, putUserInformation, putUserPassword, deleteUser); 
+router.use('/users', getUser, postUser, putUserInformation, putUserPassword, deleteUser, postLogin); 
 
 
 

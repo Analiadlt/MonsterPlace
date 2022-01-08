@@ -4,6 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('card', {
+    id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true},
     name: { type: DataTypes.STRING },
     attack: { type: DataTypes.INTEGER, allowNull: false },
     defense: { type: DataTypes.INTEGER, allowNull: false },

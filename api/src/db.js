@@ -38,8 +38,10 @@ const { User , Card} = sequelize.models;
 User.belongsToMany(User, { foreingKey: 'id', as: 'idPlayer1',  through: 'Game'});
 User.belongsToMany(User, { foreignKey: 'id', as: 'idPlayer2', through: 'Game'});
 
-User.hasMany(Card);
-Card.belongsTo(User);
+// User.hasMany(Card);
+// Card.belongsTo(User);
+User.belongsToMany(Card, { through: 'user_card' });
+Card.belongsToMany(User, { through: 'user_card' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
