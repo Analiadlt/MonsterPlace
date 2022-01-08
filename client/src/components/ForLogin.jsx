@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useFormik } from 'formik';
 import { loginUser } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const validate = values => {
 
@@ -33,6 +35,8 @@ const ForLogin = () => {
 	const dispatch = useDispatch()
 
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
+	const [ojo, setojo] = useState(false);
+	const switchShown = () => setojo(!ojo)
 
 	const formik = useFormik({
 		initialValues: {
@@ -50,11 +54,11 @@ const ForLogin = () => {
 	});
 
 
-	const Alerta = () => {
+	// const Alerta = () => {
 
-		Swal.fire('Conectando...', '', 'success');
+	// 	Swal.fire('Conectando...', '', 'success');
 
-	}
+	// }
 
 
 
@@ -84,21 +88,26 @@ const ForLogin = () => {
 					</div>
 
 					<div className="user-box">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password" >Password</label>
+						<div style={{display:'flex'}}>
 						<input
 							id="password"
 							name="password"
-							type="password"
+							type={ojo ? 'text' : 'password'}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 							value={formik.values.password}
-						/>
+							
+						/> 
+						{formik.values.password !== '' ? ojo ?<span onClick={switchShown}><VisibilityOffIcon/></span> : <span onClick={switchShown}><VisibilityIcon/> </span> :null}
+						</div>
 						{formik.touched.password && formik.errors.password ? (
 							<div className="campoErr"><ErrorOutlineOutlinedIcon/>{formik.errors.password}</div>
 						) : null}
-					</div>
 
-					{formularioEnviado ? Alerta() : null}
+						</div>
+
+					{/* {formularioEnviado ? Alerta() : null} */}
 					<div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
 					 <button type="submit" className='botonn'>
 					 <span></span>
@@ -113,6 +122,10 @@ const ForLogin = () => {
 					<span></span>Crear una cuenta</div></Link>
 					</div>
 				</form>
+				<div style={{display:'flex',justifyContent:'center', marginTop:'2rem'}}>
+					<a href='#'>Olvide mi contraseña</a>
+
+				</div>
 			</div>
 		</div>
 		</div>

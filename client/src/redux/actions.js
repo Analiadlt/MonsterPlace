@@ -14,12 +14,9 @@ export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
 
-// export function addUser() {
-//     return{ type: ADD_USER, payload: 'values'}
-// }
 
 export function addUser(payload) {
-  console.log("Datos para posteo", payload)
+ 
     return async (dispatch) => {
       try {
         var json = await axios.post(`http://localhost:3001/users`, payload);
@@ -43,10 +40,11 @@ export function getCard() {
   }
 }
 export function loginUser(payload) {
-  console.log("Datos para posteo", payload)
-    return async (dispatch) => {
-      try {
-        var json = await axios.post(`http://localhost:3001/users`, payload);
+  console.log('datos enviados para ac',payload)
+  return async (dispatch) => {
+    try {
+      var json = await axios.post(`http://localhost:3001/users/loginUser`, payload);
+      console.log("Datos para posteo", json)
         return dispatch({
           type: LOGIN_USER, 
           payload: json,
