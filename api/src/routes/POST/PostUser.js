@@ -9,8 +9,7 @@ server.post("/", async (req, res) => {
     const { email, firstName, lastName, nickName, dateBirth, password } = req.body
 
     try {
-      
-        else {
+       
             let user;
             user = await User.findOne({ where: { email: email }, })
             if (!user) {
