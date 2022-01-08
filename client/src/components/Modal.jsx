@@ -24,7 +24,7 @@ const style = {
     width: 500,
     maxheight: 800,
     bgcolor: 'black',
-    border: '2px solid #000',
+    borderRadius:"5px",
     boxShadow: 24,
     p: 4,
 };
@@ -109,6 +109,7 @@ export default function Modal1() {
                         </div>
 
                     </Typography>
+                    <button className='btn-modal'>Realizar Compra</button>
                 </Box>
             </Modal>
         </div>
