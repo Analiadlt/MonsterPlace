@@ -1,4 +1,7 @@
 const { Router } = require('express');
+const {postCardSchema,postUserSchema, postLoginSchema,putUserInformationSchema,putUserPasswordSchema,putLoginInformation} = require("./ROUTES VALIDATES/schema");
+const validateInformation = require("./ROUTES VALIDATES/middleware");
+
 
 const getCards = require('./GET/GetCards')
 const getUser = require('./GET/GetUser')
@@ -12,10 +15,11 @@ const postLogin = require("./POST/PostLogin")
 
 const router = Router();
 
-router.use('/cards', getCards, postCards); 
+router.use('/cards', getCards,validateInformation(postCardSchema),postCards); 
 
-router.use('/users', getUser, postUser, putUserInformation, putUserPassword, deleteUser, postLogin); 
 
+router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword, deleteUser,validateInformation(postLoginSchema), postLogin); 
+router.use('/user',validateInformation(putUserInformationSchema),putUserInformation)
 
 
 module.exports = router;

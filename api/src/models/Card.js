@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     defense: { type: DataTypes.INTEGER, allowNull: false },
     img: { type: DataTypes.STRING, allowNull: false }, //¿qué almacena en img?
     state: { type: DataTypes.ENUM('activa', 'agotada', 'muerta'), allowNull: false }, //¡se puede definir como default 'activa'?
-    condition: { type: DataTypes.STRING},
+    type: { type: DataTypes.STRING},
     sellPrice: {type: DataTypes.DECIMAL(20, 2)},
     sellCount: { type: DataTypes.INTEGER, allowNull: false }, //cantidad de Ventas
   }
