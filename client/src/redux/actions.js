@@ -9,6 +9,7 @@ export const ADD_CART = "ADD_CART"
 export const REMOVE_CART = "REMOVE_CART"
 export const RESET_USER = "RESET_USER"
 export const GET_CARDS = "GET_CARDS"
+export const GET_BY_ID = "GET_BY_ID"
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -65,6 +66,23 @@ export function getUser() {
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
   }
+}
+
+//Traigo un usuario por ID
+export function getById(id) {
+  console.log('id desde actions', id);
+  return async (dispatch) => {
+    try {
+      var json = await axios.get(`http://localhost:3001/users/${id}`);
+      console.log("Desde Actions", json.data);
+      return dispatch({
+        type: GET_BY_ID,
+        payload: json.data[0],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function addCart(card){
