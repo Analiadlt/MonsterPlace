@@ -5,7 +5,7 @@ const {Card} = require("../../db");
 const router = Router();
 
 router.post("/", async (req,res)=>{
-    let {name,attack,defense,img,state,condition,sellPrice,sellCount}=req.body;
+    let {name,attack,defense,img,state,type,sellPrice,sellCount}=req.body;
 
     try {
 
@@ -14,7 +14,7 @@ router.post("/", async (req,res)=>{
             defense,
             img,
             state,
-            condition,
+            type,
             sellPrice,
             sellCount
         }});
