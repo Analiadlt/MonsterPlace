@@ -21,7 +21,7 @@ const validate = values => {
 	}
 
 	if (!values.password) {
-		errors.password = 'Contraseña obligatorio.';
+		errors.password = 'Contraseña obligatoria.';
 	} else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(values.password)) {
 		errors.password = 'Debe tener entre 8 y 16 caracteres, al menos un numero, una minúscula y una mayúscula.';
 	}
