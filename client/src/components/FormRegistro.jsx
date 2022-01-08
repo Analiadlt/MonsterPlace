@@ -252,19 +252,13 @@ const Formulario = () => {
 							value={formik.values.password}
 							
 						/> 
-					
-						
 						{formik.values.password !== '' ? ojo ?<span onClick={switchShown}><VisibilityOffIcon/></span> : <span onClick={switchShown}><VisibilityIcon/> </span> :null}
 						</div>
 						{formik.touched.password && formik.errors.password ? (
 							<div className="campoErr"><ErrorOutlineOutlinedIcon/>{formik.errors.password}</div>
 						) : null}
-						
-						
-							
-						
-						
-					</div>
+
+						</div>
 					
 					<div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
 					 <button type="submit" className='botonn'>
