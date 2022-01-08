@@ -9,7 +9,7 @@ server.post("/", async (req, res) => {
     const { email, firstName, lastName, nickName, dateBirth, password } = req.body
 
     try {
-        if (!email || !firstName || !lastName || !nickName || !dateBirth || !password) res.send(" Debe completar todos los campos")
+      
         else {
             let user;
             user = await User.findOne({ where: { email: email }, })
@@ -26,9 +26,8 @@ server.post("/", async (req, res) => {
                 res.send("Usuario creado con exito")
             }
             else res.send("El usuario ya existe")
-        }
-    }
-    catch (error) {
+        
+    } catch (error) {
         res.send("Ups...!!!existe un error")
     }
 })
