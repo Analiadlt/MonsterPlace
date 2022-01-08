@@ -18,8 +18,9 @@ const router = Router();
 router.use('/cards', getCards,validateInformation(postCardSchema),postCards); 
 
 
-router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword, deleteUser,validateInformation(postLoginSchema), postLogin); 
-router.use('/user',validateInformation(putUserInformationSchema),putUserInformation)
+router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword, deleteUser); 
+router.use('/user',validateInformation(putUserInformationSchema),putUserInformation);
+router.use('/',validateInformation(postLoginSchema), postLogin);
 
 
 module.exports = router;
