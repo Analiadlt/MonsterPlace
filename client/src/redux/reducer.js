@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART }  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS }  from './actions'
 import dragon1 from '../img/recurso4.png'
 import dragon2 from '../img/recurso1.png'
 import dragon3 from '../img/recurso11.png'
@@ -155,7 +155,8 @@ const initialState = {
 
     users:[],
 
-    carrito:[]
+    carrito:[],
+    cartasbd:[]
 
 }
 
@@ -190,6 +191,11 @@ export default function Reducer(state=initialState, action){
                 ...state,
                  user: action.payload 
           }
+          case RESET_USER: 
+            return {
+                ...state,
+                 user: action.payload 
+          }
 
           case GET_USER:
               return{
@@ -200,6 +206,15 @@ export default function Reducer(state=initialState, action){
                         message:''
                     }
               }
+            case GET_CARDS:
+                return{
+                ...state,
+                cartasbd: action.payload,
+                loading:{
+                    loading: false,
+                    message: action.payload
+                    } 
+            }
             case ADD_CART:
                 return{
                     ...state,
