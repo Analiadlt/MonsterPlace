@@ -1,25 +1,21 @@
 @use '../estilosBase/variables' as v;
-.grid-destacadas{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 2rem;
-    width: 95%;
-    margin-top: 5rem;
-}
+
 
 .destacadas{
     width: 100%;
+    height: 85rem;
     background-color: v.$blanco;
-    margin-top: 40px;
+    display: f;
+    
 }
 .contenedor-destacadas{
     display: block;
     margin: 0 auto;
     width: 90%;
-    height: 90rem;
 
     h2{
         padding-top: 8rem;
+        font-size: 4rem;
         color: v.$negro;
         text-align: left;
     }
