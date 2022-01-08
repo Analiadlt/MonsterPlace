@@ -10,6 +10,13 @@ export default function Home() {
     return (
         <div>
             <div className='section'>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
             <Nav/>
             <div className='slider-home' >
             
