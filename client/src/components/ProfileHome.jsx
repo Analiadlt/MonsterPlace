@@ -88,11 +88,20 @@ export default function ProfileHome() {
                     }}
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >  <Link to='/Login'>
+                
+                > 
+                {userLogeado.nickName ?
+                    <Link to='/Login'>
                         <MenuItem >
-                            <Avatar /> <p className='menu'>{userLogeado.nickName ? 'Salir' :'Iniciar Sesion'} </p>
+                            <Avatar /> <p className='menu'> Salir </p>
                         </MenuItem>
-                    </Link>
+                    </Link> : 
+                    <Link to='/Login'>
+                    <MenuItem >
+                        <Avatar /> <p className='menu'>Iniciar Sesion</p>
+                    </MenuItem>
+                </Link> }
+                 
                     <Link to='/Registro'>
                         <MenuItem fontSize="2rem">
                             <Avatar  /> <p className='menu'> Crear Cuenta </p> 
