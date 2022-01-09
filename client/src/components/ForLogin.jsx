@@ -61,11 +61,11 @@ const ForLogin = () => {
 
 	});
 
-	useEffect(() => {
-		if (userLogeado) {
-			history.push(`/Detail/${userLogeado.id}`)
-		}
-	});
+	// useEffect(() => {
+	// 	if (userLogeado) {
+	// 		history.push(`/Detail/${userLogeado.id}`)
+	// 	}
+	// });
 
 
 
