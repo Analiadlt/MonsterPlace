@@ -42,8 +42,10 @@ const initialState = {
 
     ],
     dragonesbd:[],
+    
     //recolecta la informacion del usuario para crearlo 
     user:[],
+
     //informacion del usuario que se encuentra logueado 
     userLogueado:[],
 
@@ -52,13 +54,18 @@ const initialState = {
         email: '',
         password: '',
     },
+
     //trae todos los usuarios de la base de datos 
     users:[],
+
     //carrito de compras
     carrito:[],
+
     //trae todas las cartas 
+
     //informacion para el detalle del usuario
     userDetail:[],
+
     //tiempo de espera de las actions
     loading:{
 
@@ -95,6 +102,7 @@ export default function Reducer(state=initialState, action){
           }
 
           case LOGIN_USER: 
+          console.log("Desde Reducer ID", action.payload)
             return {
                 ...state,
                  userLogueado: action.payload 

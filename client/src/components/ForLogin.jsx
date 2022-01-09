@@ -36,6 +36,7 @@ const ForLogin = () => {
 	const history = useHistory()
 	const userLogeado = useSelector(state => state.userLogueado)
 
+
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
 	const [ojo, setojo] = useState(false);
 	const switchShown = () => setojo(!ojo)
@@ -64,8 +65,9 @@ const ForLogin = () => {
 	useEffect(() => {
 	 	if (userLogeado) {
 	 		history.push(`/Detail/${userLogeado.id}`)
+			console.log("User ID desde Login",userLogeado.id)
 	 	}
-	});
+	}, [userLogeado, history]);
 
 
 
