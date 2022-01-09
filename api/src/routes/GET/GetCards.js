@@ -128,7 +128,7 @@ const CreateCards = async () => {
 router.get("/get", async (req, res) => {
   const consulta = await Card.findAll()
   if(consulta.length===0){
-    console.log("VACIOO")
+ 
     try {
       await CreateCards();
       const allCards = await Card.findAll({
