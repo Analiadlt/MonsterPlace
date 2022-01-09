@@ -4,19 +4,20 @@ const {User} = require("../../db");
 
 const router = Router();
 
-router.delete("/",async(req,res)=>{
+router.delete("/user/:id",async(req,res)=>{
 
+    let id=req.params.id
+    console.log(id)
     try {
-        let {email}=req.query
         await User.destroy(
             {
             where: {
-                email:email,
+                id:id,
             },
         });
-        res.send("Usuario Eliminado")
+        res.status(200).send("Usuario Eliminado")
     } catch (error) {
-        res.send("Error al eliminar usuario")
+        res.status(400).send("Error al eliminar usuario")
     }
 
 })
