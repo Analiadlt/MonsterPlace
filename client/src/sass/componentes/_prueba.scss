@@ -43,7 +43,7 @@
     }
 
     .cards:hover .circle:before{
-        background: v.$color-fondo;
+        background: #ffb520b4;
         clip-path: circle(400px at center);
         
     }
@@ -80,7 +80,7 @@
 
     }
     .cards .content h2{
-        color: white;
+        color: v.$color-fondo;
         text-transform: uppercase;
         font-size: 3rem;
         line-height: 1rem;
@@ -114,7 +114,7 @@
     }
     .detalles{
         margin-top: 2rem;
-        color: white;
+        color: v.$color-fondo;
         margin-left: 1rem;
 
     }
@@ -128,12 +128,12 @@
         h4{
             font-weight: normal;
             letter-spacing: 1px;
-            color: #fff ;
+            color: v.$color-fondo ;
         }
         p{
             
             margin-top: 1rem;
-            color: #fff;
+            color: v.$color-fondo;
             letter-spacing: 1px;
         }
         .precio{
