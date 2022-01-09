@@ -40,7 +40,7 @@ export default function Slider() {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide>
+                <SwiperSlide style={{height:'1000px'}}>
                     <img src={slider1} alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
