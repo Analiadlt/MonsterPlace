@@ -12,11 +12,13 @@ export default function Detalle() {
   const dispatch = useDispatch();
   const { id }= useParams();
   const [uId, ] = useState(id);
+
+//   console.log("ID desde Detail", id, uId);
  // const aux = "840d9150-0da9-4c7b-a898-8d15e0d1827d"
 
 	useEffect(() => {
     dispatch(getById(uId));
-	}, [uId]);
+	}, [dispatch, uId]);
 
 const detail = useSelector((state) => state.userDetail);
 
