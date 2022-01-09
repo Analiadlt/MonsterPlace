@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { useFormik } = require("formik");
 const router = Router();
 const { Card } = require("../../db");
 
@@ -125,16 +126,22 @@ const CreateCards = async () => {
 };
 //acá tenemos la ruta. CreateCards() esta solo para que tengamos una base de datos base.
 router.get("/get", async (req, res) => {
-  try {
-     CreateCards();
-    const allCards = await Card.findAll({
-      attributes: ["name","attack", "defense", "img", "state", "type", "sellPrice"],
-    });
-
-    return res.status(200).send(allCards);
-  } catch (e) {
-    res.status(404).send("Cant access DB. GET CARDS PROBLEMS");
+  const consulta = await Card.findAll()
+  if(consulta.length===0){
+    console.log("VACIOO")
+    try {
+      await CreateCards();
+      const allCards = await Card.findAll({
+        attributes: ["name","attack", "defense", "img", "state", "type", "sellPrice"],
+      });
   
+      return res.status(200).send(allCards);
+    } catch (e) {
+      res.status(404).send("Cant access DB. GET CARDS PROBLEMS");
+    
+    }
+  } else {
+    res.status(200).send(consulta)
   }
 });
 
