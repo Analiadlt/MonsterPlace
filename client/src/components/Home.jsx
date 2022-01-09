@@ -9,23 +9,27 @@ export default function Home() {
 
     return (
         <div >
+
+            
+                
+         
             <div className='section'>
                 <Nav />
-            </div>
-            <div className='contenedor-cheto'>
-                <div className='section'>
+                <div className='contenedor-cheto'>
                     <div className='slider-home' >
-                        
+
                         <Slider />
                     </div>
                 </div>
+            </div>
+            <div className='contenedor-cheto'>
                 <div className='section'>
                     <Destacadas />
                 </div>
-                <div className='ranking'>
-                    <div className='section'>
+                <div className='ranking section'>
+                    
                         <Seccion2 />
-                    </div>
+                    
                 </div>
             </div>
         </div>
