@@ -8,7 +8,7 @@ import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import candado from '../img/candado.png'
+
 const validate = values => {
 
 
