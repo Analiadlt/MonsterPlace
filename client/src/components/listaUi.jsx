@@ -25,7 +25,7 @@ export default function ListaUi() {
         }
     })
   return (
-    <List dense sx={{ width: '100%', maxWidth:500, bgcolor: 'black', borderRadius:'10px',boxShadow:'0 15px 40px 0 rgba(0, 0, 0, 0.904), 0 17px 17px 0 rgba(0, 0, 0, .5)'}}>
+    <List dense sx={{ width: '100%', maxWidth:500, bgcolor: 'black', borderRadius:'10px',boxShadow:'0 15px 40px 0 rgba(0, 0, 0, 0.904), 0 17px 17px 0 rgba(0, 0, 0, .5)',border:'none'}}>
         <div className='contendedor-encabezado'>
             <ListItem >
             <ListItemButton><h4 className='encabezado'>User</h4> </ListItemButton>

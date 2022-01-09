@@ -2,9 +2,9 @@
 
 .navContainer{
     display: flex;
-   justify-content: space-around;
+   justify-content: space-between;
    align-items: center;
-   
+   margin: 0 150px;
    .titulo{
     color: v.$color-titulo;
     font-size: 4.5rem;
