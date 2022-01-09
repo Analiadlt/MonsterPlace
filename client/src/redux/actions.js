@@ -9,16 +9,14 @@ export const ADD_CART = "ADD_CART"
 export const REMOVE_CART = "REMOVE_CART"
 export const RESET_USER = "RESET_USER"
 export const GET_CARDS = "GET_CARDS"
+export const GET_BY_ID = "GET_BY_ID"
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
 
-// export function addUser() {
-//     return{ type: ADD_USER, payload: 'values'}
-// }
-
+// Funcion para crear usuario
 export function addUser(payload) {
-  console.log("Datos para posteo", payload)
+ 
     return async (dispatch) => {
       try {
         var json = await axios.post(`http://localhost:3001/users`, payload);
@@ -42,13 +40,14 @@ export function getCard() {
   }
 }
 export function loginUser(payload) {
-  console.log("Datos para posteo", payload)
-    return async (dispatch) => {
-      try {
-        var json = await axios.post(`http://localhost:3001/users`, payload);
+  console.log('datos enviados para ac',payload)
+  return async (dispatch) => {
+    try {
+      var json = await axios.post(`http://localhost:3001/loginUser`, payload);
+      console.log("Datos para posteo", json.data)
         return dispatch({
           type: LOGIN_USER, 
-          payload: json,
+          payload: json.data,
         });
       } catch (error) {
         console.log(error);
@@ -65,6 +64,23 @@ export function getUser() {
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
   }
+}
+
+//Traigo un usuario por ID
+export function getById(id) {
+  console.log('id desde actions', id);
+  return async (dispatch) => {
+    try {
+      var json = await axios.get(`http://localhost:3001/users/${id}`);
+      console.log("Data Desde Actions", json.data);
+      return dispatch({
+        type: GET_BY_ID,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function addCart(card){

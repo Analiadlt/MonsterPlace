@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useFormik } from 'formik';
 import { loginUser } from '../redux/actions';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch , useSelector} from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const validate = values => {
 
@@ -21,7 +23,7 @@ const validate = values => {
 	}
 
 	if (!values.password) {
-		errors.password = 'Contraseña obligatorio.';
+		errors.password = 'Contraseña obligatoria.';
 	} else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(values.password)) {
 		errors.password = 'Debe tener entre 8 y 16 caracteres, al menos un numero, una minúscula y una mayúscula.';
 	}
@@ -31,8 +33,12 @@ const validate = values => {
 
 const ForLogin = () => {
 	const dispatch = useDispatch()
+	const history = useHistory()
+	const userLogeado = useSelector(state => state.userLogueado)
 
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
+	const [ojo, setojo] = useState(false);
+	const switchShown = () => setojo(!ojo)
 
 	const formik = useFormik({
 		initialValues: {
@@ -41,20 +47,26 @@ const ForLogin = () => {
 		},
 		validate,
 		onSubmit: (values) => {
-			console.log(values)
+			console.log("Desde ForLogin", values)
 			dispatch(loginUser(values));
+			
 
 			setFormularioEnviado(true);
+			// setTimeout(() => {
+			// 	history.push('/Detail/')
+				 
+			// 	}, 2000);
+			
 		},
 
 	});
 
+	useEffect(() => {
+	 	if (userLogeado) {
+	 		history.push(`/Detail/${userLogeado.id}`)
+	 	}
+	});
 
-	const Alerta = () => {
-
-		Swal.fire('Conectando...', '', 'success');
-
-	}
 
 
 
@@ -84,21 +96,26 @@ const ForLogin = () => {
 					</div>
 
 					<div className="user-box">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password" >Password</label>
+						<div style={{display:'flex'}}>
 						<input
 							id="password"
 							name="password"
-							type="password"
+							type={ojo ? 'text' : 'password'}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 							value={formik.values.password}
-						/>
+							
+						/> 
+						{formik.values.password !== '' ? ojo ?<span onClick={switchShown}><VisibilityOffIcon/></span> : <span onClick={switchShown}><VisibilityIcon/> </span> :null}
+						</div>
 						{formik.touched.password && formik.errors.password ? (
 							<div className="campoErr"><ErrorOutlineOutlinedIcon/>{formik.errors.password}</div>
 						) : null}
-					</div>
 
-					{formularioEnviado ? Alerta() : null}
+						</div>
+
+					{/* {formularioEnviado ? Alerta() : null} */}
 					<div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
 					 <button type="submit" className='botonn'>
 					 <span></span>
@@ -113,6 +130,10 @@ const ForLogin = () => {
 					<span></span>Crear una cuenta</div></Link>
 					</div>
 				</form>
+				<div style={{display:'flex',justifyContent:'center', marginTop:'2rem'}}>
+					<a href='#'>Olvide mi contraseña</a>
+
+				</div>
 			</div>
 		</div>
 		</div>

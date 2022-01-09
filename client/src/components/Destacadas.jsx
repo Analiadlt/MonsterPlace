@@ -2,10 +2,12 @@ import React, {useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import Card from "./Card";
 import { getCard } from "../redux/actions";
+import Prueba from "./Prueba";
+import Car from './Car'
 export default function Destacadas() {
-    const dragones = useSelector(state => state.dragones)
     const loading = useSelector(state => state.loading)
-    const cartasbd = useSelector(state => state.cartasbd)
+    const cartasbd = useSelector(state => state.dragonesbd)
+    const destacadas = cartasbd.slice(1,4)
     const dispatch = useDispatch()
     useEffect(() => {
         if (!cartasbd.length && !loading.loading) {
@@ -15,17 +17,17 @@ export default function Destacadas() {
 
     return(
         <div className="destacadas">
+            {loading.loading ? <h1>cargando...</h1>:
             <div className="contenedor-destacadas">
                 <h2>Destacadas:</h2>
-                <div className="grid-destacadas">
-                {
-                dragones.map(dragon=>
-                    <Card name={dragon.name} atack={dragon.atack} defense={dragon.defense}  img={dragon.img} price={dragon.price} />
-                ) 
-                }
+                <div>
+
+
+                    <Car/>
                 </div>
                 
             </div>
+}
         </div>
     )
 

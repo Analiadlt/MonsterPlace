@@ -1,17 +1,16 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS }  from './actions'
-import dragon1 from '../img/recurso4.png'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID }  from './actions'
 import dragon2 from '../img/recurso1.png'
-import dragon3 from '../img/recurso11.png'
-import dragon4 from '../img/recurso6.png'
-import dragon5 from '../img/recurso7.png'
 import dragon6 from '../img/recurso9.png'
-import dragon7 from '../img/recurso12.png'
-import dragon8 from '../img/recurso13.png'
 import dragon9 from '../img/recurso3.png'
+
+
+
 const initialState = {
+    //validador de modo de color de la pagina 
     modo :'claro',
-    dragones:[        {
+    //cartas hardcode
+    dragones:[{
         name: 'oxonomy',
         img: dragon6,
         atack:85,
@@ -42,122 +41,31 @@ const initialState = {
     }
 
     ],
-    dragonesbd:[
-        {
-            name: 'warlockk',
-            img: dragon4,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        },
-        {
-            name: 'plover',
-            img: dragon3,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        },
-        {
-            name: 'gigadude',
-            img: dragon1,
-            atack:85,
-            defense: 90,
-            type:'Legendary',
-            price:200
-    
-        },
-        {
-            name: 'octopi',
-            img: dragon2,
-            atack:85,
-            defense: 90,
-            type:'Epic',
-            price:200
-    
-        },
-        {
-            name: 'ouster',
-            img: dragon5,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        },
-        {
-            name: 'oxonomy',
-            img: dragon6,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        },
-        {
-            name: 'kerplunk',
-            img: dragon8,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        },
-        {
-            name: 'succotash',
-            img: dragon9,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        },        {
-            name: 'peregrint',
-            img: dragon7,
-            atack:85,
-            defense: 90,
-            type:'Rare',
-            price:200
-    
-    
-        }
+    dragonesbd:[],
+    //recolecta la informacion del usuario para crearlo 
+    user:[],
+    //informacion del usuario que se encuentra logueado 
+    userLogueado:[],
 
-    ],
-
-    user:{
-        firstName: '',
-		lastName: '',
-		email: '',
-		nickname: '',
-		dob: '',
-		password: '',
-},
+    //carga la informacion para enviar del login
     userLogin:{
         email: '',
         password: '',
     },
-
+    //trae todos los usuarios de la base de datos 
+    users:[],
+    //carrito de compras
+    carrito:[],
+    //trae todas las cartas 
+    //informacion para el detalle del usuario
+    userDetail:[],
+    //tiempo de espera de las actions
     loading:{
 
         loading:false,
         message:''
 
     },
-
-    users:[],
-
-    carrito:[],
-    cartasbd:[]
-
 }
 
 export default function Reducer(state=initialState, action){    
@@ -189,7 +97,7 @@ export default function Reducer(state=initialState, action){
           case LOGIN_USER: 
             return {
                 ...state,
-                 user: action.payload 
+                 userLogueado: action.payload 
           }
           case RESET_USER: 
             return {
@@ -206,13 +114,21 @@ export default function Reducer(state=initialState, action){
                         message:''
                     }
               }
+        case GET_BY_ID:
+                console.log("Desde Reducer ID", action.payload)
+            return {
+                 ...state, 
+                userDetail: action.payload,
+                
+            };
+
             case GET_CARDS:
                 return{
                 ...state,
-                cartasbd: action.payload,
+                dragonesbd: action.payload,
                 loading:{
                     loading: false,
-                    message: action.payload
+                    message: ''
                     } 
             }
             case ADD_CART:

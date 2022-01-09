@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
     firstName: { type: DataTypes.STRING, allowNull: false,},
     lastName: { type: DataTypes.STRING, allowNull: false,},
     nickName: { type: DataTypes.STRING, allowNull: false,},
-    dateBirth: { type: DataTypes.DATEONLY, allowNull: false,}, 
+    dateBirth: { type: DataTypes.DATEONLY, allowNull: true,}, 
     password: { type: DataTypes.STRING, allowNull: false, },
     //token: { type: DataTypes.STRING, allowNull: false,},
     token: { type: DataTypes.STRING,},

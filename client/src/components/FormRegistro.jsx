@@ -6,6 +6,8 @@ import { Link , useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import recurso3 from '../img/recurso3.png' 
 
 const validate = values => {
@@ -51,16 +53,19 @@ const validate = values => {
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
 		errors.email = 'Email invalido';
 	}
+	if (values.email !== values.confiEmail ) {
+		errors.confiEmail = 'Email no coinciden.';
+	}
 
 	if (!values.dateBirth) {
-		errors.dateBirth = 'Fecha obligatorio.';
+		errors.dateBirth = 'Fecha obligatoria.';
 
 	} else if (calcularEdad(values.dateBirth) < 18) {
 		errors.dateBirth = 'Debes ser mayor de edad';
 	}
 
 	if (!values.password) {
-		errors.password = 'Contraseña obligatorio.';
+		errors.password = 'Contraseña obligatoria.';
 	} else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(values.password)) {
 		errors.password = 'Debe tener entre 8 y 16 caracteres, al menos un numero, una minúscula y una mayúscula.';
 	}
@@ -72,26 +77,26 @@ const Formulario = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const user = useSelector( state => state.user)
+	const [ojo, setojo] = useState(false);
 
-	console.log('esto es user desde el componente ', user)
-
-	const [formularioEnviado, setFormularioEnviado] = useState(false);
+	
+	const switchShown = () => setojo(!ojo)
 
 	const formik = useFormik({
 		initialValues: {
 			firstName: '',
 			lastName: '',
 			email: '',
+			confiEmail: '',
 			nickName: '',
 			dateBirth: '',
 			password: '',
 		},
 		validate,
-		onSubmit: (values) => {
-			console.log(values)
-			dispatch(addUser(values));
+		onSubmit: ({firstName,lastName,email,nickName,dateBirth,password}) => {
+			
+			dispatch(addUser({firstName,lastName,email,nickName,dateBirth,password}));
 
-			setFormularioEnviado(true)
 			
 		},
 		
@@ -127,7 +132,7 @@ const Formulario = () => {
 				})
 				
 					setTimeout(() => {
-					history.push('/')
+					history.push('/Login')
 					 
 					}, 5000);
 			}
@@ -206,6 +211,21 @@ const Formulario = () => {
 					</div>
 
 					<div className="user-box">
+						<label htmlFor="confiEmail">Confirmar Email</label>
+						<input
+							id="confiEmail"
+							name="confiEmail"
+							type="email"
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.confiEmail}
+						/>
+						{formik.touched.confiEmail && formik.errors.confiEmail ? (
+							<div className="campoErr"><ErrorOutlineOutlinedIcon/>{formik.errors.confiEmail}</div>
+						) : null}
+					</div>
+
+					<div className="user-box">
 						<label htmlFor="dateBirth">Fecha de Nacimiento</label>
 						<input
 							id="dateBirth"
@@ -221,19 +241,24 @@ const Formulario = () => {
 					</div>
 
 					<div className="user-box">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password" >Password</label>
+						<div style={{display:'flex'}}>
 						<input
 							id="password"
 							name="password"
-							type="password"
+							type={ojo ? 'text' : 'password'}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 							value={formik.values.password}
-						/>
+							
+						/> 
+						{formik.values.password !== '' ? ojo ?<span onClick={switchShown}><VisibilityOffIcon/></span> : <span onClick={switchShown}><VisibilityIcon/> </span> :null}
+						</div>
 						{formik.touched.password && formik.errors.password ? (
 							<div className="campoErr"><ErrorOutlineOutlinedIcon/>{formik.errors.password}</div>
 						) : null}
-					</div>
+
+						</div>
 					
 					<div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
 					 <button type="submit" className='botonn'>
