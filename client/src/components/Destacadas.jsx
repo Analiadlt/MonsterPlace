@@ -5,9 +5,8 @@ import { getCard } from "../redux/actions";
 import Prueba from "./Prueba";
 import Car from './Car'
 export default function Destacadas() {
-    const dragones = useSelector(state => state.dragones)
     const loading = useSelector(state => state.loading)
-    const cartasbd = useSelector(state => state.cartasbd)
+    const cartasbd = useSelector(state => state.dragonesbd)
     const dispatch = useDispatch()
     useEffect(() => {
         if (!cartasbd.length && !loading.loading) {
