@@ -57,7 +57,6 @@ const initialState = {
     //carrito de compras
     carrito:[],
     //trae todas las cartas 
-    cartasbd:[],
     //informacion para el detalle del usuario
     userDetail:[],
     //tiempo de espera de las actions

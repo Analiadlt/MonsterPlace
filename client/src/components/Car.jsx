@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 export default function App() {
 
-    const carta = useSelector(state => state.dragonesbd)
+    const carta = useSelector(state => state.dragones)
 
     return (
         <div className="container">
