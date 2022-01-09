@@ -1,5 +1,5 @@
-import slider1 from '../img/nft.jpeg'
-import slider2 from '../img/azul.png'
+import slider1 from '../img/sol1.png'
+import slider2 from '../img/crypto.png'
 import slider3 from '../img/compu.png'
 import React from 'react';
 
@@ -40,7 +40,7 @@ export default function Slider() {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide style={{height:'1000px'}}>
+                <SwiperSlide style={{width:'100%'}}>
                     <img src={slider1} alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
