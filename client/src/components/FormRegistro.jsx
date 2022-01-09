@@ -76,7 +76,7 @@ const validate = values => {
 const Formulario = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
-	const user = useSelector( state => state.user)
+	const user = useSelector( state => state.userLog)
 	const [ojo, setojo] = useState(false);
 
 	

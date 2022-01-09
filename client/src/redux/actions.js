@@ -14,7 +14,7 @@ export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
 
-
+// Funcion para crear usuario
 export function addUser(payload) {
  
     return async (dispatch) => {
