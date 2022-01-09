@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const { useFormik } = require("formik");
 const router = Router();
 const { Card } = require("../../db");
 
@@ -128,7 +127,6 @@ const CreateCards = async () => {
 router.get("/get", async (req, res) => {
   const consulta = await Card.findAll()
   if(consulta.length===0){
- 
     try {
       await CreateCards();
       const allCards = await Card.findAll({
