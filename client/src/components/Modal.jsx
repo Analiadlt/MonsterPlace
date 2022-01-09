@@ -38,9 +38,9 @@ export default function Modal1() {
     function sumarCarrito(carrito) {
         let total = 0;
         for (let i = 0; i < carrito.length; i++) {
-            total += carrito[i].price;
+            total += Math.round(carrito[i].sellPrice);
         }
-        return total;
+        return Math.round(total);
     }
     return (
         <div>
@@ -82,7 +82,7 @@ export default function Modal1() {
                                             <ListItemText>
                                                 <div className='nick-junto'>
 
-                                                    <p className='precio-modal'>${dragon.price} 
+                                                    <p className='precio-modal'>${dragon.sellPrice} 
                                                         <span className='label-modal' onClick={()=>dispatch(removeCart(dragon.name))}>
 
                                                             <DeleteForeverIcon fontSize='large'/>

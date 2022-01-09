@@ -14,7 +14,7 @@ export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
 
-
+// Funcion para crear usuario
 export function addUser(payload) {
  
     return async (dispatch) => {
@@ -39,15 +39,17 @@ export function getCard() {
           .then(data => dispatch({ type: GET_CARDS, payload: data }))
   }
 }
+
+// Funcion para verificar login de usuario
 export function loginUser(payload) {
   console.log('datos enviados para ac',payload)
   return async (dispatch) => {
     try {
-      var json = await axios.post(`http://localhost:3001/users/loginUser`, payload);
-      console.log("Datos para posteo", json)
+      var json = await axios.post(`http://localhost:3001/login/loginUser`, payload);
+      console.log("Datos para posteo", json.data)
         return dispatch({
           type: LOGIN_USER, 
-          payload: json,
+          payload: json.data,
         });
       } catch (error) {
         console.log(error);
@@ -57,6 +59,7 @@ export function loginUser(payload) {
 
 }
 
+//Obtener todos los usuarios
 export function getUser() {
   return function (dispatch) {
       dispatch({ type: LOADING, payload: 'Buscando Usuarios...' })
@@ -66,16 +69,16 @@ export function getUser() {
   }
 }
 
-//Traigo un usuario por ID
+//Obtener un usuario por ID
 export function getById(id) {
   console.log('id desde actions', id);
   return async (dispatch) => {
     try {
       var json = await axios.get(`http://localhost:3001/users/${id}`);
-      console.log("Desde Actions", json.data);
+      console.log("Data Desde Actions", json.data);
       return dispatch({
         type: GET_BY_ID,
-        payload: json.data[0],
+        payload: json.data,
       });
     } catch (error) {
       console.log(error);
@@ -89,6 +92,8 @@ export function addCart(card){
 export function removeCart(card){
   return{ type: REMOVE_CART, payload: card} 
 }
+
+//Reset para formulario
 export function reset(){
   
   return{ type: RESET_USER, payload: {

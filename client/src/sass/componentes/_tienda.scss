@@ -10,7 +10,7 @@
     }
 }
 .contenedor-tienda{
-    width: 90%;
+    width: 70%;
     display: block;
     margin: 0 auto;
 }
@@ -32,7 +32,7 @@
 }
 .grid-tienda{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
     gap: 2rem;
     width: 95%;
     

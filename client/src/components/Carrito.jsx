@@ -17,7 +17,7 @@ export default function(){
             <h1>Carrito</h1>
             {
                 carrito.map( dragon=>
-                    <Card name={dragon.name} atack={dragon.atack} defense={dragon.defense}  img={dragon.img} price={dragon.price} />
+                    <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense}  img={dragon.img} price={dragon.sellPrice} />
                 )
             }
             <div>

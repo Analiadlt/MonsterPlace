@@ -5,9 +5,9 @@ import { getCard } from "../redux/actions";
 import Prueba from "./Prueba";
 import Car from './Car'
 export default function Destacadas() {
-    const dragones = useSelector(state => state.dragones)
     const loading = useSelector(state => state.loading)
-    const cartasbd = useSelector(state => state.cartasbd)
+    const cartasbd = useSelector(state => state.dragonesbd)
+    const destacadas = cartasbd.slice(1,4)
     const dispatch = useDispatch()
     useEffect(() => {
         if (!cartasbd.length && !loading.loading) {
@@ -17,13 +17,17 @@ export default function Destacadas() {
 
     return(
         <div className="destacadas">
+            {loading.loading ? <h1>cargando...</h1>:
             <div className="contenedor-destacadas">
-                <h2>Destacadas:</h2>
+                <h2>Crypys Destacados:</h2>
                 <div>
+
+
                     <Car/>
                 </div>
                 
             </div>
+}
         </div>
     )
 
