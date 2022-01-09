@@ -4,6 +4,8 @@ RutaGetUser : http://localhost:3001/users Y FILTRADO : http://localhost:3001/use
 
 RutaGetCards : http://localhost:3001/cards/get
 
+RutaGetCardsDestacadas : http://localhost:3001/cards/destacadas
+
 RutaPostCards : http://localhost:3001/cards
 
 RutaPostUser : http://localhost:3001/users

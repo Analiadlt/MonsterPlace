@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import Nav from './Nav';
 import Slider from './Slider'
 import Destacadas from './Destacadas';
@@ -8,30 +8,27 @@ import ListaUi from './listaUi';
 export default function Home() {
 
     return (
-        <div>
+        <div >
             <div className='section'>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <Nav/>
-            <div className='slider-home' >
-            
-            <Slider/>
+                <Nav />
             </div>
-            </div>
-            <div className='section'>
-                <Destacadas/>
-            </div>
-            <div className='ranking'>
+            <div className='contenedor-cheto'>
                 <div className='section'>
-                    <Seccion2/>
+                    <div className='slider-home' >
+                        
+                        <Slider />
+                    </div>
+                </div>
+                <div className='section'>
+                    <Destacadas />
+                </div>
+                <div className='ranking'>
+                    <div className='section'>
+                        <Seccion2 />
+                    </div>
                 </div>
             </div>
         </div>
-        
+
     )
 }
