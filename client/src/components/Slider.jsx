@@ -1,6 +1,6 @@
 import slider1 from '../img/sol1.png'
 import slider2 from '../img/crypto.png'
-import slider3 from '../img/compu.png'
+import slider3 from '../img/huevos.png'
 import React from 'react';
 
 
