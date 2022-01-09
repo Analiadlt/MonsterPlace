@@ -16,11 +16,9 @@ const postLogin = require("./POST/PostLogin")
 const router = Router();
 
 router.use('/cards', getCards,validateInformation(postCardSchema),postCards); 
-
-
-router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword, deleteUser); 
+router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword); 
 router.use('/user',validateInformation(putUserInformationSchema),putUserInformation);
-router.use('/',validateInformation(postLoginSchema), postLogin);
-
+router.use('/login',validateInformation(postLoginSchema), postLogin);
+router.use('/delete',deleteUser)
 
 module.exports = router;
