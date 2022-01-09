@@ -125,11 +125,16 @@ const CreateCards = async () => {
 };
 //acá tenemos la ruta. CreateCards() esta solo para que tengamos una base de datos base.
 router.get("/get", async (req, res) => {
-  const consulta = await Card.findAll()
+  const consulta = await Card.findAll({
+    limit:11,
+    attributes: ["name","attack", "defense", "img", "state", "type", "sellPrice"],
+  })
+  console.log(consulta)
   if(consulta.length===0){
     try {
       await CreateCards();
       const allCards = await Card.findAll({
+        limit:11,
         attributes: ["name","attack", "defense", "img", "state", "type", "sellPrice"],
       });
   
