@@ -8,6 +8,7 @@ import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import recurso3 from '../img/recurso3.png'
 
 const validate = values => {
 
@@ -36,8 +37,7 @@ const ForLogin = () => {
 	const history = useHistory()
 	const userLogeado = useSelector(state => state.userLogueado)
 
-
-	const [formularioEnviado, setFormularioEnviado] = useState(false);
+	const [logeado, setLogeado]=useState(false)
 	const [ojo, setojo] = useState(false);
 	const switchShown = () => setojo(!ojo)
 
@@ -52,21 +52,43 @@ const ForLogin = () => {
 			dispatch(loginUser(values));
 
 
-			setFormularioEnviado(true);
-			// setTimeout(() => {
-			// 	history.push('/Detail/')
-
-			// 	}, 2000);
+			setLogeado(true)
 
 		},
 
 	});
 
 	useEffect(() => {
-	 	if (userLogeado) {
-	 		history.push(`/Detail/${userLogeado.id}`)
-			console.log("User ID desde Login",userLogeado.id)
+	 	if (logeado && userLogeado) {
+	 		// history.push(`/Detail/${userLogeado.id}`)
+			
+			 Swal.fire({
+				imageUrl: `${recurso3}`,
+				title: 'Conectando..',
+				width: 600,
+				confirmButtonText: 'Continuar' ,
+				icon: 'success',
+				imageWidth: 400,
+				imageHeight: 200,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+					
+				  },
+				  
+				})
+				
+					setTimeout(() => {
+					history.push(`/Detail/${userLogeado.id}`)
+					 
+					}, 3000);
+
+					setLogeado(false)
 	 	}
+
+		
+
 	}, [userLogeado, history]);
 
 

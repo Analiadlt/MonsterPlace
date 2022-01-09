@@ -12,15 +12,23 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import  {useEffect}  from 'react';
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const userLogeado = useSelector(state => state.userLogueado)
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+
+    },[userLogeado])
+
     return (
         <div classname="foto">
             <React.Fragment>
@@ -39,7 +47,7 @@ export default function ProfileHome() {
                         </IconButton>
                         
                     </Tooltip>
-                    <p className='log-usuario'>Invitado</p>
+                    <p className='log-usuario'>{userLogeado.nickName? userLogeado.nickName:'Invitado'}</p>
                 </Box>
                 <Menu
                     anchorEl={anchorEl}
@@ -80,9 +88,9 @@ export default function ProfileHome() {
                     }}
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >   <Link to='/Login'>
+                >  <Link to='/Login'>
                         <MenuItem >
-                            <Avatar /> <p className='menu'> Iniciar Sesion </p>
+                            <Avatar /> <p className='menu'>{userLogeado.nickName ? 'Salir' :'Iniciar Sesion'} </p>
                         </MenuItem>
                     </Link>
                     <Link to='/Registro'>
