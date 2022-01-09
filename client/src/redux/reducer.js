@@ -133,14 +133,8 @@ const initialState = {
 
     ],
 
-    user:{
-        firstName: '',
-		lastName: '',
-		email: '',
-		nickname: '',
-		dob: '',
-		password: '',
-},
+    userLog:[],
+
     userLogin:{
         email: '',
         password: '',
@@ -201,7 +195,7 @@ export default function Reducer(state=initialState, action){
           case LOGIN_USER: 
             return {
                 ...state,
-                 user: action.payload 
+                 userLog: action.payload 
           }
           case RESET_USER: 
             return {
