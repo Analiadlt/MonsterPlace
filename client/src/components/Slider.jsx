@@ -40,7 +40,7 @@ export default function Slider() {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide style={{}}>
+                <SwiperSlide style={{width:'100%'}}>
                     <img src={slider1} alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
