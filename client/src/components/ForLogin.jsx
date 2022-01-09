@@ -34,6 +34,8 @@ const validate = values => {
 const ForLogin = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
+	const userLogeado = useSelector(state => state.userLog)
+	
 
 
 	const [formularioEnviado, setFormularioEnviado] = useState(false);
@@ -60,6 +62,17 @@ const ForLogin = () => {
 		},
 
 	});
+
+	useEffect(() => {
+		if (userLogeado) {
+			history.push(`/Detail/${userLogeado.id}`)
+		}
+	});
+
+
+
+	
+		
 
 
 	// const Alerta = () => {
