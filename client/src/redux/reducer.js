@@ -122,7 +122,10 @@ export default function Reducer(state=initialState, action){
           case GET_USER:
               return{
                     ...state,
-                    users: action.payload,
+                    users: action.payload === 'No se encontraron usuarios'?
+                    []:
+                    action.payload
+                    ,
                     loading:{
                         loading:false,
                         message:''
