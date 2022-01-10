@@ -10,6 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import huevoRojo from '../img/huevoRojo.png'
 import huevoBlanco from '../img/huevoBlanco.png'
+import dragon3 from '../img/recurso3.png'
 
 
 const validate = values => {
@@ -25,16 +26,11 @@ const validate = values => {
 		errors.email = 'Email invalido';
 	}
 
-	if (!values.password) {
-		errors.password = 'Contraseña obligatoria.';
-	} else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(values.password)) {
-		errors.password = 'Debe tener entre 8 y 16 caracteres, al menos un numero, una minúscula y una mayúscula.';
-	}
-
+	
 	return errors;
 };
 
-const ForLogin = () => {
+const PassReset = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const userLogeado = useSelector(state => state.userLogueado)
@@ -56,6 +52,7 @@ const ForLogin = () => {
 
 			setLogeado(true)
 
+			alerta()
 		},
 
 	});
@@ -79,12 +76,12 @@ const ForLogin = () => {
 				  
 				})
 				
-					setTimeout(() => {
-					history.push(`/`)
+					// setTimeout(() => {
+					// history.push(`/`)
 					 
-					}, 3000);
+					// }, 3000);
 
-					setLogeado(false)
+					// setLogeado(false)
 	 	}
 
 		 if (logeado && userLogeado === '400' || userLogeado === "Contraseña incorrecta" || userLogeado === '"email" must be a valid email') {
@@ -107,6 +104,26 @@ const ForLogin = () => {
 
 	}, [userLogeado, history]);
 
+	let alerta = ()=>{
+
+		Swal.fire({
+			imageUrl: `${dragon3}`,
+			title: 'Email enviado',
+			width: 600,
+			confirmButtonText: 'Continuar' ,
+			imageWidth: 500,
+			imageHeight: 300,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: () => {
+				Swal.showLoading()
+				
+			  },
+			  
+			})
+
+	}
+
 
 
 
@@ -117,7 +134,7 @@ const ForLogin = () => {
 			<div style={{ display: 'block', margin: '10rem 33%', marginTop: '10rem', width: '55%' }}>
 				<div className='login-box'>
 					<form className="formulario" onSubmit={formik.handleSubmit}>
-						<h2 >Login</h2>
+						<h2 >Recuperar contraseña</h2>
 
 
 
@@ -136,27 +153,6 @@ const ForLogin = () => {
 							) : null}
 						</div>
 
-						<div className="user-box">
-							<label htmlFor="password" >Password</label>
-							<div style={{ display: 'flex' }}>
-								<input
-									id="password"
-									name="password"
-									type={ojo ? 'text' : 'password'}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									value={formik.values.password}
-
-								/>
-								{formik.values.password !== '' ? ojo ? <span onClick={switchShown}><VisibilityOffIcon /></span> : <span onClick={switchShown}><VisibilityIcon /> </span> : null}
-							</div>
-							{formik.touched.password && formik.errors.password ? (
-								<div className="campoErr"><ErrorOutlineOutlinedIcon />{formik.errors.password}</div>
-							) : null}
-
-						</div>
-
-						{/* {formularioEnviado ? Alerta() : null} */}
 						<div style={{ display: 'flex',justifyContent:'center',alignItems:'center',flexDirection:'column' }}>
 							<div style={{margin:'0 auto'}}>
 								<button type="submit" className='botonn'>
@@ -164,18 +160,13 @@ const ForLogin = () => {
 									<span></span>
 									<span></span>
 									<span></span>
-									Login</button>
+									Enviar</button>
 							</div>
-							<div>
-								<Link to='/Registro'><div className='botonn' >
-
-								Crear una cuenta</div>
-								</Link>
-							</div>
+							
 						</div>
 					</form>
 					<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-						<a style={{ color: '#FFB520', textDecoration: 'underline' }} href='/PassReset'>Olvide mi contraseña</a>
+						<p style={{ color: '#FFB520', textAlign:'center' }} >Te enviaremos un email para que recuperes tu contraseña</p>
 
 					</div>
 					
@@ -185,4 +176,4 @@ const ForLogin = () => {
 	);
 };
 
-export default ForLogin;
+export default PassReset;
