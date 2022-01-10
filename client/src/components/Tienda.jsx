@@ -8,7 +8,7 @@ import Nav from "./Nav";
 import Modal1 from "./Modal";
 import { Modal } from "@mui/material";
 import Filtros from "./filtrosTienda";
-
+import Slider from './Slider'
 export default function Tienda(){
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.dragonesbd)
@@ -23,6 +23,7 @@ export default function Tienda(){
         <div>
             <Nav/>
             <div className="contenedor-tienda">
+                <Slider/>
                 <div className="titulo-tienda">
                     <h1>Tienda</h1>
                     {/* <Link to='/Carrito'> */}
