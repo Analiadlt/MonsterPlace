@@ -66,7 +66,7 @@ export function loginUser(payload) {
 //Obtener todos los usuarios
 export function getUser() {
   return function (dispatch) {
-      dispatch({ type: LOADING, payload: 'Buscando Usuarios...' })
+      
       return axios.get('http://localhost:3001/users')
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
