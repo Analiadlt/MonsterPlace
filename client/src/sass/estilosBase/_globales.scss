@@ -1,0 +1,48 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+
+body{
+    background-color: v.$color-fondo;
+}
+
+button{
+    cursor: pointer;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    @include m.tablet {
+        height: 100%;
+    }
+
+
+
+    
+    color: v.$blanco;
+    font-family: v.$fuente-principal;
+    font-size: 1.6rem;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+.contenedor {
+    display: block;
+    width: 95%;
+    min-height: 70rem;
+    max-height: 80rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}

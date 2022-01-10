@@ -1,0 +1,39 @@
+@use './estilosBase/variables' as v;
+ 
+.MuiMenuItem-root{
+    font-size: 2rem;
+}
+.MuiMenuItem-denso{
+    font-size: 2rem;
+}
+.Mui-focusVisible{
+    font-size: 2rem;
+}
+
+.log-usuario{
+    display: block;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: rgba(245, 245, 220, 0.541);
+}
+.menu{
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.781);
+    padding: 0 15px;
+}
+.setting{
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.781);
+    padding: 0 15px;
+}
+.ranking{
+    margin-top: 100px;
+    margin-bottom: 10rem;
+}
+.contenedor-cheto{
+    margin: 0 100px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    /* box-Shadow:0 15px 40px 0 rgba(0, 0, 0, 0.904), 0 17px 17px 0 rgba(0, 0, 0, .5); */
+}

@@ -1,0 +1,51 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import ProfileHome from "./ProfileHome";
+export default function Nav() {
+  return (
+    <div>
+      <div className="navContainer">
+        <div>
+          <Link to="/">
+            <h1 className="titulo">CryptoGame</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/">
+            <span
+              className={window.location.pathname === "/" ? "activo" : null}
+            >
+              Home
+            </span>
+          </Link>
+          <Link to="/Tienda">
+            <span
+              className={
+                window.location.pathname === "/Tienda" ||
+                window.location.pathname === "/Carrito"
+                  ? "activo"
+                  : null
+              }
+            >
+              Tienda
+            </span>
+          </Link>
+          {/*                     <button onClick={()=>{
+                        const color = document.getElementById('body')
+
+                        if(modo === 'claro'){ 
+                        color.style.background = '#1E1E1E'
+                        dispatch(cambiarFondo())
+                    }else if (modo === 'oscuro'){
+                        color.style.background = '#2669A6'
+                        dispatch(cambiarFondo())
+                    }
+                    }}  >
+                        Cambiar
+                    </button> */}
+        </div>
+        <ProfileHome />
+      </div>
+    </div>
+  );
+}

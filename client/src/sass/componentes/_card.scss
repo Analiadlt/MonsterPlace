@@ -1,0 +1,147 @@
+@use '../estilosBase/variables' as v;
+.card{
+    display: block;
+    margin-top: 2rem;
+    border-radius: 5px ; 
+    box-shadow: 0 0 20px #bd9635
+    ;
+    width: 500px;
+    background-image: url('../../img/textura-de-los-triángulos-del-holograma-87222276.jpg');
+    background-color: rgba(0, 0, 0, 0.288);
+    &:hover{
+        transform: translateY(-10px);
+        transition: 0.4s ease-out;
+        box-shadow: 0 15px 40px 0 #bd9635, 0 17px 17px 0 #bd9635;
+    }
+    .card_img{
+        position: relative;
+        max-width: 80%;
+        z-index: 100;
+        top: 40px;
+        max-width: 90%;
+        height: 100%;
+        max-height: 350px;
+        margin-left: 20px;
+        top: 15px;
+        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+
+    }
+    .card-contenido{
+        position: relative;
+        bottom: 8px;
+        display: block;
+        margin: 0 auto;
+        background-color: rgb(29, 29, 29);
+        width: 98%;
+        height: 250px;
+        padding-bottom: 30px;
+        border-radius: 5px;
+        color: #F5B400;
+        font-weight: 300;
+        z-index: 30;
+    } 
+    .card-nombre{
+        display: block;
+        margin: 0 auto;
+        border-bottom: 2px solid #707070 ;
+        width: 50%;
+        text-align: center;
+        letter-spacing: 3px;
+        font-size: 3rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        padding-top:20px ;
+    }
+    .card-grid{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        width: 90%;
+        gap: 3rem;
+        margin: 10px 40px ;
+
+    }
+    .caracteristicas{
+        border-right: 2px solid #707070;
+    }
+    .carac{
+        display: flex;
+        margin-top: 30px;
+        margin-right: 20px;
+
+        h3{
+            font-size: 2.3rem;
+            font-weight: normal;
+            flex: 1;
+            margin: 0;
+            text-align: left;
+        }
+        span{
+            margin-left: 30px;
+            font-size: 2.3rem;
+        }
+    }
+    .precio{
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        h3{
+            font-size: 2.3rem;
+            font-weight: normal;
+            flex: 1;
+            margin: 0;
+            text-align: left;
+        }
+        span{
+            font-size: 2.3rem;
+            margin-left: 60px;
+            text-transform: uppercase;
+            color: #9fd1f5;
+        }
+    }
+    .btn-card{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        
+    }
+    .btn-gl{
+        padding: 13px 10px;
+        font-size: 2rem;
+        width: 45%;
+        margin: 0 0.7rem;
+        border-radius: 5px;
+        border: none;
+        text-transform: uppercase;
+    }
+    .btn-ver-detalle{
+        background-color: #FF8E00;
+       
+            &:hover{
+                transform: translateY(1px);
+                transition: 0.4s ease-out;
+                box-shadow: 0 15px 40px 0 #ff8c007e, 0 17px 17px rgba(255, 140, 0, 0.466);
+    
+            }
+
+    }
+    .btn-comprar{
+        background-color: v.$boton-verde;
+        &:hover{
+            transform: translateY(1px);
+            transition: 0.4s ease-out;
+            box-shadow: 0 15px 40px 0 #04ff004d, 0 17px 17px 0 #04ff0049;
+
+        }
+    }
+}
+.links{
+    text-decoration: none;
+    width: auto;
+    color: rgba(0, 0, 0);
+}
+
+
+
+
+

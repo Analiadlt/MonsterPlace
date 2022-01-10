@@ -1,0 +1,44 @@
+@use '../estilosBase/variables' as v;
+
+.contenedor-seccion{
+    display: block;
+    width: 95%;
+    height: 90rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.seccion-grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+}
+.tabla-container{
+    h1{
+        font-size: 5rem;
+        color: v.$color-titulo;
+        text-align: left;
+        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+        
+    }
+}
+
+.text-seccion{
+    margin-top: 70px;
+    h1{
+        font-size: 8rem;
+        color: v.$color-titulo;
+        text-align: left;
+        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+    }
+    h2{
+        font-size: 6rem;
+        color: v.$blanco;
+        text-align: left;
+        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+    }
+}
+.logo{
+    position: relative;
+    top: 10px;
+    left: 15px;
+}
