@@ -9,13 +9,11 @@ import Nav from './components/Nav';
 import Carrito from './components/Carrito';
 import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
-
 import userDetail from './components/userDetail';
 function App() {
 
   return (
     <div className="App">
-      
       <Route path="/Carrito" component={Carrito} />
       <Route  exact path="/" component={Home} />
       <Route  exact path="/Tienda" component={Tienda} />

@@ -1,7 +1,5 @@
 const {Router} = require("express");
 const {Card} = require("../../db");
-
-
 const router = Router();
 
 router.get("/destacadas", async (req,res) => {

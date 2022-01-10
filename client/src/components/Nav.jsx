@@ -1,33 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {  useDispatch, useSelector } from 'react-redux';
-import { cambiarFondo } from "../redux/actions";
-import ProfileHome from "./ProfileHome"
+import ProfileHome from "./ProfileHome";
 export default function Nav() {
-    const modo = useSelector(state => state.modo)
-    const dispatch =  useDispatch();
-    
-
-
-
-    return (
-        
+  return (
+    <div>
+      <div className="navContainer">
         <div>
-            
-            <div className="navContainer">
-                <div >
-                    <Link to='/'>
-                        <h1 className="titulo">CryptoGame</h1>
-                    </Link>
-                </div>
-                <div>
-                    <Link to='/' >
-                        <span className={window.location.pathname === '/' ? 'activo' : null} >Home</span>
-                    </Link>
-                    <Link to='/Tienda' >
-                        <span className={window.location.pathname === '/Tienda' || window.location.pathname === '/Carrito' ? 'activo' : null}>Tienda</span>
-                    </Link>
-                        {/*                     <button onClick={()=>{
+          <Link to="/">
+            <h1 className="titulo">CryptoGame</h1>
+          </Link>
+        </div>
+        <div>
+          <Link to="/">
+            <span
+              className={window.location.pathname === "/" ? "activo" : null}
+            >
+              Home
+            </span>
+          </Link>
+          <Link to="/Tienda">
+            <span
+              className={
+                window.location.pathname === "/Tienda" ||
+                window.location.pathname === "/Carrito"
+                  ? "activo"
+                  : null
+              }
+            >
+              Tienda
+            </span>
+          </Link>
+          {/*                     <button onClick={()=>{
                         const color = document.getElementById('body')
 
                         if(modo === 'claro'){ 
@@ -40,18 +43,9 @@ export default function Nav() {
                     }}  >
                         Cambiar
                     </button> */}
-                {window.location.pathname === '/'? console.log('estoy en el home') : 
-                window.location.pathname === '/Tienda' ? console.log('estoy en la tienda') : null
-                }
-                    
-                    
-                </div>
-                <ProfileHome/>
-
-            </div>
-       
-
         </div>
-   
-    );
-};
+        <ProfileHome />
+      </div>
+    </div>
+  );
+}
