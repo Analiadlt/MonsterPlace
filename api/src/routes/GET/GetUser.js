@@ -2,22 +2,20 @@ const express = require("express");
 const { User } = require("../../db");
 const server = express();
 
-server.get("/", async (req, res) => {
-  const allUsers = await User.findAll();
-  const nickName = req.query.nickName;
 
+server.get("/", async (req, res) => {
   try {
-    if (nickName) {
-      const userByNickName = allUsers.filter((index) =>
-        index.nickName.toLowerCase().includes(nickName.toLowerCase())
-      );
-      if (userByNickName.length > 0) res.json(userByNickName);
-      else res.send([{ error: "no se encontraron coincidencias" }]);
-    } else res.json(allUsers);
+    const allUsers = await User.findAll();
+    if(allUsers.length > 0){
+      res.status(200).send(allUsers)
+    }
+    else res.status(200).send("No se encontraron usuarios")
+
   } catch (error) {
-    res.send("Error en la base de datos");
+    res.send("Error en la base de datos")
   }
-});
+})
+ 
 
 server.get("/:id", async (req, res) => {
   const id = req.params.id;
@@ -36,4 +34,4 @@ server.get("/:id", async (req, res) => {
   }
 });
 
-module.exports = server;
+module.exports = server
