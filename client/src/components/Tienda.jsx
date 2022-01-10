@@ -30,7 +30,7 @@ export default function Tienda(){
                    <Modal1/>
                     {/* </Link> */}
                 </div>
-
+                { loading.loading? <h1>Cargando...</h1>:
                 <div className="contenedor-tajetas">
                     <div className="grid-tienda">
                     {
@@ -40,6 +40,7 @@ export default function Tienda(){
                     }
                     </div>
                 </div>
+            }   
             </div>
             
         </div>
