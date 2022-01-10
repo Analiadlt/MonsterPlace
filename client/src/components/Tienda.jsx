@@ -23,13 +23,14 @@ export default function Tienda(){
         <div>
             <Nav/>
             <div className="contenedor-tienda">
+
                 <div className="titulo-tienda">
                     <h1>Tienda</h1>
                     {/* <Link to='/Carrito'> */}
                    <Modal1/>
                     {/* </Link> */}
                 </div>
-
+                { loading.loading? <h1>Cargando...</h1>:
                 <div className="contenedor-tajetas">
                     <div className="grid-tienda">
                     {
@@ -39,6 +40,7 @@ export default function Tienda(){
                     }
                     </div>
                 </div>
+            }   
             </div>
             
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 export default function Prueba({ name, atack, defense, img, type, price}) {
     const carta = useSelector(state => state.dragonesbd)
     const cart = carta[5]
@@ -32,7 +33,11 @@ export default function Prueba({ name, atack, defense, img, type, price}) {
                         </div>
                     </div>
                     
-                    <a>Ver en Tienda</a>
+                        <a href="/tienda">
+
+                            Ver en Tienda
+                        </a>
+                    
                 </div>
                 <img src={img} alt="" />
             </div>

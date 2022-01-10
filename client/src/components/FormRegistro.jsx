@@ -8,7 +8,7 @@ import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import recurso3 from '../img/recurso3.png' 
+import huevoVerde from '../img/huevoVerde.png'
 
 const validate = values => {
 
@@ -115,14 +115,13 @@ const Formulario = () => {
 			
 			
 			Swal.fire({
-				imageUrl: `${recurso3}`,
+				imageUrl: `${huevoVerde}`,
 				title: 'Usuario creado con exito',
-				width: 600,
+				width: 500,
 				confirmButtonText: 'Continuar' ,
-				icon: 'success',
-				imageWidth: 400,
-				imageHeight: 200,
-				timer: 5000,
+				imageWidth: 300,
+				imageHeight: 400,
+				timer: 3000,
 				timerProgressBar: true,
 				didOpen: () => {
 					Swal.showLoading()
@@ -134,7 +133,7 @@ const Formulario = () => {
 					setTimeout(() => {
 					history.push('/Login')
 					 
-					}, 5000);
+					}, 3000);
 			}
 
 		

@@ -8,6 +8,7 @@ export const LOADING = "LOADING"
 export const ADD_CART = "ADD_CART"
 export const REMOVE_CART = "REMOVE_CART"
 export const RESET_USER = "RESET_USER"
+export const RESET_LOGIN = "RESET_LOGIN"
 export const GET_CARDS = "GET_CARDS"
 export const GET_BY_ID = "GET_BY_ID"
 export function cambiarFondo() {
@@ -52,7 +53,10 @@ export function loginUser(payload) {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        return dispatch({
+          type: LOGIN_USER, 
+          payload: '400',
+        });
       }
 
     }
@@ -62,7 +66,7 @@ export function loginUser(payload) {
 //Obtener todos los usuarios
 export function getUser() {
   return function (dispatch) {
-      dispatch({ type: LOADING, payload: 'Buscando Usuarios...' })
+      
       return axios.get('http://localhost:3001/users')
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
@@ -104,5 +108,13 @@ export function reset(){
     dob: '',
     password: '',
   }   } 
+
+}
+
+//reset usuario
+
+export function loginReset(){
+  
+  return{ type: RESET_LOGIN, payload:[]} 
 
 }

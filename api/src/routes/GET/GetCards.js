@@ -123,29 +123,25 @@ const CreateCards = async () => {
   ];
      const hola = await cards.map((g) => Card.create(g));
 };
-//acá tenemos la ruta. CreateCards() esta solo para que tengamos una base de datos base.
 router.get("/get", async (req, res) => {
-  const consulta = await Card.findAll({
-    limit:11,
-    attributes: ["name","attack", "defense", "img", "state", "type", "sellPrice"],
-  })
-  console.log(consulta)
-  if(consulta.length===0){
-    try {
-      await CreateCards();
-      const allCards = await Card.findAll({
-        limit:11,
-        attributes: ["name","attack", "defense", "img", "state", "type", "sellPrice"],
-      });
-  
-      return res.status(200).send(allCards);
-    } catch (e) {
-      res.status(404).send("Cant access DB. GET CARDS PROBLEMS");
-    
-    }
-  } else {
-    res.status(200).send(consulta)
-  }
-});
 
-module.exports = router;
+  try {
+    const cards1 = await Card.findAll({
+      attributes: ["name", "attack", "defense", "img", "state", "type", "sellPrice"],
+    })
+    if (cards1.length < 11) {
+      CreateCards()
+      const allCards = await Card.findAll({
+        attributes: ["name", "attack", "defense", "img", "state", "type", "sellPrice"],
+      })
+      res.status(200).send(allCards)
+    }
+    else res.status(200).send(cards1)
+    
+  } catch (error) {
+    res.send("Error en la ruta getCard")
+  }
+})
+
+
+module.exports = router

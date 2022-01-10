@@ -2,22 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/actions";
+import { useSelector } from "react-redux";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 export default function Card({ name, atack, defense, img , price }) {
+    
     const dispatch = useDispatch();
-    const card ={
-        name
-        , atack
-        , defense
-        , img 
-        , price
-    } 
+    const loading = useSelector(state=>state.loading)
     return (
         <div>
             <div className='card' >
                 <div className="fondo">
+                    { loading.loading? <h1>Cargando...</h1>:
                     <img src={img} alt="" className="card_img" />
+                    }
                 </div>
                 <div className="card-contenido">
                     <h3 className="card-nombre" >{name}</h3>
