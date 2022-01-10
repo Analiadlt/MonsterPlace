@@ -1,27 +1,59 @@
+import slider1 from '../img/sol1.png'
+import slider2 from '../img/crypto.png'
+import slider3 from '../img/huevos.png'
 import React from 'react';
+
+
+import { Navigation, Pagination } from 'swiper';
+// Direct React component imports
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
+// Styles must use direct files imports
+import 'swiper/swiper.scss'; // core Swiper
+import 'swiper/modules/navigation/navigation.scss'; // Navigation module
+import 'swiper/modules/pagination/pagination.scss'; // Pagination module
+import Prueba from './Prueba'
 import { useSelector } from 'react-redux';
-import { Carousel } from 'react-responsive-carousel';
-import "../../node_modules/react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import SliderContent from './SliderContent';
 
-// exporto el slider
+export default function Slider() {
 
-export default function Slider(){
-    const dragon = useSelector(state => state.dragones)
-	return ( 
-            <div className='contenedor-slider'>
-                <Carousel autoPlay={true} autoFocus={true} transitionTime={2000} interval={5000} infiniteLoop={true} className='slider-cont'>
-                    <div className='seccion-slider'>  
-                        <SliderContent dragon={dragon[0]}/>
-                    </div>
-                    <div className='seccion-slider'>
-                        <SliderContent dragon={dragon[1]}/>
-                    </div>
-                    <div className='seccion-slider'>
-                        <SliderContent dragon={dragon[2]}/>
-                    </div>
-                </Carousel>
-            </div>
-		
-	)
+    const carta = useSelector(state => state.dragones)
+
+    return (
+        <div className="container-slider">
+            <Swiper
+                modules={[Navigation, Pagination]}
+                navigation={true}
+                effect={"coverflow"}
+                centeredSlides={true}
+                slidesPerView={window.innerWidth < 768 ? 1 : "auto"}
+                loop={true}
+                coverflowEffect={{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true
+                }}
+                pagination={{
+                    clickable: true
+                }}
+                className="mySwiper"
+            >
+                <SwiperSlide style={{width:'100%'}}>
+                    <img src={slider1} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={slider2} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={slider3} alt="" />
+                </SwiperSlide>
+                </Swiper>
+
+
+
+        </div>
+
+    )
 }
+

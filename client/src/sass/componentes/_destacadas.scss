@@ -2,21 +2,21 @@
 
 
 .destacadas{
-    width: 100%;
-    height: 85rem;
-    background-color: v.$blanco;
-    display: f;
+    
+    height: 80rem;
+    background-color: v.$color-fondo;
+    box-Shadow:0 15px 40px 0 rgba(0, 0, 0, 0.904), 0 17px 17px 0 rgba(0, 0, 0, .5);
     
 }
 .contenedor-destacadas{
     display: block;
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
 
     h2{
         padding-top: 8rem;
         font-size: 4rem;
-        color: v.$negro;
+        color: v.$color-titulo;
         text-align: left;
     }
     

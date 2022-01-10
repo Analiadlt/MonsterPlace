@@ -19,7 +19,7 @@ export default function Destacadas() {
         <div className="destacadas">
             {loading.loading ? <h1>cargando...</h1>:
             <div className="contenedor-destacadas">
-                <h2>Destacadas:</h2>
+                <h2>Crypys Destacados:</h2>
                 <div>
 
 

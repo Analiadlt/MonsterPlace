@@ -12,15 +12,28 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import { useSelector ,useDispatch } from 'react-redux';
+import  {useEffect}  from 'react';
+import { loginReset } from '../redux/actions';
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch()
     const open = Boolean(anchorEl);
+    const userLogeado = useSelector(state => state.userLogueado)
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+
+    },[userLogeado])
+    let cambiarLogeo = ()=>{
+        dispatch(loginReset())
+    }
+
     return (
         <div classname="foto">
             <React.Fragment>
@@ -34,12 +47,12 @@ export default function ProfileHome() {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>I</Avatar>
+                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>{userLogeado !==[] ? userLogeado.nickName?.charAt(0) :'I'}</Avatar>
                             
                         </IconButton>
                         
                     </Tooltip>
-                    <p className='log-usuario'>Invitado</p>
+                    <p className='log-usuario'>{userLogeado.nickName? userLogeado.nickName:'Invitado'}</p>
                 </Box>
                 <Menu
                     anchorEl={anchorEl}
@@ -80,16 +93,33 @@ export default function ProfileHome() {
                     }}
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                >   <Link to='/Login'>
+                
+                > 
+                {userLogeado.nickName ?
+                        <Link to={`/Detail/${userLogeado.id}`}>
+                                <MenuItem>
+                                    <Avatar /> <p className='menu' style={{ paddingRigth: '20px' }}> Mi Perfil </p>
+                                </MenuItem>
+                            </Link>: 
+                    <Link to='/Login'>
+                    <MenuItem >
+                        <Avatar /> <p className='menu' >Iniciar Sesion</p>
+                    </MenuItem>
+                </Link> }
+                {userLogeado.nickName ?
+                    <Link to={'/'} >
                         <MenuItem >
-                            <Avatar /> <p className='menu'> Iniciar Sesion </p>
+                            <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{paddingRigth:'20px'}}> Cerrar Sesion </p>
                         </MenuItem>
-                    </Link>
+                    </Link> : 
                     <Link to='/Registro'>
-                        <MenuItem fontSize="2rem">
-                            <Avatar  /> <p className='menu'> Crear Cuenta </p> 
-                        </MenuItem>
-                    </Link>
+                    <MenuItem fontSize="2rem">
+                        <Avatar  /> <p className='menu'> Crear Cuenta </p> 
+                    </MenuItem>
+                </Link>}
+                
+                 
+                    
                     <Divider />
 {/*                     <MenuItem fontSize="2rem">
                         <ListItemIcon>

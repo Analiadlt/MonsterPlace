@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID }  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN }  from './actions'
 import dragon2 from '../img/recurso1.png'
 import dragon6 from '../img/recurso9.png'
 import dragon9 from '../img/recurso3.png'
@@ -42,8 +42,10 @@ const initialState = {
 
     ],
     dragonesbd:[],
+    
     //recolecta la informacion del usuario para crearlo 
     user:[],
+
     //informacion del usuario que se encuentra logueado 
     userLogueado:[],
 
@@ -52,13 +54,18 @@ const initialState = {
         email: '',
         password: '',
     },
+
     //trae todos los usuarios de la base de datos 
     users:[],
+
     //carrito de compras
     carrito:[],
+
     //trae todas las cartas 
+
     //informacion para el detalle del usuario
     userDetail:[],
+
     //tiempo de espera de las actions
     loading:{
 
@@ -95,6 +102,13 @@ export default function Reducer(state=initialState, action){
           }
 
           case LOGIN_USER: 
+          
+            return {
+                ...state,
+                 userLogueado: action.payload 
+          }
+          case RESET_LOGIN: 
+          
             return {
                 ...state,
                  userLogueado: action.payload 
@@ -108,7 +122,10 @@ export default function Reducer(state=initialState, action){
           case GET_USER:
               return{
                     ...state,
-                    users: action.payload,
+                    users: action.payload === 'No se encontraron usuarios'?
+                    []:
+                    action.payload
+                    ,
                     loading:{
                         loading:false,
                         message:''
