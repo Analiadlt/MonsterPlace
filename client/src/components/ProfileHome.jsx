@@ -12,10 +12,12 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch } from 'react-redux';
 import  {useEffect}  from 'react';
+import { loginReset } from '../redux/actions';
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch()
     const open = Boolean(anchorEl);
     const userLogeado = useSelector(state => state.userLogueado)
     const handleClick = (event) => {
@@ -28,6 +30,9 @@ export default function ProfileHome() {
     useEffect(() => {
 
     },[userLogeado])
+    let cambiarLogeo = ()=>{
+        dispatch(loginReset())
+    }
 
     return (
         <div classname="foto">
@@ -42,7 +47,7 @@ export default function ProfileHome() {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>I</Avatar>
+                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>{userLogeado !==[] ? userLogeado.nickName?.charAt(0) :'I'}</Avatar>
                             
                         </IconButton>
                         
@@ -91,22 +96,30 @@ export default function ProfileHome() {
                 
                 > 
                 {userLogeado.nickName ?
-                    <Link to='/Login'>
-                        <MenuItem >
-                            <Avatar /> <p className='menu'> Salir </p>
-                        </MenuItem>
-                    </Link> : 
+                        <Link to={`/Detail/${userLogeado.id}`}>
+                                <MenuItem>
+                                    <Avatar /> <p className='menu' style={{ paddingRigth: '20px' }}> Mi Perfil </p>
+                                </MenuItem>
+                            </Link>: 
                     <Link to='/Login'>
                     <MenuItem >
-                        <Avatar /> <p className='menu'>Iniciar Sesion</p>
+                        <Avatar /> <p className='menu' >Iniciar Sesion</p>
                     </MenuItem>
                 </Link> }
-                 
-                    <Link to='/Registro'>
-                        <MenuItem fontSize="2rem">
-                            <Avatar  /> <p className='menu'> Crear Cuenta </p> 
+                {userLogeado.nickName ?
+                    <Link to={'/'} >
+                        <MenuItem >
+                            <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{paddingRigth:'20px'}}> Cerrar Sesion </p>
                         </MenuItem>
-                    </Link>
+                    </Link> : 
+                    <Link to='/Registro'>
+                    <MenuItem fontSize="2rem">
+                        <Avatar  /> <p className='menu'> Crear Cuenta </p> 
+                    </MenuItem>
+                </Link>}
+                
+                 
+                    
                     <Divider />
 {/*                     <MenuItem fontSize="2rem">
                         <ListItemIcon>

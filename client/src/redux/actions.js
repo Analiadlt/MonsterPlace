@@ -8,6 +8,7 @@ export const LOADING = "LOADING"
 export const ADD_CART = "ADD_CART"
 export const REMOVE_CART = "REMOVE_CART"
 export const RESET_USER = "RESET_USER"
+export const RESET_LOGIN = "RESET_LOGIN"
 export const GET_CARDS = "GET_CARDS"
 export const GET_BY_ID = "GET_BY_ID"
 export function cambiarFondo() {
@@ -52,7 +53,10 @@ export function loginUser(payload) {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        return dispatch({
+          type: LOGIN_USER, 
+          payload: '400',
+        });
       }
 
     }
@@ -104,5 +108,13 @@ export function reset(){
     dob: '',
     password: '',
   }   } 
+
+}
+
+//reset usuario
+
+export function loginReset(){
+  
+  return{ type: RESET_LOGIN, payload:[]} 
 
 }
