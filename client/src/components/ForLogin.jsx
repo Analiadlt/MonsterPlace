@@ -8,7 +8,9 @@ import Nav from './Nav';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import recurso3 from '../img/recurso3.png'
+import huevoRojo from '../img/huevoRojo.png'
+import huevoBlanco from '../img/huevoBlanco.png'
+
 
 const validate = values => {
 
@@ -59,17 +61,15 @@ const ForLogin = () => {
 	});
 
 	useEffect(() => {
-	 	if (logeado && userLogeado) {
-	 		// history.push(`/Detail/${userLogeado.id}`)
-			
+	 	if (logeado && userLogeado.id) {
+	 		
 			 Swal.fire({
-				imageUrl: `${recurso3}`,
+				imageUrl: `${huevoBlanco}`,
 				title: 'Conectando..',
-				width: 600,
+				width: 500,
 				confirmButtonText: 'Continuar' ,
-				icon: 'success',
-				imageWidth: 400,
-				imageHeight: 200,
+				imageWidth: 300,
+				imageHeight: 400,
 				timer: 3000,
 				timerProgressBar: true,
 				didOpen: () => {
@@ -80,12 +80,28 @@ const ForLogin = () => {
 				})
 				
 					setTimeout(() => {
-					history.push(`/Detail/${userLogeado.id}`)
+					history.push(`/`)
 					 
 					}, 3000);
 
 					setLogeado(false)
 	 	}
+
+		 if (logeado && userLogeado === '400' || userLogeado === "Contraseña incorrecta" || userLogeado === '"email" must be a valid email') {
+			
+			Swal.fire({
+				title: '<strong>Contraseña o Email incorrecto</strong>',
+			   imageUrl: `${huevoRojo}`,
+			   width: 500,
+			   imageWidth: 300,
+			   imageHeight: 400,
+			   
+			  
+				 
+			   })
+			   
+				
+		}
 
 		
 

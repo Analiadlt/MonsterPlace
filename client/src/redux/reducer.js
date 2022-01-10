@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID }  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN }  from './actions'
 import dragon2 from '../img/recurso1.png'
 import dragon6 from '../img/recurso9.png'
 import dragon9 from '../img/recurso3.png'
@@ -102,7 +102,13 @@ export default function Reducer(state=initialState, action){
           }
 
           case LOGIN_USER: 
-          console.log("Desde Reducer ID", action.payload)
+          
+            return {
+                ...state,
+                 userLogueado: action.payload 
+          }
+          case RESET_LOGIN: 
+          
             return {
                 ...state,
                  userLogueado: action.payload 
