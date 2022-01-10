@@ -21,7 +21,6 @@ export default function Slider() {
     return (
         <div className="container-slider">
             <Swiper
-                style={{width: '100%'}}
                 modules={[Navigation, Pagination]}
                 navigation={true}
                 effect={"coverflow"}
@@ -57,3 +56,4 @@ export default function Slider() {
 
     )
 }
+
