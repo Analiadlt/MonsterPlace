@@ -8,6 +8,8 @@ import './sass/app.scss'
 import Nav from './components/Nav';
 import Carrito from './components/Carrito';
 import ForLogin from './components/ForLogin';
+import PassReset from './components/PassReset';
+
 import userDetail from './components/userDetail';
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
       <Route  exact path="/Tienda" component={Tienda} />
       <Route path="/Registro" component={FormRegistro} />
       <Route path="/Login" component={ForLogin} />
+      <Route path="/PassReset" component={PassReset} />
       <Route path="/Detail/:id" component={userDetail} />
     </div>
   );
