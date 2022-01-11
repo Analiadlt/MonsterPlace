@@ -17,3 +17,5 @@ RutaPutUserInformation : http://localhost:3001/user/putUser
 RutaPutPassword : http://localhost:3001/users/putUserPassword
 
 RutaDeleteUser : http://localhost:3001/delete/user/:id
+
+RutaRecoverUser : http://localhost:3001/recover
