@@ -3,8 +3,7 @@ import "firebase/compat/storage"
 import "firebase/compat/firestore"
 import 'firebase/compat/auth';
 
-require('dotenv').config()
-;
+require('dotenv').config();
 // If you're not using Code Sandbox, never hard-code the keys! Add them in your .env file and link them here
 // var firebaseConfig =
 export const app = firebase.initializeApp ({
@@ -21,5 +20,3 @@ export const app = firebase.initializeApp ({
     appId: process.env.REACT_APP_FIREBASE_APP_ID
   
 });
-// const firebaseApp = firebase.initializeApp(firebaseConfig)
-
