@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-
-import {app} from "../../firebase"
-
+import {app} from "../firebase"
 
 const MyPage = () => {
   
