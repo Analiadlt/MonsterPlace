@@ -11,11 +11,15 @@ import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
 
 import userDetail from './components/userDetail';
+import MyPage from './firebase/storage/MyPage';
+import MyAuthPage from './firebase/auth/MyAuthPage';
+
 function App() {
 
   return (
     <div className="App">
-      
+      <Route path="/storage" component={MyPage}/>
+      <Route path="/auth" component={MyAuthPage}/>
       <Route path="/Carrito" component={Carrito} />
       <Route  exact path="/" component={Home} />
       <Route  exact path="/Tienda" component={Tienda} />
