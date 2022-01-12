@@ -215,3 +215,22 @@
   
   
 }
+
+.chat{
+  width: 50%;
+  min-height: 50vh;
+  max-height: 50vh;
+  overflow: scroll;
+  // border: 2px solid black;
+  box-shadow: 0 0 20px #bd9635;
+
+ color:#FFB520;
+}
+
+.caja-chat{
+  display: flex;
+  
+  flex-direction:column;
+  margin-left: 35%;
+  
+}

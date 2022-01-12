@@ -175,7 +175,11 @@ const ForLogin = () => {
 						</div>
 					</form>
 					<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-						<a style={{ color: '#FFB520', textDecoration: 'underline' }} href='/PassReset'>Olvide mi contraseña</a>
+						<Link to='/PassReset'>
+						
+						<p style={{ color: '#FFB520', textDecoration: 'underline' , fontSize:'18px'}} >Olvide mi contraseña </p>
+						</Link>
+
 
 					</div>
 					

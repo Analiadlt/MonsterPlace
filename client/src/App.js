@@ -11,6 +11,7 @@ import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
 
 import userDetail from './components/userDetail';
+import Chat from './components/Chat';
 function App() {
 
   return (
@@ -23,6 +24,8 @@ function App() {
       <Route path="/Login" component={ForLogin} />
       <Route path="/PassReset" component={PassReset} />
       <Route path="/Detail/:id" component={userDetail} />
+      <Route path="/chat" component={Chat} />
+
     </div>
   );
 }
