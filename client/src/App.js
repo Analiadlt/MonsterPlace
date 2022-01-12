@@ -11,11 +11,19 @@ import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
 
 import userDetail from './components/userDetail';
+
+import Chat from './components/Chat';
+
+import MyPage from './firebase/storage/MyPage';
+import MyAuthPage from './firebase/auth/MyAuthPage';
+
+
 function App() {
 
   return (
     <div className="App">
-      
+      <Route path="/storage" component={MyPage}/>
+      <Route path="/auth" component={MyAuthPage}/>
       <Route path="/Carrito" component={Carrito} />
       <Route  exact path="/" component={Home} />
       <Route  exact path="/Tienda" component={Tienda} />
@@ -23,6 +31,8 @@ function App() {
       <Route path="/Login" component={ForLogin} />
       <Route path="/PassReset" component={PassReset} />
       <Route path="/Detail/:id" component={userDetail} />
+      <Route path="/chat" component={Chat} />
+
     </div>
   );
 }
