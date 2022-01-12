@@ -7,7 +7,6 @@ import Car from './Car'
 export default function Destacadas() {
     const loading = useSelector(state => state.loading)
     const cartasbd = useSelector(state => state.dragonesbd)
-    const destacadas = cartasbd.slice(1,4)
     const dispatch = useDispatch()
     useEffect(() => {
         if (!cartasbd.length && !loading.loading) {
@@ -21,9 +20,11 @@ export default function Destacadas() {
             <div className="contenedor-destacadas">
                 <h2>Crypys Destacados:</h2>
                 <div>
-
+                    {cartasbd.length > 0 ?
 
                     <Car/>
+                    : <h1>cargando</h1>
+                    }
                 </div>
                 
             </div>

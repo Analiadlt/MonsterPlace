@@ -13,8 +13,7 @@ import { useSelector } from 'react-redux';
 
 export default function App() {
 
-    const carta = useSelector(state => state.dragones)
-
+    const carta = useSelector(state => state.dragonesbd)
     return (
         <div className="container">
             <Swiper
@@ -38,7 +37,7 @@ export default function App() {
             >
                 { carta.map( dragon=>
                 <SwiperSlide>
-                    <Prueba name={dragon.name} atack={dragon.atack} defense={dragon.defense} img={dragon.img} price={dragon.price} type={dragon.type} />
+                    <Prueba name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} type={dragon.type} />
                 </SwiperSlide>
                 )
                 }   

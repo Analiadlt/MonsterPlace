@@ -1,3 +1,5 @@
+var connections = [];
+
 let Chat = (http)=>{
 
 const io = require('socket.io')(http,{
@@ -8,7 +10,23 @@ const io = require('socket.io')(http,{
 
 });
 
+
+
+// contar los sockets abiertos
+function getCounter(){
+	io.sockets.emit('getCounter',connections.length);
+	console.log("Conexiones a Socket Nro: ", connections.length);
+}
+
+//apertura del socket
 io.on('connection', socket =>{
+
+    // contador de sockets
+    connections.push(socket);
+    getCounter();
+    console.log("New Socket connected: ", socket.id);
+    
+    // controlador del chat
     let nombre;
     socket.on('conectado',(nomb)=>{
         nombre = nomb;
@@ -23,8 +41,13 @@ io.on('connection', socket =>{
         io.emit('mensajes', {server: 'Servidor', mensaje: `${nombre} abandonado la sala`})
     })
 
+    
+
+
 })
 
 }
+
+
 
 module.exports = Chat;
