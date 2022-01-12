@@ -34,7 +34,7 @@ export function addUser(payload) {
 }
 export function getCard() {
   return function (dispatch) {
-      dispatch({ type: LOADING, payload: 'Buscando Cartas...' })
+      /* dispatch({ type: LOADING, payload: 'Buscando Cartas...' }) */
       return axios.get('http://localhost:3001/cards/get')
           .then(res => res.data)
           .then(data => dispatch({ type: GET_CARDS, payload: data }))

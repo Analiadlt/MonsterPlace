@@ -1,9 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 export default function Prueba({ name, atack, defense, img, type, price}) {
-    const carta = useSelector(state => state.dragonesbd)
-    const cart = carta[5]
     return (
         <div className="prueba">
             <div className="cards" >
@@ -39,7 +36,7 @@ export default function Prueba({ name, atack, defense, img, type, price}) {
                         </a>
                     
                 </div>
-                <img src={img} alt="" />
+                <img src={img} alt="NO tengo imagen" />
             </div>
         </div>
 
