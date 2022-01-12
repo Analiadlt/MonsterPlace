@@ -1,5 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN }  from './actions'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN, USER_LOG }  from './actions'
 import dragon2 from '../img/recurso1.png'
 import dragon6 from '../img/recurso9.png'
 import dragon9 from '../img/recurso3.png'
@@ -10,41 +10,11 @@ const initialState = {
     //validador de modo de color de la pagina 
     modo :'claro',
     //cartas hardcode
-    dragones:[{
-        name: 'oxonomy',
-        img: dragon6,
-        atack:85,
-        defense: 90,
-        type:'Rare',
-        price:200
+    user:[],
 
-
-    },
-    {
-        name: 'octopi',
-        img: dragon2,
-        atack:85,
-        defense: 90,
-        type:'Epic',
-        price:200
-
-    },
-    {
-        name: 'succotash',
-        img: dragon9,
-        atack:85,
-        defense: 90,
-        type:'Rare',
-        price:200
-
-
-    }
-
-    ],
     dragonesbd:[],
     
     //recolecta la informacion del usuario para crearlo 
-    user:[],
 
     //informacion del usuario que se encuentra logueado 
     userLogueado:[],
@@ -159,6 +129,11 @@ export default function Reducer(state=initialState, action){
                 return{
                     ...state,
                     carrito: state.carrito.filter(card => card.name !== action.payload)
+                }
+            case USER_LOG:
+                return{
+                    ...state,
+                    userLogueado: action.payload
                 }
           default:
             return state;
