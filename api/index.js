@@ -21,7 +21,9 @@ const http = require('./src/app.js');
 const Chat = require('./src/socket/Chat');
 
 
+
 const { conn } = require('./src/db.js');
+
 
 
 
@@ -33,4 +35,5 @@ conn.sync({ force: true }).then(() => {
 });
 
 Chat(http)
+
 
