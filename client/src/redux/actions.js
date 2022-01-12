@@ -11,6 +11,7 @@ export const RESET_USER = "RESET_USER"
 export const RESET_LOGIN = "RESET_LOGIN"
 export const GET_CARDS = "GET_CARDS"
 export const GET_BY_ID = "GET_BY_ID"
+export const USER_LOG = "USER_LOG"
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -116,5 +117,12 @@ export function reset(){
 export function loginReset(){
   
   return{ type: RESET_LOGIN, payload:[]} 
+
+}
+
+
+export function usuarioLog(user){
+  
+  return{ type: USER_LOG, payload: user} 
 
 }
