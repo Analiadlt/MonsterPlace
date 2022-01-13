@@ -42,7 +42,9 @@ export default function Tienda(){
                 </div>
             }   
             </div>
-            
+            <Link to="/juego">
+                Hola
+            </Link>
         </div>
 
     )
