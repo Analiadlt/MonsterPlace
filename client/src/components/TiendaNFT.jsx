@@ -48,6 +48,7 @@ export default function TiendaNFT() {
         return item;
       })
     );
+    console.log(items) //estos son los items en venta 
     setNfts(items);
     setLoadingState("loaded");
   }
