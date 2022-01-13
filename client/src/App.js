@@ -18,17 +18,22 @@ import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
+import { getUserLogin } from './redux/actions';
+
+
 function App() {
-  const logueado = useSelector(state => state.userLogueado)
+  const logueado = useSelector(state => state.users)
   const dispatch = useDispatch()
 
   useEffect(() => {
 
     if (app) {
         app.auth().onAuthStateChanged((authUser) => {
-          if (authUser && !logueado.length) {
+
+          if (authUser && logueado.length >4) {
+            dispatch(getUserLogin(authUser.email))
               console.log('hola');
-          }})}},[])
+          }})}},[logueado])
 
 
 

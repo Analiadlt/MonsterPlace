@@ -91,6 +91,28 @@ export function getById(id) {
   };
 }
 
+//Obtener un usuario por Email
+export function getUserLogin(em) {
+  let email = {email:em}
+  console.log('email desde actions', email);
+
+  return async (dispatch) => {
+    
+    try {
+      console.log('email desde actions', email);
+      var json = await axios.post(`http://localhost:3001/loginInfo/loginInformation`, email);
+      console.log("Data Desde Actions", json.data);
+      return dispatch({
+        type: LOGIN_USER,
+        payload: json.data[0],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
 export function addCart(card){
     return{ type: ADD_CART, payload: card} 
 }
