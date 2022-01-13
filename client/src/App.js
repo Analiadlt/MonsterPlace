@@ -29,11 +29,11 @@ function App() {
 
     if (app) {
         app.auth().onAuthStateChanged((authUser) => {
-          console.log('authUser',authUser.email)
+          console.log('authUser',logueado.length)
           if (authUser && logueado.length >4) {
             dispatch(getUserLogin(authUser.email))
               console.log('hola');
-          }})}},[])
+          }})}},[logueado])
 
 
 
