@@ -1,4 +1,4 @@
-require("dotenv").config();
+
 const { NFTMARKETADDRESS, NFTADDRESS } = process.env;
 
   export const nftmarketaddress = `${NFTMARKETADDRESS}`
