@@ -30,7 +30,7 @@ function App() {
     if (app) {
         app.auth().onAuthStateChanged((authUser) => {
 
-          if (authUser && logueado.length >4) {
+          if (authUser && logueado.length >5) {
             dispatch(getUserLogin(authUser.email))
               console.log('hola');
           }})}},[logueado])
