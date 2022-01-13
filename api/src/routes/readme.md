@@ -19,3 +19,5 @@ RutaPutPassword : http://localhost:3001/users/putUserPassword
 RutaDeleteUser : http://localhost:3001/delete/user/:id
 
 RutaRecoverUser : http://localhost:3001/recover
+
+RutaAdquirirCard : http://localhost:3001/carduser/:id/buy
