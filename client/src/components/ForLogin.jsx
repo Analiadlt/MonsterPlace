@@ -10,6 +10,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import huevoRojo from '../img/huevoRojo.png'
 import huevoBlanco from '../img/huevoBlanco.png'
+import {app} from "../firebase/firebase";
+
 
 
 const validate = values => {
@@ -34,6 +36,8 @@ const validate = values => {
 	return errors;
 };
 
+
+
 const ForLogin = () => {
 	const dispatch = useDispatch()
 	const history = useHistory()
@@ -49,12 +53,26 @@ const ForLogin = () => {
 			password: '',
 		},
 		validate,
-		onSubmit: (values) => {
-			console.log("Desde ForLogin", values)
-			dispatch(loginUser(values));
+		onSubmit: async (values) => {
+
+			try {
+				if (app) {
+				  const user = await app
+					.auth()
+					.signInWithEmailAndPassword(values.email, values.password);
+				  console.log("user", user);
+				  dispatch(loginUser(values));
+				  alert("Bienvenido!");
+				  setLogeado(true)
+				}
+			  } catch (error) {
+			   console.log("error");
+			   alert(error);
+			   
+			  }
+			// console.log("Desde ForLogin", values)
 
 
-			setLogeado(true)
 
 		},
 
@@ -107,6 +125,24 @@ const ForLogin = () => {
 
 	}, [userLogeado, history]);
 
+
+	// const signIn = async (event) => {
+	// 	event.preventDefault();
+	
+	// 	try {
+	// 	  if (app) {
+	// 		const user = await app
+	// 		  .auth()
+	// 		  .signInWithEmailAndPassword(email.value, password.value);
+	// 		console.log("user", user);
+	// 		alert("Bienvenido!");
+	// 	  }
+	// 	} catch (error) {
+	// 	 console.log("error");
+	// 	 alert(error);
+		 
+	// 	}
+	//   };
 
 
 
