@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Home from './components/Home'
@@ -9,32 +9,45 @@ import Nav from './components/Nav';
 import Carrito from './components/Carrito';
 import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
-
+import Juego from './components/juego/interface';
 import userDetail from './components/userDetail';
 
 import Chat from './components/Chat';
 
 import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { app } from "./firebase/firebase";
 function App() {
+  const logueado = useSelector(state => state.userLogueado)
+  const dispatch = useDispatch()
 
-  return (
-    <div className="App">
-      <Route path="/storage" component={MyPage}/>
-      <Route path="/auth" component={MyAuthPage}/>
-      <Route path="/Carrito" component={Carrito} />
-      <Route  exact path="/" component={Home} />
-      <Route  exact path="/Tienda" component={Tienda} />
-      <Route path="/Registro" component={FormRegistro} />
-      <Route path="/Login" component={ForLogin} />
-      <Route path="/PassReset" component={PassReset} />
-      <Route path="/Detail/:id" component={userDetail} />
-      <Route path="/chat" component={Chat} />
+  useEffect(() => {
 
-    </div>
-  );
-}
+    if (app) {
+        app.auth().onAuthStateChanged((authUser) => {
+          if (authUser && !logueado.length) {
+              console.log('hola');
+          }})}},[])
 
-export default App;
+
+
+      return (
+        <div className="App">
+          <Route path="/storage" component={MyPage} />
+          <Route path="/auth" component={MyAuthPage} />
+          <Route path="/Carrito" component={Carrito} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Tienda" component={Tienda} />
+          <Route path="/Registro" component={FormRegistro} />
+          <Route path="/Login" component={ForLogin} />
+          <Route path="/PassReset" component={PassReset} />
+          <Route path="/Detail/:id" component={userDetail} />
+          <Route path="/chat" component={Chat} />
+          <Route path="/juego" component={Juego} />
+
+        </div>
+      );
+    }
+
+    export default App;
