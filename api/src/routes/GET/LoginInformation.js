@@ -4,7 +4,7 @@ const {User} = require("../../db");
 
 const router = Router();
 
-router.get("/loginInformation", async (req,res) => {
+router.post("/loginInformation", async (req,res) => {
     const email = req.body.email
     console.log(email)
     const info = await User.findAll({
