@@ -1,6 +1,6 @@
 var connections = [];
 
-let Chat = (http)=>{
+let ServerIo = (http)=>{
 
 const io = require('socket.io')(http,{
 
@@ -41,7 +41,7 @@ io.on('connection', socket =>{
         io.emit('mensajes', {server: 'Servidor', mensaje: `${nombre} abandonado la sala`})
     })
 
-    
+     
 
 
 })
@@ -50,4 +50,4 @@ io.on('connection', socket =>{
 
 
 
-module.exports = Chat;
+module.exports = ServerIo;

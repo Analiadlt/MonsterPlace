@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const http = require('./src/app.js');
-const Chat = require('./src/socket/Chat');
+const ServerIo = require('./src/socket/Serverio');
 
 
 
@@ -34,6 +34,6 @@ conn.sync({ force: true }).then(() => {
   });
 });
 
-Chat(http)
+ServerIo(http)
 
 
