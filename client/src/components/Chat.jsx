@@ -17,10 +17,40 @@ export default function Chat() {
     const dispatch = useDispatch()
 
     let nombre=socket.id
+    // controlo la cantidad de jugadores
+    useEffect(() => {
+        socket.on('getCounter',cant  => {
+            console.log('cantidad de jugadores',cant)
+            if (cant > 2){
+                socket.emit('message', 'cantidad de jugadores superada');
+                
+                // alert('cantidad de jugadores superada')
+            }  return ()=> {socket.off()}     
+        })
+            
+    })
+
+    //Obtengo el socket id
+    useEffect(() => {
+        socket.on('Socketid',sid  => {
+            console.log('Socket Id: ',sid)
+
+        })
+            
+    })
+    // obtengo el numero de jugador
+    useEffect(() => {
+        socket.on('player-number', pIndex  => {
+            console.log('Jugador Numero: ',pIndex)
+
+        })
+            
+    })
+
+
 
     console.log('mensajes',mensajes)
-    
-    // useEffect(() => {
+   // useEffect(() => {
         
     //     socket.emit('conectado',nombre)
 
