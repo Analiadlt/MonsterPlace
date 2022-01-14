@@ -10,10 +10,14 @@ import Nav from "./Nav";
 
 
 export default function Chat() {
+
+    const infoRoom = JSON.parse(localStorage.getItem("info-room"));
+    const [mazo, setMazo] = useState(JSON.parse(localStorage.getItem("mazo")));
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
     const dragones = useSelector(state => state.dragonesbd)
 
+    const [rondas,setRondas]= useState([])
 
     const idpartida = localStorage.getItem('idroom')
 
@@ -24,6 +28,7 @@ export default function Chat() {
     const [ronda, setRonda] = useState(localStorage.getItem(false))
     const [resultadoo, setResultado] = useState([])
 
+
     // controlo la cantidad de jugadores
     useEffect(() => {
         socket.on('getCounter', cant => {
@@ -32,6 +37,7 @@ export default function Chat() {
         })
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
+            setRondas([...rondas, resultado])
 
         })
 
@@ -51,6 +57,15 @@ export default function Chat() {
     useEffect(() => {
         if (mensajes.length === 2) {
             socket.emit('fin-ronda', mensajes, idpartida)
+            setRonda(true)
+        }
+    }, [mensajes])
+    
+    
+    
+    useEffect(() => {
+        if (rondas.length === 3) {
+            socket.emit('fin-partida', mensajes, idpartida)
             setRonda(true)
         }
     }, [mensajes])
@@ -84,7 +99,9 @@ export default function Chat() {
 
     const divRef = useRef(null);
 
+    function handleSubmit(e) {
 
+    }
 
 
     useEffect(() => {
@@ -101,8 +118,10 @@ export default function Chat() {
     }, [mensaje])
     console.log('esto es mensaje', mensaje)
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    function remover(carta) {
+        
+        setMensaje(carta)
+        setMazo(mazo.filter(car => car.name !== carta.name))
     }
 
 
@@ -116,8 +135,9 @@ export default function Chat() {
             <div className='caja-chat'>
                 {resultadoo.length ?
                     <div>
+                        {console.log(mazo)}
                         <h1>Carta Ganadora</h1>
-                        
+                        <h2>{resultadoo[0].mensaje.name}</h2>
                         <img alt="carta" src={resultadoo[0]?.mensaje.img} style={{ width: '100px', height: '100px', display: 'block', margin: ' 0 auto' }} />
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
                             <p>Ataque:</p><span>{resultadoo[0]?.mensaje.attack}</span>
@@ -146,7 +166,7 @@ export default function Chat() {
 
                         }
                         <div ref={divRef}></div>
-                        {console.log('este es el turno ', turno)}
+                        {console.log('este es tu mazo ', mazo)}
                     </div>
 
                 }
@@ -155,9 +175,9 @@ export default function Chat() {
                 {turno !== 'true' ? <h1>Turno del rival</h1>
                     :
                     <div style={{ display: 'flex', marginTop: '2rem', justifyContent: 'center' }}>
-                        <img className="cartita" alt="carta" src={dragones[0]?.img} onClick={() => setMensaje(dragones[0])} />
-                        <img className="cartita" alt="carta" src={dragones[1]?.img} onClick={() => setMensaje(dragones[1])} />
-                        <img className="cartita" alt="carta" src={dragones[2]?.img} onClick={() => setMensaje(dragones[2])} />
+                        {mazo.map( (carta ,i) =>
+                        <img className="cartita" key={i} alt="carta" src={carta.img} onClick={() => remover(carta) }/>
+                        )}
                     </div>
 
                 }
