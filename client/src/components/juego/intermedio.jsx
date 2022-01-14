@@ -11,14 +11,19 @@ export default function Intermedio(){
     const dispatch = useDispatch()
     localStorage.setItem('turno', false);
     useEffect(() => {
-        socket.on('inicio-partida', (roomincompleto) => {
+        socket.on('inicio-partida', (roomincompleto, room) => {
             dispatch(empezarPartida())
+            localStorage.setItem("info-room", JSON.stringify(room));
             localStorage.setItem('idroom', roomincompleto);
-            console.log('desde intermedio ', roomincompleto)
+            console.log('desde intermedio ', room)
         })
         socket.on('turno', turno =>{
             localStorage.setItem('turno', turno);
             console.log('llego el turno', turno )
+        })
+        socket.on('mazo-juego', mazo =>{
+            localStorage.setItem("mazo", JSON.stringify(mazo));
+            
         })
 
     }, [])
