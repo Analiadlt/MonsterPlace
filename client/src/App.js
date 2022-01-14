@@ -17,6 +17,9 @@ import userDetail from './components/userDetail';
 import Chat from './components/Chat';
 import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';
+import Intermedio from './components/juego/intermedio';
+
+
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
 import { getUserLogin } from './redux/actions';
@@ -54,7 +57,7 @@ function App() {
           <Route  exact path="/CrearNFT" component={crearNFT} />
           <Route  exact path="/TableroNFT" component={tableroNFT} />
           <Route  exact path="/MisNFT" component={misNFT} />
-
+          <Route  exact path="/Matchmaking" component={Intermedio} />
         </div>
       );
     }
