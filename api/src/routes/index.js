@@ -13,6 +13,8 @@ const postCards = require('./POST/PostCards')
 const postLogin = require('./POST/PostLogin')
 const getDestacadas = require('./GET/GetDestacadas')
 const postRecoverUser = require("./POST/PostRecoverUser")
+const loginInfo= require("./GET/LoginInformation")
+const postUserCard = require("./POST/PostUserCard")
 const postLogicGame = require("./POST/PostLogicGame")
 
 const router = Router();
@@ -23,6 +25,9 @@ router.use('/user',validateInformation(putUserInformationSchema),putUserInformat
 router.use('/login',validateInformation(postLoginSchema), postLogin);
 router.use('/delete',deleteUser)
 router.use("/recover", postRecoverUser)
+router.use("/loginInfo",loginInfo)
+router.use("/usercard", postUserCard)
 router.use("/game", postLogicGame)
 // router.use('/')
+
 module.exports = router;

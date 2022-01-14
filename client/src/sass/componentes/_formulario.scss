@@ -217,20 +217,38 @@
 }
 
 .chat{
-  width: 50%;
-  min-height: 50vh;
-  max-height: 50vh;
+  width: 100%;
+  min-height: 70vh;
+  max-height: 70vh;
   overflow: scroll;
   // border: 2px solid black;
   box-shadow: 0 0 20px #bd9635;
 
  color:#FFB520;
+ display: flex;
+  justify-content: center;
 }
 
 .caja-chat{
   display: flex;
-  
+  justify-content: center;
   flex-direction:column;
-  margin-left: 35%;
+ 
   
 }
+
+.cartita{
+  width:100px; 
+
+  height : 100px; 
+
+  cursor: pointer;
+
+  margin: 0 30px;
+
+  &:hover{
+        transform: translateY(-10px);
+        transition: 0.4s ease-out;
+  }
+}
+

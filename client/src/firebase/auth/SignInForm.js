@@ -19,8 +19,9 @@ const SignInForm = () => {
         alert("Bienvenido!");
       }
     } catch (error) {
-     // console.log("error", error);
+     console.log("error");
      alert(error);
+     
     }
   };
 
