@@ -50,10 +50,10 @@ function App() {
           <Route path="/Detail/:id" component={userDetail} />
           <Route path="/chat" component={Chat} />
           <Route path="/juego" component={Juego} />
-            <Route  exact path="/TiendaNFT" component={TiendaNFT} />
-      <Route  exact path="/CrearNFT" component={crearNFT} />
-      <Route  exact path="/TableroNFT" component={tableroNFT} />
-      <Route  exact path="/MisNFT" component={misNFT} />
+          <Route  exact path="/TiendaNFT" component={TiendaNFT} />
+          <Route  exact path="/CrearNFT" component={crearNFT} />
+          <Route  exact path="/TableroNFT" component={tableroNFT} />
+          <Route  exact path="/MisNFT" component={misNFT} />
 
         </div>
       );
