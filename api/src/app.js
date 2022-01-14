@@ -2,7 +2,6 @@ var path = require('path');
 var app = require('express');
 var server = app()
 var http = require('http').createServer(server);
-
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -10,7 +9,7 @@ const routes = require('./routes/index.js');
 ////
 server.get('/', (req, res) => {
   console.error('express connection');
-  res.sendFile(path.join(__dirname, 'si.html'));
+  res.sendFile(path.join(__dirname, 'socket'));
 });
 
 
