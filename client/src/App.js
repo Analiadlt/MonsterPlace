@@ -26,15 +26,15 @@ function App() {
   const logueado = useSelector(state => state.users)
   const dispatch = useDispatch()
 
-  useEffect(() => {
+    useEffect(() => {
 
-    if (app) {
+      if (app) {
         app.auth().onAuthStateChanged((authUser) => {
 
           if (authUser && logueado.length >5) {
             dispatch(getUserLogin(authUser.email))
                        }})}},[logueado])
-
+                    
 
 
       return (
@@ -47,7 +47,7 @@ function App() {
           <Route path="/Registro" component={FormRegistro} />
           <Route path="/Login" component={ForLogin} />
           <Route path="/PassReset" component={PassReset} />
-          <Route path="/Detail/:id" component={userDetail} />
+          <Route path="/Detail/" component={userDetail} />
           <Route path="/chat" component={Chat} />
           <Route path="/juego" component={Juego} />
           <Route  exact path="/TiendaNFT" component={TiendaNFT} />

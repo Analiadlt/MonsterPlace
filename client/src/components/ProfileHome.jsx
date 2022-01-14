@@ -15,11 +15,17 @@ import { Link } from 'react-router-dom';
 import { useSelector ,useDispatch } from 'react-redux';
 import  {useEffect}  from 'react';
 import { loginReset } from '../redux/actions';
+import {app} from "../firebase/firebase"
+
+
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dispatch = useDispatch()
     const open = Boolean(anchorEl);
+
     const userLogeado = useSelector(state => state.userLogueado)
+
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -27,11 +33,34 @@ export default function ProfileHome() {
         setAnchorEl(null);
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    },[userLogeado])
-    let cambiarLogeo = ()=>{
-        dispatch(loginReset())
+    // },[userLogeado])
+    const signOut = async () => {
+        // try {
+        //   if (app) {
+        //     await app.auth().signOut();
+        //     alert("Successfully signed out!");
+        //   }
+        // } catch (error) {
+        //   console.log("error", error);
+        // }
+        console.log('desloguado')
+      };
+
+    
+
+    let cambiarLogeo = async ()=>{
+
+            try {
+          if (app) {
+            await app.auth().signOut();
+            dispatch(loginReset())
+            // alert("Successfully signed out!");
+          }
+        } catch (error) {
+          console.log("error", error);
+        }
     }
 
     return (
@@ -96,7 +125,7 @@ export default function ProfileHome() {
                 
                 > 
                 {userLogeado.nickName ?
-                        <Link to={`/Detail/${userLogeado.id}`}>
+                        <Link to={`/Detail`}>
                                 <MenuItem>
                                     <Avatar /> <p className='menu' style={{ paddingRigth: '20px' }}> Mi Perfil </p>
                                 </MenuItem>

@@ -62,7 +62,7 @@ const ForLogin = () => {
 					.signInWithEmailAndPassword(values.email, values.password);
 				  console.log("user", user);
 				  dispatch(loginUser(values));
-				  alert("Bienvenido!");
+				//   alert("Bienvenido!");
 				  setLogeado(true)
 				}
 			  } catch (error) {
