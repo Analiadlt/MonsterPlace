@@ -1,4 +1,6 @@
 var connections = [];
+let roomincompleto = [];
+let room = [];
 
 let ServerIo = (http)=>{
 
@@ -12,15 +14,10 @@ const io = require('socket.io')(http,{
 
 
 
-// contar los sockets abiertos
-function getCounter(){
-	io.sockets.emit('getCounter',connections.length);
-	console.log("Conexiones a Socket Nro: ", connections.length);
-}
 
 //apertura del socket
 io.on('connection', socket =>{
-
+    
     // contador de sockets
     // connections.push(socket);
 
@@ -30,6 +27,24 @@ io.on('connection', socket =>{
     if (socket.id !== false) {
         connections.push(socket.id);
       }
+
+      //Buscar rooms
+      
+      socket.on('buscar-rooms', (nombre)=>{
+        console.log("buscar-rooms");
+        if(roomincompleto.length > 0) {
+          roomincompleto.push(nombre);
+          room.push(roomincompleto);
+          console.log("RoomInconpleto antes de enviar: ", roomincompleto)
+          socket.emit('inicio-partida', roomincompleto);
+          roomincompleto = [];
+          console.log('roomincompleto: ', roomincompleto, 'room: ', room);
+        } else {
+          roomincompleto.push(nombre);
+          // socket.join(nombre);
+          console.log('roomincompleto: ', roomincompleto, 'room: ', room);
+        }
+      });
 
     // contar los sockets abiertos
     function getCounter(){
