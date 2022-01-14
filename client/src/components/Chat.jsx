@@ -1,5 +1,5 @@
 import React, {useState , useEffect , useRef } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 
 import { getCard } from "../redux/actions";
 
@@ -14,6 +14,7 @@ export default function Chat() {
     const [mensajes, setMensajes] = useState([]);
     const dragones = useSelector(state => state.dragonesbd)
 
+
     const dispatch = useDispatch()
 
     let nombre=socket.id
@@ -23,6 +24,7 @@ export default function Chat() {
             console.log('cantidad de jugadores',cant)
             if (cant > 2){
                 socket.emit('message', 'cantidad de jugadores superada');
+                socket.emit('buscar-rooms', 'pepe');
                 
                 // alert('cantidad de jugadores superada')
             }  return ()=> {socket.off()}     
@@ -98,6 +100,22 @@ export default function Chat() {
     //     setMensaje('')
 
     // }
+    function handleSubmit(e) {
+        e.preventDefault();
+        socket.emit('buscar-rooms', 'pepe');
+      }
+    // handleSubmit = (e) => {
+    //     socket.emit('buscar-rooms', e)
+    // }
+
+    useEffect(() => {
+        socket.on('inicio-partida', roomincompleto => {
+          console.log(roomincompleto, "Inicio partida")
+    })
+    }, [])
+         
+       
+
 
 
     return (
@@ -113,7 +131,7 @@ export default function Chat() {
                         <div key={i} style={{display:'flex', justifyContent:'center'}}>
                         <div style={{ border:'1px solid #ffff', width:'200px',height:'300px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
                     
-                    <img  src={dragon?.mensaje.img} style={{width:'100px',height:'100px',display:'block', margin:' 0 auto'}}/>
+                    <img  alt = "carta" src={dragon?.mensaje.img} style={{width:'100px',height:'100px',display:'block', margin:' 0 auto'}}/>
                         <div style={{display:'flex', flexDirection:'column', textAlign:'center'}}>
                         <p>Ataque:</p><span>{dragon?.mensaje.attack}</span>
                         <p>Defensa:</p><span>{dragon?.mensaje.defense}</span>
@@ -130,10 +148,12 @@ export default function Chat() {
           
            <div style={{display:'flex',marginTop:'2rem', justifyContent:'center'}}>
 
-            <img className="cartita" src={dragones[0]?.img} onClick={()=>setMensaje(dragones[0])}/>
-            <img className="cartita" src={dragones[1]?.img} onClick={()=>setMensaje(dragones[1])}/>
-            <img className="cartita" src={dragones[2]?.img} onClick={()=>setMensaje(dragones[2])}/>
-
+            <img className="cartita" alt = "carta" src={dragones[0]?.img} onClick={()=>setMensaje(dragones[0])}/>
+            <img className="cartita" alt = "carta" src={dragones[1]?.img} onClick={()=>setMensaje(dragones[1])}/>
+            <img className="cartita" alt = "carta" src={dragones[2]?.img} onClick={()=>setMensaje(dragones[2])}/>
+             <button onClick={(e) => {
+                handleSubmit(e);
+              }}>Jugar</button>
             </div>
            
 
