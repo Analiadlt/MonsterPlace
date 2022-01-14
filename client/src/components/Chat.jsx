@@ -28,6 +28,8 @@ export default function Chat() {
     const [ronda, setRonda] = useState(localStorage.getItem(false))
     const [resultadoo, setResultado] = useState([])
 
+    const[enviarMensaje,setenviarMensaje]= useState(true)
+
 
     // controlo la cantidad de jugadores
     useEffect(() => {
@@ -38,6 +40,11 @@ export default function Chat() {
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
             setRondas([...rondas, resultado])
+            
+                setTimeout(() => {
+                    setResultado([])
+                    setMensajes([])
+                }, 3000)
 
         })
 
@@ -72,7 +79,6 @@ export default function Chat() {
 
 
 
-    console.log('mensajes', mensajes)
 
 
     useEffect(() => {
@@ -99,15 +105,15 @@ export default function Chat() {
 
     const divRef = useRef(null);
 
-    function handleSubmit(e) {
-
-    }
-
-
+  
     useEffect(() => {
         if (mensaje !== '' && turno === 'true') {
-
+            
             socket.emit('mensaje', mensaje, idpartida)
+
+            setenviarMensaje(!enviarMensaje)
+          
+            
 
 
         }
@@ -117,13 +123,23 @@ export default function Chat() {
 
     }, [mensaje])
     console.log('esto es mensaje', mensaje)
-
+   
     function remover(carta) {
         
-        setMensaje(carta)
         setMazo(mazo.filter(car => car.name !== carta.name))
+
+        if(enviarMensaje){
+            carta.jugador = infoRoom.jugador2
+        setMensaje(carta)
+        }
+        else{
+            carta.jugador = infoRoom.jugador1
+        setMensaje(carta)
+        }
     }
 
+    console.log('infoRoom',infoRoom)
+    console.log('infoRoom.jugardor1',infoRoom.jugador1)
 
 
 
@@ -136,8 +152,9 @@ export default function Chat() {
                 {resultadoo.length ?
                     <div>
                         {console.log(mazo)}
-                        <h1>Carta Ganadora</h1>
-                        <h2>{resultadoo[0].mensaje.name}</h2>
+                        <h1>{'Partida Ganada por '+resultadoo[0].mensaje.jugador}</h1>
+                        <h2>Carta </h2>
+                        <h3>{resultadoo[0].mensaje.name}</h3>
                         <img alt="carta" src={resultadoo[0]?.mensaje.img} style={{ width: '100px', height: '100px', display: 'block', margin: ' 0 auto' }} />
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
                             <p>Ataque:</p><span>{resultadoo[0]?.mensaje.attack}</span>
