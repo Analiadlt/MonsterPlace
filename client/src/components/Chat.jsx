@@ -13,11 +13,16 @@ export default function Chat() {
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
     const dragones = useSelector(state => state.dragonesbd)
-
+    
 
     const idpartida = localStorage.getItem('idroom')
 
     const dispatch = useDispatch()
+    
+    const [turno,setTurno] = useState(localStorage.getItem('turno'))
+    
+    const [ronda,setRonda] = useState(localStorage.getItem(false))
+
 
     // controlo la cantidad de jugadores
     useEffect(() => {
@@ -25,25 +30,30 @@ export default function Chat() {
             console.log('cantidad de jugadores',cant)
   
         })
+        socket.on('resultado', resultado  => {
+            console.log('este es el resultado', resultado)
+  
+        })
+
             
     })
 
     //Obtengo el socket id
-    useEffect(() => {
+/*     useEffect(() => {
         socket.on('Socketid',sid  => {
             console.log('Socket Id: ',sid)
 
         })
             
-    })
+    }) */
     // obtengo el numero de jugador
-    useEffect(() => {
-        socket.on('player-number', pIndex  => {
-            console.log('Jugador Numero: ',pIndex)
 
-        })
-            
-    })
+    useEffect(() => {
+        if(mensajes.length === 2){
+            socket.emit('fin-ronda', mensajes, idpartida)
+            setRonda(true)
+        }
+    },[mensajes])
 
 
 
@@ -60,9 +70,15 @@ export default function Chat() {
     useEffect(() => {
         
         socket.on('mensajes',mensaje =>{
-            setMensajes([...mensajes,mensaje])
+            
+            turno === 'true'?
+            setTurno('false')
+            :
+            setTurno('true')
+            if(mensajes.length < 2 ) { 
+                setMensajes([...mensajes,mensaje])
+            }
         })
-
         return ()=> {socket.off()}
     })
     
@@ -74,9 +90,10 @@ export default function Chat() {
 
         
         useEffect(() => {
-            if(mensaje !== ''){
+            if(mensaje !== '' && turno === 'true'){
                 
                 socket.emit('mensaje', mensaje, idpartida)
+                
                
             }
 
@@ -118,16 +135,22 @@ export default function Chat() {
                     
              }
              <div ref={divRef}></div>
-             {console.log(idpartida)}
+             {console.log('este es el turno ', turno)}
            </div> 
             
           
-           <div style={{display:'flex',marginTop:'2rem', justifyContent:'center'}}>
+           
 
-            <img className="cartita" alt = "carta" src={dragones[0]?.img} onClick={()=>setMensaje(dragones[0])}/>
-            <img className="cartita" alt = "carta" src={dragones[1]?.img} onClick={()=>setMensaje(dragones[1])}/>
-            <img className="cartita" alt = "carta" src={dragones[2]?.img} onClick={()=>setMensaje(dragones[2])}/>
-            </div>
+            {turno !== 'true' ? <h1>Turno del rival</h1>
+                :
+                <div style={{display:'flex',marginTop:'2rem', justifyContent:'center'}}>
+                    <img className="cartita" alt = "carta" src={dragones[0]?.img} onClick={()=> setMensaje(dragones[0])}/>
+                    <img className="cartita" alt = "carta" src={dragones[1]?.img} onClick={()=> setMensaje(dragones[1])}/>
+                    <img className="cartita" alt = "carta" src={dragones[2]?.img} onClick={()=> setMensaje(dragones[2])}/>
+                </div>
+             
+             }
+            
            
 
 
