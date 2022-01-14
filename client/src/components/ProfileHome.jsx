@@ -11,21 +11,30 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector ,useDispatch } from 'react-redux';
 import  {useEffect}  from 'react';
 import { loginReset } from '../redux/actions';
+import socket from "./Socket";
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dispatch = useDispatch()
     const open = Boolean(anchorEl);
     const userLogeado = useSelector(state => state.userLogueado)
+    const history = useHistory()
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        socket.emit('buscar-rooms', userLogeado.nickName);
+        history.push('/Matchmaking')
+    
+    }
 
     useEffect(() => {
 
@@ -110,6 +119,10 @@ export default function ProfileHome() {
                     <Link to={'/'} >
                         <MenuItem >
                             <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{paddingRigth:'20px'}}> Cerrar Sesion </p>
+                        </MenuItem>
+                        <MenuItem >
+
+                        <Avatar /> <p className='menu' onClick={(e) => {handleSubmit(e);}} style={{paddingRigth:'20px'}}> Jugar </p>
                         </MenuItem>
                     </Link> : 
                     <Link to='/Registro'>
