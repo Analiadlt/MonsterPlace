@@ -184,6 +184,8 @@ io.on('connection', socket =>{
     // })
 
     socket.on('mensaje', (mensaje, idpartida)=>{
+
+      console.log('mensaje',mensaje)
       io.sockets.in(room[idpartida].name).emit('mensajes',{mensaje});
     })
 
