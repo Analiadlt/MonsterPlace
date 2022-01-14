@@ -4,6 +4,18 @@ var connections = [];
 let roomincompleto = '';
 let room = [];
 
+function ronda(carta1 , carta2){
+  if(carta1.mensaje.attack > carta2.mensaje.attack){
+    return carta1
+  }
+  else if(carta2.mensaje.attack > carta1.mensaje.attack){
+    return carta2;
+  }
+  else if(carta2.mensaje.attack === carta1.mensaje.attack){
+    return 'empate';
+  }
+}
+
 let ServerIo = (http)=>{
 
 const io = require('socket.io')(http,{
@@ -35,28 +47,29 @@ io.on('connection', socket =>{
       socket.on('buscar-rooms', (nombre)=>{
         console.log("buscar-rooms");
         if(roomincompleto !== '') {
-/*           roomincompleto.push(nombre);
-          room.push(roomincompleto);
-          console.log("RoomInconpleto antes de enviar: ", roomincompleto, room.length-1)
-          io.sockets.emit('inicio-partida', roomincompleto, (room.length-1) );
-          roomincompleto = [];
-          console.log('roomincompleto: ', roomincompleto, 'room: ', room); */
           socket.join(room[roomincompleto])
           console.log('estas son las room', room);
           io.sockets.in(room[roomincompleto]).emit('inicio-partida', roomincompleto );
+          socket.emit('turno', true)
           roomincompleto = ''
 
 
         } else {
-/*           roomincompleto.push(nombre);
-          socket.join(nombre);
-          console.log('roomincompleto: ', roomincompleto, 'room: ', room); */
+
           room.push(`room de ${nombre}`)
           socket.join(room[room.length-1])
           roomincompleto = room.length-1
 
         }
       });
+
+      socket.on('fin-ronda',(mensajes,idpartida)=> {
+        console.log('fin de RONDA',mensajes);
+        let resultado = ronda(mensajes[0], mensajes[1])
+        console.log('resultado ronda',resultado)
+        io.sockets.in(room[idpartida]).emit('resultado', resultado)
+      })
+
 
     // contar los sockets abiertos
     function getCounter(){
