@@ -19,16 +19,11 @@ export default function Chat() {
 
     const dispatch = useDispatch()
 
-    let nombre=socket.id
     // controlo la cantidad de jugadores
     useEffect(() => {
         socket.on('getCounter',cant  => {
             console.log('cantidad de jugadores',cant)
-   /*          if (cant > 2){
-                socket.emit('message', 'cantidad de jugadores superada');
-                
-                // alert('cantidad de jugadores superada')
-            }  return ()=> {socket.off()}      */
+  
         })
             
     })
@@ -53,11 +48,7 @@ export default function Chat() {
 
 
     console.log('mensajes',mensajes)
-   // useEffect(() => {
-        
-    //     socket.emit('conectado',nombre)
-
-    // }, [nombre])
+  
 
     useEffect(() => {
         
@@ -85,7 +76,7 @@ export default function Chat() {
         useEffect(() => {
             if(mensaje !== ''){
                 
-                socket.emit('mensaje',nombre, mensajes, idpartida)
+                socket.emit('mensaje', mensaje, idpartida)
                
             }
 
@@ -94,25 +85,13 @@ export default function Chat() {
 
         },[mensaje])
         console.log('esto es mensaje',mensaje)
-    // const submit = (e) => {
-    //     e.preventDefault();
-    //     socket.emit('mensaje',nombre, mensaje)
-
-    //     setMensaje('')
-
-    // }
+   
     function handleSubmit(e) {
         e.preventDefault();
     }
-    // handleSubmit = (e) => {
-    //     socket.emit('buscar-rooms', e)
-    // }
+    
 
-
-         
        
-
-
 
     return (
         <div>
