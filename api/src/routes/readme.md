@@ -21,3 +21,6 @@ RutaDeleteUser : http://localhost:3001/delete/user/:id
 RutaRecoverUser : http://localhost:3001/recover
 
 RutaAdquirirCard : http://localhost:3001/carduser/:id/buy
+
+RutaLogicGame : http://localhost:3001/game/play
+
