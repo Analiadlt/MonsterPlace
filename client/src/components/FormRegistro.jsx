@@ -9,6 +9,7 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import huevoVerde from '../img/huevoVerde.png'
+import {app} from "../firebase/firebase";
 
 const validate = values => {
 
@@ -27,6 +28,7 @@ const validate = values => {
 		}
 		return edad;
 	}
+
 
 
 
@@ -78,6 +80,19 @@ const Formulario = () => {
 	const history = useHistory()
 	const user = useSelector( state => state.user)
 	const [ojo, setojo] = useState(false);
+	
+	const signUp = async (email,password) => {
+	
+		try {
+		  if (app) {
+			const user = await app
+			  .auth()
+			  .createUserWithEmailAndPassword(email, password);
+		  }
+		} catch (error) {
+		  alert(error.message);
+		}
+	};
 
 	
 	const switchShown = () => setojo(!ojo)
@@ -95,7 +110,9 @@ const Formulario = () => {
 		validate,
 		onSubmit: ({firstName,lastName,email,nickName,dateBirth,password}) => {
 			
-			dispatch(addUser({firstName,lastName,email,nickName,dateBirth,password}));
+			dispatch(addUser({firstName,lastName,email,nickName,dateBirth,password}))
+			signUp(email,password)
+			
 
 			
 		},
