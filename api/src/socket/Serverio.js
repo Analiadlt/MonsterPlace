@@ -78,8 +78,8 @@ io.on('connection', socket =>{
     //     socket.broadcast.emit('mensajes',{nombre: nombre , mensaje: `${nombre} Ha entrado en la sala`});
     // })
 
-    socket.on('mensaje', (nombre,mensaje, idpartida)=>{
-      io.sockets.in(room[idpartida]).emit('mensajes',{nombre,mensaje});
+    socket.on('mensaje', (mensaje, idpartida)=>{
+      io.sockets.in(room[idpartida]).emit('mensajes',{mensaje});
     })
 
     // socket.on('disconnect', ()=>{
