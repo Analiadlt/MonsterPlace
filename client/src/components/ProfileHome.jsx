@@ -49,29 +49,29 @@ export default function ProfileHome() {
         // }
         console.log('desloguado')
       };
+      function handleSubmit(e) {
+      e.preventDefault();
+      socket.emit('buscar-rooms', userLogeado.nickName);
+      history.push('/Matchmaking')
+  
+  }
 
     let cambiarLogeo = async ()=>{
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        socket.emit('buscar-rooms', userLogeado.nickName);
-        history.push('/Matchmaking')
-    
-    }
+        try {
+            if (app) {
 
-    useEffect(() => {
-
-
-            try {
-          if (app) {
-            await app.auth().signOut();
-            dispatch(loginReset())
-            // alert("Successfully signed out!");
+              await app.auth().signOut();
+              dispatch(loginReset())
+            //   alert("Successfully signed out!");
+            }
+          } catch (error) {
+            console.log("error", error);
           }
-        } catch (error) {
-          console.log("error", error);
-        }
-    }
+            };
+    
+
+   
 
     return (
         <div classname="foto">
