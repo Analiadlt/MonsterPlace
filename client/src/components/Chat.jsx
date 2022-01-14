@@ -22,12 +22,11 @@ export default function Chat() {
     useEffect(() => {
         socket.on('getCounter',cant  => {
             console.log('cantidad de jugadores',cant)
-            if (cant > 2){
+   /*          if (cant > 2){
                 socket.emit('message', 'cantidad de jugadores superada');
-                socket.emit('buscar-rooms', 'pepe');
                 
                 // alert('cantidad de jugadores superada')
-            }  return ()=> {socket.off()}     
+            }  return ()=> {socket.off()}      */
         })
             
     })
@@ -102,17 +101,12 @@ export default function Chat() {
     // }
     function handleSubmit(e) {
         e.preventDefault();
-        socket.emit('buscar-rooms', 'pepe');
-      }
+    }
     // handleSubmit = (e) => {
     //     socket.emit('buscar-rooms', e)
     // }
 
-    useEffect(() => {
-        socket.on('inicio-partida', roomincompleto => {
-          console.log(roomincompleto, "Inicio partida")
-    })
-    }, [])
+
          
        
 
@@ -151,9 +145,6 @@ export default function Chat() {
             <img className="cartita" alt = "carta" src={dragones[0]?.img} onClick={()=>setMensaje(dragones[0])}/>
             <img className="cartita" alt = "carta" src={dragones[1]?.img} onClick={()=>setMensaje(dragones[1])}/>
             <img className="cartita" alt = "carta" src={dragones[2]?.img} onClick={()=>setMensaje(dragones[2])}/>
-             <button onClick={(e) => {
-                handleSubmit(e);
-              }}>Jugar</button>
             </div>
            
 
