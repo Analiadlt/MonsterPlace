@@ -16,14 +16,14 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 export default function ListaUi() {
 
     const usuarios =  useSelector(state => state.users)
-    const loading = useSelector(state=>state.loading)
+    // const loading = useSelector(state=>state.loading)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (!usuarios.length && !loading.loading) {
-            dispatch(getUser())
-        }
-    })
+    // useEffect(() => {
+    //     if (!usuarios.length && !loading.loading) {
+    //         dispatch(getUser())
+    //     }
+    // })
   return (
     <List dense sx={{ width: '100%', maxWidth:500, bgcolor: 'black', borderRadius:'10px',boxShadow:'0 15px 40px 0 rgba(0, 0, 0, 0.904), 0 17px 17px 0 rgba(0, 0, 0, .5)',border:'none'}}>
         <div className='contendedor-encabezado'>

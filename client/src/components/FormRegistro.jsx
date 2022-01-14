@@ -148,7 +148,7 @@ const Formulario = () => {
 				})
 				
 					setTimeout(() => {
-					history.push('/Login')
+					history.push('/')
 					 
 					}, 3000);
 			}
