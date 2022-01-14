@@ -35,8 +35,8 @@ io.on('connection', socket =>{
         if(roomincompleto.length > 0) {
           roomincompleto.push(nombre);
           room.push(roomincompleto);
-          console.log("RoomInconpleto antes de enviar: ", roomincompleto)
-          socket.emit('inicio-partida', roomincompleto);
+          console.log("RoomInconpleto antes de enviar: ", roomincompleto, room.length-1)
+          io.sockets.emit('inicio-partida', roomincompleto);
           roomincompleto = [];
           console.log('roomincompleto: ', roomincompleto, 'room: ', room);
         } else {
