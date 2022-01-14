@@ -49,7 +49,7 @@ export default function Nav() {
           </Link>
           <Link to="/TiendaNFT">
             <span
-              className={window.location.pathname === "/" ? "activo" : null}
+              className={window.location.pathname === "/TiendaNFT" ? "activo" : null}
             >
               TiendaNFT
             </span>

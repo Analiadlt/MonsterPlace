@@ -11,12 +11,13 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector ,useDispatch } from 'react-redux';
 import  {useEffect}  from 'react';
 import { loginReset } from '../redux/actions';
-import {app} from "../firebase/firebase"
 
+import {app} from "../firebase/firebase"
+import socket from "./Socket";
 
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -24,7 +25,7 @@ export default function ProfileHome() {
     const open = Boolean(anchorEl);
 
     const userLogeado = useSelector(state => state.userLogueado)
-
+ const history = useHistory()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -32,6 +33,7 @@ export default function ProfileHome() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
 
     // useEffect(() => {
 
@@ -48,9 +50,17 @@ export default function ProfileHome() {
         console.log('desloguado')
       };
 
-    
-
     let cambiarLogeo = async ()=>{
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        socket.emit('buscar-rooms', userLogeado.nickName);
+        history.push('/Matchmaking')
+    
+    }
+
+    useEffect(() => {
+
 
             try {
           if (app) {
@@ -139,6 +149,10 @@ export default function ProfileHome() {
                     <Link to={'/'} >
                         <MenuItem >
                             <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{paddingRigth:'20px'}}> Cerrar Sesion </p>
+                        </MenuItem>
+                        <MenuItem >
+
+                        <Avatar /> <p className='menu' onClick={(e) => {handleSubmit(e);}} style={{paddingRigth:'20px'}}> Jugar </p>
                         </MenuItem>
                     </Link> : 
                     <Link to='/Registro'>
