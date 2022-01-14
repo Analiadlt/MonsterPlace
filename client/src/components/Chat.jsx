@@ -15,6 +15,8 @@ export default function Chat() {
     const dragones = useSelector(state => state.dragonesbd)
 
 
+    const idpartida = localStorage.getItem('idroom')
+
     const dispatch = useDispatch()
 
     let nombre=socket.id
@@ -83,7 +85,7 @@ export default function Chat() {
         useEffect(() => {
             if(mensaje !== ''){
                 
-                socket.emit('mensaje',nombre, mensaje)
+                socket.emit('mensaje',nombre, mensajes, idpartida)
                
             }
 
@@ -120,7 +122,7 @@ export default function Chat() {
             <div className='chat'>
                 {
                     
-
+                    
                     mensajes.map((dragon,i)=>(
                         <div key={i} style={{display:'flex', justifyContent:'center'}}>
                         <div style={{ border:'1px solid #ffff', width:'200px',height:'300px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
@@ -137,6 +139,7 @@ export default function Chat() {
                     
              }
              <div ref={divRef}></div>
+             {console.log(idpartida)}
            </div> 
             
           
