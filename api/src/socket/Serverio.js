@@ -1,5 +1,7 @@
+const { Socket } = require('socket.io');
+
 var connections = [];
-let roomincompleto = [];
+let roomincompleto = '';
 let room = [];
 
 let ServerIo = (http)=>{
@@ -32,17 +34,27 @@ io.on('connection', socket =>{
       
       socket.on('buscar-rooms', (nombre)=>{
         console.log("buscar-rooms");
-        if(roomincompleto.length > 0) {
-          roomincompleto.push(nombre);
+        if(roomincompleto !== '') {
+/*           roomincompleto.push(nombre);
           room.push(roomincompleto);
           console.log("RoomInconpleto antes de enviar: ", roomincompleto, room.length-1)
-          io.sockets.emit('inicio-partida', roomincompleto);
+          io.sockets.emit('inicio-partida', roomincompleto, (room.length-1) );
           roomincompleto = [];
-          console.log('roomincompleto: ', roomincompleto, 'room: ', room);
+          console.log('roomincompleto: ', roomincompleto, 'room: ', room); */
+          socket.join(room[roomincompleto])
+          console.log('estas son las room', room);
+          io.sockets.in(room[roomincompleto]).emit('inicio-partida', roomincompleto );
+          roomincompleto = ''
+
+
         } else {
-          roomincompleto.push(nombre);
-          // socket.join(nombre);
-          console.log('roomincompleto: ', roomincompleto, 'room: ', room);
+/*           roomincompleto.push(nombre);
+          socket.join(nombre);
+          console.log('roomincompleto: ', roomincompleto, 'room: ', room); */
+          room.push(`room de ${nombre}`)
+          socket.join(room[room.length-1])
+          roomincompleto = room.length-1
+
         }
       });
 
@@ -66,8 +78,8 @@ io.on('connection', socket =>{
     //     socket.broadcast.emit('mensajes',{nombre: nombre , mensaje: `${nombre} Ha entrado en la sala`});
     // })
 
-    socket.on('mensaje', (nombre,mensaje)=>{
-        io.emit('mensajes',{nombre,mensaje});
+    socket.on('mensaje', (nombre,mensaje, idpartida)=>{
+      io.sockets.in(room[idpartida]).emit('mensajes',{nombre,mensaje});
     })
 
     // socket.on('disconnect', ()=>{
