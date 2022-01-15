@@ -146,9 +146,8 @@ export default function Chat() {
     return (
         <div>
             <Nav />
-
-
             <div className='caja-chat'>
+
                 {resultadoo.length ?
                     <div>
                         {console.log(mazo)}
@@ -166,7 +165,7 @@ export default function Chat() {
                     <div className='chat'>
                         {
 
-
+                            
                             mensajes.map((dragon, i) => (
                                 <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
                                     <div style={{ border: '1px solid #ffff', width: '200px', height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
