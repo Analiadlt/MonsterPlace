@@ -17,7 +17,7 @@ router.get("/userCard/:id", async (req, res) => {
         res.send(userCard)
 
     } catch (error) {
-        console.log("ERROR", error)
+        res.send("No existe el usuario o no tiene cartas para jugar")
     }
 
 })
