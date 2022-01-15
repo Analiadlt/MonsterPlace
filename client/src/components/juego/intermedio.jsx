@@ -9,6 +9,7 @@ export default function Intermedio(){
     const history = useHistory()
     const partida = useSelector(state=>state.partida)
     const dispatch = useDispatch()
+    const infoRoom = JSON.parse(localStorage.getItem("info-room"));
     localStorage.setItem('turno', false);
     useEffect(() => {
         socket.on('inicio-partida', (roomincompleto, room) => {
@@ -33,7 +34,21 @@ export default function Intermedio(){
             {!partida?
             <Spinner/>
             :
-            <button onClick={()=>history.push('/chat')}> Empezar Partida</button>
+            <div className="contenedor-cheto">
+                <h1>Detalles de la Partida</h1>
+                <div className="grid-intermedio">
+                    <div className="jugador">
+                        <h1>Jugador 1</h1>
+                        <h2>{infoRoom.jugador1}</h2>
+                    </div>
+                    <div className="jugador">
+                        <h1>Jugador 2</h1>
+                        <h2>{infoRoom.jugador2}</h2>
+                    </div>
+
+                </div>
+            <button className="boton-partida btn-registrarse draw meet" onClick={()=>history.push('/chat')}> Empezar Partida</button>
+            </div>
             }
         </div>
     )
