@@ -1,11 +1,23 @@
-import React from "react";
+import {React, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cambiarFondo } from "../redux/actions";
 import ProfileHome from "./ProfileHome";
+import { getUser } from "../redux/actions";
+
+
 export default function Nav() {
+
+  const usuarios =  useSelector(state => state.users)
+  const loading = useSelector(state=>state.loading)
   const modo = useSelector((state) => state.modo);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!usuarios.length && !loading.loading) {
+      dispatch(getUser())
+    }
+  })
 
   return (
     <div>
@@ -37,7 +49,7 @@ export default function Nav() {
           </Link>
           <Link to="/TiendaNFT">
             <span
-              className={window.location.pathname === "/" ? "activo" : null}
+              className={window.location.pathname === "/TiendaNFT" ? "activo" : null}
             >
               TiendaNFT
             </span>

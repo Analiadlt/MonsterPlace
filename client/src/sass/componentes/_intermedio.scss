@@ -1,0 +1,20 @@
+.grid-intermedio{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-top: 5rem;
+
+}
+.jugador{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.boton-partida{
+    margin-top: 2rem;
+    width: 30%;
+    padding: 15px 10px;
+    display: block;
+    margin: 0 auto;
+
+}

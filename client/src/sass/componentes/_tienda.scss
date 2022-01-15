@@ -19,7 +19,7 @@
     font-weight: normal;
     color: v.$color-titulo;
     cursor: pointer;
-    
+    position: static;
     &:hover{
         color: v.$blanco;
     }

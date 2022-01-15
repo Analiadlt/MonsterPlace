@@ -11,15 +11,22 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector ,useDispatch } from 'react-redux';
 import  {useEffect}  from 'react';
 import { loginReset } from '../redux/actions';
+
+import {app} from "../firebase/firebase"
+import socket from "./Socket";
+
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const dispatch = useDispatch()
     const open = Boolean(anchorEl);
+
     const userLogeado = useSelector(state => state.userLogueado)
+ const history = useHistory()
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -27,12 +34,44 @@ export default function ProfileHome() {
         setAnchorEl(null);
     };
 
-    useEffect(() => {
 
-    },[userLogeado])
-    let cambiarLogeo = ()=>{
-        dispatch(loginReset())
-    }
+    // useEffect(() => {
+
+    // },[userLogeado])
+    const signOut = async () => {
+        // try {
+        //   if (app) {
+        //     await app.auth().signOut();
+        //     alert("Successfully signed out!");
+        //   }
+        // } catch (error) {
+        //   console.log("error", error);
+        // }
+        console.log('desloguado')
+      };
+      function handleSubmit(e) {
+      e.preventDefault();
+      socket.emit('buscar-rooms', userLogeado.nickName);
+      history.push('/Matchmaking')
+  
+  }
+
+    let cambiarLogeo = async ()=>{
+
+        try {
+            if (app) {
+
+              await app.auth().signOut();
+              dispatch(loginReset())
+            //   alert("Successfully signed out!");
+            }
+          } catch (error) {
+            console.log("error", error);
+          }
+            };
+    
+
+   
 
     return (
         <div classname="foto">
@@ -96,7 +135,7 @@ export default function ProfileHome() {
                 
                 > 
                 {userLogeado.nickName ?
-                        <Link to={`/Detail/${userLogeado.id}`}>
+                        <Link to={`/Detail`}>
                                 <MenuItem>
                                     <Avatar /> <p className='menu' style={{ paddingRigth: '20px' }}> Mi Perfil </p>
                                 </MenuItem>
@@ -110,6 +149,10 @@ export default function ProfileHome() {
                     <Link to={'/'} >
                         <MenuItem >
                             <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{paddingRigth:'20px'}}> Cerrar Sesion </p>
+                        </MenuItem>
+                        <MenuItem >
+
+                        <Avatar /> <p className='menu' onClick={(e) => {handleSubmit(e);}} style={{paddingRigth:'20px'}}> Jugar </p>
                         </MenuItem>
                     </Link> : 
                     <Link to='/Registro'>
