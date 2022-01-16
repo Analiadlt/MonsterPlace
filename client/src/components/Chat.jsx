@@ -6,6 +6,7 @@ import { getCard } from "../redux/actions";
 
 import socket from "./Socket";
 import Nav from "./Nav";
+import Chatear from "./chat/chatear";
 
 
 
@@ -16,6 +17,21 @@ export default function Chat() {
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
     const dragones = useSelector(state => state.dragonesbd)
+    
+
+        // chat -------------------------------------------------------
+        const [nombre, setNombre] = useState("");
+        const nick = useSelector(state => state.userLogueado.nickName)
+    
+      
+        useEffect(() => {
+          setNombre(nick);
+        },[nick]);
+        
+        console.log("NickName desde el chat: ", nombre);
+
+
+        // ----------------------------------------------------------
 
     const [rondas,setRondas]= useState([])
 
@@ -202,6 +218,10 @@ export default function Chat() {
 
 
 
+            </div>
+
+            <div >
+                <Chatear nombre={nombre} />
             </div>
         </div>
     )
