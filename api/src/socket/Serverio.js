@@ -1,4 +1,7 @@
+//const socket  = require('socket.io');
 const { Socket } = require('socket.io');
+
+
 
 const mazo1 = [{
   name: "warlockk",
@@ -84,6 +87,7 @@ let room = [];
 
 
 
+
 function ronda(carta1 , carta2){
   if(carta1.mensaje.attack > carta2.mensaje.attack){
     return carta1
@@ -107,13 +111,12 @@ const io = require('socket.io')(http,{
 });
 
 
-
-
 //apertura del socket
 io.on('connection', socket =>{
-    
-    // contador de sockets
-    // connections.push(socket);
+
+socket.onAny((event, ...args) => {
+  console.log(event, args);
+});
 
     getCounter();
     console.log("New Socket connected: ", socket.id);
@@ -176,12 +179,6 @@ io.on('connection', socket =>{
      console.log("Mensaje de Alerta: ", men)}
 
     )
-    // controlador del chat
-    // let nombre;
-    // socket.on('conectado',(nomb)=>{
-    //     nombre = nomb;
-    //     socket.broadcast.emit('mensajes',{nombre: nombre , mensaje: `${nombre} Ha entrado en la sala`});
-    // })
 
     socket.on('mensaje', (mensaje, idpartida)=>{
 
@@ -189,42 +186,40 @@ io.on('connection', socket =>{
       io.sockets.in(room[idpartida].name).emit('mensajes',{mensaje});
     })
 
-    // socket.on('disconnect', ()=>{
-    //     io.emit('mensajes', {server: 'Servidor', mensaje: `${nombre} abandonado la sala`})
-    // })
 
 
-//---------------------------------------------------------------------------------------
-// Encontrar un jugador disponible
-  let playerIndex = -1;
-  for (let i = 0; i < connections.length; i++) {
-    
-      playerIndex = i
-    
-  }
-
-  // Avisar al cliente conectado que numero de jugador hay 
-  socket.emit('player-number', playerIndex)
-
-  console.log(`Jugador ${playerIndex} esta conectado`)
-
-  // Ignore player 3
-  if (playerIndex > 1) return
-
-  connections[playerIndex] = false
-
-  // Decir a todos que jugador esta conectado
-  socket.broadcast.emit('player-connection', playerIndex)
-
-  // Handle Diconnect
-  socket.on('disconnect', () => {
-    console.log(`Player ${playerIndex} disconnected`)
-    connections[playerIndex] = null
-    //Tell everyone what player numbe just disconnected
-    socket.broadcast.emit('player-connection', playerIndex)
-  })
 
 
+//----------------------------------------------------------
+//Chat
+//----------------------------------------------------------
+let nombre;
+
+socket.on("conectado", (nomb) => {
+  nombre = nomb;
+  console.log(nomb)
+  //socket.broadcast.emit manda el mensaje a todos los clientes excepto al que ha enviado el mensaje
+  socket.broadcast.emit("mensajeschat", {
+    nombre: nombre,
+    mensajechat: `${nombre} ha entrado en la sala del chat`,
+  });
+
+});
+
+socket.on("mensajechat", (nombre, mensajechat) => {  
+  //io.emit manda el mensaje a todos los clientes conectados al chat
+  io.sockets.emit("mensajeschat", { nombre, mensajechat });
+});
+
+socket.on("disconnect", () => {
+  io.emit("mensajeschat", {
+    servidor: "Servidor",
+    mensajechat: `${nombre} ha abandonado la sala`,
+  });
+});
+
+
+//----------------------------------------------------------
 })
 
 }
