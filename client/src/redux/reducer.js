@@ -1,8 +1,5 @@
 
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN, USER_LOG, PARTIDA }  from './actions'
-import dragon2 from '../img/recurso1.png'
-import dragon6 from '../img/recurso9.png'
-import dragon9 from '../img/recurso3.png'
 
 
 
@@ -13,6 +10,7 @@ const initialState = {
     user:[],
 
     dragonesbd:[],
+    
     partida:false,
     //recolecta la informacion del usuario para crearlo 
 

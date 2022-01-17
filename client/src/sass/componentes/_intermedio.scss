@@ -18,3 +18,16 @@
     margin: 0 auto;
 
 }
+
+.invisibility {
+    transform: scale(0);
+    pointer-events: none;
+} 
+
+.mover{
+    transform-style: preserve-3d;
+    transform: translateY(300px) rotatez(180deg) ;
+    
+
+    
+}
