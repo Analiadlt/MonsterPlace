@@ -37,7 +37,7 @@ export default function Intermedio(){
     return(
         <div>
             {!partida && !infoRoom?
-            <Spinner/>
+            <Spinner text={'Buscando Partida'}/>
             :
             <div className="contenedor-cheto">
                 <h1>Detalles de la Partida</h1>
