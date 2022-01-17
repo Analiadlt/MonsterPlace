@@ -66,10 +66,7 @@ export default function Chat() {
     // controlo la cantidad de jugadores
     useEffect(() => {
         localStorage.removeItem("info-inicio")
-        socket.on('getCounter', cant => {
-            console.log('cantidad de jugadores', cant)
 
-        })
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
             let ban = false
@@ -77,11 +74,11 @@ export default function Chat() {
             if (resultado.mensaje.name === copia[0].mensaje.name) {
                 let cartIz = document.getElementById(resultado.mensaje.name)
                 let cartDe = document.getElementById(copia[1]?.mensaje.name)
-                console.log('esta dda problemas', cartDe)
+                
                 cartIz.classList.add('izquierda')
                 cartDe?.classList.toggle('invisible')
                 ban = true;
-                console.log('el trolo no se va', copia)
+                
                 cartDe?.classList.toggle('none')
                 setMensajes(mensajes.filter(car => car.mensaje.name === mensajes[0]?.mensaje.name))
 
@@ -91,7 +88,7 @@ export default function Chat() {
                 let cartDe = document.getElementById(copia[1]?.mensaje.name)
                 cartIz.classList.toggle('invisible')
                 cartDe?.classList.add('derecha')
-                console.log('el trolo no se va', copia)
+                
                 cartIz.classList.add('none')
                 setMensajes(mensajes.filter(car => car.mensaje.name === mensajes[1]?.mensaje.name))
 
@@ -135,7 +132,7 @@ export default function Chat() {
     
     useEffect(() => {
         socket.on('jugadores-listos', ()=>{
-            console.log('estan los dos en la sala')
+            
             setListos(true)
         })
             
