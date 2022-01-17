@@ -16,12 +16,16 @@ export default function Chat() {
     const [mazo, setMazo] = useState(JSON.parse(localStorage.getItem("mazo")));
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
-    const dragones = useSelector(state => state.dragonesbd)
+    const dragones = useSelector(state => state.dragonesbd);
     
 
         // chat -------------------------------------------------------
+        const [mensajechat, setMensajechat] = useState("");
+        const [mensajeschat, setMensajeschat] = useState([]);
+        const [agarrarMensaje, setagarrarMensaje] = useState([]);
         const [nombre, setNombre] = useState("");
         const nick = useSelector(state => state.userLogueado.nickName)
+        
     
       
         useEffect(() => {
@@ -29,6 +33,7 @@ export default function Chat() {
         },[nick]);
         
         console.log("NickName desde el chat: ", nombre);
+        const divRef = useRef(null);
 
 
         // ----------------------------------------------------------
@@ -45,10 +50,17 @@ export default function Chat() {
     const [resultadoo, setResultado] = useState([])
 
     const[enviarMensaje,setenviarMensaje]= useState(true)
+    const[numeroDeRonda,setnumeroDeRonda]= useState(1)
+    
+    
+
+
+    
 
 
     // controlo la cantidad de jugadores
     useEffect(() => {
+        localStorage.removeItem("info-inicio")
         socket.on('getCounter', cant => {
             console.log('cantidad de jugadores', cant)
 
@@ -60,6 +72,7 @@ export default function Chat() {
                 setTimeout(() => {
                     setResultado([])
                     setMensajes([])
+                    setnumeroDeRonda(numeroDeRonda+1)
                 }, 3000)
 
         })
@@ -67,15 +80,7 @@ export default function Chat() {
 
     })
 
-    //Obtengo el socket id
-    /*     useEffect(() => {
-            socket.on('Socketid',sid  => {
-                console.log('Socket Id: ',sid)
-    
-            })
-                
-        }) */
-    // obtengo el numero de jugador
+
 
     useEffect(() => {
         if (mensajes.length === 2) {
@@ -119,7 +124,7 @@ export default function Chat() {
         return () => { socket.off() }
     })
 
-    const divRef = useRef(null);
+    
 
   
     useEffect(() => {
@@ -158,12 +163,59 @@ export default function Chat() {
     console.log('infoRoom.jugardor1',infoRoom.jugador1)
 
 
+//-----------------------------------------------chat
+
+useEffect(() => {
+    socket.on("mensajeschat", nombre ,mensajechat => {
+        console.log("Este es el mensajeschat: ", nombre,mensajechat);
+    //   setMensajeschat([...mensajeschat, mensajechat]);   
+    });
+
+  
+    return () => {
+      socket.off();
+    };
+
+  });
+
+  console.log("Este es el mensajeschat: ", mensajeschat);
+
+
+  
+
+    useEffect(() => {
+      divRef.current.scrollIntoView({ behavior: "smooth" });
+    });
+
+    useEffect(() => {
+        if (mensajechat !== '') {
+            
+            socket.emit("mensajechat", nombre, mensajechat);
+
+
+
+        }
+
+        setMensajechat('');
+
+
+    }, [mensajechat])
+
+    const submit = (e) => {
+        e.preventDefault();
+        
+        setMensajechat(agarrarMensaje);
+        setagarrarMensaje('')
+      };
+
+
+
 
     return (
         <div>
             <Nav />
             <div className='caja-chat'>
-
+                    
                 {resultadoo.length ?
                     <div>
                         {console.log(mazo)}
@@ -178,6 +230,8 @@ export default function Chat() {
                         </div>
                     </div>
                     :
+                    <div>
+                        <h1>Ronda {numeroDeRonda}</h1>
                     <div className='chat'>
                         {
 
@@ -200,6 +254,7 @@ export default function Chat() {
                         <div ref={divRef}></div>
                         {console.log('este es tu mazo ', mazo)}
                     </div>
+                    </div>
 
                 }
 
@@ -213,16 +268,37 @@ export default function Chat() {
                     </div>
 
                 }
-
-
-
-
-
+        
             </div>
 
-            <div >
-                <Chatear nombre={nombre} />
+            {/* <div >
+            <Chatear nombre={nombre} idpartida={idpartida} />
+            
+            </div> */}
+            
+            {/* <div>
+        <div style={{ display: 'block', margin: '20px', marginTop: '20px', width: '55%' }}>
+          {mensajeschat.map((e, i) => (
+            <div key={i}>
+              <div style={{color: "yellow"}}>{e.nombre}</div>
+              <div style={{color: "white"}}>{e.mensajechat}</div>
             </div>
+          ))}
+          <div ref={divRef}></div>
+        </div>
+        <form onSubmit={submit}>
+          <label htmlFor="">Escriba su mensaje</label>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="2"
+            value={agarrarMensaje}
+            onChange={(e) => setagarrarMensaje(e.target.value)}
+          ></textarea>
+          <button>Enviar</button>
+        </form>
+      </div> */}
         </div>
     )
 };
