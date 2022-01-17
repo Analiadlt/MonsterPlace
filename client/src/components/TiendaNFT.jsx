@@ -76,8 +76,8 @@ export default function TiendaNFT() {
     <div>
       <Nav />
 
-      <div className="contenedor-tienda">
-        <div className="titulo-tienda">
+      <div className="contenedor-tienda"> 
+         <div className="titulo-tienda"> 
           <Link to="/TiendaNFT">
             <span
               className={
@@ -116,13 +116,13 @@ export default function TiendaNFT() {
             >
               TableroNFT
             </span>
-          </Link>
+          </Link> 
 
-          <Modal1 /> 
+          
         </div>
-        {loadingState === "laoded" && !nfts.length ? (
-          <h1>No items in the marketplace</h1>
-        ) : (
+         {loadingState === "laoded" && !nfts.length ? (
+          <h1>No items in the marketplace</h1> 
+           ) : (
           <div className="contenedor-tajetas">
             <div className="grid-tienda">
               {nfts.map((nft, i) => (
@@ -142,8 +142,8 @@ export default function TiendaNFT() {
               ))}
             </div>
           </div>
-        )}
-      </div>
+         )}
+      </div> 
     </div>
   );
 }

@@ -15,7 +15,9 @@ const getDestacadas = require('./GET/GetDestacadas')
 const postRecoverUser = require("./POST/PostRecoverUser")
 const loginInfo= require("./GET/LoginInformation")
 const postUserCard = require("./POST/PostUserCard")
+const CardUser = require("./GET/GetUser-Card")
 const postLogicGame = require("./POST/PostLogicGame")
+
 
 const router = Router();
 
@@ -27,6 +29,7 @@ router.use('/delete',deleteUser)
 router.use("/recover", postRecoverUser)
 router.use("/loginInfo",loginInfo)
 router.use("/usercard", postUserCard)
+router.use("/CardUser",CardUser)
 router.use("/game", postLogicGame)
 // router.use('/')
 

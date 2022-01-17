@@ -1,165 +1,308 @@
-import React, {useState , useEffect , useRef } from "react";
-import { useSelector, useDispatch} from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { getCard } from "../redux/actions";
 
 
 import socket from "./Socket";
 import Nav from "./Nav";
-
-
+import Chatear from "./chat/chatear";
+import CartaFondo from './juego/FondoCarta';
+import Spinner from "./juego/spinner";
+import CartaGame from "./juego/interface";
 
 export default function Chat() {
+
+    const infoRoom = JSON.parse(localStorage.getItem("info-room"));
+    const [mazo, setMazo] = useState(JSON.parse(localStorage.getItem("mazo")));
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
-    const dragones = useSelector(state => state.dragonesbd)
+    const dragones = useSelector(state => state.dragonesbd);
+    
 
+        // chat -------------------------------------------------------
+
+        // const [mensajechat, setMensajechat] = useState("");
+        // const [mensajeschat, setMensajeschat] = useState([]);
+        // const [agarrarMensaje, setagarrarMensaje] = useState([]);
+        // const [nombre, setNombre] = useState("");
+        // const nick = useSelector(state => state.userLogueado.nickName)
+
+    
+      
+        // useEffect(() => {
+        //   setNombre(nick);
+        // },[nick]);
+        
+
+        // console.log("NickName desde el chat: ", nombre);
+        // const divRef = useRef(null);
+
+
+
+        // ----------------------------------------------------------
+
+    const [rondas,setRondas]= useState([])
+
+    const idpartida = localStorage.getItem('idroom')
 
     const dispatch = useDispatch()
 
-    let nombre=socket.id
+    const [turno, setTurno] = useState(localStorage.getItem('turno'))
+
+    // const [ronda, setRonda] = useState(localStorage.getItem(false))
+    const [resultadoo, setResultado] = useState([])
+
+    const[enviarMensaje,setenviarMensaje]= useState(true)
+    const[numeroDeRonda,setnumeroDeRonda]= useState(1)
+    const[listos,setListos]= useState(false)
+
+    
+
+
+    
+
+
     // controlo la cantidad de jugadores
     useEffect(() => {
-        socket.on('getCounter',cant  => {
-            console.log('cantidad de jugadores',cant)
-            if (cant > 2){
-                socket.emit('message', 'cantidad de jugadores superada');
-                socket.emit('buscar-rooms', 'pepe');
+        localStorage.removeItem("info-inicio")
+
+        socket.on('resultado', resultado => {
+            setResultado([...resultadoo, resultado])
+            let ban = false
+            const  copia = mensajes
+            if (resultado.mensaje.name === copia[0].mensaje.name) {
+                let cartIz = document.getElementById(resultado.mensaje.name)
+                let cartDe = document.getElementById(copia[1]?.mensaje.name)
                 
-                // alert('cantidad de jugadores superada')
-            }  return ()=> {socket.off()}     
-        })
-            
-    })
-
-    //Obtengo el socket id
-    useEffect(() => {
-        socket.on('Socketid',sid  => {
-            console.log('Socket Id: ',sid)
-
-        })
-            
-    })
-    // obtengo el numero de jugador
-    useEffect(() => {
-        socket.on('player-number', pIndex  => {
-            console.log('Jugador Numero: ',pIndex)
-
-        })
-            
-    })
-
-
-
-    console.log('mensajes',mensajes)
-   // useEffect(() => {
-        
-    //     socket.emit('conectado',nombre)
-
-    // }, [nombre])
-
-    useEffect(() => {
-        
-        
-        dispatch(getCard())
-
-    }, [])
-
-    useEffect(() => {
-        
-        socket.on('mensajes',mensaje =>{
-            setMensajes([...mensajes,mensaje])
-        })
-
-        return ()=> {socket.off()}
-    })
-    
-    const divRef = useRef(null);
-
-    useEffect(() => {
-         divRef.current.scrollIntoView({dehavior:'smooth'})
-        })
-
-        
-        useEffect(() => {
-            if(mensaje !== ''){
+                cartIz.classList.add('izquierda')
+                cartDe?.classList.toggle('invisible')
+                ban = true;
                 
-                socket.emit('mensaje',nombre, mensaje)
-               
+                cartDe?.classList.toggle('none')
+                setMensajes(mensajes.filter(car => car.mensaje.name === mensajes[0]?.mensaje.name))
+
+
+            } else if (ban === false){
+                let cartIz = document.getElementById(resultado.mensaje.name)
+                let cartDe = document.getElementById(copia[1]?.mensaje.name)
+                cartIz.classList.toggle('invisible')
+                cartDe?.classList.add('derecha')
+                
+                cartIz.classList.add('none')
+                setMensajes(mensajes.filter(car => car.mensaje.name === mensajes[1]?.mensaje.name))
+
+
+
             }
 
-            setMensaje('')
+
+            setTimeout(() => {
+                setRondas([...rondas, resultado])
+                setResultado([])
+                setMensajes([])
+                setnumeroDeRonda(numeroDeRonda+1)
+            }, 4000)
+
+        })
 
 
-        },[mensaje])
-        console.log('esto es mensaje',mensaje)
-    // const submit = (e) => {
-    //     e.preventDefault();
-    //     socket.emit('mensaje',nombre, mensaje)
+    })
 
-    //     setMensaje('')
 
-    // }
-    function handleSubmit(e) {
-        e.preventDefault();
-        socket.emit('buscar-rooms', 'pepe');
-      }
-    // handleSubmit = (e) => {
-    //     socket.emit('buscar-rooms', e)
-    // }
 
     useEffect(() => {
-        socket.on('inicio-partida', roomincompleto => {
-          console.log(roomincompleto, "Inicio partida")
-    })
-    }, [])
-         
-       
+        if (mensajes.length === 2) {
+
+            setTimeout(() => {
+                let girar = document.querySelectorAll('#carta3d')
+                girar.forEach(function (car) {
+                    car.classList.toggle('girar');
+                });
+            }, 2000)
 
 
+            setTimeout(() => {
+                socket.emit('fin-ronda', mensajes, idpartida)
+                
+            }, 5000)
 
-    return (
-        <div>
-			<Nav />
-
-        <div className='caja-chat'>
-            <div className='chat'>
-                {
-                    
-
-                    mensajes.map((dragon,i)=>(
-                        <div key={i} style={{display:'flex', justifyContent:'center'}}>
-                        <div style={{ border:'1px solid #ffff', width:'200px',height:'300px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    
-                    <img  alt = "carta" src={dragon?.mensaje.img} style={{width:'100px',height:'100px',display:'block', margin:' 0 auto'}}/>
-                        <div style={{display:'flex', flexDirection:'column', textAlign:'center'}}>
-                        <p>Ataque:</p><span>{dragon?.mensaje.attack}</span>
-                        <p>Defensa:</p><span>{dragon?.mensaje.defense}</span>
-                    
-                        </div>
-                </div>
-                </div>
-                    ))
-                    
-             }
-             <div ref={divRef}></div>
-           </div> 
+        }
+    }, [mensajes])
+    
+    useEffect(() => {
+        socket.on('jugadores-listos', ()=>{
             
+            setListos(true)
+        })
+            
+    })
+    
+    useEffect(() => {
+        if (rondas.length === 3) {
+            socket.emit('fin-partida', mensajes, idpartida)
+            // setRonda(true)
+        }
+
+    }, [mensajes])
+
+
+
+    useEffect(() => {
+
+        socket.on('mensajes', mensaje => {
+            setTimeout(() => {
+                turno === 'true' ?
+                    setTurno('false')
+                    :
+                    setTurno('true')
+                if (mensajes.length < 2) {
+                    setMensajes([...mensajes, mensaje])
+                }
+            }, 1000)
+
+        })
+        return () => { socket.off() }
+    })
+
+    
+
+  
+    useEffect(() => {
+        if (mensaje !== '' && turno === 'true') {
+            
+            socket.emit('mensaje', mensaje, idpartida)
+
+            setenviarMensaje(!enviarMensaje)
           
-           <div style={{display:'flex',marginTop:'2rem', justifyContent:'center'}}>
+            
 
-            <img className="cartita" alt = "carta" src={dragones[0]?.img} onClick={()=>setMensaje(dragones[0])}/>
-            <img className="cartita" alt = "carta" src={dragones[1]?.img} onClick={()=>setMensaje(dragones[1])}/>
-            <img className="cartita" alt = "carta" src={dragones[2]?.img} onClick={()=>setMensaje(dragones[2])}/>
-             <button onClick={(e) => {
-                handleSubmit(e);
-              }}>Jugar</button>
+
+        }
+
+        setMensaje('')
+
+
+    }, [mensaje])
+    
+   
+    function remover(carta) {
+        let cart = document.getElementById(carta.name)
+        cart.classList.add('invisible')
+
+        setTimeout(() => {
+            setMazo(mazo.filter(car => car.name !== carta.name))
+
+        }, 2500)
+        setTimeout(() => {
+
+            if (enviarMensaje) {
+                carta.jugador = infoRoom.jugador2
+                setMensaje(carta)
+            }
+            else {
+                carta.jugador = infoRoom.jugador1
+                setMensaje(carta)
+            }
+        }, 1400)
+    }
+
+
+
+//-----------------------------------------------chat
+
+
+// useEffect(() => {
+//     socket.on("mensajeschat", nombre ,mensajechat => {
+//         console.log("Este es el mensajeschat: ", nombre,mensajechat);
+//       setMensajeschat([...mensajeschat, mensajechat]);   
+//     });
+
+  
+//     return () => {
+//       socket.off();
+//     };
+
+//   });
+
+//   console.log("Este es el resultadoo: ", resultadoo);
+
+
+
+  
+
+//     useEffect(() => {
+//       divRef.current.scrollIntoView({ behavior: "smooth" });
+//     });
+
+//     useEffect(() => {
+//         if (mensajechat !== '') {
+            
+//             socket.emit("mensajechat", nombre, mensajechat);
+
+
+
+//         }
+
+//         setMensajechat('');
+
+
+//     }, [mensajechat])
+
+//     const submit = (e) => {
+//         e.preventDefault();
+        
+//         setMensajechat(agarrarMensaje);
+//         setagarrarMensaje('')
+//       };
+
+
+
+
+
+return (
+    <div>
+        <div className='caja-chat'>
+
+        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
+
+            <div className='chat'>
+                {resultadoo.length ? <h1>{'Partida Ganada por ' + resultadoo[0].mensaje.jugador}</h1> : null}
+                
+                <div className="grid-chat">
+                    {
+                        mensajes.map((dragon, i) => (
+                            <div classList='carta-grid'>
+                                <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} />
+                            </div>
+                        ))
+                    }
+                </div>
+                
             </div>
-           
 
 
-           
+
+
+            {turno !== 'true' || listos === false ? <Spinner text={'Esperando al Rival'} />
+                :
+                <div>
+                    
+                <div style={{ display: 'flex', marginTop: '2rem', justifyContent: 'space-around' }}>
+                    {mazo.map((carta, i) =>
+
+                        <CartaGame attack={carta.attack} key={i} defense={carta.defense} state={carta.state} type={carta.type} name={carta.name} img={carta.img} funcion={remover} carta={carta} />
+                    )}
+                </div>
+                </div>
+
+            }
+
+
+
+
+
         </div>
-        </div>
-    )
+    </div>
+)
 };

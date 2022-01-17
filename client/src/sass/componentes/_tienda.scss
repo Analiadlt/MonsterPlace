@@ -19,7 +19,7 @@
     font-weight: normal;
     color: v.$color-titulo;
     cursor: pointer;
-    
+    position: static;
     &:hover{
         color: v.$blanco;
     }
@@ -49,5 +49,15 @@
     
     color: rgb(255, 255, 255);
     text-align: center;
+}
+/* Tablets y phablets */
+@media only screen and (min-width: 0px) and (max-width: 767px){
+    .grid-tienda{
+        display: block;
+        margin: 0 auto;
+    }
+    .titulo-tienda{
+        width: 100%;
+    }
 }
 

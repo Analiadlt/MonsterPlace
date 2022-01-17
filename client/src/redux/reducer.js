@@ -1,8 +1,5 @@
 
-import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN, USER_LOG }  from './actions'
-import dragon2 from '../img/recurso1.png'
-import dragon6 from '../img/recurso9.png'
-import dragon9 from '../img/recurso3.png'
+import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, RESET_LOGIN, USER_LOG, PARTIDA }  from './actions'
 
 
 
@@ -14,6 +11,7 @@ const initialState = {
 
     dragonesbd:[],
     
+    partida:false,
     //recolecta la informacion del usuario para crearlo 
 
     //informacion del usuario que se encuentra logueado 
@@ -134,6 +132,11 @@ export default function Reducer(state=initialState, action){
                 return{
                     ...state,
                     userLogueado: action.payload
+                }
+            case PARTIDA:
+                return{
+                    ...state,
+                    partida:true
                 }
           default:
             return state;

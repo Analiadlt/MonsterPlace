@@ -2,27 +2,36 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams} from "react-router-dom";
 import Nav from './Nav';
-import { 
-    getById,
- } from "../redux/actions.js";
- 
+// import { 
+//     getById,
+//  } from "../redux/actions.js";
+
+import { app } from "../firebase/firebase";
+import { getUserLogin } from '../redux/actions';
 
 
 export default function Detalle() {
   const dispatch = useDispatch();
   const { id }= useParams();
-  const [uId, ] = useState(id);
+  const logueado = useSelector(state => state.users)
+  const detail = useSelector((state) => state.userLogueado);
 
-//   console.log("ID desde Detail", id, uId);
- // const aux = "840d9150-0da9-4c7b-a898-8d15e0d1827d"
 
-	useEffect(() => {
-    dispatch(getById(uId));
-	}, [dispatch, uId]);
 
-const detail = useSelector((state) => state.userDetail);
 
-console.log("detalle desde detail", detail)
+ 
+
+  useEffect(() => {
+
+	if (app) {
+	  app.auth().onAuthStateChanged((authUser) => {
+
+		if (authUser && logueado.length >5) {
+		  dispatch(getUserLogin(authUser.email))
+		}})}},[logueado])
+
+
+
 
 
     
