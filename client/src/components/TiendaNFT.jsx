@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
-import Modal1 from "./Modal";
 import { Link } from "react-router-dom";
 import { ethers } from "ethers";
 import axios from "axios";
-import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts//contracts/NFTMarket.sol/NFTMarket.json";
+import CardNFT from "./NFTcard";
 
 let rpcEndpoint = null;
 
@@ -48,36 +47,16 @@ export default function TiendaNFT() {
         return item;
       })
     );
-    console.log(items) //estos son los items en venta 
+    console.log(items); //estos son los items en venta
     setNfts(items);
     setLoadingState("loaded");
-  }
-
-  async function buyNft(nft) {
-    //para conectar la wallet
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-    const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
-    const transaction = await contract.createMarketSale(
-      nftaddress,
-      nft.itemId,
-      {
-        value: price,
-      }
-    );
-    await transaction.wait();
-    loadNFTs();
   }
 
   return (
     <div>
       <Nav />
-
-      <div className="contenedor-tienda"> 
-         <div className="titulo-tienda"> 
+      <div className="contenedor-tienda">
+        <div className="navContainerNFT">
           <Link to="/TiendaNFT">
             <span
               className={
@@ -116,34 +95,20 @@ export default function TiendaNFT() {
             >
               TableroNFT
             </span>
-          </Link> 
-
-          
+          </Link>
         </div>
-         {loadingState === "laoded" && !nfts.length ? (
-          <h1>No items in the marketplace</h1> 
-           ) : (
+        {loadingState === "laoded" && !nfts.length ? (
+          <h1>No items in the marketplace</h1>
+        ) : (
           <div className="contenedor-tajetas">
             <div className="grid-tienda">
-              {nfts.map((nft, i) => (
-                <div key={i}>
-                  <img src={nft.image} />
-                  <div>
-                    <p>{nft.name}</p>
-                  </div>
-                  <div>
-                    <p>{nft.description}</p>
-                  </div>
-                  <div>
-                    <p>{nft.price} ETH</p>
-                    <button onClick={() => buyNft(nft)}>Buy</button>
-                  </div>
-                </div>
+              {nfts.map((nft) => (
+                <CardNFT name={nft.name} nft={nft} />
               ))}
             </div>
           </div>
-         )}
-      </div> 
+        )}
+      </div>
     </div>
   );
 }
