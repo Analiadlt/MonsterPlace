@@ -20,20 +20,20 @@ export default function Chat() {
     
 
         // chat -------------------------------------------------------
-        const [mensajechat, setMensajechat] = useState("");
-        const [mensajeschat, setMensajeschat] = useState([]);
-        const [agarrarMensaje, setagarrarMensaje] = useState([]);
-        const [nombre, setNombre] = useState("");
-        const nick = useSelector(state => state.userLogueado.nickName)
+        // const [mensajechat, setMensajechat] = useState("");
+        // const [mensajeschat, setMensajeschat] = useState([]);
+        // const [agarrarMensaje, setagarrarMensaje] = useState([]);
+        // const [nombre, setNombre] = useState("");
+        // const nick = useSelector(state => state.userLogueado.nickName)
         
     
       
-        useEffect(() => {
-          setNombre(nick);
-        },[nick]);
+        // useEffect(() => {
+        //   setNombre(nick);
+        // },[nick]);
         
-        console.log("NickName desde el chat: ", nombre);
-        const divRef = useRef(null);
+        // console.log("NickName desde el chat: ", nombre);
+        // const divRef = useRef(null);
 
 
         // ----------------------------------------------------------
@@ -46,7 +46,7 @@ export default function Chat() {
 
     const [turno, setTurno] = useState(localStorage.getItem('turno'))
 
-    const [ronda, setRonda] = useState(localStorage.getItem(false))
+    // const [ronda, setRonda] = useState(localStorage.getItem(false))
     const [resultadoo, setResultado] = useState([])
 
     const[enviarMensaje,setenviarMensaje]= useState(true)
@@ -66,8 +66,9 @@ export default function Chat() {
 
         })
         socket.on('resultado', resultado => {
+            console.log('resultado',resultado)
             setResultado([...resultadoo, resultado])
-            setRondas([...rondas, resultado])
+            // setRondas([...rondas, resultado])
             
                 setTimeout(() => {
                     setResultado([])
@@ -85,7 +86,7 @@ export default function Chat() {
     useEffect(() => {
         if (mensajes.length === 2) {
             socket.emit('fin-ronda', mensajes, idpartida)
-            setRonda(true)
+            // setRonda(true)
         }
     }, [mensajes])
     
@@ -94,7 +95,7 @@ export default function Chat() {
     useEffect(() => {
         if (rondas.length === 3) {
             socket.emit('fin-partida', mensajes, idpartida)
-            setRonda(true)
+            // setRonda(true)
         }
     }, [mensajes])
 
@@ -165,48 +166,48 @@ export default function Chat() {
 
 //-----------------------------------------------chat
 
-useEffect(() => {
-    socket.on("mensajeschat", nombre ,mensajechat => {
-        console.log("Este es el mensajeschat: ", nombre,mensajechat);
-    //   setMensajeschat([...mensajeschat, mensajechat]);   
-    });
+// useEffect(() => {
+//     socket.on("mensajeschat", nombre ,mensajechat => {
+//         console.log("Este es el mensajeschat: ", nombre,mensajechat);
+//       setMensajeschat([...mensajeschat, mensajechat]);   
+//     });
 
   
-    return () => {
-      socket.off();
-    };
+//     return () => {
+//       socket.off();
+//     };
 
-  });
+//   });
 
-  console.log("Este es el mensajeschat: ", mensajeschat);
+//   console.log("Este es el resultadoo: ", resultadoo);
 
 
   
 
-    useEffect(() => {
-      divRef.current.scrollIntoView({ behavior: "smooth" });
-    });
+//     useEffect(() => {
+//       divRef.current.scrollIntoView({ behavior: "smooth" });
+//     });
 
-    useEffect(() => {
-        if (mensajechat !== '') {
+//     useEffect(() => {
+//         if (mensajechat !== '') {
             
-            socket.emit("mensajechat", nombre, mensajechat);
+//             socket.emit("mensajechat", nombre, mensajechat);
 
 
 
-        }
+//         }
 
-        setMensajechat('');
+//         setMensajechat('');
 
 
-    }, [mensajechat])
+//     }, [mensajechat])
 
-    const submit = (e) => {
-        e.preventDefault();
+//     const submit = (e) => {
+//         e.preventDefault();
         
-        setMensajechat(agarrarMensaje);
-        setagarrarMensaje('')
-      };
+//         setMensajechat(agarrarMensaje);
+//         setagarrarMensaje('')
+//       };
 
 
 
@@ -219,9 +220,9 @@ useEffect(() => {
                 {resultadoo.length ?
                     <div>
                         {console.log(mazo)}
-                        <h1>{'Partida Ganada por '+resultadoo[0].mensaje.jugador}</h1>
+                        <h1>{'Partida Ganada por '+resultadoo[0]?.mensaje.jugador}</h1>
                         <h2>Carta </h2>
-                        <h3>{resultadoo[0].mensaje.name}</h3>
+                        <h3>{resultadoo[0]?.mensaje.name}</h3>
                         <img alt="carta" src={resultadoo[0]?.mensaje.img} style={{ width: '100px', height: '100px', display: 'block', margin: ' 0 auto' }} />
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
                             <p>Ataque:</p><span>{resultadoo[0]?.mensaje.attack}</span>
@@ -251,8 +252,7 @@ useEffect(() => {
                             ))
 
                         }
-                        <div ref={divRef}></div>
-                        {console.log('este es tu mazo ', mazo)}
+                       
                     </div>
                     </div>
 
