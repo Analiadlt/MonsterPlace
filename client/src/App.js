@@ -18,8 +18,8 @@ import Chat from './components/Chat';
 import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';
 import Intermedio from './components/juego/intermedio';
-// import Chatear from './components/chat/chatear';
-import ChatApp from './components/chat/index';
+import Chatear from './components/chat/chatear';
+// import ChatApp from './components/chat/index';
 
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -60,8 +60,8 @@ function App() {
           <Route  exact path="/TableroNFT" component={tableroNFT} />
           <Route  exact path="/MisNFT" component={misNFT} />
           <Route  exact path="/Matchmaking" component={Intermedio} />
-          {/* <Route  exact path="/Chatear" component={Chatear} /> */}
-          <Route  exact path="/Chatear" component={ChatApp} />
+          <Route  exact path="/Chatear" component={Chatear} />
+          {/* <Route  exact path="/Chatear" component={ChatApp} /> */}
         </div>
       );
     }

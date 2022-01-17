@@ -221,11 +221,11 @@
   position: relative;
   right:0;
   left: 10%;
-  min-height: 55vh;
-  max-height: 60vh;
+  height: 450px;
   
-  // border: 2px solid black;
-  box-shadow: 0 0 20px #bd9635;
+  
+  border: 2px solid rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
   margin-top: 2.5rem;
  color:#FFB520;
  display: flex;
@@ -247,10 +247,11 @@
 
   cursor: pointer;
 
-  margin: 40px 30px;
+  
 
   &:hover{
         transform: translateY(-10px);
+        transform:translateY(-300px);
         transition: 0.4s ease-out;
   }
 }

@@ -69,12 +69,13 @@ export default function CreateItem() {
 
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
     await transaction.wait()
-    router.push('/')
+    router.push('/TiendaNFT')
   }
 
   return (
     <div >
-        <Nav/>
+       <Nav/>
+      
       <div >
         <input 
           placeholder="Asset Name"

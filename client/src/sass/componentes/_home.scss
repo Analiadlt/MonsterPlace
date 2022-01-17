@@ -1,14 +1,6 @@
 @use './estilosBase/variables' as v;
  
-.MuiMenuItem-root{
-    font-size: 2rem;
-}
-.MuiMenuItem-denso{
-    font-size: 2rem;
-}
-.Mui-focusVisible{
-    font-size: 2rem;
-}
+
 
 .log-usuario{
     display: block;
@@ -36,4 +28,14 @@
     justify-content: center;
     align-items: center;
     /* box-Shadow:0 15px 40px 0 rgba(0, 0, 0, 0.904), 0 17px 17px 0 rgba(0, 0, 0, .5); */
+}
+
+@media only screen and (min-width: 0px) and (max-width: 867px){
+    .contenedor-cheto{
+        margin: 0;
+        
+    }
+    .ranking{
+        margin: 0;
+    }
 }

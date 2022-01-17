@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from 'react-redux'
 import Card from "../Card";
 
-export default function Spinner() {
+export default function Spinner({text}) {
 
     return (
         <div className="contenedor-spinner">
@@ -11,7 +11,7 @@ export default function Spinner() {
                 <div class="square dos"></div>
                 <div class="square tres"></div>
             </div>
-            <div class="text">Buscando Partida</div>
+            <div class="text">{text}</div>
         </div>
     )
 

@@ -12,15 +12,7 @@
     grid-template-columns: repeat(2,1fr);
     gap: 1rem;
 }
-.tabla-container{
-    h1{
-        font-size: 5rem;
-        color: v.$color-titulo;
-        text-align: left;
-        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
-        
-    }
-}
+
 
 .text-seccion{
     margin-top: 70px;
@@ -41,4 +33,13 @@
     position: relative;
     top: 10px;
     left: 15px;
+}
+@media only screen and (min-width: 0px) and (max-width: 867px){
+    .seccion-grid{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+    }
 }
