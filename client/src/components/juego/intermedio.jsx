@@ -18,12 +18,11 @@ export default function Intermedio(){
             localStorage.setItem("info-inicio", JSON.stringify(room));
             dispatch(empezarPartida())
             localStorage.setItem('idroom', roomincompleto);
-            console.log('desde intermedio ', room)
 
         })
         socket.on('turno', turno =>{
             localStorage.setItem('turno', turno);
-            console.log('llego el turno', turno )
+        
         })
         socket.on('mazo-juego', mazo =>{
             localStorage.setItem("mazo", JSON.stringify(mazo));
@@ -41,15 +40,17 @@ export default function Intermedio(){
     }
     
 
-    console.log('infoRoom',infoRoom)
+    
    
 
     return(
         <div>
             {!partida && !infoRoom?
             <div>
-                <button onClick={()=> cancelar()}>cancelar</button>
+                <button onClick={()=> cancelar()} className="boton-cancelar">Cancelar Busqueda</button>
+                <div className="spinner-intermedio">
                 <Spinner text={'Buscando Partida'}/>
+                </div>
             </div>
             :
             <div className="contenedor-cheto">
