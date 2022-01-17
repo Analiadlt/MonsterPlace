@@ -28,19 +28,10 @@ export default function Detalle() {
 
 		if (authUser && logueado.length >5) {
 		  dispatch(getUserLogin(authUser.email))
-					 }})}},[logueado])
-
-//   const [uId, ] = useState(id);
-
-//   console.log("ID desde Detail", id, uId);
- // const aux = "840d9150-0da9-4c7b-a898-8d15e0d1827d"
-
-	// useEffect(() => {
-    // dispatch(getById(uId));
-	// }, [dispatch, uId]);
+		}})}},[logueado])
 
 
-// console.log("detalle desde detail", detail)
+
 
 
     
