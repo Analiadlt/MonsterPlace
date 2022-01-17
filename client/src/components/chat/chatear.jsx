@@ -4,7 +4,7 @@ import socket from "../Socket";
 
 
 
-const Chatear = ({nombre}) => {
+const Chatear = ({nombre,idpartida}) => {
     const [mensajechat, setMensajechat] = useState("");
     const [mensajeschat, setMensajeschat] = useState([]);
   
@@ -12,21 +12,20 @@ const Chatear = ({nombre}) => {
       socket.emit("conectado", nombre);
     }, [nombre]);
 
-    
   
     useEffect(() => {
       socket.on("mensajeschat", (mensajechat) => {
         setMensajeschat([...mensajeschat, mensajechat]);
-        console.log("Este es el mensajechat: ", mensajechat);
+        console.log("Este es el mensajeschat: ", mensajeschat);
       });
 
-      console.log("Mensajes en el chat: ", mensajeschat);
-     
-        
+    
       return () => {
         socket.off();
       };
+
     }, [mensajeschat]);
+        console.log("Mensajes en el chat: ", mensajeschat);
   
     const divRef = useRef(null);
     useEffect(() => {
@@ -35,7 +34,7 @@ const Chatear = ({nombre}) => {
   
     const submit = (e) => {
       e.preventDefault();
-      socket.emit("mensajechat ", nombre, mensajechat);
+      socket.emit("mensajechat", nombre, mensajechat,idpartida);
       setMensajechat("");
     };
   

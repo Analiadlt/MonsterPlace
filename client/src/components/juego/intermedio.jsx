@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import {useSelector,useDispatch} from 'react-redux'
 import Card from "../Card";
 import socket from "../Socket";
@@ -6,15 +6,17 @@ import { Link, useHistory } from 'react-router-dom';
 import { empezarPartida } from "../../redux/actions";
 import Spinner from "./spinner";
 export default function Intermedio(){
+    
     const history = useHistory()
     const partida = useSelector(state=>state.partida)
     const dispatch = useDispatch()
-    const infoRoom = JSON.parse(localStorage.getItem("info-room"));
+    let infoRoom = JSON.parse(localStorage.getItem("info-inicio"));
     localStorage.setItem('turno', false);
     useEffect(() => {
         socket.on('inicio-partida', (roomincompleto, room) => {
-            dispatch(empezarPartida())
             localStorage.setItem("info-room", JSON.stringify(room));
+            localStorage.setItem("info-inicio", JSON.stringify(room));
+            dispatch(empezarPartida())
             localStorage.setItem('idroom', roomincompleto);
             console.log('desde intermedio ', room)
         })
@@ -26,12 +28,15 @@ export default function Intermedio(){
             localStorage.setItem("mazo", JSON.stringify(mazo));
             
         })
+        
+    })
 
-    }, [])
+    console.log('infoRoom',infoRoom)
+   
 
     return(
         <div>
-            {!partida?
+            {!partida && !infoRoom?
             <Spinner/>
             :
             <div className="contenedor-cheto">
