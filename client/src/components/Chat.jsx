@@ -55,7 +55,8 @@ export default function Chat() {
 
     const[enviarMensaje,setenviarMensaje]= useState(true)
     const[numeroDeRonda,setnumeroDeRonda]= useState(1)
-    
+    const[listos,setListos]= useState(false)
+
     
 
 
@@ -132,13 +133,20 @@ export default function Chat() {
         }
     }, [mensajes])
     
-    
+    useEffect(() => {
+        socket.on('jugadores-listos', ()=>{
+            console.log('estan los dos en la sala')
+            setListos(true)
+        })
+            
+    })
     
     useEffect(() => {
         if (rondas.length === 3) {
             socket.emit('fin-partida', mensajes, idpartida)
             // setRonda(true)
         }
+
     }, [mensajes])
 
 
@@ -279,7 +287,7 @@ return (
 
 
 
-            {turno !== 'true' ? <Spinner text={'Esperando al Rival'} />
+            {turno !== 'true' || listos === false ? <Spinner text={'Esperando al Rival'} />
                 :
                 <div>
                     

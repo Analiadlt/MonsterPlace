@@ -19,6 +19,7 @@ export default function Intermedio(){
             dispatch(empezarPartida())
             localStorage.setItem('idroom', roomincompleto);
             console.log('desde intermedio ', room)
+
         })
         socket.on('turno', turno =>{
             localStorage.setItem('turno', turno);
@@ -30,6 +31,15 @@ export default function Intermedio(){
         })
         
     })
+    function cancelar(){
+        socket.emit('cancelar-busqueda', localStorage.getItem('idroom'))
+        history.push('/')
+    }
+    function entrar(){
+        history.push('/chat')
+        socket.emit('usuario-dentro', localStorage.getItem('idroom'))
+    }
+    
 
     console.log('infoRoom',infoRoom)
    
@@ -37,7 +47,10 @@ export default function Intermedio(){
     return(
         <div>
             {!partida && !infoRoom?
-            <Spinner text={'Buscando Partida'}/>
+            <div>
+                <button onClick={()=> cancelar()}>cancelar</button>
+                <Spinner text={'Buscando Partida'}/>
+            </div>
             :
             <div className="contenedor-cheto">
                 <h1>Detalles de la Partida</h1>
@@ -52,7 +65,7 @@ export default function Intermedio(){
                     </div>
 
                 </div>
-            <button className="boton-partida btn-registrarse draw meet" onClick={()=>history.push('/chat')}> Empezar Partida</button>
+            <button className="boton-partida btn-registrarse draw meet" onClick={()=>entrar()}> Empezar Partida</button>
             </div>
             }
         </div>
