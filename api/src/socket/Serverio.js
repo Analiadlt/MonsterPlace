@@ -82,7 +82,7 @@ const mazo2 = [
 var connections = [];
 let roomincompleto = '';
 let room = [];
-
+let usu = 0;
 
 
 
@@ -130,21 +130,20 @@ socket.onAny((event, ...args) => {
       socket.on('buscar-rooms', (nombre)=>{
         console.log("buscar-rooms");
         if(roomincompleto !== '') {
-          socket.join(room[roomincompleto].name)
-
-          room[roomincompleto].jugador2=nombre;
-          room[roomincompleto].mazo2=mazo2;
-          console.log('estas son las room', room);
-          io.sockets.in(room[roomincompleto].name).emit('inicio-partida', roomincompleto , (room[roomincompleto]) );
-          socket.emit('turno', true)
-          socket.emit('mazo-juego', mazo2)
-          roomincompleto = ''
-
-
+          if(room[roomincompleto].jugador1 !== nombre){
+            socket.join(room[roomincompleto].name)
+            room[roomincompleto].jugador2=nombre;
+            room[roomincompleto].mazo2=mazo2;
+            console.log('estas son las room', room);
+            io.sockets.in(room[roomincompleto].name).emit('inicio-partida', roomincompleto , (room[roomincompleto]) );
+            socket.emit('turno', true)
+            socket.emit('mazo-juego', mazo2)
+            roomincompleto = ''
+          }
         } else {
 
           room.push({
-            name: `Room de dram`,
+            name: `Room de ${nombre}`,
             jugador1: nombre,
             mazo1: mazo1,
             jugador2: '',
@@ -157,6 +156,21 @@ socket.onAny((event, ...args) => {
 
         }
       });
+      socket.on('cancelar-busqueda',(idpartida)=> {
+        socket.leave(room[idpartida].name)
+        console.log(room, roomincompleto)
+        roomincompleto = '';
+
+      })
+      socket.on('usuario-dentro',(idpartida)=> {
+        usu += 1;
+        console.log('usuarios en sala',usu)
+        if(usu === 2){
+          io.sockets.in(room[idpartida].name).emit('jugadores-listos')
+          usu = 0;
+        }
+
+      })
 
       socket.on('fin-ronda',(mensajes,idpartida)=> {
         console.log('fin de RONDA',mensajes);
