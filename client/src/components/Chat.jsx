@@ -20,20 +20,23 @@ export default function Chat() {
     
 
         // chat -------------------------------------------------------
+
         // const [mensajechat, setMensajechat] = useState("");
         // const [mensajeschat, setMensajeschat] = useState([]);
         // const [agarrarMensaje, setagarrarMensaje] = useState([]);
         // const [nombre, setNombre] = useState("");
         // const nick = useSelector(state => state.userLogueado.nickName)
-        
+
     
       
         // useEffect(() => {
         //   setNombre(nick);
         // },[nick]);
         
+
         // console.log("NickName desde el chat: ", nombre);
         // const divRef = useRef(null);
+
 
 
         // ----------------------------------------------------------
@@ -166,6 +169,7 @@ export default function Chat() {
 
 //-----------------------------------------------chat
 
+
 // useEffect(() => {
 //     socket.on("mensajeschat", nombre ,mensajechat => {
 //         console.log("Este es el mensajeschat: ", nombre,mensajechat);
@@ -180,6 +184,7 @@ export default function Chat() {
 //   });
 
 //   console.log("Este es el resultadoo: ", resultadoo);
+
 
 
   
@@ -208,6 +213,7 @@ export default function Chat() {
 //         setMensajechat(agarrarMensaje);
 //         setagarrarMensaje('')
 //       };
+
 
 
 
@@ -253,6 +259,7 @@ export default function Chat() {
 
                         }
                        
+                    </div>
                     </div>
                     </div>
 
