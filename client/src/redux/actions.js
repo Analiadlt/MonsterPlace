@@ -151,9 +151,9 @@ export function usuarioLog(user){
 }
 
 
-export function empezarPartida(){
+export function empezarPartida(bolea){
   
-  return{ type: PARTIDA, payload:'EMPEZO' } 
+  return{ type: PARTIDA, payload:bolea } 
 
 }
 
