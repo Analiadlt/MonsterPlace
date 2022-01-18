@@ -43,11 +43,12 @@ export default function TiendaNFT() {
           image: meta.data.image,
           name: meta.data.name,
           description: meta.data.description,
+          nftContract: i.nftContract
         };
         return item;
       })
     );
-    console.log(items); //estos son los items en venta
+    console.log("NFT",items); //estos son los items en venta
     setNfts(items);
     setLoadingState("loaded");
   }
