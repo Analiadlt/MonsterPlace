@@ -5,7 +5,8 @@ import { addCart } from "../redux/actions";
 import { useSelector } from "react-redux";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
-export default function Card({ name, atack, defense, img , price }) {
+import DetalleDr from "./ModalDetalle";
+export default function Card({ name, atack, defense, img , price, type }) {
     
     const dispatch = useDispatch();
     const loading = useSelector(state=>state.loading)
@@ -36,7 +37,7 @@ export default function Card({ name, atack, defense, img , price }) {
                         </div>
                     </div>
                     <div className="btn-card">
-                        <button className="btn-gl btn-ver-detalle">Ver Detalle</button>
+                        <DetalleDr name={name} attack={atack} defense={defense} img={img} type={type}/>
                         {window.location.pathname === '/'?
                             <button className="btn-gl btn-comprar">
                             <Link to='/Tienda' className="links" >
