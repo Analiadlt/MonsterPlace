@@ -225,7 +225,7 @@ socket.on("conectado", (nomb) => {
 socket.on("mensajechat", (nombre, mensajechat) => {  
   //io.emit manda el mensaje a todos los clientes conectados al chat
   console.log('este si ',nombre, mensajechat)
-  io.emit("mensajeschat",  nombre, mensajechat );
+  io.emit("mensajeschat",  {nombre, mensajechat} );
 });
 
 socket.on("disconnect", () => {
