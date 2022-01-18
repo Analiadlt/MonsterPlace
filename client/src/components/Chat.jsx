@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getCard } from "../redux/actions";
-
+import { useHistory } from "react-router-dom";
 
 import socket from "./Socket";
 import Nav from "./Nav";
@@ -18,7 +18,7 @@ export default function Chat() {
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
     const dragones = useSelector(state => state.dragonesbd);
-    
+    const history = useHistory()
 
         // chat -------------------------------------------------------
 
@@ -57,8 +57,9 @@ export default function Chat() {
     const[numeroDeRonda,setnumeroDeRonda]= useState(1)
     const[listos,setListos]= useState(false)
 
-    
+    const[partida,setPartida]= useState(false)
 
+    const[val,setVal]= useState(false)
 
     
 
@@ -101,6 +102,7 @@ export default function Chat() {
                 setRondas([...rondas, resultado])
                 setResultado([])
                 setMensajes([])
+                setVal(false)
                 setnumeroDeRonda(numeroDeRonda+1)
             }, 4000)
 
@@ -113,7 +115,7 @@ export default function Chat() {
 
     useEffect(() => {
         if (mensajes.length === 2) {
-
+            setVal(true)
             setTimeout(() => {
                 let girar = document.querySelectorAll('#carta3d')
                 girar.forEach(function (car) {
@@ -139,12 +141,16 @@ export default function Chat() {
     })
     
     useEffect(() => {
-        if (rondas.length === 3) {
-            socket.emit('fin-partida', mensajes, idpartida)
-            // setRonda(true)
+        if (numeroDeRonda === 4) {
+            setPartida(true)
+            setTimeout(() => {
+                history.push('/')
+                }, 2000);
+            socket.emit('fin-partida', idpartida)
+            
         }
-
-    }, [mensajes])
+    })
+        
 
 
 
@@ -262,6 +268,7 @@ export default function Chat() {
 
 return (
     <div>
+        {partida ? <h1>Partida Finalizada</h1> : 
         <div className='caja-chat'>
 
         <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
@@ -284,7 +291,7 @@ return (
 
 
 
-            {turno !== 'true' || listos === false ? <Spinner text={'Esperando al Rival'} />
+            {turno !== 'true' || listos === false  || val ? <Spinner text={'Esperando al Rival'} />
                 :
                 <div>
                     
@@ -303,6 +310,7 @@ return (
 
 
         </div>
+        }
     </div>
 )
 };

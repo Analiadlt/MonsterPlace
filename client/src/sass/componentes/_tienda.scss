@@ -10,9 +10,20 @@
     }
 }
 .contenedor-tienda{
-    width: 70%;
+    width: 80%;
     display: block;
     margin: 0 auto;
+
+    
+}
+.background-tienda{
+    margin: 50px 100px;
+    display: flex;
+    justify-content: center;
+    
+    background: #1C1D1F;
+    box-shadow: 0 0 15px #e4ba493b;
+    border-radius: 20px;
 }
 .carrito{
     font-size: 7rem;
@@ -51,13 +62,16 @@
     text-align: center;
 }
 /* Tablets y phablets */
-@media only screen and (min-width: 0px) and (max-width: 767px){
+@media only screen and (min-width: 0px) and (max-width: 967px){
     .grid-tienda{
         display: block;
         margin: 0 auto;
     }
     .titulo-tienda{
         width: 100%;
+    }
+    .background-tienda{
+        margin: 0;
     }
 }
 

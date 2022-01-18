@@ -6,11 +6,11 @@ import Seccion2 from './Seccion2';
 import ListaUi from './listaUi';
 //Slider
 export default function Home() {
-
+    localStorage.clear();
     return (
         <div >
 
-            
+
                 
          
             <div className='section'>
