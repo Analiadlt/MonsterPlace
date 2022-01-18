@@ -54,4 +54,45 @@
     top: 5px;
 }
 
+.caja_ranking{
+    // overflow: scroll ;
+    // height: 40rem;
+    margin: 2rem auto;
+    height: 40rem;
+    width:100%;
+    max-width: 450px;
+    background: black;
+    overflow:auto;
+    box-sizing: border-box;
+    
+  
+}
+.caja_ranking::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
 
+.caja_ranking::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.caja_ranking::-webkit-scrollbar-button:increment{
+    display: none;
+}
+
+.caja_ranking::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.caja_ranking::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.caja_ranking::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.caja_ranking::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}

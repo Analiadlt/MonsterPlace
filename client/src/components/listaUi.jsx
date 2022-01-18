@@ -32,7 +32,7 @@ export default function ListaUi() {
             <ListItemButton><h4 className='encabezado'>Nick Name </h4> </ListItemButton>
             </ListItem>
         </div>
-        
+        <div className='caja_ranking'>
             {usuarios.map((value) => {
             const labelId = `checkbox-list-secondary-label-${value}`;
             return (
@@ -73,6 +73,7 @@ export default function ListaUi() {
                 
             );
             })}
+            </div>
         
     </List>
   );
