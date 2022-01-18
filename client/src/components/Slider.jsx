@@ -43,14 +43,14 @@ export default function Slider() {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide style={{width:'100%'}}>
-                    <img src={slider1} alt="" />
+                <SwiperSlide >
+                    <img className='container-slider' src={slider1} alt="" />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slider2} alt="" />
+                <SwiperSlide >
+                    <img className='container-slider' src={slider2} alt="" />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slider3} alt="" />
+                <SwiperSlide >
+                    <img className='container-slider' src={slider3} alt="" />
                 </SwiperSlide>
                 </Swiper>
 

@@ -26,8 +26,42 @@
 
 
 }
+
+.navContainerNFT{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 150px;
+   .titulo{
+    color: v.$color-titulo;
+    font-size: 4.5rem;
+    
+    }
+
+    span{
+        font-size: 1.5rem;
+        color: v.$blanco;
+        margin-right: 15rem;
+        &:hover{
+            color: v.$color-titulo;
+        }
+    }
+    .activo{
+        color: v.$color-titulo;
+        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+    }
+
+
+}
 @media only screen and (min-width: 0px) and (max-width: 867px){
     .navContainer{
+        flex-direction: column;
+        span{
+            flex-direction: column;
+            margin: 50px;
+        }
+    }
+    .navContainerNFT{
         flex-direction: column;
         span{
             flex-direction: column;

@@ -49,7 +49,8 @@ export default function MyAssets() {
     <div >
         <Nav/>
       <div >
-      <Link to="/TiendaNFT">
+      <div className="navContainerNFT">
+          <Link to="/TiendaNFT">
             <span
               className={
                 window.location.pathname === "/TiendaNFT" ? "activo" : null
@@ -88,11 +89,12 @@ export default function MyAssets() {
               TableroNFT
             </span>
           </Link>
+        </div>
         <div>
        
             {nfts.map((nft, i) => (
               <div key={i} >
-                <img src={nft.image} />
+                <img src={nft.image} alt='' />
                 <div >
                   <p>Price - {nft.price} Eth</p>
                 </div>
