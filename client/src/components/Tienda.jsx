@@ -1,7 +1,7 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Card from '../components/Card'
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getCard } from "../redux/actions";
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
@@ -9,7 +9,7 @@ import Modal1 from "./Modal";
 import { Modal } from "@mui/material";
 import Filtros from "./filtrosTienda";
 
-export default function Tienda(){
+export default function Tienda() {
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.dragonesbd)
     const dispatch = useDispatch()
@@ -19,29 +19,32 @@ export default function Tienda(){
         }
     })
 
-    return(
+    return (
         <div>
-            <Nav/>
-            <div className="contenedor-tienda">
+            <Nav />
+            <div className="background-tienda">
+                <div className="contenedor-tienda">
 
-                <div className="titulo-tienda">
-                    <h1>Tienda</h1>
-                    {/* <Link to='/Carrito'> */}
-                   <Modal1/>
-                    {/* </Link> */}
-                </div>
-                { loading.loading? <h1>Cargando...</h1>:
-                <div className="contenedor-tajetas">
-                    <div className="grid-tienda">
-                    {
-                    dragones.map(dragon=>
-                        <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense}  img={dragon.img} price={dragon.sellPrice} />
-                    ) 
-                    }
+                    <div className="titulo-tienda">
+                        <h1>Tienda</h1>
+                        {/* <Link to='/Carrito'> */}
+                        <Modal1 />
+                        {/* </Link> */}
                     </div>
+                    {loading.loading ? <h1>Cargando...</h1> :
+                        <div className="contenedor-tajetas">
+                            <div className="grid-tienda">
+                                {
+                                    dragones.map(dragon =>
+                                        <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                    )
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
-            }   
             </div>
+
             <Link to="/juego">
                 Hola
             </Link>
