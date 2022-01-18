@@ -4,7 +4,7 @@ import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
 import { getCard } from "../redux/actions";
 import { Link } from "react-router-dom";
-import Nav from "./Nav";
+import NavCheto from './NavCheto';
 
 
 export default function Compra() {
@@ -24,7 +24,7 @@ export default function Compra() {
 
     return (
         <div>
-            <Nav />
+            <NavCheto />
             <div className="background-tienda">
                 <div className="contenedor-tienda">
 
