@@ -1,0 +1,135 @@
+.contenedor-pokemon{
+    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    height: 100%;
+    
+  
+}
+/* .btn-gl{
+    padding: 13px 10px;
+    font-size: 2rem;
+    width: 100%;
+    margin: 0 0.7rem;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+} */
+.btn-ver-detalle{
+    background-color: #FF8E00;
+   
+        
+        background-color: #FF8E00;
+        width: 90%;
+        padding: 13px 30px;
+        font-size: 2rem;
+        margin-right:4rem;
+        border-radius: 5px;
+        border: none;
+        text-transform: uppercase;
+            &:hover{
+                transform: translateY(1px);
+                transition: 0.4s ease-out;
+                box-shadow: 0 15px 40px 0 #ff8c007e, 0 17px 17px rgba(255, 140, 0, 0.466);
+    
+            }
+
+    
+        &:hover{
+            transform: translateY(1px);
+            transition: 0.4s ease-out;
+            box-shadow: 0 15px 40px 0 #ff8c007e, 0 17px 17px rgba(255, 140, 0, 0.466);
+
+        }
+
+}
+.titi{
+    font-size: 5rem;
+    color: #f8ecc0;
+    text-transform: uppercase;
+}
+.general-titulo{
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: left;
+    color: #F5CE42;
+}
+.informacion-general{
+    display: flex;
+    grid-template-columns: repeat(2,1fr);
+    color: #F5CE42;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.425);
+    h2{
+        text-align: left;
+    }
+    .tipo-{
+        font-weight: normal;
+        margin-left: 50px;
+        text-transform: uppercase;
+    }
+}
+
+.habilidad{
+    color: #F5CE42;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+    border-bottom: 1px solid #4b4a47;
+    progress{
+        margin-left: 25px;
+    }
+}
+.habilidad h3 {
+    text-align: left;
+    margin-left: 25px;
+}
+.habilidad span{
+    position: relative;
+    bottom: 4px;
+    margin-left: 5px;
+
+}
+
+.img-list{
+    margin-top: 100px;
+    display: block;
+    max-width: 100%;
+    max-height: 500px;
+}
+.progress{
+    color: indianred;
+}
+.progress {
+    width: 50%;
+    height: 25px;
+    
+}
+
+.tipo-detail{
+    position: relative;
+    top:80px;
+    color:#F5CE42 ;
+    border-right: 1px solid  #F5CE42;
+    border-left:1px solid  #F5CE42;
+}
+.boton-detalle{
+    padding: 15px ;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.89);
+    background: #06FF00;
+    transition: 0.5s;
+    &:hover{
+        color: rgba(0, 0, 0, 0.89);
+        background: #03b300;
+    }
+
+}

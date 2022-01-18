@@ -61,6 +61,12 @@
     color: rgb(255, 255, 255);
     text-align: center;
 }
+
+.seccion-compra{
+    display: flex;
+    justify-content: space-around;
+}
+
 /* Tablets y phablets */
 @media only screen and (min-width: 0px) and (max-width: 967px){
     .grid-tienda{
@@ -74,4 +80,6 @@
         margin: 0;
     }
 }
+
+
 

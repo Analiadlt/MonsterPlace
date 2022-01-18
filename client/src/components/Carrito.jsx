@@ -2,6 +2,8 @@ import React from "react";
 import Card from "./Card";
 import { useSelector } from "react-redux";
 import Nav from "./Nav";
+
+
 export default function(){
     const carrito = useSelector(state=> state.carrito)
     function sumarCarrito(carrito){

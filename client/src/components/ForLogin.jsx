@@ -150,7 +150,7 @@ const ForLogin = () => {
 	return (
 		<div >
 			<Nav />
-			<div style={{ display: 'block', margin: '10rem 33%', marginTop: '10rem', width: '55%' }}>
+			<div className='contenedor-cheto container-log'>
 				<div className='login-box'>
 					<form className="formulario" onSubmit={formik.handleSubmit}>
 						<h2 >Login</h2>

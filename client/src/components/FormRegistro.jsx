@@ -159,7 +159,7 @@ const Formulario = () => {
 	return (
 		<div>
 			<Nav />
-		<div style={{display:'flex',alignItems:'center', justifyContent:'center'}}>
+		<div className='container-log'>
 			<div className='login-box'>
 				<form  onSubmit={formik.handleSubmit}>
 					<h2 >Registrarse</h2>
