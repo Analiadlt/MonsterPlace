@@ -136,7 +136,7 @@ export default function Reducer(state=initialState, action){
             case PARTIDA:
                 return{
                     ...state,
-                    partida:true
+                    partida:action.payload
                 }
           default:
             return state;

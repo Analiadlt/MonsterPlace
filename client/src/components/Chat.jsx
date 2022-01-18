@@ -10,6 +10,7 @@ import Chatear from "./chat/chatear";
 import CartaFondo from './juego/FondoCarta';
 import Spinner from "./juego/spinner";
 import CartaGame from "./juego/interface";
+import { empezarPartida } from "../redux/actions";
 
 export default function Chat() {
 
@@ -67,6 +68,7 @@ export default function Chat() {
     // controlo la cantidad de jugadores
     useEffect(() => {
         localStorage.removeItem("info-inicio")
+        
 
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
@@ -134,7 +136,8 @@ export default function Chat() {
     
     useEffect(() => {
         socket.on('jugadores-listos', ()=>{
-            
+            dispatch(empezarPartida(false))
+
             setListos(true)
         })
             
