@@ -25,7 +25,7 @@ const style = {
     width: '80%',
     height: '700px',
     bgcolor: 'black',
-    borderRadius: "5px",
+    borderRadius: "10px",
     boxShadow: 24,
     padding: '5px 40px',
 };
@@ -51,7 +51,7 @@ export default function DetalleDr({ img, attack, defense, type, name}) {
             >
                 
                 <Box sx={style}>
-                <span style={{color:"red",position:"relative",left:"95%", top:'20px', cursor:'pointer'}} onClick={handleClose}> <CloseIcon fontSize='large'/></span>
+                <span style={{color:"red",position:"relative",left:"98%", top:'20px', cursor:'pointer'}} onClick={handleClose}> <CloseIcon fontSize='large'/></span>
                     <div className="contenedor-pokemon">
                         <div className="pokemon-imagen">
                             <img src={img} className="img-list" alt="" />
