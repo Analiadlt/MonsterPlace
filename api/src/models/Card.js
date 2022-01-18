@@ -8,12 +8,21 @@ module.exports = (sequelize) => {
     name: { type: DataTypes.STRING },
     attack: { type: DataTypes.INTEGER, allowNull: false },
     defense: { type: DataTypes.INTEGER, allowNull: false },
-    img: { type: DataTypes.STRING, allowNull: false }, //¿qué almacena en img?
-    state: { type: DataTypes.ENUM('activa', 'agotada', 'muerta'), allowNull: false }, //¡se puede definir como default 'activa'?
+    img: { type: DataTypes.STRING, allowNull: false }, 
+    state: { type: DataTypes.ENUM('activa', 'agotada', 'muerta'), allowNull: false },
     type: { type: DataTypes.STRING},
     sellPrice: {type: DataTypes.DECIMAL(20, 2)},
-    sellCount: { type: DataTypes.INTEGER, allowNull: false }, //cantidad de Ventas
+    sellCount: { type: DataTypes.INTEGER }, //cantidad de Ventas
+    currency: {type: DataTypes.STRING,  defaultValue: 'ARS'}
   }
  );
 };
 
+// currency: Identificador de la moneda utilizada en el pago
+// ARS: Peso argentino.
+// BRL: Real brasilero.
+// CLP: Peso chileno.
+// MXN: Peso mexicano.
+// COP: Peso colombiano.
+// PEN: Sol peruano.
+// UYU: Peso uruguayo.
