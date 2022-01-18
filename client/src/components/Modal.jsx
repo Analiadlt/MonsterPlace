@@ -15,7 +15,7 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { removeCart } from '../redux/actions';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { useHistory } from "react-router-dom";
 const style = {
     position: 'absolute',
     top: '50%',
@@ -35,6 +35,7 @@ export default function Modal1() {
     const handleClose = () => setOpen(false);
     const carrito = useSelector(state => state.carrito)
     const dispatch = useDispatch()
+    const history = useHistory()
     function sumarCarrito(carrito) {
         let total = 0;
         for (let i = 0; i < carrito.length; i++) {
@@ -59,14 +60,14 @@ export default function Modal1() {
                         <h1 className='titulo-modal'>Carrito <span><AddShoppingCartOutlinedIcon fontSize="large" /></span></h1>
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <ul className='container-modal' >
+                        <ul className='container-modal  caja_modal' >
                             {carrito.length === 0?
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}><h3 style={{textAlign:'left',fontWeight:"normal"}}> Carrito Vacio</h3></Typography>:
                             
                             
                                 carrito.map(dragon =>
                                     <ListItem
-
+                                    
                                         disablePadding
                                     >
                                         <div className="modal-contenido">
@@ -109,7 +110,7 @@ export default function Modal1() {
                         </div>
 
                     </Typography>
-                    <button className='btn-modal'>Realizar Compra</button>
+                    <button className='btn-modal' onClick={()=>history.push('/Compra')}>Ver Detalle</button>
                 </Box>
             </Modal>
         </div>
