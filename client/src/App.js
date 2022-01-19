@@ -20,7 +20,7 @@ import MyAuthPage from './firebase/auth/MyAuthPage';
 import Intermedio from './components/juego/intermedio';
 // import Chatear from './components/chat/chatear';
 import ChatApp from './components/chat/index';
-
+import NavCheto from './components/NavCheto';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
@@ -54,7 +54,7 @@ function App() {
           <Route path="/PassReset" component={PassReset} />
           <Route path="/Detail/" component={userDetail} />
           <Route path="/chat" component={Chat} />
-          <Route path="/juego" component={Juego} />
+          <Route path="/juego" component={NavCheto} />
           <Route  exact path="/TiendaNFT" component={TiendaNFT} />
           <Route  exact path="/CrearNFT" component={crearNFT} />
           <Route  exact path="/TableroNFT" component={tableroNFT} />

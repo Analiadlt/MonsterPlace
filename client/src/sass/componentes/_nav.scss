@@ -1,10 +1,8 @@
 @use './estilosBase/variables' as v;
 
 .navContainer{
-    display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin: 0 150px;
+
+  
    .titulo{
     color: v.$color-titulo;
     font-size: 4.5rem;
@@ -27,45 +25,144 @@
 
 }
 
-.navContainerNFT{
-    display: flex;
-   justify-content: center;
-   align-items: center;
-   margin: 0 150px;
-   .titulo{
-    color: v.$color-titulo;
-    font-size: 4.5rem;
-    
-    }
 
-    span{
-        font-size: 1.5rem;
-        color: v.$blanco;
-        margin-right: 15rem;
-        &:hover{
-            color: v.$color-titulo;
+
+
+
+/////
+
+.nav-cheto{
+
+      
+      .header{
+        height: 100%;
+        margin: 0 150px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        position:relative;
+
+      }
+      
+      .header-link{
+        text-decoration:none;
+        color:inherit;
+        font-size:2rem;
+        cursor:pointer;
+      }
+      
+      .header-link:hover{
+        text-decoration:underline;
+      }
+      
+      .header-logo{
+        font-size:2rem;
+        text-transform:uppercase;
+      }
+      
+      .hamburger{
+        width:45px;
+        height:45px;
+        cursor:pointer;
+        overflow:hidden;
+      }
+      
+      .line{
+        display:inline-block;
+        width:98%;
+        height:2.5px;
+        background-color:#fff;
+        margin:6px 0;
+        transition:0.4s;
+        transform-origin:11px 1px;
+        border-radius:10px;
+      }
+      .makex{
+        margin-top:9px;
+      }
+      
+      .makex .two{
+        visibility: hidden;
+        display:none;
+      }
+      
+      .makex .one{
+        transform:rotate(45deg);
+      }
+      
+      .makex .three{
+        transform:rotate(-45deg);
+      }
+      
+      .only-mobile{
+        visibility:hidden;
+        display:none;
+      }
+      
+      .only-desktop{
+        visibility:visible;
+        display:block;
+      }
+
+      @media only screen and (max-width:968px){
+        .header{
+            margin: 0;
         }
-    }
-    .activo{
-        color: v.$color-titulo;
-        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
-    }
-
-
+        .titulo{
+            font-size: 3rem;
+        }
+        .only-mobile{
+          visibility:visible;
+          display:block;
+        }
+        
+        .only-desktop{
+          visibility:hidden;
+          display:none;
+        }
+      }
+      
+      .header-nav{
+        width:65%;
+      }
+      
+      .nav-list{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+      }
+      
+      .header-overlay{
+        width:100%;
+        height:230px;
+        padding-bottom:10px;
+        background-color: black;
+        color:#fff;
+        display: none;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        opacity:0;
+        position:fixed;
+        top:80px;
+        left:0;
+        transition:.5s;
+      }
+      
+      .header-overlay a{
+        text-align: center;
+      }
+      .overlay{
+        opacity:1;
+        z-index: 100;
+      }
+      
+      .delimitate{
+        overflow:hidden;
+      }
+      
+      .big{
+        height:1000px;
+      }
 }
-@media only screen and (min-width: 0px) and (max-width: 867px){
-    .navContainer{
-        flex-direction: column;
-        span{
-            flex-direction: column;
-            margin: 50px;
-        }
-    }
-    .navContainerNFT{
-        flex-direction: column;
-        span{
-            flex-direction: column;
-            margin: 50px;
-        }
-    }
-}
+  
