@@ -62,7 +62,7 @@ function App() {
           <Route  exact path="/Matchmaking" component={Intermedio} />
           <Route  exact path="/Compra" component={Compra} />
           <Route  exact path="/Chatear" component={ChatApp} />
-          {/* <Route  exact path="/Chatear" component={ChatApp} /> */}
+
         </div>
       );
     }
