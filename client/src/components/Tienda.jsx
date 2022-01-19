@@ -25,9 +25,9 @@ export default function Tienda() {
             <NavCheto />
             <div className="nav-tienda">
                 
-                <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className={`link ${window.location.pathname === "/Tienda" ? "activo" : null}`}>Crypis</Link></h3>
+                <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className='link-tienda'>Crypis</Link></h3>
                 
-                <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link'>NFT</Link></h3>
+                <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link-tienda'>NFT</Link></h3>
     
             </div>
             <div className="muestra contenedor-cheto" >
@@ -66,4 +66,5 @@ export default function Tienda() {
 
     )
 }
+
 
