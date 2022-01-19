@@ -11,7 +11,7 @@ router.get("/userCard/:id", async (req, res) => {
 
         const userCard = await User.findAll({
             where: { id: id },
-            include: Card
+            //include: Card
         })
 
         res.send(userCard)
