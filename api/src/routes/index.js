@@ -14,13 +14,11 @@ const postLogin = require('./POST/PostLogin')
 const getDestacadas = require('./GET/GetDestacadas')
 const postRecoverUser = require("./POST/PostRecoverUser")
 const loginInfo= require("./GET/LoginInformation")
+const postOrder = require('./POST/PostOrder');
+const mercadopago = require('./GET/GetMercadoPago');
 const postUserCard = require("./POST/PostUserCard")
 const CardUser = require("./GET/GetUser-Card")
 const postLogicGame = require("./POST/PostLogicGame")
-const putOrder = require('./PUT/PutOrder');
-const getOrder = require('./GET/GetOrder');
-
-
 const router = Router();
 
 router.use('/cards', getCards,getDestacadas,validateInformation(postCardSchema),postCards); 
@@ -30,10 +28,12 @@ router.use('/login',validateInformation(postLoginSchema), postLogin);
 router.use('/delete',deleteUser)
 router.use("/recover", postRecoverUser)
 router.use("/loginInfo",loginInfo)
+router.use('/order', postOrder);
+router.use('/mercadopago', mercadopago);
 router.use("/usercard", postUserCard)
 router.use("/CardUser",CardUser)
 router.use("/game", postLogicGame)
-router.use('/order', putOrder, getOrder);
+
 // router.use('/')
 
 module.exports = router;
