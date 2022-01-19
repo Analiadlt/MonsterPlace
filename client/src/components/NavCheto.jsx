@@ -1,7 +1,22 @@
-import React from "react";
+import {React, useEffect} from "react";
 import ProfileHome from "./ProfileHome";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../redux/actions";
+
 export default function NavCheto() {
+
+   const usuarios =  useSelector(state => state.users)
+  const loading = useSelector(state=>state.loading)
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (!usuarios.length && !loading.loading) {
+      dispatch(getUser())
+    }
+  })
+
+
     return (
         <div className="nav-cheto navContainer">
 
