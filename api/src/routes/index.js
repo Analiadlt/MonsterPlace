@@ -17,6 +17,8 @@ const loginInfo= require("./GET/LoginInformation")
 const postUserCard = require("./POST/PostUserCard")
 const CardUser = require("./GET/GetUser-Card")
 const postLogicGame = require("./POST/PostLogicGame")
+const putOrder = require('./PUT/PutOrder');
+const getOrder = require('./GET/GetOrder');
 
 
 const router = Router();
@@ -31,6 +33,7 @@ router.use("/loginInfo",loginInfo)
 router.use("/usercard", postUserCard)
 router.use("/CardUser",CardUser)
 router.use("/game", postLogicGame)
+router.use('/order', putOrder, getOrder);
 // router.use('/')
 
 module.exports = router;
