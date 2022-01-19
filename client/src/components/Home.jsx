@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from './Nav';
+import NavCheto from './NavCheto';
 import Slider from './Slider'
 import Destacadas from './Destacadas';
 import Seccion2 from './Seccion2';
@@ -14,7 +14,7 @@ export default function Home() {
                 
          
             <div className='section'>
-                <Nav />
+                <NavCheto/>
                 <div className='contenedor-cheto'>
                     <div className='slider-home' >
 

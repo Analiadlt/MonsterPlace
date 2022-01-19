@@ -8,7 +8,7 @@ import Nav from "./Nav";
 import Modal1 from "./Modal";
 import { Modal } from "@mui/material";
 import Filtros from "./filtrosTienda";
-
+import NavCheto from './NavCheto';
 export default function Tienda() {
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.dragonesbd)
@@ -21,7 +21,7 @@ export default function Tienda() {
 
     return (
         <div>
-            <Nav />
+            <NavCheto />
             <div className="background-tienda">
                 <div className="contenedor-tienda">
 
