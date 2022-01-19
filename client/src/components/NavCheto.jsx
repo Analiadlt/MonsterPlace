@@ -51,7 +51,8 @@ export default function NavCheto() {
                             <span
                                 className={
                                     window.location.pathname === "/Tienda" ||
-                                        window.location.pathname === "/Carrito"
+                                        window.location.pathname === "/Carrito" ||
+                                        window.location.pathname === "/TiendaNft"
                                         ? "activo"
                                         : null
                                 }

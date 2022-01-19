@@ -66,6 +66,52 @@
     display: flex;
     justify-content: space-around;
 }
+.nav-tienda{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+    .link{
+        text-decoration: none;
+        color: white;
+        transition: 0.5s;
+        &:hover{
+            color: #FFB520;
+
+        }
+    }
+    
+.activoTienda{
+    .link{
+        color: #FFB520;
+    }
+    color: #FFB520;
+    border-bottom: 1px solid #ffffff04;
+
+}
+    h3{
+        display: block;
+        font-weight: lighter;
+        letter-spacing: 3PX;
+        border-bottom: 1px solid #74531252;
+        cursor: pointer;
+        padding: 3px 20px;
+        width: 35%;
+        height: 40%;
+        transition: 0.5S;
+        &:hover{
+            color: #FFB520;
+            border-bottom: 1px solid #ffffff04;
+
+        }
+
+    }
+
+}
+
+.tiendaPobre:hover{
+    color: yellowgreen;
+}
 
 /* Tablets y phablets */
 @media only screen and (min-width: 0px) and (max-width: 967px){
