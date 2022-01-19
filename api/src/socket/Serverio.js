@@ -5,8 +5,8 @@ const { Socket } = require('socket.io');
 
 const mazo1 = [{
   name: "warlockk",
-  attack: 1,
-  defense: 2,
+  attack: 30,
+  defense: 20,
   img: "https://firebasestorage.googleapis.com/v0/b/proyecto-final-47802.appspot.com/o/recurso1.png?alt=media&token=52c53a37-57b4-483e-bd88-d62fc81e7d93",
   state: "activa",
   type: "legendary",
@@ -16,8 +16,8 @@ const mazo1 = [{
 
 {
   name: "plover",
-  attack: 2,
-  defense: 3,
+  attack: 50,
+  defense: 15,
   img: "https://firebasestorage.googleapis.com/v0/b/proyecto-final-47802.appspot.com/o/recurso11.png?alt=media&token=1bf33928-cede-47c1-b12e-f5655c1ae074",
   state: "activa",
   type: "legendary",
@@ -27,8 +27,8 @@ const mazo1 = [{
 
 {
   name: "gigadude",
-  attack: 3,
-  defense: 4,
+  attack: 80,
+  defense: 40,
   img: "https://firebasestorage.googleapis.com/v0/b/proyecto-final-47802.appspot.com/o/recurso12.png?alt=media&token=bc22754b-000d-4e78-995a-5180cfcd54de",
   state: "activa",
   type: "legendary",
@@ -40,8 +40,8 @@ const mazo1 = [{
 const mazo2 = [
   {
     name: "octopi",
-    attack: 4,
-    defense: 5,
+    attack: 40,
+    defense: 50,
     img: "https://firebasestorage.googleapis.com/v0/b/proyecto-final-47802.appspot.com/o/recurso13.png?alt=media&token=2cfce067-415f-4b42-b8bf-0ce667c628a6",
     state: "activa",
     type: "legendary",
@@ -51,8 +51,8 @@ const mazo2 = [
 
   {
     name: "ouster",
-    attack: 5,
-    defense: 6,
+    attack: 60,
+    defense: 20,
     img: "https://firebasestorage.googleapis.com/v0/b/proyecto-final-47802.appspot.com/o/recurso3.png?alt=media&token=edfd5c70-c7c6-4c03-8925-67d66cde53fa",
     state: "activa",
     type: "legendary",
@@ -62,8 +62,8 @@ const mazo2 = [
 
   {
     name: "oxonomy",
-    attack: 6,
-    defense: 7,
+    attack: 25,
+    defense: 70,
     img: "https://firebasestorage.googleapis.com/v0/b/proyecto-final-47802.appspot.com/o/recurso4.png?alt=media&token=fca777ad-267b-4a36-9d60-713ec7f832e0",
     state: "activa",
     type: "epic",
@@ -86,13 +86,19 @@ let usu = 0;
 
 
 
-
+let diferencia
 
 function ronda(carta1 , carta2){
   if(carta1.mensaje.attack > carta2.mensaje.attack){
+    diferencia = carta1.mensaje.attack - carta2.mensaje.attack
+    carta1.restarvida2 = diferencia
+    
     return carta1
   }
   else if(carta2.mensaje.attack > carta1.mensaje.attack){
+    diferencia = carta2.mensaje.attack - carta1.mensaje.attack
+    carta2.restarvida1 = diferencia
+    
     return carta2;
   }
   else if(carta2.mensaje.attack === carta1.mensaje.attack){
