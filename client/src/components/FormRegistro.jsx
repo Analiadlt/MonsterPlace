@@ -4,7 +4,8 @@ import { addUser , reset } from '../redux/actions';
 import { useDispatch , useSelector} from 'react-redux';
 import { Link , useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Nav from './Nav';
+import NavCheto from './NavCheto';
+
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -158,8 +159,8 @@ const Formulario = () => {
 
 	return (
 		<div>
-			<Nav />
-		<div style={{display:'flex',alignItems:'center', justifyContent:'center'}}>
+			<NavCheto/>
+		<div className='container-log'>
 			<div className='login-box'>
 				<form  onSubmit={formik.handleSubmit}>
 					<h2 >Registrarse</h2>

@@ -16,6 +16,9 @@ const postRecoverUser = require("./POST/PostRecoverUser")
 const loginInfo= require("./GET/LoginInformation")
 const postOrder = require('./POST/PostOrder');
 const mercadopago = require('./GET/GetMercadoPago');
+const postUserCard = require("./POST/PostUserCard")
+const CardUser = require("./GET/GetUser-Card")
+const postLogicGame = require("./POST/PostLogicGame")
 const router = Router();
 
 router.use('/cards', getCards,getDestacadas,validateInformation(postCardSchema),postCards); 
@@ -27,5 +30,10 @@ router.use("/recover", postRecoverUser)
 router.use("/loginInfo",loginInfo)
 router.use('/order', postOrder);
 router.use('/mercadopago', mercadopago);
+router.use("/usercard", postUserCard)
+router.use("/CardUser",CardUser)
+router.use("/game", postLogicGame)
+
 // router.use('/')
+
 module.exports = router;

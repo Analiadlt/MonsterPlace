@@ -13,10 +13,15 @@ import Carrito from './components/Carrito';
 import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
 import Juego from './components/juego/interface';
-import userDetail from './components/userDetail';
+import userDetail from './components/profile/userDetail';
 import Chat from './components/Chat';
 import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';
+import Intermedio from './components/juego/intermedio';
+// import Chatear from './components/chat/chatear';
+import ChatApp from './components/chat/index';
+import NavCheto from './components/NavCheto';
+import Compra from './components/Compra';
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
 import { getUserLogin } from './redux/actions';
@@ -26,15 +31,15 @@ function App() {
   const logueado = useSelector(state => state.users)
   const dispatch = useDispatch()
 
-  useEffect(() => {
+    useEffect(() => {
 
-    if (app) {
+      if (app) {
         app.auth().onAuthStateChanged((authUser) => {
 
           if (authUser && logueado.length >5) {
             dispatch(getUserLogin(authUser.email))
-                       }})}},[logueado])
-
+                       }})}},[dispatch, logueado])
+                    
 
 
       return (
@@ -47,13 +52,16 @@ function App() {
           <Route path="/Registro" component={FormRegistro} />
           <Route path="/Login" component={ForLogin} />
           <Route path="/PassReset" component={PassReset} />
-          <Route path="/Detail/:id" component={userDetail} />
+          <Route path="/Detail/" component={userDetail} />
           <Route path="/chat" component={Chat} />
-          <Route path="/juego" component={Juego} />
-            <Route  exact path="/TiendaNFT" component={TiendaNFT} />
-      <Route  exact path="/CrearNFT" component={crearNFT} />
-      <Route  exact path="/TableroNFT" component={tableroNFT} />
-      <Route  exact path="/MisNFT" component={misNFT} />
+          <Route path="/juego" component={NavCheto} />
+          <Route  exact path="/TiendaNFT" component={TiendaNFT} />
+          <Route  exact path="/CrearNFT" component={crearNFT} />
+          <Route  exact path="/TableroNFT" component={tableroNFT} />
+          <Route  exact path="/MisNFT" component={misNFT} />
+          <Route  exact path="/Matchmaking" component={Intermedio} />
+          <Route  exact path="/Compra" component={Compra} />
+          <Route  exact path="/Chatear" component={ChatApp} />
 
         </div>
       );
@@ -62,4 +70,3 @@ function App() {
 
 
     export default App;
-

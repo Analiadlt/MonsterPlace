@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Nav from "./Nav";
-import Modal1 from "./Modal";
+import NavCheto from './NavCheto';
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import CartaFondo from "./juego/FondoCarta";
 import { ethers } from "ethers";
 import axios from "axios";
-import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts//contracts/NFTMarket.sol/NFTMarket.json";
+import CardNFT from "./NFTcard";
 
 let rpcEndpoint = null;
 
@@ -16,6 +17,7 @@ if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
 }
 
 export default function TiendaNFT() {
+  const dragones = useSelector(state => state.dragonesbd)
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
   useEffect(() => {
@@ -23,6 +25,7 @@ export default function TiendaNFT() {
   }, []);
   async function loadNFTs() {
     //funcion para cargar los nft
+    
     const provider = new ethers.providers.JsonRpcProvider(rpcEndpoint);
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
     const marketContract = new ethers.Contract(
@@ -48,36 +51,28 @@ export default function TiendaNFT() {
         return item;
       })
     );
-    console.log(items) //estos son los items en venta 
+    console.log(items); //estos son los items en venta
     setNfts(items);
     setLoadingState("loaded");
   }
 
-  async function buyNft(nft) {
-    //para conectar la wallet
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-    const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
-    const transaction = await contract.createMarketSale(
-      nftaddress,
-      nft.itemId,
-      {
-        value: price,
-      }
-    );
-    await transaction.wait();
-    loadNFTs();
-  }
-
   return (
     <div>
-      <Nav />
+      <NavCheto />
+      <div className="nav-tienda">
 
+        <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className={`link ${window.location.pathname === "/Tienda" ? "activo" : null}`}>Crypis</Link></h3>
+
+        <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link'>NFT</Link></h3>
+
+      </div>
+      <div className="muestra contenedor-cheto" >
+        <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'} />
+
+      </div>
       <div className="contenedor-tienda">
-        <div className="titulo-tienda">
+
+        <div className="navContainerNFT">
           <Link to="/TiendaNFT">
             <span
               className={
@@ -91,7 +86,7 @@ export default function TiendaNFT() {
             <span
               className={
                 window.location.pathname === "/CrearNFT" ||
-                window.location.pathname === "/Carrito"
+                  window.location.pathname === "/Carrito"
                   ? "activo"
                   : null
               }
@@ -117,28 +112,14 @@ export default function TiendaNFT() {
               TableroNFT
             </span>
           </Link>
-
-          <Modal1 /> 
         </div>
         {loadingState === "laoded" && !nfts.length ? (
           <h1>No items in the marketplace</h1>
         ) : (
           <div className="contenedor-tajetas">
             <div className="grid-tienda">
-              {nfts.map((nft, i) => (
-                <div key={i}>
-                  <img src={nft.image} />
-                  <div>
-                    <p>{nft.name}</p>
-                  </div>
-                  <div>
-                    <p>{nft.description}</p>
-                  </div>
-                  <div>
-                    <p>{nft.price} ETH</p>
-                    <button onClick={() => buyNft(nft)}>Buy</button>
-                  </div>
-                </div>
+              {nfts.map((nft) => (
+                <CardNFT name={nft.name} nft={nft} />
               ))}
             </div>
           </div>

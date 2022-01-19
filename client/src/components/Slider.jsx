@@ -4,7 +4,7 @@ import slider3 from '../img/huevos.png'
 import React from 'react';
 
 
-import { Navigation, Pagination } from 'swiper';
+import { Autoplay, Navigation, Pagination } from 'swiper';
 // Direct React component imports
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 // Styles must use direct files imports
@@ -21,11 +21,15 @@ export default function Slider() {
     return (
         <div className="container-slider">
             <Swiper
-                modules={[Navigation, Pagination]}
-                navigation={true}
+                modules={[Navigation, Pagination, Autoplay]}
+                navigation={false}
                 effect={"coverflow"}
+                autoplay={{
+                    "delay": 4500,
+                    "disableOnInteraction": false
+                  }}
                 centeredSlides={true}
-                slidesPerView={window.innerWidth < 768 ? 1 : "auto"}
+                slidesPerView={window.innerWidth < 300 ? 1 : "auto"}
                 loop={true}
                 coverflowEffect={{
                     rotate: 50,
@@ -39,14 +43,14 @@ export default function Slider() {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide style={{width:'100%'}}>
-                    <img src={slider1} alt="" />
+                <SwiperSlide >
+                    <img className='container-slider' src={slider1} alt="" />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slider2} alt="" />
+                <SwiperSlide >
+                    <img className='container-slider' src={slider2} alt="" />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <img src={slider3} alt="" />
+                <SwiperSlide >
+                    <img className='container-slider' src={slider3} alt="" />
                 </SwiperSlide>
                 </Swiper>
 

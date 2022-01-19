@@ -12,12 +12,18 @@
    
 
 }
-
+.container-log{
+  display: block;
+  display: flex;
+  justify-content: center;
+  
+ 
+}
 .login-box {
     
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: 40%;
     
     padding: 40px;
     
@@ -72,6 +78,20 @@
   }
   
   .login-box form .botonn {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: v.$color-titulo;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+  }
+
+  .login-box .form .botonn {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -217,13 +237,16 @@
 }
 
 .chat{
-  width: 100%;
-  min-height: 70vh;
-  max-height: 70vh;
-  overflow: scroll;
-  // border: 2px solid black;
-  box-shadow: 0 0 20px #bd9635;
-
+  width: 80%;
+  position: relative;
+  right:0;
+  left: 10%;
+  height: 450px;
+  
+  
+  border: 2px solid rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
+  margin-top: 2.5rem;
  color:#FFB520;
  display: flex;
   justify-content: center;
@@ -238,17 +261,24 @@
 }
 
 .cartita{
-  width:100px; 
+  width:210px; 
 
-  height : 100px; 
+  height : 190px; 
 
   cursor: pointer;
 
-  margin: 0 30px;
+  
 
   &:hover{
         transform: translateY(-10px);
+        transform:translateY(-300px);
         transition: 0.4s ease-out;
   }
 }
 
+@media only screen and (min-width: 0px) and (max-width: 1067px){
+  .login-box {
+      width: 100%;
+  }
+     
+}

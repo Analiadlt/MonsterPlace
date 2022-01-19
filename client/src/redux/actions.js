@@ -12,6 +12,7 @@ export const RESET_LOGIN = "RESET_LOGIN"
 export const GET_CARDS = "GET_CARDS"
 export const GET_BY_ID = "GET_BY_ID"
 export const USER_LOG = "USER_LOG"
+export const PARTIDA = "PARTIDA"
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -21,7 +22,7 @@ export function addUser(payload) {
  
     return async (dispatch) => {
       try {
-        var json = await axios.post(`http://localhost:3001/users`, payload);
+        var json = await axios.post(`/users`, payload);
         return dispatch({
           type: ADD_USER, 
           payload: json,
@@ -36,7 +37,7 @@ export function addUser(payload) {
 export function getCard() {
   return function (dispatch) {
       /* dispatch({ type: LOADING, payload: 'Buscando Cartas...' }) */
-      return axios.get('http://localhost:3001/cards/get')
+      return axios.get('/cards/get')
           .then(res => res.data)
           .then(data => dispatch({ type: GET_CARDS, payload: data }))
   }
@@ -47,7 +48,7 @@ export function loginUser(payload) {
   console.log('datos enviados para ac',payload)
   return async (dispatch) => {
     try {
-      var json = await axios.post(`http://localhost:3001/login/loginUser`, payload);
+      var json = await axios.post(`/login/loginUser`, payload);
       console.log("Datos para posteo", json.data)
         return dispatch({
           type: LOGIN_USER, 
@@ -68,7 +69,7 @@ export function loginUser(payload) {
 export function getUser() {
   return function (dispatch) {
       
-      return axios.get('http://localhost:3001/users')
+      return axios.get('/users')
           .then(res => res.data)
           .then(data => dispatch({ type: GET_USER, payload: data }))
   }
@@ -79,7 +80,7 @@ export function getById(id) {
   console.log('id desde actions', id);
   return async (dispatch) => {
     try {
-      var json = await axios.get(`http://localhost:3001/users/${id}`);
+      var json = await axios.get(`/users/${id}`);
       console.log("Data Desde Actions", json.data);
       return dispatch({
         type: GET_BY_ID,
@@ -100,7 +101,7 @@ export function getUserLogin(em) {
     
     try {
       console.log('email desde actions', email);
-      var json = await axios.post(`http://localhost:3001/loginInfo/loginInformation`, email);
+      var json = await axios.post(`/loginInfo/loginInformation`, email);
       console.log("Data Desde Actions", json.data);
       return dispatch({
         type: LOGIN_USER,
@@ -148,3 +149,12 @@ export function usuarioLog(user){
   return{ type: USER_LOG, payload: user} 
 
 }
+
+
+export function empezarPartida(bolea){
+  
+  return{ type: PARTIDA, payload:bolea } 
+
+}
+
+

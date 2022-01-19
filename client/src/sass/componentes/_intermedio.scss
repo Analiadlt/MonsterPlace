@@ -1,0 +1,54 @@
+.grid-intermedio{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-top: 5rem;
+
+}
+.jugador{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.boton-partida{
+    margin-top: 2rem;
+    width: 30%;
+    padding: 15px 10px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.invisibility {
+    transform: scale(0);
+    pointer-events: none;
+} 
+
+.mover{
+    transform-style: preserve-3d;
+    transform: translateY(300px) rotatez(180deg) ;
+    
+
+    
+}
+.spinner-intermedio{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.boton-cancelar{
+    background: transparent;
+    border: none;
+    color: #FFB520;
+    letter-spacing: 2px;
+    margin: 50px 50px;
+    cursor: pointer;
+    transition: 1s;
+    &:hover{
+        transition: 1s;
+        border: 1px solid #FFB520;
+        padding: 5px 10px;
+    }
+
+}

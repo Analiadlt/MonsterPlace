@@ -10,16 +10,27 @@
     }
 }
 .contenedor-tienda{
-    width: 70%;
+    width: 80%;
     display: block;
     margin: 0 auto;
+
+    
+}
+.background-tienda{
+    margin: 50px 100px;
+    display: flex;
+    justify-content: center;
+    
+    background: #1C1D1F;
+    box-shadow: 0 0 15px #e4ba493b;
+    border-radius: 20px;
 }
 .carrito{
     font-size: 7rem;
     font-weight: normal;
     color: v.$color-titulo;
     cursor: pointer;
-    
+    position: static;
     &:hover{
         color: v.$blanco;
     }
@@ -50,4 +61,72 @@
     color: rgb(255, 255, 255);
     text-align: center;
 }
+
+.seccion-compra{
+    display: flex;
+    justify-content: space-around;
+}
+.nav-tienda{
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .link-tienda{
+        text-decoration: none;
+        color: white;
+        transition: 0.5s;
+        &:hover{
+            color: #FFB520;
+
+        }
+    }
+    
+.activoTienda{
+    .link{
+        color: #FFB520;
+    }
+    color: #FFB520;
+    border-bottom: 1px solid #ffffff04;
+
+}
+    h3{
+        display: block;
+        font-weight: lighter;
+        letter-spacing: 3PX;
+        border-bottom: 1px solid #74531252;
+        cursor: pointer;
+        padding: 3px 20px;
+        width: 35%;
+        height: 40%;
+        transition: 0.5S;
+        &:hover{
+            color: #FFB520;
+            border-bottom: 1px solid #ffffff04;
+
+        }
+
+    }
+
+}
+
+.tiendaPobre:hover{
+    color: yellowgreen;
+}
+
+/* Tablets y phablets */
+@media only screen and (min-width: 0px) and (max-width: 967px){
+    .grid-tienda{
+        display: block;
+        margin: 0 auto;
+    }
+    .titulo-tienda{
+        width: 100%;
+    }
+    .background-tienda{
+        margin: 0;
+        width:100%;
+    }
+}
+
+
 

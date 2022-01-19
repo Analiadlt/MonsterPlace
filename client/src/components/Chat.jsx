@@ -1,115 +1,357 @@
-import React, {useState , useEffect , useRef } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { getCard } from "../redux/actions";
-
+import { useHistory } from "react-router-dom";
 
 import socket from "./Socket";
 import Nav from "./Nav";
-
-
+import Chatear from "./chat/chatear";
+import CartaFondo from './juego/FondoCarta';
+import Spinner from "./juego/spinner";
+import CartaGame from "./juego/interface";
+import { empezarPartida } from "../redux/actions";
 
 export default function Chat() {
+
+    const infoRoom = JSON.parse(localStorage.getItem("info-room"));
+    const [mazo, setMazo] = useState(JSON.parse(localStorage.getItem("mazo")));
     const [mensaje, setMensaje] = useState('');
     const [mensajes, setMensajes] = useState([]);
-    const dragones = useSelector(state => state.dragonesbd)
+    const dragones = useSelector(state => state.dragonesbd);
+    const history = useHistory()
+
+        // chat -------------------------------------------------------
+
+        // const [mensajechat, setMensajechat] = useState("");
+        // const [mensajeschat, setMensajeschat] = useState([]);
+        // const [agarrarMensaje, setagarrarMensaje] = useState([]);
+        // const [nombre, setNombre] = useState("");
+        // const nick = useSelector(state => state.userLogueado.nickName)
+
+    
+      
+        // useEffect(() => {
+        //   setNombre(nick);
+        // },[nick]);
+        
+
+        // console.log("NickName desde el chat: ", nombre);
+        // const divRef = useRef(null);
+
+
+
+        // ----------------------------------------------------------
+
+    const [rondas,setRondas]= useState([])
+
+    const idpartida = localStorage.getItem('idroom')
 
     const dispatch = useDispatch()
 
-    let nombre=socket.id
+    const [turno, setTurno] = useState(localStorage.getItem('turno'))
 
-    console.log('mensajes',mensajes)
+    // const [ronda, setRonda] = useState(localStorage.getItem(false))
+    const [resultadoo, setResultado] = useState([])
+
+    const[enviarMensaje,setenviarMensaje]= useState(true)
+    const[numeroDeRonda,setnumeroDeRonda]= useState(1)
+    const[listos,setListos]= useState(false)
+
+    const[partida,setPartida]= useState(false)
+
+    const[val,setVal]= useState(false)
+    const[vida1,setvida1]= useState(100)
+    const[vida2,setvida2]= useState(100)
+
     
-    // useEffect(() => {
-        
-    //     socket.emit('conectado',nombre)
 
-    // }, [nombre])
 
-    useEffect(() => {
-        
-        
-        dispatch(getCard())
 
-    }, [])
-
-    useEffect(() => {
-        
-        socket.on('mensajes',mensaje =>{
-            setMensajes([...mensajes,mensaje])
-        })
-
-        return ()=> {socket.off()}
-    })
     
-    const divRef = useRef(null);
 
+
+    // controlo la cantidad de jugadores
     useEffect(() => {
-         divRef.current.scrollIntoView({dehavior:'smooth'})
-        })
-
+        localStorage.removeItem("info-inicio")
         
-        useEffect(() => {
-            if(mensaje !== ''){
+
+        socket.on('resultado', resultado => {
+            setResultado([...resultadoo, resultado])
+            //restar vida--------
+            
+            if(resultado.restarvida1){
+                setvida1(vida1-resultado.restarvida1)
+            }
+            if(resultado.restarvida2){
+                setvida2(vida2-resultado.restarvida2)
+            }
+            
+
+            //---------
+
+            let ban = false
+            const  copia = mensajes
+            if (resultado.mensaje.name === copia[0].mensaje.name) {
+                let cartIz = document.getElementById(resultado.mensaje.name)
+                let cartDe = document.getElementById(copia[1]?.mensaje.name)
                 
-                socket.emit('mensaje',nombre, mensaje)
-               
+                cartIz.classList.add('izquierda')
+                cartDe?.classList.toggle('invisible')
+                ban = true;
+                
+                cartDe?.classList.toggle('none')
+                setMensajes(mensajes.filter(car => car.mensaje.name === mensajes[0]?.mensaje.name))
+
+
+            } else if (ban === false){
+                let cartIz = document.getElementById(resultado.mensaje.name)
+                let cartDe = document.getElementById(copia[1]?.mensaje.name)
+                cartIz.classList.toggle('invisible')
+                cartDe?.classList.add('derecha')
+                
+                cartIz.classList.add('none')
+                setMensajes(mensajes.filter(car => car.mensaje.name === mensajes[1]?.mensaje.name))
+
+
+
             }
 
-            setMensaje('')
+
+            setTimeout(() => {
+                setRondas([...rondas, resultado])
+                setResultado([])
+                setMensajes([])
+                setVal(false)
+                setnumeroDeRonda(numeroDeRonda+1)
+            }, 4000)
+
+        })
 
 
-        },[mensaje])
-        console.log('esto es mensaje',mensaje)
-    // const submit = (e) => {
-    //     e.preventDefault();
-    //     socket.emit('mensaje',nombre, mensaje)
-
-    //     setMensaje('')
-
-    // }
+    })
 
 
-    return (
-        <div>
-			<Nav />
 
-        <div className='caja-chat'>
-            <div className='chat'>
-                {
-                    
+    useEffect(() => {
+        if (mensajes.length === 2) {
+            setVal(true)
+            setTimeout(() => {
+                let girar = document.querySelectorAll('#carta3d')
+                girar.forEach(function (car) {
+                    car.classList.toggle('girar');
+                });
+            }, 2000)
 
-                    mensajes.map((dragon,i)=>(
-                        <div key={i} style={{display:'flex', justifyContent:'center'}}>
-                        <div style={{ border:'1px solid #ffff', width:'200px',height:'300px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    
-                    <img  src={dragon?.mensaje.img} style={{width:'100px',height:'100px',display:'block', margin:' 0 auto'}}/>
-                        <div style={{display:'flex', flexDirection:'column', textAlign:'center'}}>
-                        <p>Ataque:</p><span>{dragon?.mensaje.attack}</span>
-                        <p>Defensa:</p><span>{dragon?.mensaje.defense}</span>
-                    
-                        </div>
-                </div>
-                </div>
-                    ))
-                    
-             }
-             <div ref={divRef}></div>
-           </div> 
+
+            setTimeout(() => {
+                socket.emit('fin-ronda', mensajes, idpartida)
+                
+            }, 5000)
+
+        }
+    }, [mensajes])
+    
+    useEffect(() => {
+        socket.on('jugadores-listos', ()=>{
+            dispatch(empezarPartida(false))
+
+            setListos(true)
+        })
             
+    })
+    
+    useEffect(() => {
+        if (numeroDeRonda === 4) {
+            setPartida(true)
+            setTimeout(() => {
+                history.push('/')
+                }, 2000);
+            socket.emit('fin-partida', idpartida)
+            
+        }
+    })
+        
+
+
+
+    useEffect(() => {
+
+        socket.on('mensajes', mensaje => {
+            setTimeout(() => {
+                turno === 'true' ?
+                    setTurno('false')
+                    :
+                    setTurno('true')
+                if (mensajes.length < 2) {
+                    setMensajes([...mensajes, mensaje])
+                }
+            }, 1000)
+
+        })
+        return () => { socket.off() }
+    })
+
+    
+
+  
+    useEffect(() => {
+        if (mensaje !== '' && turno === 'true') {
+            
+            socket.emit('mensaje', mensaje, idpartida)
+
+            setenviarMensaje(!enviarMensaje)
           
-           <div style={{display:'flex',marginTop:'2rem', justifyContent:'center'}}>
+            
 
-            <img className="cartita" src={dragones[0]?.img} onClick={()=>setMensaje(dragones[0])}/>
-            <img className="cartita" src={dragones[1]?.img} onClick={()=>setMensaje(dragones[1])}/>
-            <img className="cartita" src={dragones[2]?.img} onClick={()=>setMensaje(dragones[2])}/>
 
+        }
+
+        setMensaje('')
+
+
+    }, [mensaje])
+    
+   
+    function remover(carta) {
+        let cart = document.getElementById(carta.name)
+        cart.classList.add('invisible')
+
+        setTimeout(() => {
+            setMazo(mazo.filter(car => car.name !== carta.name))
+
+        }, 2500)
+        setTimeout(() => {
+
+            if (enviarMensaje) {
+                carta.jugador = infoRoom.jugador2
+                setMensaje(carta)
+            }
+            else {
+                carta.jugador = infoRoom.jugador1
+                setMensaje(carta)
+            }
+        }, 1400)
+    }
+
+
+
+//-----------------------------------------------chat
+
+
+// useEffect(() => {
+//     socket.on("mensajeschat", nombre ,mensajechat => {
+//         console.log("Este es el mensajeschat: ", nombre,mensajechat);
+//       setMensajeschat([...mensajeschat, mensajechat]);   
+//     });
+
+  
+//     return () => {
+//       socket.off();
+//     };
+
+//   });
+
+//   console.log("Este es el resultadoo: ", resultadoo);
+
+
+
+  
+
+//     useEffect(() => {
+//       divRef.current.scrollIntoView({ behavior: "smooth" });
+//     });
+
+//     useEffect(() => {
+//         if (mensajechat !== '') {
+            
+//             socket.emit("mensajechat", nombre, mensajechat);
+
+
+
+//         }
+
+//         setMensajechat('');
+
+
+//     }, [mensajechat])
+
+//     const submit = (e) => {
+//         e.preventDefault();
+        
+//         setMensajechat(agarrarMensaje);
+//         setagarrarMensaje('')
+//       };
+
+
+
+
+
+return (
+    <div>
+
+        <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
+            <h2>Jugador 1</h2>
+            <h2>Jugador 2</h2>
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+            <h2 style={{position:'relative',top:'-50px',left:'50px'}}>{infoRoom.jugador1}</h2>
+            <h2 style={{position:'relative',top:'-50px', right:'50px'}}>{infoRoom.jugador2}</h2>
+
+        </div>
+        
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+        <progress className="progress" max="100" value={vida1} style={{position:'relative',top:'-80px',left:'50px',width:'100px'}} />
+        <progress className="progress" max="100" value={vida2} style={{position:'relative',top:'-80px', right:'50px', width:'100px'}} />
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+        <span style={{position:'relative',top:'-100px',left:'150px',width:'100px'}} >{vida1}</span>
+        <span style={{position:'relative',top:'-100px', right:'80px', width:'100px'}}>{vida2}</span>
+        </div>
+
+        {partida ? <h1>Partida Finalizada</h1> : 
+        <div className='caja-chat'>
+
+
+            <div className='chat'>
+                {resultadoo.length ? <h1>{'Partida Ganada por ' + resultadoo[0].mensaje.jugador}</h1> : null}
+                
+                <div className="grid-chat">
+                    {
+                        mensajes.map((dragon, i) => (
+                            <div classList='carta-grid'>
+                                <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} />
+                            </div>
+                        ))
+                    }
+                </div>
+                
             </div>
-           
 
 
-           
+
+
+            {turno !== 'true' || listos === false  || val ? <Spinner text={'Esperando al Rival'} />
+                :
+                <div>
+                    
+                <div style={{ display: 'flex', marginTop: '2rem', justifyContent: 'space-around' }}>
+                    {mazo.map((carta, i) =>
+
+                        <CartaGame attack={carta.attack} key={i} defense={carta.defense} state={carta.state} type={carta.type} name={carta.name} img={carta.img} funcion={remover} carta={carta} />
+                    )}
+                </div>
+                </div>
+
+            }
+
+
+
+
+
         </div>
-        </div>
-    )
+        }
+    </div>
+)
 };

@@ -1,0 +1,66 @@
+.square-container {
+    margin-top: 100px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  
+.square {
+    height: 20px;
+    width: 20px;
+    background-color: #FFB520;
+    float: left;
+    margin:10px;
+    margin-bottom:30px;
+    border-radius:50%;
+    animation-name: loading;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+  
+.uno {
+    animation-delay: 1s;
+}
+  
+.dos {
+    animation-delay: 1.5s;
+}
+  
+.tres {
+    animation-delay: 2s;
+}
+  
+.text {
+    
+    font-size: 3em;
+    color: rgba(255,255,255,0.87);
+    font-weight: bold;
+    letter-spacing: 20px;
+    margin-right: -20px;
+    animation-name: message;
+    animation-duration: 3s;
+}
+  
+@keyframes loading {
+    30% {
+      background-color: transparent;
+    }
+}
+  
+@keyframes message {
+    0% {
+      color: transparent;
+    }
+}
+
+
+.contenedor-spinner{
+    
+    display: block;
+    margin: 5rem auto;
+    text-align: center;
+}
+
+
+
+
