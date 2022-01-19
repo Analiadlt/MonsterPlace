@@ -271,6 +271,15 @@ export default function Chat() {
 
 return (
     <div>
+        <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+            <h2>Jugador 1</h2>
+            <h2>Jugador 2</h2>
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+            <h2 style={{position:'relative',top:'-50px',left:'50px'}}>{infoRoom.jugador1}</h2>
+            <h2 style={{position:'relative',top:'-50px', right:'50px'}}>{infoRoom.jugador2}</h2>
+
+        </div>
         {partida ? <h1>Partida Finalizada</h1> : 
         <div className='caja-chat'>
 
