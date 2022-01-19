@@ -1,12 +1,12 @@
 import React from "react";
 import dragon from '../../img/recurso1.png'
 import SpinnerT from "./SpinnerTurno";
-export default function CartaFondo({img,name,attack,defense}) {
+export default function CartaFondo({img,name,attack,defense,efect}) {
 
     return (
   
             <div id={name}  className="carta3d">
-                <div id='carta3d' className="contenido3d">
+                <div id='carta3d' className={`contenido3d ${efect}`}>
                     <div className="frontCarta logo-carta">
                         
                     </div>
