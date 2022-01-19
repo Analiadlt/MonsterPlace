@@ -3,27 +3,27 @@ const { User, Card } = require("../../db")
 
 const server = express()
 
-server.post("/:id/buy", async (req, res) => {
-    const email = req.body.email
-    const idCard = req.params.id
+server.post("/buy", async (req, res) => {
+    const { email, idCard } = req.body
 
     try {
         const user = await User.findOne({ where: { email: email } })
-        const cardDB = await Card.findByPk(idCard)
+        const cards = await Card.findAll({ where: { id: idCard } })
 
-        if(!user){
-            res.send("Usuario inexistente")
+        if (!user) {
+            res.send("No existe el usuario")
         }
-        if(!cardDB){
+        if (!cards) {
             res.send("No existe la carta solicitada")
         }
-        
-        user.addCards(cardDB)
-        res.send("Compra exitosa")
-        
+
+        for (let i = 0; i < cards.length; i++) {
+            await user.addCards(cards[i])
+        }
+        res.send("Cartas agregadas satifactoriamente")
     }
     catch (error) {
-        res.send("Ocurrio un error")
+        res.send("Error en la base de datos")
     }
 })
 

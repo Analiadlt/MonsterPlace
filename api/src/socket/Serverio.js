@@ -178,7 +178,9 @@ socket.onAny((event, ...args) => {
         console.log('resultado ronda',resultado)
         io.sockets.in(room[idpartida].name).emit('resultado', resultado)
       })
-
+      socket.on('fin-partida',(idpartida)=> {
+        socket.leave(room[idpartida].name)
+      })
 
     // contar los sockets abiertos
     function getCounter(){
@@ -223,7 +225,7 @@ socket.on("conectado", (nomb) => {
 socket.on("mensajechat", (nombre, mensajechat) => {  
   //io.emit manda el mensaje a todos los clientes conectados al chat
   console.log('este si ',nombre, mensajechat)
-  io.emit("mensajeschat",  nombre, mensajechat );
+  io.emit("mensajeschat",  {nombre, mensajechat} );
 });
 
 socket.on("disconnect", () => {

@@ -16,7 +16,7 @@ export default function Intermedio(){
         socket.on('inicio-partida', (roomincompleto, room) => {
             localStorage.setItem("info-room", JSON.stringify(room));
             localStorage.setItem("info-inicio", JSON.stringify(room));
-            dispatch(empezarPartida())
+            dispatch(empezarPartida(true))
             localStorage.setItem('idroom', roomincompleto);
 
         })
@@ -38,10 +38,8 @@ export default function Intermedio(){
         history.push('/chat')
         socket.emit('usuario-dentro', localStorage.getItem('idroom'))
     }
-    
 
-    
-   
+   console.log('partida', partida)
 
     return(
         <div>

@@ -34,12 +34,17 @@
     top: 10px;
     left: 15px;
 }
-@media only screen and (min-width: 0px) and (max-width: 867px){
+@media only screen and (min-width: 0px) and (max-width: 967px){
     .seccion-grid{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-top: 3rem;
+    }
+    .contenedor-seccion{
+        position: relative;
+        bottom: 330px;
+        margin-bottom: 3rem;
     }
 }

@@ -1,20 +1,20 @@
 import React from 'react';
-import Nav from './Nav';
+import NavCheto from './NavCheto';
 import Slider from './Slider'
 import Destacadas from './Destacadas';
 import Seccion2 from './Seccion2';
 import ListaUi from './listaUi';
 //Slider
 export default function Home() {
-
+    localStorage.clear();
     return (
         <div >
 
-            
+
                 
          
             <div className='section'>
-                <Nav />
+                <NavCheto/>
                 <div className='contenedor-cheto'>
                     <div className='slider-home' >
 
