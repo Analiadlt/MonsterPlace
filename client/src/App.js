@@ -13,7 +13,7 @@ import Carrito from './components/Carrito';
 import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
 import Juego from './components/juego/interface';
-import userDetail from './components/userDetail';
+import userDetail from './components/profile/userDetail';
 import Chat from './components/Chat';
 import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';

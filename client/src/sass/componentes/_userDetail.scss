@@ -58,6 +58,7 @@
 }    
 .wrapper .sidebar i {
     color:#FFB520;
+    margin-right: 5px;
 }
 .wrapper .sidebar ul li a{
     color: white;
@@ -65,20 +66,27 @@
     width: 100%;
     font-weight: normal;
     letter-spacing: 2px;
-    transition: 1s;
+    transition: 0.5s;
 }
   
 .wrapper .sidebar ul li a .fas{
     width: 25px;
-    transition: 1s;
+    transition: 0.5s;
 }
   
 .wrapper .sidebar ul li:hover{
-    background-color: #755109;
-    transition: 1s;
+    background-color: #75510983;
+    transition: 0.5s;
     color: white;
 }
-      
+.activo-profile{
+    background-color: #a06f0e;
+    
+    i{
+        margin-right: 10px;
+    }
+   
+}     
 .wrapper .sidebar ul li:hover a{
     color: #fff;
 }
@@ -130,4 +138,14 @@
     .social_media{
       display: none !important;
     }
+}
+.contenido-profile{
+    width: 100%;
+    margin: 35px 20px 20px 80px;
+}
+
+.grid-inventario{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem 2rem;
 }
