@@ -26,6 +26,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
 import { getUserLogin } from './redux/actions';
 import Comprar from './components/compra/ordenCompra';
+import GanadorJuego from './components/juego/GanadorJuego';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
 
       return (
         <div className="App">
+          <Route path="/ganador" component={GanadorJuego} />
           <Route path="/storage" component={MyPage} />
           <Route path="/auth" component={MyAuthPage} />
           <Route path="/Carrito" component={Carrito} />

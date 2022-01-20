@@ -202,12 +202,12 @@ socket.onAny((event, ...args) => {
 
     )
 
-    socket.on('mensaje', (mensaje, idpartida, enviarMensaje)=>{
+    socket.on('mensaje', (mensaje, idpartida, enviarMensaje,perdedor)=>{
 
       console.log('mensaje...',mensaje)
       console.log('bule...',enviarMensaje)
 
-      io.sockets.in(room[idpartida].name).emit('mensajes',{mensaje},enviarMensaje);
+      io.sockets.in(room[idpartida].name).emit('mensajes',{mensaje},enviarMensaje,perdedor);
     })
 
 
