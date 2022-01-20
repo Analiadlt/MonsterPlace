@@ -4,6 +4,7 @@ const { Order, Card, User } = require("../../db");
 
 server.post('/', async (req, res, next) => {
     const { email, allCards } = req.body 
+    console.log('Datos desde Post Order', req.body);
     try {
         const user = await User.findOne({
             where: {

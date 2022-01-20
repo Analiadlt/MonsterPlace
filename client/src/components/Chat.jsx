@@ -21,28 +21,6 @@ export default function Chat() {
     const dragones = useSelector(state => state.dragonesbd);
     const history = useHistory()
 
-        // chat -------------------------------------------------------
-
-        // const [mensajechat, setMensajechat] = useState("");
-        // const [mensajeschat, setMensajeschat] = useState([]);
-        // const [agarrarMensaje, setagarrarMensaje] = useState([]);
-        // const [nombre, setNombre] = useState("");
-        // const nick = useSelector(state => state.userLogueado.nickName)
-
-    
-      
-        // useEffect(() => {
-        //   setNombre(nick);
-        // },[nick]);
-        
-
-        // console.log("NickName desde el chat: ", nombre);
-        // const divRef = useRef(null);
-
-
-
-        // ----------------------------------------------------------
-
     const [rondas,setRondas]= useState([])
 
     const idpartida = localStorage.getItem('idroom')
@@ -81,10 +59,10 @@ export default function Chat() {
             //restar vida--------
             
             if(resultado.restarvida1){
-                setvida1(vida1-resultado.restarvida1)
+                setvida1(vida1-(resultado.restarvida1 / 2))
             }
             if(resultado.restarvida2){
-                setvida2(vida2-resultado.restarvida2)
+                setvida2(vida2-(resultado.restarvida2 / 2))
             }
             
 
@@ -177,7 +155,9 @@ export default function Chat() {
 
     useEffect(() => {
 
-        socket.on('mensajes', mensaje => {
+        socket.on('mensajes', (mensaje,enviarMensaje) => {
+            setenviarMensaje(enviarMensaje)
+
             setTimeout(() => {
                 turno === 'true' ?
                     setTurno('false')
@@ -198,12 +178,7 @@ export default function Chat() {
     useEffect(() => {
         if (mensaje !== '' && turno === 'true') {
             
-            socket.emit('mensaje', mensaje, idpartida)
-
-            setenviarMensaje(!enviarMensaje)
-          
-            
-
+            socket.emit('mensaje', mensaje, idpartida,enviarMensaje)
 
         }
 
@@ -225,63 +200,20 @@ export default function Chat() {
 
             if (enviarMensaje) {
                 carta.jugador = infoRoom.jugador2
+            setenviarMensaje(!enviarMensaje)
+           
                 setMensaje(carta)
             }
-            else {
+            if (!enviarMensaje) {
                 carta.jugador = infoRoom.jugador1
+            setenviarMensaje(!enviarMensaje)
+
                 setMensaje(carta)
             }
         }, 1400)
     }
 
 
-
-//-----------------------------------------------chat
-
-
-// useEffect(() => {
-//     socket.on("mensajeschat", nombre ,mensajechat => {
-//         console.log("Este es el mensajeschat: ", nombre,mensajechat);
-//       setMensajeschat([...mensajeschat, mensajechat]);   
-//     });
-
-  
-//     return () => {
-//       socket.off();
-//     };
-
-//   });
-
-//   console.log("Este es el resultadoo: ", resultadoo);
-
-
-
-  
-
-//     useEffect(() => {
-//       divRef.current.scrollIntoView({ behavior: "smooth" });
-//     });
-
-//     useEffect(() => {
-//         if (mensajechat !== '') {
-            
-//             socket.emit("mensajechat", nombre, mensajechat);
-
-
-
-//         }
-
-//         setMensajechat('');
-
-
-//     }, [mensajechat])
-
-//     const submit = (e) => {
-//         e.preventDefault();
-        
-//         setMensajechat(agarrarMensaje);
-//         setagarrarMensaje('')
-//       };
 
 
 
@@ -291,8 +223,8 @@ return (
     <div>
 
         <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
-        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
             <h2>Jugador 1</h2>
+        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
             <h2>Jugador 2</h2>
         </div>
         <div style={{display:'flex', justifyContent:'space-between'}}>

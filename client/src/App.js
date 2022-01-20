@@ -25,6 +25,7 @@ import Compra from './components/Compra';
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
 import { getUserLogin } from './redux/actions';
+import Comprar from './components/compra/ordenCompra';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
           <Route  exact path="/Matchmaking" component={Intermedio} />
           <Route  exact path="/Compra" component={Compra} />
           <Route  exact path="/Chatear" component={ChatApp} />
+          <Route  exact path="/Comprar" component={Comprar} />
 
         </div>
       );
