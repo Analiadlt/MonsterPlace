@@ -42,11 +42,41 @@ export default function Chat() {
     const[vida1,setvida1]= useState(100)
     const[vida2,setvida2]= useState(100)
 
+    const[segundos,setsegundos]= useState(60)
+    const[perdedor,setperdedor]= useState(false)
+    //false jugador 2
+    //true jugador 1
+
+    localStorage.setItem('perdedor', perdedor);
     
 
-
-
     
+
+ 
+  const reset = () => {
+    setsegundos(60);
+    
+  }
+    
+  useEffect(()=>{
+   let interval = null;
+
+   if(segundos === 0){
+    history.push('/ganador')
+   }
+
+   else if(listos){
+    interval= setInterval(()=>{
+        setsegundos((segundos)=> segundos-1 )
+    },1000)
+   }
+
+
+   return ()=> clearInterval(interval)
+
+  },[segundos,listos])
+
+  
 
 
     // controlo la cantidad de jugadores
@@ -155,7 +185,13 @@ export default function Chat() {
 
     useEffect(() => {
 
-        socket.on('mensajes', (mensaje,enviarMensaje) => {
+        socket.on('mensajes', (mensaje,enviarMensaje,perdedor) => {
+            // false jugador1
+            // true jugador2
+            
+            setperdedor(!perdedor)
+
+            reset()
             setenviarMensaje(enviarMensaje)
 
             setTimeout(() => {
@@ -178,7 +214,7 @@ export default function Chat() {
     useEffect(() => {
         if (mensaje !== '' && turno === 'true') {
             
-            socket.emit('mensaje', mensaje, idpartida,enviarMensaje)
+            socket.emit('mensaje', mensaje, idpartida,enviarMensaje,perdedor )
 
         }
 
@@ -221,14 +257,19 @@ export default function Chat() {
 
 return (
     <div>
-
+        
+            
         <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
             <h2>Jugador 1</h2>
         <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
             <h2>Jugador 2</h2>
         </div>
         <div style={{display:'flex', justifyContent:'space-between'}}>
-            <h2 style={{position:'relative',top:'-50px',left:'50px'}}>{infoRoom.jugador1}</h2>
+            <h2 style={{position:'relative',top:'-50px',left:'50px'}}>{infoRoom.jugador1} </h2>
+            <div class="bloque">
+            <div >{segundos}</div>
+            
+        </div>
             <h2 style={{position:'relative',top:'-50px', right:'50px'}}>{infoRoom.jugador2}</h2>
 
         </div>
