@@ -88,20 +88,20 @@ let usu = 0;
 
 let diferencia
 
-function ronda(carta1 , carta2){
-  if(carta1.mensaje.attack > carta2.mensaje.attack){
-    diferencia = carta1.mensaje.attack - carta2.mensaje.attack
-    carta1.restarvida2 = diferencia
+function ronda(cartaJugador2 , cartaJugador1){
+  if(cartaJugador2.mensaje.attack > cartaJugador1.mensaje.attack){
+    diferencia = cartaJugador2.mensaje.attack - cartaJugador1.mensaje.attack
+    cartaJugador2.restarvida1 = diferencia
     
-    return carta1
+    return cartaJugador2
   }
-  else if(carta2.mensaje.attack > carta1.mensaje.attack){
-    diferencia = carta2.mensaje.attack - carta1.mensaje.attack
-    carta2.restarvida1 = diferencia
+  else if(cartaJugador1.mensaje.attack > cartaJugador2.mensaje.attack){
+    diferencia = cartaJugador1.mensaje.attack - cartaJugador2.mensaje.attack
+    cartaJugador1.restarvida2 = diferencia
     
-    return carta2;
+    return cartaJugador1;
   }
-  else if(carta2.mensaje.attack === carta1.mensaje.attack){
+  else if(cartaJugador1.mensaje.attack === cartaJugador2.mensaje.attack){
     return 'empate';
   }
 }
@@ -202,10 +202,12 @@ socket.onAny((event, ...args) => {
 
     )
 
-    socket.on('mensaje', (mensaje, idpartida)=>{
+    socket.on('mensaje', (mensaje, idpartida, enviarMensaje)=>{
 
-      console.log('mensaje',mensaje)
-      io.sockets.in(room[idpartida].name).emit('mensajes',{mensaje});
+      console.log('mensaje...',mensaje)
+      console.log('bule...',enviarMensaje)
+
+      io.sockets.in(room[idpartida].name).emit('mensajes',{mensaje},enviarMensaje);
     })
 
 
