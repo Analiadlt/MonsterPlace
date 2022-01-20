@@ -1,6 +1,6 @@
 import { useEffect} from 'react'
 
-export default function BotonPagar({ carrito, data }){
+export default function BotonPagar({ data }){
  useEffect(()=>{
   const script = document.createElement('script'); //Crea un elemento html script
   
