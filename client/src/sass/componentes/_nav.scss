@@ -77,6 +77,9 @@
         transform-origin:11px 1px;
         border-radius:10px;
       }
+      .link-oculto{
+        display: none;
+      }
       .makex{
         margin-top:9px;
       }
@@ -95,12 +98,12 @@
       }
       
       .only-mobile{
-        visibility:hidden;
+        
         display:none;
       }
       
       .only-desktop{
-        visibility:visible;
+        
         display:block;
       }
 
@@ -112,12 +115,14 @@
             font-size: 3rem;
         }
         .only-mobile{
-          visibility:visible;
+          
           display:block;
         }
-        
+        .link-oculto{
+          display: block;
+        }
         .only-desktop{
-          visibility:hidden;
+          
           display:none;
         }
       }
@@ -134,6 +139,7 @@
       
       .header-overlay{
         width:100%;
+        display: none;
         height:230px;
         padding-bottom:10px;
         background-color: black;

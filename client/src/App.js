@@ -13,7 +13,7 @@ import Carrito from './components/Carrito';
 import ForLogin from './components/ForLogin';
 import PassReset from './components/PassReset';
 import Juego from './components/juego/interface';
-import userDetail from './components/userDetail';
+import userDetail from './components/profile/userDetail';
 import Chat from './components/Chat';
 import MyPage from './firebase/storage/MyPage';
 import MyAuthPage from './firebase/auth/MyAuthPage';
@@ -21,7 +21,7 @@ import Intermedio from './components/juego/intermedio';
 // import Chatear from './components/chat/chatear';
 import ChatApp from './components/chat/index';
 import NavCheto from './components/NavCheto';
-
+import Compra from './components/Compra';
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
 import { getUserLogin } from './redux/actions';
@@ -60,8 +60,9 @@ function App() {
           <Route  exact path="/TableroNFT" component={tableroNFT} />
           <Route  exact path="/MisNFT" component={misNFT} />
           <Route  exact path="/Matchmaking" component={Intermedio} />
+          <Route  exact path="/Compra" component={Compra} />
           <Route  exact path="/Chatear" component={ChatApp} />
-          {/* <Route  exact path="/Chatear" component={ChatApp} /> */}
+
         </div>
       );
     }

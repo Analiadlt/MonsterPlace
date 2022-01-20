@@ -61,6 +61,12 @@ export default function Chat() {
     const[partida,setPartida]= useState(false)
 
     const[val,setVal]= useState(false)
+    const[vida1,setvida1]= useState(100)
+    const[vida2,setvida2]= useState(100)
+
+    
+
+
 
     
 
@@ -72,6 +78,18 @@ export default function Chat() {
 
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
+            //restar vida--------
+            
+            if(resultado.restarvida1){
+                setvida1(vida1-resultado.restarvida1)
+            }
+            if(resultado.restarvida2){
+                setvida2(vida2-resultado.restarvida2)
+            }
+            
+
+            //---------
+
             let ban = false
             const  copia = mensajes
             if (resultado.mensaje.name === copia[0].mensaje.name) {
@@ -271,10 +289,30 @@ export default function Chat() {
 
 return (
     <div>
+
+        <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
+            <h2>Jugador 1</h2>
+            <h2>Jugador 2</h2>
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+            <h2 style={{position:'relative',top:'-50px',left:'50px'}}>{infoRoom.jugador1}</h2>
+            <h2 style={{position:'relative',top:'-50px', right:'50px'}}>{infoRoom.jugador2}</h2>
+
+        </div>
+        
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+        <progress className="progress" max="100" value={vida1} style={{position:'relative',top:'-80px',left:'50px',width:'100px'}} />
+        <progress className="progress" max="100" value={vida2} style={{position:'relative',top:'-80px', right:'50px', width:'100px'}} />
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+        <span style={{position:'relative',top:'-100px',left:'150px',width:'100px'}} >{vida1}</span>
+        <span style={{position:'relative',top:'-100px', right:'80px', width:'100px'}}>{vida2}</span>
+        </div>
+
         {partida ? <h1>Partida Finalizada</h1> : 
         <div className='caja-chat'>
 
-        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
 
             <div className='chat'>
                 {resultadoo.length ? <h1>{'Partida Ganada por ' + resultadoo[0].mensaje.jugador}</h1> : null}

@@ -4,7 +4,8 @@ import { loginUser } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Nav from './Nav';
+import NavCheto from './NavCheto';
+
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -149,7 +150,7 @@ const ForLogin = () => {
 
 	return (
 		<div >
-			<Nav />
+			<NavCheto />
 			<div className='contenedor-cheto container-log'>
 				<div className='login-box'>
 					<form className="formulario" onSubmit={formik.handleSubmit}>
