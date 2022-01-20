@@ -2,23 +2,45 @@ import React, { Fragment } from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { sellOrder, getCard} from '../../redux/actions'
+import Card from '../Card'
+import NavCheto from '../NavCheto';
 
 export default function Comprar() {
   const dispatch = useDispatch()
+  const email = useSelector(state => state.userLogueado.email)
+  const cards = useSelector(state => state.carrito)
+  const dragones = useSelector(state => state.carrito)
+let allCards = []
+
+  function cargarCards(cards) {
+      let array = []
+    for (let i = 0; i < cards.length; i++) {
+        array.push(cards[i].id)
+
+    }
+    return array
+    
+  }
+
+
+  console.log("Todas las cartas desde comprar: ", allCards)
+
+
+
 //   const cards = useSelector(state => state.cards)
   
 
 
   const [state, setState] = useState({
-    email: '',
-    allCards: [],
+    email: email,
+    allCards: cargarCards(cards),
  })
 
- const onChange = (e) => {
-    let field_name = e.target.name;
-    let field_value = e.target.value;
-    setState(prev => ({...prev, [field_name]: field_value}) )
-}
+//  const onChange = (e) => {
+//     let field_name = e.target.name;
+//     let field_value = e.target.value;
+//     setState(prev => ({...prev, [field_name]: field_value}) )
+// }
 
 const onSubmit = (e) => {
     e.preventDefault()
@@ -31,36 +53,44 @@ const onSubmit = (e) => {
     }
 }
 return (
-    <div className="col-md-6 m-auto">
-        <div className="card card-body mt-5">
-            <h2 className="text-center">Prueba</h2>
-            <form encType="multipart/form-data" onSubmit={onSubmit}>
-                <div className="form-group">
-                    <label>User Email</label>
-                    <input
-                        type="text"
+    <div>
+        <NavCheto />
+        <div>
+            <h2 >Prueba</h2>
+                <form onSubmit={onSubmit}>
+                    <div className="usuario-box">
+                        <h3> Email: </h3>
+                        <input
+                        
                         className="form-control"
                         name="email"
-                        value={state.email = "zaraza@ameil.com"}
-                        onChange={onChange}
-                        required/>
-                </div>
-                <div className="form-group">
-                        <label> Id Card</label>
+                        value={state.email}
+                        readOnly/>
+                    </div>
+                    <div className="usuario-box">
+                        <h3> Cards ID: </h3>
                         <input
-                            type="allCards"
-                            className="form-control"
-                            name="allCards"
-                            value={state.allCards = ["c961409a-8b0f-4fe1-924b-13d26a704007", "e0a0fe29-89b2-4ea9-8d8f-af6a27845a39"]}
-                            onChange={onChange}
-                            required/>
+                        
+                        className="form-control"
+                        name="email"
+                        value={state.allCards}
+                        readOnly/>
                     </div>
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-primary">Register</button>
+                    <div className="grid-tienda">
+                                {
+                                    dragones.map(dragon =>
+                                        <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                    )
+                                }
+                            </div>
+                
+                    <div className='botonn'>
+                        <button type="submit" className="btn btn-primary">Ir a Pagar</button>
                     </div>
+            
                 </form>
-            </div>
         </div>
+    </div>
     );
 
 

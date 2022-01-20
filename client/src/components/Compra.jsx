@@ -49,7 +49,10 @@ export default function Compra() {
                         <h3>$  {sumarCarrito(carrito)}</h3>
                     </div>
                     <div>
+                        <Link to="/Comprar">
                         <button>Realizar Compra</button>
+                        </Link>
+
                     </div>
                 </div>
             </div>
