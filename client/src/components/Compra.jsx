@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
-import { getCard } from "../redux/actions";
+import { getCard, sellOrder } from "../redux/actions";
 import { Link } from "react-router-dom";
 import NavCheto from './NavCheto';
 
@@ -12,6 +12,9 @@ export default function Compra() {
     const dragones = useSelector(state => state.carrito)
     const dispatch = useDispatch()
     const carrito = useSelector(state => state.carrito)
+    const email = useSelector(state => state.userLogueado.email)
+    const cards = useSelector(state => state.carrito)
+    let allCards = []
 
     function sumarCarrito(carrito) {
         let total = 0;
@@ -21,6 +24,34 @@ export default function Compra() {
         return Math.round(total);
     }
 
+    function cargarCards(cards) {
+        let array = []
+      for (let i = 0; i < cards.length; i++) {
+          array.push(cards[i].id)
+  
+      }
+      return array
+      
+    }
+
+    const [state, setState] = useState({
+        email: email,
+        allCards: cargarCards(cards),
+     })
+
+     const onSubmit = (e) => {
+        e.preventDefault()
+        if (state.email && state.allCards.length > 0) {
+            console.log("dede form: ", state.email, state.allCards)
+            dispatch(sellOrder(state))
+            alert(`${email} Orden enviada`)
+        }
+        else {
+            console.log('ERROR')
+        }
+    }
+
+    console.log("Todas las cartas desde compra: ", state.allCards)
 
     return (
         <div>
@@ -49,9 +80,8 @@ export default function Compra() {
                         <h3>$  {sumarCarrito(carrito)}</h3>
                     </div>
                     <div>
-                        <Link to="/Comprar">
-                        <button>Realizar Compra</button>
-                        </Link>
+
+                        <button onClick={onSubmit}>Realizar Compra</button>
 
                     </div>
                 </div>
