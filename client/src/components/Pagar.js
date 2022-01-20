@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react'
 import BotonPagar from  './BotonPagar.jsx'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import dotenv from "dotenv";
+dotenv.config();
 
-function Pagar(carrito) {
+
+export function Pagar() {
   const [datos, setDatos] = useState("")
-  //const {carrito}=useParams();
-  console.log('PROBANDO............', {carrito})
+
+//1° debería invocarse a axios.post(`${process.env.REACT_APP_API}/order`+{email, cardIds})
+//2° Con el orderId creado en el post, invocar al axios.get(`${process.env.REACT_APP_API}/mercadopago/${orderId}`)
 
   useEffect(()=>{
     axios
-    .get("http://localhost:3001/mercadopago", carrito)
+    .get(`${process.env.REACT_APP_API}/mercadopago/`+11) //el 11, en realidad debería ser el orderId creado en el PostOrder
     .then((data)=>{
       setDatos(data.data)
       console.info('Contenido de data:', data)
@@ -18,17 +22,12 @@ function Pagar(carrito) {
     .catch(err => console.error(err)) 
   },[])
 
-  //Mercado Pago requiere que se le envíen los datos como Array de objetos
-  // const carrito = [
-  //   {title: "plover", quantity: 1, price: 100},
-  //   {title: "warlockk", quantity: 1, price: 500}
-  // ]
-  
+
   return (
     <div>
       { !datos
         ? <p>Aguarde un momento....</p> 
-        : <BotonPagar carrito={carrito} data={datos}/>
+        : <BotonPagar data={datos}/>
       }
     </div>
   );
