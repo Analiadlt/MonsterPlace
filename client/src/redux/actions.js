@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const CAMBIAR_FONDO = "CAMBIAR_FONDO"
 export const ADD_USER = "ADD_USER"
 export const GET_USER = "GET_USER"
@@ -13,6 +14,8 @@ export const GET_CARDS = "GET_CARDS"
 export const GET_BY_ID = "GET_BY_ID"
 export const USER_LOG = "USER_LOG"
 export const PARTIDA = "PARTIDA"
+export const SELL_ORDER = "SELL_ORDER"
+export const GET_ORDERS = "GET_ORDERS"
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -156,5 +159,37 @@ export function empezarPartida(bolea){
   return{ type: PARTIDA, payload:bolea } 
 
 }
+
+export function sellOrder(order){
+  console.log('orden de compra', order)
+  return async (dispatch) => {
+    try {
+      var json = await axios.post(`/order`, order);
+      console.log("Orden ID desde Actions: ", json.data.id, "User ID: ", json.data.userId);
+      return dispatch({
+        type: SELL_ORDER,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getOrder(oId){
+  return async (dispatch) => {
+    try {
+      var json = await axios.get(`/order/${oId}`);
+      return dispatch({
+        type: GET_ORDERS, 
+        payload: json,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+}
+
 
 
