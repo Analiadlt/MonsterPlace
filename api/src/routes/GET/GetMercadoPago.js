@@ -5,7 +5,9 @@ const router = require('express').Router();
 const mercadopago = require ('mercadopago');
 //const Card = require("../../models/Card");
 
-const { ACCESS_TOKEN } = process.env;
+const { ACCESS_TOKEN , REACT_APP_CLIENT} = process.env;
+// REACT_APP_CLIENT = "http://localhost:3000"
+// REACT_APP_API = "http://localhost:3001"
 
 //Agrega credenciales
 mercadopago.configure({
@@ -55,9 +57,9 @@ router.get("/:id", async (req, res, next) => {
       installments: 24  //Cantidad máximo de cuotas
     },
     back_urls: {
-      success: 'http://localhost:3001/mercadopago/pagos',
-      failure: 'http://localhost:3001/mercadopago/pagos',
-      pending: 'http://localhost:3001/mercadopago/pagos',
+      success: '/mercadopago/pagos',
+      failure: '/mercadopago/pagos',
+      pending: '/mercadopago/pagos',
     },
   };
 
@@ -101,16 +103,16 @@ router.get("/pagos", (req, res)=>{
     .then((_) => {
       console.info('redirect success')
       
-      return res.redirect("http://localhost:3000")
+      return res.redirect(REACT_APP_CLIENT)
     })
     .catch((err) =>{
       console.error('error al salvar', err)
-      return res.redirect(`http://localhost:3000/?error=${err}&where=al+salvar`)
+      return res.redirect(`${REACT_APP_CLIENT}/?error=${err}&where=al+salvar`)
     })
   })
   .catch(err =>{
     console.error('error al buscar', err)
-    return res.redirect(`http://localhost:3000/?error=${err}&where=al+buscar`)
+    return res.redirect(`${REACT_APP_CLIENT}/?error=${err}&where=al+buscar`)
   })
 })
 
