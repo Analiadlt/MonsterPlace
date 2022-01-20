@@ -36,11 +36,7 @@ let allCards = []
     allCards: cargarCards(cards),
  })
 
-//  const onChange = (e) => {
-//     let field_name = e.target.name;
-//     let field_value = e.target.value;
-//     setState(prev => ({...prev, [field_name]: field_value}) )
-// }
+
 
 const onSubmit = (e) => {
     e.preventDefault()
@@ -76,6 +72,7 @@ return (
                         value={state.allCards}
                         readOnly/>
                     </div>
+  
                     <div className="grid-tienda">
                                 {
                                     dragones.map(dragon =>
