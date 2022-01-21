@@ -89,13 +89,14 @@ const Formulario = () => {
 			  const user = await app
 				.auth()
 				.createUserWithEmailAndPassword(email, password)
-				if (user){
+				verificar();
+/* 				if (user){
 				  try {
 					verificar();
 				  } catch (error) {
 					alert(error.message)
 				  }
-				}
+				} */
 			  alert(`Welcome ${email.value}!`);
 			}
 	  
