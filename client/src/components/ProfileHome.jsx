@@ -14,10 +14,14 @@ import Logout from '@mui/icons-material/Logout';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { loginReset } from '../redux/actions';
+import { loginReset, restarSaldo } from '../redux/actions';
 
 import { app } from "../firebase/firebase"
 import socket from "./Socket";
+import Swal from 'sweetalert2';
+import huevoRojo from '../img/huevoRojo.png'
+
+
 
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -51,9 +55,24 @@ export default function ProfileHome() {
     };
     function handleSubmit(e) {
         e.preventDefault();
+        if(userLogeado.saldo_cryps > 5){
+
+        // dispatch(restarSaldo())
         socket.emit('buscar-rooms', userLogeado.nickName);
         history.push('/Matchmaking')
-
+        }
+        else{
+            Swal.fire({
+                title: '<strong>Saldo insuficiente para jugar</strong>',
+               imageUrl: `${huevoRojo}`,
+               width: 500,
+               imageWidth: 300,
+               imageHeight: 400,
+               
+              
+                 
+               })
+        }
     }
 
     let cambiarLogeo = async () => {
@@ -86,7 +105,7 @@ return (
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 60, height: 60, fontSize: "2.5rem", backgroundColor: '#f8bd279d', ":hover": 'rgba(0, 0, 0)' }}>{userLogeado !== [] ? userLogeado.nickName?.charAt(0) : 'I'}</Avatar>
+                        <Avatar sx={{ width: 60, height: 60, fontSize: "2.5rem", backgroundColor: '#FF6363', ":hover": 'rgba(0, 0, 0)' }}>{userLogeado !== [] ? userLogeado.nickName?.charAt(0) : 'I'}</Avatar>
 
                     </IconButton>
 

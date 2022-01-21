@@ -12,15 +12,15 @@ export function Pagar() {
 //1° debería invocarse a axios.post(`${process.env.REACT_APP_API}/order`+{email, cardIds})
 //2° Con el orderId creado en el post, invocar al axios.get(`${process.env.REACT_APP_API}/mercadopago/${orderId}`)
 
-  useEffect(()=>{
-    axios
-    .get(`${process.env.REACT_APP_API}/mercadopago/`+11) //el 11, en realidad debería ser el orderId creado en el PostOrder
-    .then((data)=>{
-      setDatos(data.data)
-      console.info('Contenido de data:', data)
-    })
-    .catch(err => console.error(err)) 
-  },[])
+  // useEffect(()=>{
+  //   axios
+  //   .get(`${process.env.REACT_APP_API}/mercadopago/`+11) //el 11, en realidad debería ser el orderId creado en el PostOrder
+  //   .then((data)=>{
+  //     setDatos(data.data)
+  //     console.info('Contenido de data:', data)
+  //   })
+  //   .catch(err => console.error(err)) 
+  // },[])
 
 
   return (

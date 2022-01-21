@@ -1,26 +1,43 @@
-RUTAS
+RUTAS GET
 
-RutaGetUser : http://localhost:3001/users Y FILTRADO : http://localhost:3001/users/:id
+GetCards : http://localhost:3001/cards/get
 
-RutaGetCards : http://localhost:3001/cards/get
+GetCardsDestacadas : http://localhost:3001/cards/destacadas
 
-RutaGetCardsDestacadas : http://localhost:3001/cards/destacadas
+GetMercadoPago: http://localhost:3001/mercadopado/:id y PAGOS http://localhost:3001/mercadopado/pagos y http://localhost:3001/mercadopado/pagos/:id
 
-RutaPostCards : http://localhost:3001/cards
+GetOrder: http://localhost:3001/order/:id
 
-RutaPostUser : http://localhost:3001/users
+GetUser-Card: http://localhost:3001/CardUser/userCard/:id
 
-RutaPostLogin : http://localhost:3001/login/loginUser
+GetUser : http://localhost:3001/users Y FILTRADO : http://localhost:3001/users/:id
 
-RutaPutUserInformation : http://localhost:3001/user/putUser
+LoginInformation: http://localhost:3001/loginInfo/loginInformation
 
-RutaPutPassword : http://localhost:3001/users/putUserPassword
+RUTAS POST
 
-RutaDeleteUser : http://localhost:3001/delete/user/:id
+LoginInformation: http://localhost:3001/loginInformation
 
-RutaRecoverUser : http://localhost:3001/recover
+PostCards : http://localhost:3001/cards
 
-RutaAdquirirCard : http://localhost:3001/carduser/:id/buy
+PostLogicGame : http://localhost:3001/game/play
 
-RutaLogicGame : http://localhost:3001/game/play
+PostLogin : http://localhost:3001/login/loginUser
 
+PostOrder: http://localhost:3001/order
+
+PostRecoverUser : http://localhost:3001/recover
+
+PostUser : http://localhost:3001/users
+
+PostUserCard : http://localhost:3001/usercard/buy
+
+RUTAS PUT
+
+PutUserInformation : http://localhost:3001/user/putUser
+
+PutUserPassword : http://localhost:3001/users/putUserPassword
+
+RUTAS DELETE
+
+DeleteUser : http://localhost:3001/delete/user/:id

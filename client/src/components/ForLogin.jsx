@@ -76,6 +76,16 @@ const ForLogin = () => {
 					.signInWithEmailAndPassword(values.email, values.password);
 				  if(user.user.emailVerified === false){
 					cambiarLogeo()
+					Swal.fire({
+						title: '<strong>Debes validar el email</strong>',
+					   imageUrl: `${huevoRojo}`,
+					   width: 500,
+					   imageWidth: 300,
+					   imageHeight: 400,
+					   
+					  
+						 
+					   })
 				  }else{
 				  	dispatch(loginUser(values));
 					setLogeado(true)
