@@ -22,6 +22,7 @@ export const CARGAR_SALDO = "CARGAR_SALDO"
 
 
 
+
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -216,6 +217,7 @@ export function getPagar(oId){
       console.log(error);
     }
   };
+}
 
 export function restarSaldo(){
   
@@ -229,6 +231,4 @@ export function cargarSaldo(){
 
 
 }
-
-
 
