@@ -8,7 +8,7 @@ GetMercadoPago: http://localhost:3001/mercadopado/:id y PAGOS http://localhost:3
 
 GetOrder: http://localhost:3001/order/:id
 
-GetUser-Card: http://localhost:3001/CardUser/usercard/:id
+GetUser-Card: http://localhost:3001/CardUser/userCard/:id
 
 GetUser : http://localhost:3001/users Y FILTRADO : http://localhost:3001/users/:id
 
