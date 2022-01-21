@@ -30,6 +30,7 @@ export default function Compra() {
         let array = []
       for (let i = 0; i < cards.length; i++) {
           array.push(cards[i].id)
+          
   
       }
       return array
@@ -56,8 +57,7 @@ export default function Compra() {
         e.preventDefault()
         if (state.email && state.allCards.length > 0) {
             console.log("Email y Cards desde Compras: ", state.email, state.allCards)
-            dispatch(sellOrder(state))
-            
+            dispatch(sellOrder(state)) 
             alert(`${email} Orden enviada`)
             history.push("/DetalleCompra")
 

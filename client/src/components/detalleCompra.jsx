@@ -23,6 +23,7 @@ export default function DetalleCompra() {
         }
         return Math.round(total);
     }
+// Generar ID de mercadopago
 
     useEffect(() => {
         
@@ -30,16 +31,17 @@ export default function DetalleCompra() {
 
         dispatch(getPagar(orderId));
         
+        
       }
-      else {
-        alert("No hay orden")
-      }
-    }, [dispatch, orderId]);
+    //   else {
+    //     alert("No hay orden")
+    //   }
+    }, [orderId]);
     
      
 
-    const datos = useSelector((state) => state.getpago)
-   console.log("ID para Mercadopago:", datos);
+    const mId = useSelector((state) => state.getpago)
+   console.log("ID para Mercadopago:", mId);
     
 
     return (
@@ -59,9 +61,9 @@ export default function DetalleCompra() {
                     <h3>$  {sumarCarrito(carrito)}</h3>
                 </div>
                 <div>
-                { !datos
+                { !mId.id
         ? <p>Aguarde un momento....</p> 
-        : <BotonPagar data={datos}/>
+        : <BotonPagar data={mId}/>
       }
                 </div>
 
