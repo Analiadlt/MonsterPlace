@@ -10,7 +10,7 @@ export default function BotonPagar({ data }){
   console.log("ID de MercadoPago: ", attr_data_preference.value)
 
   //Agrega atributos al elemento script
-  script.src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"; 
+  script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"; 
   // script.src="https://sdk.mercadopago.com/js/v2";  
   script.setAttributeNode(attr_data_preference)  
   
