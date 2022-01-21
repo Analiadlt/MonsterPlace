@@ -16,6 +16,7 @@ export const USER_LOG = "USER_LOG"
 export const PARTIDA = "PARTIDA"
 export const SELL_ORDER = "SELL_ORDER"
 export const GET_ORDERS = "GET_ORDERS"
+export const GET_PAGAR = "GET_PAGAR"
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -176,10 +177,12 @@ export function sellOrder(order){
   };
 }
 
-export function getOrder(oId){
+export function getOrder(id){
+  console.log('id de orden desde GET Actions', id)
   return async (dispatch) => {
     try {
-      var json = await axios.get(`/order/${oId}`);
+      var json = await axios.get(`/detalle/${id}`);
+      console.log("Orden de Compra GET ID desde Actions: ", json.data);
       return dispatch({
         type: GET_ORDERS, 
         payload: json,
@@ -189,6 +192,22 @@ export function getOrder(oId){
     }
 
   }
+}
+
+export function getPagar(oId){
+  console.log('Id orden GET_PAGAR desde actions', oId)
+  return async (dispatch) => {
+    try {
+      var json = await axios.get(`/mercadopago/${oId}`);
+      console.log("Datos GET_PAGAR desde ACTIONS: ", json.data);
+      return dispatch({
+        type: GET_PAGAR,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 

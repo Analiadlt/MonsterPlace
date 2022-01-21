@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { sellOrder, getCard} from '../../redux/actions'
+import { sellOrder, pagar} from '../../redux/actions'
 import Card from '../Card'
 import NavCheto from '../NavCheto';
 

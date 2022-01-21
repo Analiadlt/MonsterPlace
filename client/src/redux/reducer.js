@@ -1,7 +1,7 @@
 
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, 
-    RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS} from './actions'
+    RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS, GET_PAGAR} from './actions'
 
 
 
@@ -46,10 +46,14 @@ const initialState = {
     },
 
     //Carga ordenes de compra
-    orden: [],
+    order: [],
     //trae todas las ordenes de compra
-    ordenes: [],
-    
+    orders: [],
+
+    //pago
+    getpago: [],
+
+
 
 
 }
@@ -153,15 +157,21 @@ export default function Reducer(state=initialState, action){
             console.log("Orden desde el Reducer: ", action.payload)
                 return {
                     ...state,
-                    user: action.payload 
+                    order: action.payload 
           }
           case GET_ORDERS:
             console.log("Ordenes desde el reducer", action.payload)
                 return {
                 ...state, 
-                userDetail: action.payload,
+                orders: action.payload,
             
             };
+            case GET_PAGAR:
+                console.log("Pagar desde el Reducer: ", action.payload)
+                return {
+                    ...state,
+                    getpago: action.payload
+                }
           default:
             return state;
 
