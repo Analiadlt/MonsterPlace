@@ -32,15 +32,28 @@ import GanadorJuego from './components/juego/GanadorJuego';
 function App() {
   const logueado = useSelector(state => state.users)
   const dispatch = useDispatch()
+  let cambiarLogeo = async () => {
 
+    try {
+        if (app) {
+
+            await app.auth().signOut();
+          
+            //   alert("Successfully signed out!");
+        }
+    } catch (error) {
+        console.log("error", error);
+    }
+    };
     useEffect(() => {
 
       if (app) {
         app.auth().onAuthStateChanged((authUser) => {
 
-          if (authUser && logueado.length >5) {
+          if (authUser && logueado.length >5 && authUser.emailVerified === true) {
             dispatch(getUserLogin(authUser.email))
-                       }})}},[dispatch, logueado])
+          }
+          })}},[dispatch, logueado])
                     
 
 
