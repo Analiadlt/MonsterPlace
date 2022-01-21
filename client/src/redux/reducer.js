@@ -1,7 +1,7 @@
 
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID, 
-    RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS} from './actions'
+    RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,RESTAR_SALDO,CARGAR_SALDO} from './actions'
 
 
 
@@ -85,6 +85,18 @@ export default function Reducer(state=initialState, action){
             return {
                 ...state,
                  userLogueado: action.payload 
+          }
+          case RESTAR_SALDO: 
+          
+            return {
+                ...state,
+                 userLogueado:{...state.userLogueado,saldo_cryps: state.userLogueado.saldo_cryps - action.payload }  
+          }
+          case CARGAR_SALDO: 
+          
+            return {
+                ...state,
+                 userLogueado:{...state.userLogueado,saldo_cryps: state.userLogueado.saldo_cryps + action.payload }  
           }
           case RESET_LOGIN: 
           

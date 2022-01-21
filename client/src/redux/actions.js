@@ -16,6 +16,10 @@ export const USER_LOG = "USER_LOG"
 export const PARTIDA = "PARTIDA"
 export const SELL_ORDER = "SELL_ORDER"
 export const GET_ORDERS = "GET_ORDERS"
+export const RESTAR_SALDO = "RESTAR_SALDO"
+export const CARGAR_SALDO = "CARGAR_SALDO"
+
+
 export function cambiarFondo() {
     return{ type: CAMBIAR_FONDO, payload: 'MODO'} 
 }
@@ -52,7 +56,10 @@ export function loginUser(payload) {
   return async (dispatch) => {
     try {
       var json = await axios.post(`/login/loginUser`, payload);
+      
+      json.data.saldo_cryps = 12;
       console.log("Datos para posteo", json.data)
+
         return dispatch({
           type: LOGIN_USER, 
           payload: json.data,
@@ -189,6 +196,18 @@ export function getOrder(oId){
     }
 
   }
+}
+
+export function restarSaldo(){
+  
+  return{ type: RESTAR_SALDO, payload:6 } 
+
+}
+
+export function cargarSaldo(){
+  
+  return{ type: CARGAR_SALDO, payload:10 } 
+
 }
 
 
