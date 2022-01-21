@@ -52,7 +52,7 @@ export default function Detalle() {
 			
 			
 			<div className="avatar">
-				<Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>{detail !==[] ? detail.nickName?.charAt(0) :'I'}</Avatar>
+				<Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#FF6363',":hover":'rgba(0, 0, 0)' }}>{detail !==[] ? detail.nickName?.charAt(0) :'I'}</Avatar>
 				<p className='log-usuario'>{detail.nickName? detail.nickName:'Invitado'}</p>
 			</div>
 			
@@ -64,7 +64,6 @@ export default function Detalle() {
 						<li onClick={()=>{setNavegacion('profile')}} className={`${navegacion === 'profile'? 'activo-profile' : null}`} ><a href="#"><i class="fas fa-user"></i>Profile</a></li>
 						<li onClick={()=>{setNavegacion('inventario')}} className={`${navegacion === 'inventario'? 'activo-profile' : null}`}><a href="#"><i class="fas fa-boxes"></i>Inventario</a></li>
 						<li onClick={()=>{setNavegacion('misNft')}}className={`${navegacion === 'misNft'? 'activo-profile' : null}`}><a href="#"><i class="fas fa-hat-wizard"></i>Mis NFT</a></li>
-						<li onClick={()=>{setNavegacion('mazo')}} className={`${navegacion === 'mazo'? 'activo-profile' : null}`}><a href="#"><i class="fas fa-gamepad"></i>Mazo</a></li>
 						<li onClick={()=>{setNavegacion('estadisticas')}} className={`${navegacion === 'estadisticas'? 'activo-profile' : null}`}><a href="#"><i class="far fa-chart-bar"></i>Estadisticas</a></li>
 
 					</ul>
@@ -76,7 +75,6 @@ export default function Detalle() {
 						navegacion === 'profile' ? <h1>pr</h1> : 
 						navegacion === 'inventario' ? <Inventario/> : 
 						navegacion === 'misNft' ? <h1>nft</h1> : 
-						navegacion === 'mazo' ? <Mazo/> : 
 						navegacion === 'estadisticas' ? <h1>Hola</h1>: null
 						
 					}

@@ -105,7 +105,7 @@ return (
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 60, height: 60, fontSize: "2.5rem", backgroundColor: '#f8bd279d', ":hover": 'rgba(0, 0, 0)' }}>{userLogeado !== [] ? userLogeado.nickName?.charAt(0) : 'I'}</Avatar>
+                        <Avatar sx={{ width: 60, height: 60, fontSize: "2.5rem", backgroundColor: '#FF6363', ":hover": 'rgba(0, 0, 0)' }}>{userLogeado !== [] ? userLogeado.nickName?.charAt(0) : 'I'}</Avatar>
 
                     </IconButton>
 
