@@ -5,7 +5,10 @@ import socket from "../Socket";
 import { Link, useHistory } from 'react-router-dom';
 import { empezarPartida } from "../../redux/actions";
 import Spinner from "./spinner";
+import { restarSaldo } from "../../redux/actions";
+
 export default function Intermedio(){
+    const userLogeado = useSelector(state => state.userLogueado)
     
     const history = useHistory()
     const partida = useSelector(state=>state.partida)
@@ -28,6 +31,12 @@ export default function Intermedio(){
             localStorage.setItem("mazo", JSON.stringify(mazo));
             
         })
+        socket.on('room', (room,jugador) =>{
+            localStorage.setItem('idroom', room);
+            localStorage.setItem('numero_jugador',jugador);
+
+            
+        })
         
     })
     function cancelar(){
@@ -35,6 +44,7 @@ export default function Intermedio(){
         history.push('/')
     }
     function entrar(){
+        dispatch(restarSaldo())
         history.push('/chat')
         socket.emit('usuario-dentro', localStorage.getItem('idroom'))
     }
@@ -53,6 +63,7 @@ export default function Intermedio(){
             :
             <div className="contenedor-cheto">
                 <h1>Detalles de la Partida</h1>
+                <h2>Saldo{userLogeado?.saldo_cryps}</h2>
                 <div className="grid-intermedio">
                     <div className="jugador">
                         <h1>Jugador 1</h1>

@@ -141,6 +141,7 @@ socket.onAny((event, ...args) => {
             room[roomincompleto].jugador2=nombre;
             room[roomincompleto].mazo2=mazo2;
             console.log('estas son las room', room);
+            socket.emit('room', roomincompleto,'jugador2')
             io.sockets.in(room[roomincompleto].name).emit('inicio-partida', roomincompleto , (room[roomincompleto]) );
             socket.emit('turno', true)
             socket.emit('mazo-juego', mazo2)
@@ -159,6 +160,7 @@ socket.onAny((event, ...args) => {
           socket.join(room[room.length-1].name)
           roomincompleto = room.length-1
           socket.emit('mazo-juego', mazo1)
+          socket.emit('room', roomincompleto,'jugador1')
 
         }
       });

@@ -90,14 +90,8 @@ const Formulario = () => {
 				.auth()
 				.createUserWithEmailAndPassword(email, password)
 				verificar();
-/* 				if (user){
-				  try {
-					verificar();
-				  } catch (error) {
-					alert(error.message)
-				  }
-				} */
-			  alert(`Welcome ${email.value}!`);
+
+			  
 			}
 	  
 		  } catch (error) {
@@ -153,12 +147,13 @@ const Formulario = () => {
 			
 			
 			Swal.fire({
-				imageUrl: `${huevoVerde}`,
-				title: 'Usuario creado con exito',
-				width: 500,
+				// imageUrl: `${huevoVerde}`,
+				imageUrl: 'http://pngimg.com/uploads/envelope/envelope_PNG18384.png',
+				title: 'Te hemos enviado un email de validacion',
+				width: 400,
 				confirmButtonText: 'Continuar' ,
 				imageWidth: 300,
-				imageHeight: 400,
+				imageHeight: 250,
 				timer: 3000,
 				timerProgressBar: true,
 				didOpen: () => {
