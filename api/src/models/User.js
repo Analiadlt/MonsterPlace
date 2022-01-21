@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
     rol: { type: DataTypes.INTEGER, default: 0 }, // vale 1-usuario logueado y confirmado - 2- administrador
     win_games: { type: DataTypes.INTEGER, default: 0 }, //cant partidas ganadas
     lost_games: { type: DataTypes.INTEGER, default: 0 }, //cant partidas perdidas
+    saldo_cryps: { type: DataTypes.INTEGER } //cantidad de Cryps disponibles
   },
  );
 };

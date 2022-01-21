@@ -13,7 +13,7 @@ import huevoRojo from '../img/huevoRojo.png'
 import huevoBlanco from '../img/huevoBlanco.png'
 import {app} from "../firebase/firebase";
 
-
+import { loginReset } from '../redux/actions';
 
 const validate = values => {
 
@@ -47,6 +47,19 @@ const ForLogin = () => {
 	const [logeado, setLogeado]=useState(false)
 	const [ojo, setojo] = useState(false);
 	const switchShown = () => setojo(!ojo)
+	let cambiarLogeo = async () => {
+
+        try {
+            if (app) {
+
+                await app.auth().signOut();
+				dispatch(loginReset())
+                //   alert("Successfully signed out!");
+            }
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
 
 	const formik = useFormik({
 		initialValues: {
@@ -61,10 +74,13 @@ const ForLogin = () => {
 				  const user = await app
 					.auth()
 					.signInWithEmailAndPassword(values.email, values.password);
-				  console.log("user", user);
-				  dispatch(loginUser(values));
+				  if(user.user.emailVerified === false){
+					cambiarLogeo()
+				  }else{
+				  	dispatch(loginUser(values));
+					setLogeado(true)
+				  }
 				//   alert("Bienvenido!");
-				  setLogeado(true)
 				}
 			  } catch (error) {
 			   console.log("error");
