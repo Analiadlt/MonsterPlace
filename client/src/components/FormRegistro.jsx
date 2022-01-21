@@ -85,15 +85,34 @@ const Formulario = () => {
 	const signUp = async (email,password) => {
 	
 		try {
-		  if (app) {
-			const user = await app
-			  .auth()
-			  .createUserWithEmailAndPassword(email, password);
+			if (app) {
+			  const user = await app
+				.auth()
+				.createUserWithEmailAndPassword(email, password)
+				if (user){
+				  try {
+					verificar();
+				  } catch (error) {
+					alert(error.message)
+				  }
+				}
+			  alert(`Welcome ${email.value}!`);
+			}
+	  
+		  } catch (error) {
+			console.log("error", error);
+			alert(error.message);
 		  }
-		} catch (error) {
-		  alert(error.message);
-		}
+		};
+		function verificar() {
+		  var user = app.auth().currentUser;
+		  user.sendEmailVerification().then(function () {
+			  // Email sent.
+		  }).catch(function (error) {
+			  // An error happened.
+		  });
 	};
+
 
 	
 	const switchShown = () => setojo(!ojo)

@@ -5,6 +5,7 @@ import NavCheto from '../NavCheto';
 import Avatar from '@mui/material/Avatar';
 import Inventario from "./Inventario";
 import Mazo from "./Mazo";
+/* import Estadisticas from "./estadisticas/Estadisticas"; */
 // import { 
 //     getById,
 //  } from "../redux/actions.js";
@@ -76,7 +77,7 @@ export default function Detalle() {
 						navegacion === 'inventario' ? <Inventario/> : 
 						navegacion === 'misNft' ? <h1>nft</h1> : 
 						navegacion === 'mazo' ? <Mazo/> : 
-						navegacion === 'estadisticas' ? <h1>esta</h1> : null
+						navegacion === 'estadisticas' ? <h1>Hola</h1>: null
 						
 					}
 					
