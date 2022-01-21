@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
-import { getCard, sellOrder } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { getOrder, sellOrder, pagar } from "../redux/actions";
+import { Link, useHistory } from "react-router-dom";
 import NavCheto from './NavCheto';
 
 
 export default function Compra() {
+    const history = useHistory();
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.carrito)
     const dispatch = useDispatch()
     const carrito = useSelector(state => state.carrito)
     const email = useSelector(state => state.userLogueado.email)
     const cards = useSelector(state => state.carrito)
+    // const id = useSelector(state => state.carrito.id)
     let allCards = []
 
     function sumarCarrito(carrito) {
@@ -39,12 +41,26 @@ export default function Compra() {
         allCards: cargarCards(cards),
      })
 
+    //  useEffect(() => {
+    //     dispatch(sellOrder(state))
+    // }, [dispatch, state])
+
+    // const orderDetail = useSelector((state) => state.order.id);
+
+    // console.log("Odren de Compra ID ", orderDetail)
+
+
+
+
      const onSubmit = (e) => {
         e.preventDefault()
         if (state.email && state.allCards.length > 0) {
-            console.log("dede form: ", state.email, state.allCards)
+            console.log("Email y Cards desde Compras: ", state.email, state.allCards)
             dispatch(sellOrder(state))
+            
             alert(`${email} Orden enviada`)
+            history.push("/DetalleCompra")
+
         }
         else {
             console.log('ERROR')

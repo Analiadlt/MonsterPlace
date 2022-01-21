@@ -19,13 +19,42 @@
     }
     .activo{
         color: v.$color-titulo;
-        text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+        text-shadow: 5px 15px 50px  v.$color-tercero;
     }
 
 
 }
 
+.navContainerNFT{
 
+  
+  .titulo{
+   color: v.$color-titulo;
+   font-size: 2.5rem;
+   
+   }
+
+   span{
+    
+       font-size: 2.5rem;
+       color: v.$color-tercero;
+       margin-right: 15rem;
+       &:hover{
+           color: v.$color-tercero;
+       }
+   }
+   .activo{
+       color: v.$color-tercero;
+       text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+   }
+
+
+}
+
+.activo{
+  color: v.$color-tercero;
+  text-shadow: 0 15px 40px  rgba(0, 0, 0, 0.904);
+}
 
 
 

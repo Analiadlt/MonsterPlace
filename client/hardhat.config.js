@@ -1,8 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require("dotenv").config();
-const { INFURA_MUMBAI, INFURA_MAINNET } = process.env;
-const fs = require("fs");
-const privateKey = fs.readFileSync(".secret").toString().trim();
+const { INFURA_MUMBAI, INFURA_MAINNET, PRIVATEKEY } = process.env;
+const privateKey = PRIVATEKEY.toString().trim();
 // const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
 
 module.exports = {

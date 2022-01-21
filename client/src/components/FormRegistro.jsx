@@ -85,15 +85,29 @@ const Formulario = () => {
 	const signUp = async (email,password) => {
 	
 		try {
-		  if (app) {
-			const user = await app
-			  .auth()
-			  .createUserWithEmailAndPassword(email, password);
+			if (app) {
+			  const user = await app
+				.auth()
+				.createUserWithEmailAndPassword(email, password)
+				verificar();
+
+			  
+			}
+	  
+		  } catch (error) {
+			console.log("error", error);
+			alert(error.message);
 		  }
-		} catch (error) {
-		  alert(error.message);
-		}
+		};
+		function verificar() {
+		  var user = app.auth().currentUser;
+		  user.sendEmailVerification().then(function () {
+			  // Email sent.
+		  }).catch(function (error) {
+			  // An error happened.
+		  });
 	};
+
 
 	
 	const switchShown = () => setojo(!ojo)
@@ -133,12 +147,13 @@ const Formulario = () => {
 			
 			
 			Swal.fire({
-				imageUrl: `${huevoVerde}`,
-				title: 'Usuario creado con exito',
-				width: 500,
+				// imageUrl: `${huevoVerde}`,
+				imageUrl: 'http://pngimg.com/uploads/envelope/envelope_PNG18384.png',
+				title: 'Te hemos enviado un email de validacion',
+				width: 400,
 				confirmButtonText: 'Continuar' ,
 				imageWidth: 300,
-				imageHeight: 400,
+				imageHeight: 250,
 				timer: 3000,
 				timerProgressBar: true,
 				didOpen: () => {

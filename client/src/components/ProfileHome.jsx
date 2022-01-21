@@ -12,12 +12,16 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector ,useDispatch } from 'react-redux';
-import  {useEffect}  from 'react';
-import { loginReset } from '../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { loginReset, restarSaldo } from '../redux/actions';
 
-import {app} from "../firebase/firebase"
+import { app } from "../firebase/firebase"
 import socket from "./Socket";
+import Swal from 'sweetalert2';
+import huevoRojo from '../img/huevoRojo.png'
+
+
 
 export default function ProfileHome() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,7 +29,7 @@ export default function ProfileHome() {
     const open = Boolean(anchorEl);
 
     const userLogeado = useSelector(state => state.userLogueado)
- const history = useHistory()
+    const history = useHistory()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -48,142 +52,157 @@ export default function ProfileHome() {
         //   console.log("error", error);
         // }
         console.log('desloguado')
-      };
-      function handleSubmit(e) {
-      e.preventDefault();
-      socket.emit('buscar-rooms', userLogeado.nickName);
-      history.push('/Matchmaking')
-  
-  }
+    };
+    function handleSubmit(e) {
+        e.preventDefault();
+        if(userLogeado.saldo_cryps > 5){
 
-    let cambiarLogeo = async ()=>{
+        // dispatch(restarSaldo())
+        socket.emit('buscar-rooms', userLogeado.nickName);
+        history.push('/Matchmaking')
+        }
+        else{
+            Swal.fire({
+                title: '<strong>Saldo insuficiente para jugar</strong>',
+               imageUrl: `${huevoRojo}`,
+               width: 500,
+               imageWidth: 300,
+               imageHeight: 400,
+               
+              
+                 
+               })
+        }
+    }
+
+    let cambiarLogeo = async () => {
 
         try {
             if (app) {
 
-              await app.auth().signOut();
-              dispatch(loginReset())
-            //   alert("Successfully signed out!");
+                await app.auth().signOut();
+                dispatch(loginReset())
+                //   alert("Successfully signed out!");
             }
-          } catch (error) {
+        } catch (error) {
             console.log("error", error);
-          }
-            };
-    
+        }
+    };
 
-   
 
-    return (
-        <div classname="foto">
-            <React.Fragment>
-                <Box sx={{ display: 'block', alignItems: 'center', textAlign: 'center'}}>
-                    <Tooltip title="Account settings">
-                        <IconButton
-                            onClick={handleClick}
-                            size="small"
-                            /* sx={{ ml: 2 }} */
-                            aria-controls={open ? 'account-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                        >
-                            <Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#f8bd279d',":hover":'rgba(0, 0, 0)' }}>{userLogeado !==[] ? userLogeado.nickName?.charAt(0) :'I'}</Avatar>
-                            
-                        </IconButton>
-                        
-                    </Tooltip>
-                    <p className='log-usuario'>{userLogeado.nickName? userLogeado.nickName:'Invitado'}</p>
-                </Box>
-                <Menu
-                    anchorEl={anchorEl}
-                    id="account-menu"
-                    open={open}
-                    onClose={handleClose}
-                    onClick={handleClose}
-                    PaperProps={{
-                        elevation: 0,
-                        Typography:{
-                            fontSize:'2rem'
+
+
+return (
+    <div classname="foto">
+        <React.Fragment>
+            <Box sx={{ display: 'block', alignItems: 'center', textAlign: 'center' }}>
+                <Tooltip title="Account settings">
+                    <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        /* sx={{ ml: 2 }} */
+                        aria-controls={open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                    >
+                        <Avatar sx={{ width: 60, height: 60, fontSize: "2.5rem", backgroundColor: '#FF6363', ":hover": 'rgba(0, 0, 0)' }}>{userLogeado !== [] ? userLogeado.nickName?.charAt(0) : 'I'}</Avatar>
+
+                    </IconButton>
+
+                </Tooltip>
+                <p className='log-usuario'>{userLogeado.nickName ? userLogeado.nickName : 'Invitado'}</p>
+            </Box>
+            <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                    elevation: 0,
+                    Typography: {
+                        fontSize: '2rem'
+                    },
+                    sx: {
+                        overflow: 'visible',
+                        fontWeight: '5rem',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
                         },
-                        sx: {
-                            overflow: 'visible',
-                            fontWeight:'5rem',
-                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                            mt: 1.5,
-                            '& .MuiAvatar-root': {
-                                width: 32,
-                                height: 32,
-                                ml: -0.5,
-                                mr: 1,
-                            },
-                            '&:before': {
-                                content: '""',
-                                display: 'block',
-                                position: 'absolute',
-                                top: 0,
-                                right: 14,
-                                width: 10,
-                                height: 10,
-                                bgcolor: 'background.paper',
-                                transform: 'translateY(-50%) rotate(45deg)',
-                                zIndex: 0,
-                                
-                            },
+                        '&:before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+
                         },
-                    }}
-                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                
-                > 
+                    },
+                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+
+            >
                 {userLogeado.nickName ?
-                        <Link to={`/Detail`}>
-                                <MenuItem>
-                                    <Avatar /> <p className='menu' style={{ paddingRigth: '20px' }}> Mi Perfil </p>
-                                </MenuItem>
-                            </Link>: 
+                    <Link to={`/Detail`}>
+                        <MenuItem>
+                            <Avatar /> <p className='menu' style={{ paddingRigth: '20px' }}> Mi Perfil </p>
+                        </MenuItem>
+                    </Link> :
                     <Link to='/Login'>
-                    <MenuItem >
-                        <Avatar /> <p className='menu' >Iniciar Sesion</p>
-                    </MenuItem>
-                </Link> }
+                        <MenuItem >
+                            <Avatar /> <p className='menu' >Iniciar Sesion</p>
+                        </MenuItem>
+                    </Link>}
                 {userLogeado.nickName ?
                     <Link to={'/'} >
                         <MenuItem >
-                            <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{paddingRigth:'20px'}}> Cerrar Sesion </p>
+                            <Avatar /> <p className='menu' onClick={cambiarLogeo} style={{ paddingRigth: '20px' }}> Cerrar Sesion </p>
                         </MenuItem>
                         <MenuItem >
 
-                        <Avatar /> <p className='menu' onClick={(e) => {handleSubmit(e);}} style={{paddingRigth:'20px'}}> Jugar </p>
+                            <Avatar /> <p className='menu' onClick={(e) => { handleSubmit(e); }} style={{ paddingRigth: '20px' }}> Jugar </p>
                         </MenuItem>
-                    </Link> : 
+                    </Link> :
                     <Link to='/Registro'>
-                    <MenuItem fontSize="2rem">
-                        <Avatar  /> <p className='menu'> Crear Cuenta </p> 
-                    </MenuItem>
-                </Link>}
-                
-                 
-                    
-                    <Divider />
-{/*                     <MenuItem fontSize="2rem">
+                        <MenuItem fontSize="2rem">
+                            <Avatar /> <p className='menu'> Crear Cuenta </p>
+                        </MenuItem>
+                    </Link>}
+
+
+
+                <Divider />
+                {/*                     <MenuItem fontSize="2rem">
                         <ListItemIcon>
                             <PersonAdd fontSize="bold" />
                         </ListItemIcon>
                         Add another account
                     </MenuItem> */}
-                    <MenuItem fontSize="2rem">
-                        <ListItemIcon >
-                            <Settings fontSize="small" />
-                        </ListItemIcon>
-                        <p className='setting'> Settings </p> 
-                    </MenuItem>
-{/*                     <MenuItem>
+                <MenuItem fontSize="2rem">
+                    <ListItemIcon >
+                        <Settings fontSize="small" />
+                    </ListItemIcon>
+                    <p className='setting'> Settings </p>
+                </MenuItem>
+                {/*                     <MenuItem>
                         <ListItemIcon>
                             <Logout fontSize="small" />
                         </ListItemIcon>
                         Logout
                     </MenuItem> */}
-                </Menu>
-            </React.Fragment>
-        </div>
-    );
+            </Menu>
+        </React.Fragment>
+    </div>
+);
 }

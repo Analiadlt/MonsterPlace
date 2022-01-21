@@ -24,23 +24,39 @@ import NavCheto from './components/NavCheto';
 import Compra from './components/Compra';
 import { useSelector, useDispatch } from 'react-redux';
 import { app } from "./firebase/firebase";
-import { getUserLogin } from './redux/actions';
+import { getUserLogin, pagar, PAGAR } from './redux/actions';
 import Comprar from './components/compra/ordenCompra';
 import GanadorJuego from './components/juego/GanadorJuego';
+import BotonPagar from './components/BotonPagar';
+import DetalleCompra from './components/detalleCompra';
+
 
 
 function App() {
   const logueado = useSelector(state => state.users)
   const dispatch = useDispatch()
+  let cambiarLogeo = async () => {
 
+    try {
+        if (app) {
+
+            await app.auth().signOut();
+          
+            //   alert("Successfully signed out!");
+        }
+    } catch (error) {
+        console.log("error", error);
+    }
+    };
     useEffect(() => {
 
       if (app) {
         app.auth().onAuthStateChanged((authUser) => {
 
-          if (authUser && logueado.length >5) {
+          if (authUser && logueado.length >5 && authUser.emailVerified === true) {
             dispatch(getUserLogin(authUser.email))
-                       }})}},[dispatch, logueado])
+          }
+          })}},[dispatch, logueado])
                     
 
 
@@ -66,6 +82,8 @@ function App() {
           <Route  exact path="/Compra" component={Compra} />
           <Route  exact path="/Chatear" component={ChatApp} />
           <Route  exact path="/Comprar" component={Comprar} />
+          <Route exact path= "/BotonPagar" component={BotonPagar} />
+          <Route exact path= "/Detallecompra" component={DetalleCompra} />
 
         </div>
       );

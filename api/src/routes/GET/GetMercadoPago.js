@@ -19,12 +19,14 @@ mercadopago.configure({
 router.get("/:id", async (req, res, next) => {
 
   const id_orden = req.params.id;
+  // const id_orden = 3;
 
   const orden = await Order.findOne({
     where: {
       id: id_orden
     }
   })
+  console.log("Orden desde Get del Mercadopago: ", orden)
 
   const carrito = await Card.findAll({
     where: {

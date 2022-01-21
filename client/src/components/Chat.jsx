@@ -42,7 +42,7 @@ export default function Chat() {
     const[vida1,setvida1]= useState(100)
     const[vida2,setvida2]= useState(100)
 
-    const[segundos,setsegundos]= useState(60)
+    const[segundos,setsegundos]= useState(30)
     const[perdedor,setperdedor]= useState(false)
     //false jugador 2
     //true jugador 1
@@ -54,7 +54,7 @@ export default function Chat() {
 
  
   const reset = () => {
-    setsegundos(60);
+    setsegundos(30);
     
   }
     
