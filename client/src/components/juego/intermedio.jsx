@@ -68,10 +68,24 @@ export default function Intermedio(){
                     <div className="jugador">
                         <h1>Jugador 1</h1>
                         <h2>{infoRoom.jugador1}</h2>
+                        <h3>CrypsCoins a descontar: 6</h3>
+                        <h3>CrypsCoins restantes en billetera: {userLogeado.saldo_cryps-6}</h3>
+
+
+                    </div>
+                    <div className="detalle">
+                        <h2>Tiempo por ronda: 30s</h2>
+                        <h2>CrypsCoins para el ganador: 10</h2>
+
+                        
                     </div>
                     <div className="jugador">
                         <h1>Jugador 2</h1>
                         <h2>{infoRoom.jugador2}</h2>
+                        <h3>CrypsCoins a descontar: 6</h3>
+                        <h3>CrypsCoins restantes en billetera: {userLogeado.saldo_cryps-6}</h3>
+
+
                     </div>
 
                 </div>
