@@ -67,12 +67,6 @@ export default function DetalleCompra() {
       }
                 </div>
 
-
-                <div>
-
-                    <button>Pagar</button>
-
-                </div>
             </div>
         </div>
 
