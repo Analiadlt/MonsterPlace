@@ -85,7 +85,9 @@ export default function Compra() {
                             <div className="grid-tienda">
                                 {
                                     dragones.map(dragon =>
+                                        <div className="cart-tienda">
                                         <CartaTienda name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                        </div>
                                     )
                                 }
                             </div>
