@@ -41,6 +41,8 @@ export default function Chat() {
     const[val,setVal]= useState(false)
     const[vida1,setvida1]= useState(100)
     const[vida2,setvida2]= useState(100)
+    const[rondaganada1,setrondaganada1]= useState(0)
+    const[rondaganada2,setrondaganada2]= useState(0)
 
     const[segundos,setsegundos]= useState(30)
     const[perdedor,setperdedor]= useState(false)
@@ -76,6 +78,18 @@ export default function Chat() {
 
   },[segundos,listos])
 
+  useEffect(()=>{
+      if(vida1===0){
+        localStorage.setItem('perdedor', infoRoom.jugador1);
+        history.push('/ganador')
+      }
+      if(vida2===0){
+        localStorage.setItem('perdedor', infoRoom.jugador2);
+        history.push('/ganador')
+      }
+
+  },[vida1,vida2])
+
   
 
 
@@ -86,6 +100,19 @@ export default function Chat() {
 
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
+            
+
+            //rondaganada
+            if(resultado.mensaje.jugador === infoRoom.jugador1 ){
+                setrondaganada1(rondaganada1+1)
+            }
+            if(resultado.mensaje.jugador === infoRoom.jugador2 ){
+                setrondaganada2(rondaganada2+1)
+            }
+
+
+            //--------
+
             //restar vida--------
             
             if(resultado.restarvida1){
@@ -139,6 +166,10 @@ export default function Chat() {
 
     })
 
+ console.log('rondaganada1...',rondaganada1) 
+ console.log('rondaganada2...',rondaganada2) 
+
+
 
 
     useEffect(() => {
@@ -172,14 +203,30 @@ export default function Chat() {
     useEffect(() => {
         if (numeroDeRonda === 4) {
             setPartida(true)
-            setTimeout(() => {
-                history.push('/')
-                }, 2000);
-            socket.emit('fin-partida', idpartida)
-            
+            if(vida1>vida2){
+                localStorage.setItem('perdedor', infoRoom.jugador2);
+                history.push('/ganador')
+            }
+            if(vida2>vida1){
+                localStorage.setItem('perdedor', infoRoom.jugador1);
+                history.push('/ganador')
+            }
+            if(vida2===vida1){
+                if(rondaganada1>rondaganada2){
+
+                    localStorage.setItem('perdedor', infoRoom.jugador2);
+                    history.push('/ganador')
+                }
+                if(rondaganada2>rondaganada1){
+                    localStorage.setItem('perdedor', infoRoom.jugador1);
+                    history.push('/ganador')
+                }
+            }
         }
-    })
+    },[numeroDeRonda])
         
+   
+
 
 
 

@@ -24,6 +24,7 @@ let enviarSaldo = ()=>{
         setSado(false)
     }
 }
+console.log('perdedor...', perdedor)
 
     return (
   
@@ -31,7 +32,7 @@ let enviarSaldo = ()=>{
                
                {
 
-               perdedor === 'false'?
+               perdedor === 'false'|| perdedor === infoRoom.jugador2 ?
                <div>
                <h1>{infoRoom?.jugador2} esta en un cumpleaños</h1>
                 <h2>Gano {infoRoom?.jugador1}</h2>
