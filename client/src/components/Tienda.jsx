@@ -9,7 +9,7 @@ import Modal1 from "./Modal";
 import { Modal } from "@mui/material";
 import Filtros from "./filtrosTienda";
 import NavCheto from './NavCheto';
-import CartaFondo from "./juego/FondoCarta";
+import CartaTienda from "./cartaTienda";
 export default function Tienda() {
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.dragonesbd)
@@ -30,10 +30,10 @@ export default function Tienda() {
                 <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link-tienda'>NFT</Link></h3>
     
             </div>
-            <div className="muestra contenedor-cheto" >
+{/*             <div className="muestra contenedor-cheto" >
                 <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'}/>
     
-            </div>
+            </div> */}
             <div className="background-tienda">
                 <div className="contenedor-tienda">
 
@@ -50,7 +50,9 @@ export default function Tienda() {
                             <div className="grid-tienda">
                                 {
                                     dragones.map(dragon =>
-                                        <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} type={dragon.type} />
+                                        <div className="cart-tienda">
+                                            <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                        </div>
                                     )
                                 }
                             </div>
@@ -58,10 +60,6 @@ export default function Tienda() {
                     }
                 </div>
             </div>
-
-            <Link to="/juego">
-                Hola
-            </Link>
         </div>
 
     )
