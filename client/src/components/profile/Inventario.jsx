@@ -1,5 +1,5 @@
 import React from "react";
-import Card from '../Card'
+import CartaTienda from "../cartaTienda";
 
 
 
@@ -78,7 +78,7 @@ export default function Inventario() {
         <div className="grid-inventario">
         {
             mazo1.map(dragon =>
-                <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} type={dragon.type} />
+                <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} type={dragon.type} />
             )
         }
     </div>

@@ -51,7 +51,7 @@ export default function Tienda() {
                                 {
                                     dragones.map(dragon =>
                                         <div className="cart-tienda">
-                                            <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                            <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
                                         </div>
                                     )
                                 }

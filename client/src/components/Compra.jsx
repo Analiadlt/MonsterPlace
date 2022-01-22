@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOrder, sellOrder, pagar } from "../redux/actions";
 import { Link, useHistory } from "react-router-dom";
 import NavCheto from './NavCheto';
-
+import CartaTienda from "./cartaTienda";
 
 export default function Compra() {
     const history = useHistory();
@@ -15,6 +15,7 @@ export default function Compra() {
     const carrito = useSelector(state => state.carrito)
     const email = useSelector(state => state.userLogueado.email)
     const cards = useSelector(state => state.carrito)
+    
     // const id = useSelector(state => state.carrito.id)
     let allCards = []
 
@@ -84,7 +85,7 @@ export default function Compra() {
                             <div className="grid-tienda">
                                 {
                                     dragones.map(dragon =>
-                                        <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                        <CartaTienda name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
                                     )
                                 }
                             </div>

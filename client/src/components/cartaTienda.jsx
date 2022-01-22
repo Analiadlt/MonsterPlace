@@ -6,7 +6,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/actions";
-export default function CartaTienda({ img, name, attack, defense, efect, price, type }) {
+export default function CartaTienda({ img, name, attack, defense, efect, price, type, botones }) {
     const dispatch = useDispatch()
     return (
 
@@ -24,27 +24,23 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
                         <div className="radios">
                             <div className="caracteristicasFondo">
                                 <div className="caract">
-                                    <i class="fab fa-fort-awesome"></i><span>{defense}</span>
+                                    <i class="fab fa-fort-awesome icono-cart"></i><span>{defense}</span>
 
                                 </div>
                                 <div className="caract">
-                                    <i class="fab fa-gripfire"></i><span>{attack}</span>
+                                    <i class="fab fa-gripfire icono-cart"></i><span>{attack}</span>
                                 </div>
                             </div>
                             <div className="precio-carta">
                                 Ars${price}
                             </div>
+                            { botones === true ? 
                             <div className="botones">
                                 <button className="btn-cart btn-detalle"><DetalleDr name={name} attack={attack} defense={defense} img={img} type={type} /></button>
                                 
                                 <button className="btn-cart btn-comprar" onClick={() => dispatch(addCart(name))}>Comprar</button>
-                            </div>
-                            <div className="botones">
-                                
-                                
-
-
-                            </div>
+                            </div> : null
+                            }
                         </div>
                     </div>
 
