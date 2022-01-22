@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+
 export const CAMBIAR_FONDO = "CAMBIAR_FONDO"
 export const ADD_USER = "ADD_USER"
 export const GET_USER = "GET_USER"
@@ -19,6 +20,9 @@ export const GET_ORDERS = "GET_ORDERS"
 export const GET_PAGAR = "GET_PAGAR"
 export const RESTAR_SALDO = "RESTAR_SALDO"
 export const CARGAR_SALDO = "CARGAR_SALDO"
+
+
+
 
 
 
@@ -53,14 +57,38 @@ export function getCard() {
   }
 }
 
+export function cargarSaldo(payload){
+
+ 
+  // return{ type: CARGAR_SALDO, payload:10 } 
+  return async (dispatch) => {
+    console.log('cargar saldo payload', payload)
+
+    // try {
+      var json = await axios.put(`/putsumamonedas`,payload );
+      console.log('respuesta cargar saldo', json.data[0].saldo_cryps)
+      
+   
+      // return{ type: CARGAR_SALDO, payload: json.data } 
+      return dispatch({
+        type: CARGAR_SALDO, 
+        payload: json.data[0].saldo_cryps,
+      });
+
+    }
+
+
+}
+
 // Funcion para verificar login de usuario
 export function loginUser(payload) {
   console.log('datos enviados para ac',payload)
+  
   return async (dispatch) => {
     try {
       var json = await axios.post(`/login/loginUser`, payload);
       
-      json.data.saldo_cryps = 12;
+      
       console.log("Datos para posteo", json.data)
 
         return dispatch({
@@ -225,10 +253,6 @@ export function restarSaldo(){
 
 }
 
-export function cargarSaldo(){
-  
-  return{ type: CARGAR_SALDO, payload:10 } 
 
 
-}
 
