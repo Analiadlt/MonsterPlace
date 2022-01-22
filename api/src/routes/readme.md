@@ -12,6 +12,8 @@ GetUser-Card: http://localhost:3001/CardUser/userCard/:id
 
 GetUser : http://localhost:3001/users Y FILTRADO : http://localhost:3001/users/:id
 
+GetMonedas : http://localhost:3001/getmonedas
+
 LoginInformation: http://localhost:3001/loginInfo/loginInformation
 
 RUTAS POST
@@ -38,6 +40,11 @@ PutUserInformation : http://localhost:3001/user/putUser
 
 PutUserPassword : http://localhost:3001/users/putUserPassword
 
+PutSumaMonedas : http://localhost:3001/putsumamonedas
+
+PutRestaMonedas : http://localhost:3001/putrestamonedas
+
 RUTAS DELETE
 
 DeleteUser : http://localhost:3001/delete/user/:id
+

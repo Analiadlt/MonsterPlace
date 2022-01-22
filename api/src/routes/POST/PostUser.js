@@ -27,7 +27,7 @@ server.post("/", async (req, res) => {
             }
             else res.send("El usuario ya existe")
         } else {
-            res.send("El Nickname ya existe")
+            res.send({message:"El Nickname ya existe"})
         }
     } catch (error) {
         res.send("Ups...!!!existe un error")
