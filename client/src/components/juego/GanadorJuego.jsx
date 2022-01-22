@@ -9,7 +9,9 @@ const infoRoom = JSON.parse(localStorage.getItem("info-room"));
 const jugador = localStorage.getItem('numero_jugador');
 
 const dispatch = useDispatch()
-
+let enviarSaldo = ()=>{
+    dispatch(cargarSaldo())
+}
 
     return (
   
@@ -22,7 +24,9 @@ const dispatch = useDispatch()
                <h1>{infoRoom?.jugador2} esta en un cumpleaños</h1>
                 <h2>Gano {infoRoom?.jugador1}</h2>
                 {
-                    jugador === 'jugador1'?dispatch(cargarSaldo) :null
+                    jugador === 'jugador1'?enviarSaldo():null
+                    
+
                 }
                 </div>
                :
@@ -30,7 +34,9 @@ const dispatch = useDispatch()
                <h1>{infoRoom?.jugador1} esta en un cumpleaños</h1>
                 <h2>Gano {infoRoom?.jugador2}</h2>
                 {
-                    jugador === 'jugador2'?dispatch(cargarSaldo()) :null
+                    jugador === 'jugador2'? enviarSaldo() :null
+                    
+
                 }
                 </div>
                }
