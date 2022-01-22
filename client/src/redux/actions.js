@@ -207,7 +207,8 @@ export function getPagar(oId){
   console.log('Id orden GET_PAGAR desde actions', oId)
   return async (dispatch) => {
     try {
-      var json = await axios.get(`/mercadopago/${oId}`);
+      const params = {id_order: oId }
+      var json = await axios.get("/mercadopago", {params});
       console.log("Datos GET_PAGAR desde ACTIONS: ", json.data);
       return dispatch({
         type: GET_PAGAR,

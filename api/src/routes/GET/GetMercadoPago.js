@@ -16,40 +16,42 @@ mercadopago.configure({
 
 
 //Ruta que genera la URL de MercadoPago
-router.get("/:id", async (req, res, next) => {
-
-  const id_orden = req.params.id;
+router.get("/", async (req, res, next) => {
+  const {id_order} = req.query
+  //const id_order = req.params.id;
+  console.log("IDORDER", id_order)
   // const id_orden = 3;
-
-  const orden = await Order.findOne({
+try {
+  
+  const order = await Order.findOne({
     where: {
-      id: id_orden
+      id: id_order
     }
   })
-  console.log("Orden desde Get del Mercadopago: ", orden)
+  console.log("Orden desde Get del Mercadopago: ", order)
 
   const carrito = await Card.findAll({
     where: {
-      orderId: id_orden
+      orderId: id_order
     }
   })
-  console.log('nroorden', orden)
+  console.log('nroorden', order)
   console.log('carrito', carrito)
   // ejemplo de carrito = [
-  //   {id: 1, title: "plover", quantity: 1, price: 100},
-  //   {id: 2, title: "warlockk", quantity: 1, price: 500}
-  // ]
-  
-  const items_ml = carrito?.map(i => ({
+    //   {id: 1, title: "plover", quantity: 1, price: 100},
+    //   {id: 2, title: "warlockk", quantity: 1, price: 500}
+    // ]
+    
+    const items_ml = carrito?.map(i => ({
     title: i.name,
     unit_price: Math.ceil(i.sellPrice),
     quantity: 1,
   }))
-
+  
   // Crea un objeto de preferencia
   let preference = {
     items: items_ml,
-    external_reference : `${id_orden}`,
+    external_reference : `${id_order}`,
     payment_methods: {
       excluded_payment_types: [
         {
@@ -59,28 +61,36 @@ router.get("/:id", async (req, res, next) => {
       installments: 24  //Cantidad máximo de cuotas
     },
     back_urls: {
-      success: '/mercadopago/pagos',
+      success: '/http://localhost:3001/mercadopago/pagos',
       failure: '/mercadopago/pagos',
       pending: '/mercadopago/pagos',
     },
   };
+  
+//   mercadopago.preferences.create(preference)
 
-  mercadopago.preferences.create(preference)
-
-  .then(function(response){
+//   .then(function(response){
     
-    console.info('respondio')
+//     console.info('respondio')
+    
+//     //Este valor reemplazará el string"<%= global.id %>" en tu HTML
+//     global.id = response.body.id;
+//     res.json({ id: global.id });
+    
+//   })
+//   .catch(function(error){
+//     console.log(error);
+//   })
+// }) 
 
-  //Este valor reemplazará el string"<%= global.id %>" en tu HTML
-    global.id = response.body.id;
-    res.json({ id: global.id });
+const response = await mercadopago.preferences.create(preference)
+console.log("REPONDIO", response)
+res.json({id: response.body.id})
 
-  })
-  .catch(function(error){
-    console.log(error);
-  })
-}) 
-
+} catch (error) {
+  res.send("No se genero correctamente ID-MP")
+}
+})
 
 //Ruta que recibe la información del pago
 router.get("/pagos", (req, res)=>{
