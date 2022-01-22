@@ -94,7 +94,7 @@ export default function Reducer(state=initialState, action){
           
             return {
                 ...state,
-                 userLogueado:{...state.userLogueado,saldo_cryps: state.userLogueado.saldo_cryps - action.payload }  
+                 userLogueado:{...state.userLogueado,saldo_cryps: action.payload }  
           }
           case CARGAR_SALDO: 
           

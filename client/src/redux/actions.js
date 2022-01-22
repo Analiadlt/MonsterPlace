@@ -57,28 +57,7 @@ export function getCard() {
   }
 }
 
-export function cargarSaldo(payload){
 
- 
-  // return{ type: CARGAR_SALDO, payload:10 } 
-  return async (dispatch) => {
-    console.log('cargar saldo payload', payload)
-
-    // try {
-      var json = await axios.put(`/putsumamonedas`,payload );
-      console.log('respuesta cargar saldo', json.data[0].saldo_cryps)
-      
-   
-      // return{ type: CARGAR_SALDO, payload: json.data } 
-      return dispatch({
-        type: CARGAR_SALDO, 
-        payload: json.data[0].saldo_cryps,
-      });
-
-    }
-
-
-}
 
 // Funcion para verificar login de usuario
 export function loginUser(payload) {
@@ -247,9 +226,43 @@ export function getPagar(oId){
   };
 }
 
-export function restarSaldo(){
+
+export function cargarSaldo(payload){
+
+
+  return async (dispatch) => {
+    console.log('cargar saldo payload', payload)
+
+    
+      var json = await axios.put(`/putsumamonedas`,payload );
+      console.log('respuesta cargar saldo', json.data[0].saldo_cryps)
+      
+      return dispatch({
+        type: CARGAR_SALDO, 
+        payload: json.data[0].saldo_cryps,
+      });
+
+    }
+
+
+}
+
+export function restarSaldo(payload){
   
-  return{ type: RESTAR_SALDO, payload:6 } 
+  // return{ type: RESTAR_SALDO, payload:6 } 
+  return async (dispatch) => {
+    console.log('restar saldo payload', payload)
+
+    
+      var json = await axios.put(`/putrestamonedas`,payload );
+      console.log('respuesta restar saldo', json.data[0].saldo_cryps)
+      
+      return dispatch({
+        type: RESTAR_SALDO, 
+        payload: json.data[0].saldo_cryps,
+      });
+
+    }
 
 }
 
