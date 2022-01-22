@@ -1,89 +1,93 @@
-import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Route } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Home from './components/Home'
-import FormRegistro from './components/FormRegistro'
-import Tienda from './components/Tienda';
-import './sass/app.scss'
-import TiendaNFT from './components/TiendaNFT';
-import crearNFT from './components/CrearNFT';
-import tableroNFT from './components/TableroNFT';
-import misNFT from './components/MisNFT';
-import Carrito from './components/Carrito';
-import ForLogin from './components/ForLogin';
-import PassReset from './components/PassReset';
-import Juego from './components/juego/interface';
-import userDetail from './components/profile/userDetail';
-import Chat from './components/Chat';
-import MyPage from './firebase/storage/MyPage';
-import MyAuthPage from './firebase/auth/MyAuthPage';
-import Intermedio from './components/juego/intermedio';
+import Home from "./components/Home";
+import FormRegistro from "./components/FormRegistro";
+import Tienda from "./components/Tienda";
+import "./sass/app.scss";
+import TiendaNFT from "./components/NFT/TiendaNFT";
+import crearNFT from "./components/NFT/CrearNFT";
+import tableroNFT from "./components/NFT/TableroNFT";
+import misNFT from "./components/NFT/MisNFT";
+import Carrito from "./components/Carrito";
+import ForLogin from "./components/ForLogin";
+import PassReset from "./components/PassReset";
+import Juego from "./components/juego/interface";
+import userDetail from "./components/profile/userDetail";
+import Chat from "./components/Chat";
+import MyPage from "./firebase/storage/MyPage";
+import MyAuthPage from "./firebase/auth/MyAuthPage";
+import Intermedio from "./components/juego/intermedio";
 // import Chatear from './components/chat/chatear';
-import ChatApp from './components/chat/index';
-import NavCheto from './components/NavCheto';
-import Compra from './components/Compra';
-import { useSelector, useDispatch } from 'react-redux';
+import ChatApp from "./components/chat/index";
+import NavCheto from "./components/NavCheto";
+import Compra from "./components/Compra";
+import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
-import { getUserLogin } from './redux/actions';
-import Comprar from './components/compra/ordenCompra';
-import GanadorJuego from './components/juego/GanadorJuego';
-
+import { getUserLogin } from "./redux/actions";
+import Comprar from "./components/compra/ordenCompra";
+import GanadorJuego from "./components/juego/GanadorJuego";
+import LoginMetamask from "./components/NFT/PaginaLoginMetamask.jsx";
+import { MoralisProvider } from "react-moralis";
 
 function App() {
-  const logueado = useSelector(state => state.users)
-  const dispatch = useDispatch()
+  const logueado = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   let cambiarLogeo = async () => {
-
     try {
-        if (app) {
-
-            await app.auth().signOut();
-          
-            //   alert("Successfully signed out!");
-        }
-    } catch (error) {
-        console.log("error", error);
-    }
-    };
-    useEffect(() => {
-
       if (app) {
-        app.auth().onAuthStateChanged((authUser) => {
+        await app.auth().signOut();
 
-          if (authUser && logueado.length >5 && authUser.emailVerified === true) {
-            dispatch(getUserLogin(authUser.email))
-          }
-          })}},[dispatch, logueado])
-                    
-
-
-      return (
-        <div className="App">
-          <Route path="/ganador" component={GanadorJuego} />
-          <Route path="/storage" component={MyPage} />
-          <Route path="/auth" component={MyAuthPage} />
-          <Route path="/Carrito" component={Carrito} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/Tienda" component={Tienda} />
-          <Route path="/Registro" component={FormRegistro} />
-          <Route path="/Login" component={ForLogin} />
-          <Route path="/PassReset" component={PassReset} />
-          <Route path="/Detail/" component={userDetail} />
-          <Route path="/chat" component={Chat} />
-          <Route path="/juego" component={NavCheto} />
-          <Route  exact path="/TiendaNFT" component={TiendaNFT} />
-          <Route  exact path="/CrearNFT" component={crearNFT} />
-          <Route  exact path="/TableroNFT" component={tableroNFT} />
-          <Route  exact path="/MisNFT" component={misNFT} />
-          <Route  exact path="/Matchmaking" component={Intermedio} />
-          <Route  exact path="/Compra" component={Compra} />
-          <Route  exact path="/Chatear" component={ChatApp} />
-          <Route  exact path="/Comprar" component={Comprar} />
-
-        </div>
-      );
+        //   alert("Successfully signed out!");
+      }
+    } catch (error) {
+      console.log("error", error);
     }
+  };
+  useEffect(() => {
+    if (app) {
+      app.auth().onAuthStateChanged((authUser) => {
+        if (
+          authUser &&
+          logueado.length > 5 &&
+          authUser.emailVerified === true
+        ) {
+          dispatch(getUserLogin(authUser.email));
+        }
+      });
+    }
+  }, [dispatch, logueado]);
 
+  return (
+    <MoralisProvider
+      appId="sF0LH5oGXTqeMld25GjGk8XEQAocbocN8D4XIlMK"
+      serverUrl="https://ltky0gpdxgky.usemoralis.com:2053/server"
+    >
+      <div className="App">
+        <Route path="/ganador" component={GanadorJuego} />
+        <Route path="/storage" component={MyPage} />
+        <Route path="/auth" component={MyAuthPage} />
+        <Route path="/Carrito" component={Carrito} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/Tienda" component={Tienda} />
+        <Route path="/Registro" component={FormRegistro} />
+        <Route path="/Login" component={ForLogin} />
+        <Route path="/PassReset" component={PassReset} />
+        <Route path="/Detail/" component={userDetail} />
+        <Route path="/chat" component={Chat} />
+        <Route path="/juego" component={NavCheto} />
+        <Route exact path="/TiendaNFT" component={TiendaNFT} />
+        <Route exact path="/CrearNFT" component={crearNFT} />
+        <Route exact path="/TableroNFT" component={tableroNFT} />
+        <Route exact path="/MisNFT" component={misNFT} />
+        <Route exact path="/Matchmaking" component={Intermedio} />
+        <Route exact path="/Compra" component={Compra} />
+        <Route exact path="/Chatear" component={ChatApp} />
+        <Route exact path="/Comprar" component={Comprar} />
+        <Route exact path="/LoginMetamask" component={LoginMetamask} />
+      </div>
+    </MoralisProvider>
+  );
+}
 
-
-    export default App;
+export default App;
