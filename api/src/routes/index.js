@@ -16,9 +16,13 @@ const postRecoverUser = require("./POST/PostRecoverUser")
 const loginInfo= require("./GET/LoginInformation")
 const postOrder = require('./POST/PostOrder');
 const mercadopago = require('./GET/GetMercadoPago');
-const postUserCard = require("./POST/PostUserCard")
-const CardUser = require("./GET/GetUser-Card")
-const postLogicGame = require("./POST/PostLogicGame")
+const postUserCard = require("./POST/PostUserCard");
+const CardUser = require("./GET/GetUser-Card");
+const postLogicGame = require("./POST/PostLogicGame");
+const putSumaMonedas = require("./PUT/PutSumaMonedas");
+const putRestaMonedas = require("./PUT/PutRestaMonedas");
+const getMonedas = require ("./GET/GetMonedas");
+
 const router = Router();
 
 router.use('/cards', getCards,getDestacadas,validateInformation(postCardSchema),postCards); 
@@ -33,7 +37,9 @@ router.use('/mercadopago', mercadopago);
 router.use("/usercard", postUserCard)
 router.use("/CardUser",CardUser)
 router.use("/game", postLogicGame)
-
+router.use("/putsumamonedas",putSumaMonedas)
+router.use("/putrestamonedas",putRestaMonedas)
+router.use("/getmonedas",getMonedas)
 // router.use('/')
 
 module.exports = router;
