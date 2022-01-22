@@ -10,10 +10,10 @@ import Chatear from "./chat/chatear";
 import CartaFondo from './juego/FondoCarta';
 import Spinner from "./juego/spinner";
 import CartaGame from "./juego/interface";
-import { empezarPartida } from "../redux/actions";
+import { empezarPartida,restarSaldo } from "../redux/actions";
 
 export default function Chat() {
-
+    const userLogeado = useSelector(state => state.userLogueado)
     const infoRoom = JSON.parse(localStorage.getItem("info-room"));
     const [mazo, setMazo] = useState(JSON.parse(localStorage.getItem("mazo")));
     const [mensaje, setMensaje] = useState('');
@@ -249,7 +249,21 @@ export default function Chat() {
         }, 1400)
     }
 
+ let aux = {
+        email: userLogeado.email,
+        saldo_cryps:6
+    }
 
+let restarCoins = ()=>{
+    dispatch(restarSaldo(aux))
+}
+useEffect(() => {
+  if(listos){
+    restarCoins()
+  }
+
+
+}, [listos])
 
 
 
@@ -257,7 +271,7 @@ export default function Chat() {
 
 return (
     <div>
-        
+       
             
         <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
             <h2>Jugador 1</h2>
