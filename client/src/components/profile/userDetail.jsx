@@ -5,6 +5,7 @@ import NavCheto from '../NavCheto';
 import Avatar from '@mui/material/Avatar';
 import Inventario from "./Inventario";
 import Mazo from "./Mazo";
+import Perfil from "./perfil";
 /* import Estadisticas from "./estadisticas/Estadisticas"; */
 // import { 
 //     getById,
@@ -72,7 +73,7 @@ export default function Detalle() {
 				<div className="contenido-profile">
 					{
 						navegacion === 'home' ? <h1>Home</h1> : 
-						navegacion === 'profile' ? <h1>pr</h1> : 
+						navegacion === 'profile' ? <Perfil/> : 
 						navegacion === 'inventario' ? <Inventario/> : 
 						navegacion === 'misNft' ? <h1>nft</h1> : 
 						navegacion === 'estadisticas' ? <h1>Hola</h1>: null
