@@ -2,10 +2,10 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { nftmarketaddress, nftaddress } from "../config";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts//contracts/NFTMarket.sol/NFTMarket.json";
-import Nav from "./Nav";
+import { nftaddress, nftmarketaddress } from "../../config";
+import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
+import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import Nav from "../Nav";
 import { Link } from "react-router-dom";
 
 export default function CreatorDashboard() {
@@ -81,22 +81,7 @@ export default function CreatorDashboard() {
             CrearNFT
           </span>
         </Link>
-        <Link to="/MisNFT">
-          <span
-            className={window.location.pathname === "/MisNFT" ? "activo" : null}
-          >
-            Mis NFT
-          </span>
-        </Link>
-        <Link to="/TableroNFT">
-          <span
-            className={
-              window.location.pathname === "/TableroNFT" ? "activo" : null
-            }
-          >
-            TableroNFT
-          </span>
-        </Link>
+        
       </div>
       <div>
         <h2>Items Created</h2>

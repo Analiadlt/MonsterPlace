@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import NavCheto from './NavCheto';
-
+import Meta from '../img/MetaMask_Fox.png'
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -225,8 +225,14 @@ const ForLogin = () => {
 						</div>
 
 						{/* {formularioEnviado ? Alerta() : null} */}
+						<div style={{ display: 'flex', alignItems:'center', cursor:'pointer'}}>
+							<img src={Meta} alt=""  style={{ display: 'flex',justifyContent:'left',alignItems:'center',flexDirection:'column', width:'15%'}}/>
+							<p style={{ fontSize:'1.5rem', color:'grey'}}>Iniciar con metamask</p>
+						</div>
 						<div style={{ display: 'flex',justifyContent:'center',alignItems:'center',flexDirection:'column' }}>
+						
 							<div style={{margin:'0 auto'}}>
+								
 								<button type="submit" className='botonn'>
 									<span></span>
 									<span></span>

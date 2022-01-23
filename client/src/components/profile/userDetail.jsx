@@ -10,7 +10,7 @@ import Perfil from "./perfil";
 // import { 
 //     getById,
 //  } from "../redux/actions.js";
-
+import MisNFT from "../NFT/MisNFT"
 import { app } from "../../firebase/firebase";
 import { getUserLogin } from '../../redux/actions';
 
@@ -75,14 +75,14 @@ export default function Detalle() {
 						navegacion === 'home' ? <h1>Home</h1> : 
 						navegacion === 'profile' ? <Perfil/> : 
 						navegacion === 'inventario' ? <Inventario/> : 
-						navegacion === 'misNft' ? <h1>nft</h1> : 
+						navegacion === 'misNft' ? <MisNFT/> : 
 						navegacion === 'estadisticas' ? <h1>Hola</h1>: null
 						
 					}
 					
 				</div>
 				</div>
-			</div>
+			</div>∫
 			
 			</div>
 		

@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import { nftaddress, nftmarketaddress } from "../config";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
-
+import { nftaddress, nftmarketaddress } from "../../config";
+import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 export default function Card({ nft }) {
   const loading = useSelector((state) => state.loading);
   const ataqueDefensa = nft.description.split(",");

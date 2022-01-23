@@ -3,11 +3,11 @@ import { ethers } from "ethers";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { useHistory } from "react-router-dom";
 import Web3Modal from "web3modal";
-import { nftaddress, nftmarketaddress } from "../config";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import { nftaddress, nftmarketaddress } from "../../config";
+import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
+import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import NavCheto from "./NavCheto";
+import NavCheto from "../NavCheto";
 import { Link } from "react-router-dom";
 const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
@@ -159,43 +159,7 @@ export default function CreateItem() {
           justifyContent: "center",
         }}
       >
-        <Link to="/TiendaNFT">
-          <span
-            className={
-              window.location.pathname === "/TiendaNFT" ? "activo" : null
-            }
-          >
-            Home
-          </span>
-        </Link>
-        <Link to="/CrearNFT">
-          <span
-            className={
-              window.location.pathname === "/CrearNFT" ||
-              window.location.pathname === "/Carrito"
-                ? "activo"
-                : null
-            }
-          >
-            CrearNFT
-          </span>
-        </Link>
-        <Link to="/MisNFT">
-          <span
-            className={window.location.pathname === "/MisNFT" ? "activo" : null}
-          >
-            Mis NFT
-          </span>
-        </Link>
-        <Link to="/TableroNFT">
-          <span
-            className={
-              window.location.pathname === "/TableroNFT" ? "activo" : null
-            }
-          >
-            TableroNFT
-          </span>
-        </Link>
+        
       </div>
 
       <div
