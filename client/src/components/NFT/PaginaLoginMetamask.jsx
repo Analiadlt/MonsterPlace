@@ -4,13 +4,18 @@ import { useMoralis } from "react-moralis";
 
 export default function Home() {
   const { isAuthenticated, logout } = useMoralis();
+  const { user } = useMoralis();
+  console.log(user);
+
   return (
     <div>
       {isAuthenticated ? (
-        <p>
-          You are logged in
-          <button onClick={logout}>Sign Out</button>
-        </p>
+        <div>
+          <p>
+            Wallet conectada exitosamente!
+            <button onClick={logout}>Sign Out</button>
+          </p>
+        </div>
       ) : (
         <LoginMetamask />
       )}
