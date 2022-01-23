@@ -1,6 +1,8 @@
 import {React,useState} from "react";
 import {useDispatch,useSelector } from 'react-redux';
 import { cargarSaldo } from "../../redux/actions";
+import { Link, useHistory } from "react-router-dom";
+import socket from "../Socket";
 
 
 export default function GanadorJuego() {
@@ -9,6 +11,7 @@ const infoRoom = JSON.parse(localStorage.getItem("info-room"));
 const jugador = localStorage.getItem('numero_jugador');
 const userLogeado = useSelector(state => state.userLogueado)
 const [saldo,setSado]= useState(true)
+const history = useHistory()
 
 
 let aux = {
@@ -24,12 +27,20 @@ let enviarSaldo = ()=>{
         setSado(false)
     }
 }
-console.log('perdedor...', perdedor)
+
+let reset = ()=>{
+    localStorage.clear();
+    socket.emit('buscar-rooms', userLogeado.nickName);
+    history.push('/Matchmaking')
+
+}
+
 
     return (
   
-            <div  className="">
+            <div  className="contenedor-cheto container-log">
                
+                <div className="login-box">
                {
 
                perdedor === 'false'|| perdedor === infoRoom.jugador2 ?
@@ -52,7 +63,24 @@ console.log('perdedor...', perdedor)
 
                 }
                 </div>
-               }
+            }
+            <div style={{ display: 'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row' }}>
+            <div>
+								<Link to='#'><div className='boton_ganador' onClick={reset} >
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Jugar</div>
+								</Link>
+							</div>
+							<div>
+								<Link to='/'><div className='boton_ganador' >Home</div>
+								</Link>
+							</div>
+						</div>
+            </div>
+               
             
             </div>
 
