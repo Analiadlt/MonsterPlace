@@ -23,7 +23,7 @@ function LoginMetamask() {
           <button
             className={"button_login"} onClick={authenticate}
           >
-            Login Metamask
+            Conectar Wallet 
           </button>
         </div>
       </div>
