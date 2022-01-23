@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+
 export const CAMBIAR_FONDO = "CAMBIAR_FONDO"
 export const ADD_USER = "ADD_USER"
 export const GET_USER = "GET_USER"
@@ -19,6 +20,9 @@ export const GET_ORDERS = "GET_ORDERS"
 export const GET_PAGAR = "GET_PAGAR"
 export const RESTAR_SALDO = "RESTAR_SALDO"
 export const CARGAR_SALDO = "CARGAR_SALDO"
+
+
+
 
 
 
@@ -53,14 +57,17 @@ export function getCard() {
   }
 }
 
+
+
 // Funcion para verificar login de usuario
 export function loginUser(payload) {
   console.log('datos enviados para ac',payload)
+  
   return async (dispatch) => {
     try {
       var json = await axios.post(`/login/loginUser`, payload);
       
-      json.data.saldo_cryps = 12;
+      
       console.log("Datos para posteo", json.data)
 
         return dispatch({
@@ -204,10 +211,11 @@ export function getOrder(id){
 }
 
 export function getPagar(oId){
-  console.log('Id orden GET_PAGAR desde actions', oId)
+  console.log('Id orden GET-PAGAR desde actions', oId)
   return async (dispatch) => {
     try {
-      var json = await axios.get(`/mercadopago/${oId}`);
+      const params = {id_order: oId }
+      var json = await axios.get("/mercadopago", {params});
       console.log("Datos GET_PAGAR desde ACTIONS: ", json.data);
       return dispatch({
         type: GET_PAGAR,
@@ -219,16 +227,46 @@ export function getPagar(oId){
   };
 }
 
-export function restarSaldo(){
-  
-  return{ type: RESTAR_SALDO, payload:6 } 
+
+export function cargarSaldo(payload){
+
+
+  return async (dispatch) => {
+    console.log('cargar saldo payload', payload)
+
+    
+      var json = await axios.put(`/putsumamonedas`,payload );
+      console.log('respuesta cargar saldo', json.data[0].saldo_cryps)
+      
+      return dispatch({
+        type: CARGAR_SALDO, 
+        payload: json.data[0].saldo_cryps,
+      });
+
+    }
+
 
 }
 
-export function cargarSaldo(){
+export function restarSaldo(payload){
   
-  return{ type: CARGAR_SALDO, payload:10 } 
+  // return{ type: RESTAR_SALDO, payload:6 } 
+  return async (dispatch) => {
+    console.log('restar saldo payload', payload)
 
+    
+      var json = await axios.put(`/putrestamonedas`,payload );
+      console.log('respuesta restar saldo', json.data[0].saldo_cryps)
+      
+      return dispatch({
+        type: RESTAR_SALDO, 
+        payload: json.data[0].saldo_cryps,
+      });
+
+    }
 
 }
+
+
+
 

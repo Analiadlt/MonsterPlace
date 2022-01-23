@@ -43,8 +43,9 @@ export default function Intermedio(){
         socket.emit('cancelar-busqueda', localStorage.getItem('idroom'))
         history.push('/')
     }
+   
     function entrar(){
-        dispatch(restarSaldo())
+        
         history.push('/chat')
         socket.emit('usuario-dentro', localStorage.getItem('idroom'))
     }
@@ -63,13 +64,13 @@ export default function Intermedio(){
             :
             <div className="contenedor-cheto">
                 <h1>Detalles de la Partida</h1>
-                <h2>Saldo{userLogeado?.saldo_cryps}</h2>
+                
                 <div className="grid-intermedio">
                     <div className="jugador">
                         <h1>Jugador 1</h1>
                         <h2>{infoRoom.jugador1}</h2>
                         <h3>CrypsCoins a descontar: 6</h3>
-                        <h3>CrypsCoins restantes en billetera: {userLogeado.saldo_cryps-6}</h3>
+                     
 
 
                     </div>
@@ -83,7 +84,7 @@ export default function Intermedio(){
                         <h1>Jugador 2</h1>
                         <h2>{infoRoom.jugador2}</h2>
                         <h3>CrypsCoins a descontar: 6</h3>
-                        <h3>CrypsCoins restantes en billetera: {userLogeado.saldo_cryps-6}</h3>
+                       
 
 
                     </div>
