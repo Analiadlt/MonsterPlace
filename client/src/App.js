@@ -24,7 +24,6 @@ import NavCheto from "./components/NavCheto";
 import Compra from "./components/Compra";
 import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
-import LoginMetamask from "./components/NFT/PaginaLoginMetamask.jsx";
 import { getUserLogin, pagar, PAGAR } from './redux/actions';
 import Comprar from './components/compra/ordenCompra';
 import GanadorJuego from './components/juego/GanadorJuego';
@@ -84,7 +83,7 @@ function App() {
           <Route  exact path="/Comprar" component={Comprar} />
           <Route exact path= "/BotonPagar" component={BotonPagar} />
           <Route exact path= "/Detallecompra" component={DetalleCompra} />
-          <Route exact path="/LoginMetamask" component={LoginMetamask} /> 
+           
         </div>
       );
     }
