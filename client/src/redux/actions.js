@@ -204,7 +204,7 @@ export function getOrder(id){
 }
 
 export function getPagar(oId){
-  console.log('Id orden GET_PAGAR desde actions', oId)
+  console.log('Id orden GET-PAGAR desde actions', oId)
   return async (dispatch) => {
     try {
       const params = {id_order: oId }
