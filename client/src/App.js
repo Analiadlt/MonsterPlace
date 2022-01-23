@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Route } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Home from './components/Home'
-import FormRegistro from './components/FormRegistro'
-import Tienda from './components/Tienda';
-import './sass/app.scss'
-import TiendaNFT from './components/TiendaNFT';
-import crearNFT from './components/CrearNFT';
-import tableroNFT from './components/TableroNFT';
-import misNFT from './components/MisNFT';
-import Carrito from './components/Carrito';
-import ForLogin from './components/ForLogin';
-import PassReset from './components/PassReset';
-import Juego from './components/juego/interface';
-import userDetail from './components/profile/userDetail';
-import Chat from './components/Chat';
-import MyPage from './firebase/storage/MyPage';
-import MyAuthPage from './firebase/auth/MyAuthPage';
-import Intermedio from './components/juego/intermedio';
+import Home from "./components/Home";
+import FormRegistro from "./components/FormRegistro";
+import Tienda from "./components/Tienda";
+import "./sass/app.scss";
+import TiendaNFT from "./components/NFT/TiendaNFT";
+import crearNFT from "./components/NFT/CrearNFT";
+import tableroNFT from "./components/NFT/TableroNFT";
+import misNFT from "./components/NFT/MisNFT";
+import Carrito from "./components/Carrito";
+import ForLogin from "./components/ForLogin";
+import PassReset from "./components/PassReset";
+import Juego from "./components/juego/interface";
+import userDetail from "./components/profile/userDetail";
+import Chat from "./components/Chat";
+import MyPage from "./firebase/storage/MyPage";
+import MyAuthPage from "./firebase/auth/MyAuthPage";
+import Intermedio from "./components/juego/intermedio";
 // import Chatear from './components/chat/chatear';
-import ChatApp from './components/chat/index';
-import NavCheto from './components/NavCheto';
-import Compra from './components/Compra';
-import { useSelector, useDispatch } from 'react-redux';
+import ChatApp from "./components/chat/index";
+import NavCheto from "./components/NavCheto";
+import Compra from "./components/Compra";
+import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
+import LoginMetamask from "./components/NFT/PaginaLoginMetamask.jsx";
 import { getUserLogin, pagar, PAGAR } from './redux/actions';
 import Comprar from './components/compra/ordenCompra';
 import GanadorJuego from './components/juego/GanadorJuego';
@@ -32,22 +33,22 @@ import DetalleCompra from './components/detalleCompra';
 import CartaFondo from './components/juego/FondoCarta';
 
 
+
 function App() {
-  const logueado = useSelector(state => state.users)
-  const dispatch = useDispatch()
+  const logueado = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   let cambiarLogeo = async () => {
-
     try {
-        if (app) {
+      if (app) {
+        await app.auth().signOut();
 
-            await app.auth().signOut();
-          
-            //   alert("Successfully signed out!");
-        }
+        //   alert("Successfully signed out!");
+      }
     } catch (error) {
-        console.log("error", error);
+      console.log("error", error);
     }
-    };
+
+  };
     useEffect(() => {
 
       if (app) {
@@ -57,7 +58,6 @@ function App() {
             dispatch(getUserLogin(authUser.email))
           }
           })}},[dispatch, logueado])
-                    
 
 
       return (
@@ -84,11 +84,7 @@ function App() {
           <Route  exact path="/Comprar" component={Comprar} />
           <Route exact path= "/BotonPagar" component={BotonPagar} />
           <Route exact path= "/Detallecompra" component={DetalleCompra} />
-
+          <Route exact path="/LoginMetamask" component={LoginMetamask} /> 
         </div>
       );
     }
-
-
-
-    export default App;

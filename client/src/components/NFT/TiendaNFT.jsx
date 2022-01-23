@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import NavCheto from './NavCheto';
+import NavCheto from '../NavCheto';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import CartaFondo from "./juego/FondoCarta";
+import CartaFondo from "../juego/FondoCarta";
 import { ethers } from "ethers";
 import axios from "axios";
-import { nftaddress, nftmarketaddress } from "../config";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts//contracts/NFTMarket.sol/NFTMarket.json";
+import { nftaddress, nftmarketaddress } from "../../config";
+import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
+import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import CardNFT from "./NFTcard";
 
 let rpcEndpoint = null;
