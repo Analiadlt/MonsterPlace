@@ -7,7 +7,7 @@ const router = Router();
 router.put("/",async(req,res)=>{
 
     const { metamaskAccount,email } = req.body
-    console.log(req.body)
+   
     try {
         let response=await User.update({ metamaskAccount },
             {
