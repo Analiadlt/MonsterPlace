@@ -159,43 +159,7 @@ export default function CreateItem() {
           justifyContent: "center",
         }}
       >
-        <Link to="/TiendaNFT">
-          <span
-            className={
-              window.location.pathname === "/TiendaNFT" ? "activo" : null
-            }
-          >
-            Home
-          </span>
-        </Link>
-        <Link to="/CrearNFT">
-          <span
-            className={
-              window.location.pathname === "/CrearNFT" ||
-              window.location.pathname === "/Carrito"
-                ? "activo"
-                : null
-            }
-          >
-            CrearNFT
-          </span>
-        </Link>
-        <Link to="/MisNFT">
-          <span
-            className={window.location.pathname === "/MisNFT" ? "activo" : null}
-          >
-            Mis NFT
-          </span>
-        </Link>
-        <Link to="/TableroNFT">
-          <span
-            className={
-              window.location.pathname === "/TableroNFT" ? "activo" : null
-            }
-          >
-            TableroNFT
-          </span>
-        </Link>
+        
       </div>
 
       <div
