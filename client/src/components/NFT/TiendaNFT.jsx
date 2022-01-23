@@ -9,6 +9,8 @@ import { nftaddress, nftmarketaddress } from "../../config";
 import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import CardNFT from "./NFTcard";
+import Modal1 from "./Modal";
+import CartaTienda from "../cartaTienda";
 
 let rpcEndpoint = null;
 
@@ -17,8 +19,11 @@ if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
 }
 
 export default function TiendaNFT() {
+  const loading = useSelector(state => state.loading)
   const dragones = useSelector(state => state.dragonesbd)
   const [nfts, setNfts] = useState([]);
+
+  
   const [loadingState, setLoadingState] = useState("not-loaded");
   useEffect(() => {
     loadNFTs();
@@ -55,76 +60,52 @@ export default function TiendaNFT() {
     setNfts(items);
     setLoadingState("loaded");
   }
-
+  // {nfts.map((nft) => (
+  //   <CardNFT name={nft.name} nft={nft} />
+  // ))}
   return (
     <div>
-      <NavCheto />
-      <div className="nav-tienda">
+    <NavCheto />
+    <div className="nav-tienda">
+        
+        <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className='link-tienda'>Crypis</Link></h3>
+        
+        <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link-tienda'>NFT</Link></h3>
 
-        <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className={`link ${window.location.pathname === "/Tienda" ? "activo" : null}`}>Crypis</Link></h3>
-
-        <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link'>NFT</Link></h3>
-
-      </div>
-      <div className="muestra contenedor-cheto" >
-        <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'} />
-
-      </div>
-      <div className="contenedor-tienda">
-
-        <div className="navContainerNFT">
-          <Link to="/TiendaNFT">
-            <span
-              className={
-                window.location.pathname === "/TiendaNFT" ? "activo" : null
-              }
-            >
-              Home
-            </span>
-          </Link>
-          <Link to="/CrearNFT">
-            <span
-              className={
-                window.location.pathname === "/CrearNFT" ||
-                  window.location.pathname === "/Carrito"
-                  ? "activo"
-                  : null
-              }
-            >
-              CrearNFT
-            </span>
-          </Link>
-          <Link to="/MisNFT">
-            <span
-              className={
-                window.location.pathname === "/MisNFT" ? "activo" : null
-              }
-            >
-              Mis NFT
-            </span>
-          </Link>
-          <Link to="/TableroNFT">
-            <span
-              className={
-                window.location.pathname === "/TableroNFT" ? "activo" : null
-              }
-            >
-              TableroNFT
-            </span>
-          </Link>
-        </div>
-        {loadingState === "laoded" && !nfts.length ? (
-          <h1>No items in the marketplace</h1>
-        ) : (
-          <div className="contenedor-tajetas">
-            <div className="grid-tienda">
-              {nfts.map((nft) => (
-                <CardNFT name={nft.name} nft={nft} />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
     </div>
+{/*             <div className="muestra contenedor-cheto" >
+        <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'}/>
+
+    </div> */}
+    <div className="background-tienda">
+        <div className="contenedor-tienda">
+
+            <div className="titulo-tienda">
+                <h1>Tienda</h1>
+                {/* <Link to='/Carrito'> */}
+                <Modal1 />
+                {/* </Link> */}
+            </div>
+          
+            
+            {loading.loading ? <h1>Cargando...</h1> :
+                <div className="contenedor-tajetas">
+                    <div className="grid-tienda">
+                        {
+                            nfts.map(nft =>
+                                <div className="cart-tienda">
+                                 
+                                    <CartaTienda name={nft.name} attack={"10"} defense={"20"} img={nft.image} price={nft.price} botones={true} />
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+    
   );
 }

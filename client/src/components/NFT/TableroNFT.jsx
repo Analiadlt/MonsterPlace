@@ -81,22 +81,7 @@ export default function CreatorDashboard() {
             CrearNFT
           </span>
         </Link>
-        <Link to="/MisNFT">
-          <span
-            className={window.location.pathname === "/MisNFT" ? "activo" : null}
-          >
-            Mis NFT
-          </span>
-        </Link>
-        <Link to="/TableroNFT">
-          <span
-            className={
-              window.location.pathname === "/TableroNFT" ? "activo" : null
-            }
-          >
-            TableroNFT
-          </span>
-        </Link>
+        
       </div>
       <div>
         <h2>Items Created</h2>
