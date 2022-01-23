@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import { useDispatch } from "react-redux";
+
 import { addCart } from "../redux/actions";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import { nftaddress, nftmarketaddress } from "../../config";
-import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import { nftaddress, nftmarketaddress } from "../config";
+import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 
 export default function CartaTienda({ img, name, attack, defense, efect, price, type, botones }) {
     const dispatch = useDispatch()
