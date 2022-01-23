@@ -25,8 +25,13 @@ export default function Perfil() {
                 <div className="campo contrase">
                     <i class="fas fa-edit"></i> Modificar Contraseña
                 </div>
+                <div className="campo meta">
+                    <i class="fas fa-wallet"></i> <h2>Conectar Wallet</h2>
+                </div>
 
             </div>
+
+
         </div>
     )
 }
