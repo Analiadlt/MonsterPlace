@@ -23,6 +23,7 @@ const putSumaMonedas = require("./PUT/PutSumaMonedas");
 const putRestaMonedas = require("./PUT/PutRestaMonedas");
 const getMonedas = require ("./GET/GetMonedas");
 
+
 const router = Router();
 
 router.use('/cards', getCards,getDestacadas,validateInformation(postCardSchema),postCards); 
@@ -40,6 +41,7 @@ router.use("/game", postLogicGame)
 router.use("/putsumamonedas",putSumaMonedas)
 router.use("/putrestamonedas",putRestaMonedas)
 router.use("/getmonedas",getMonedas)
+
 // router.use('/')
 
 module.exports = router;

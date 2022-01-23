@@ -6,9 +6,10 @@ const server = express()
 
 server.post("/", async (req, res) => {
 
-    const { email, firstName, lastName, nickName, dateBirth, password } = req.body
+    const {image, email, firstName, lastName, nickName, dateBirth, password } = req.body
     const nick = await User.findOne({where:{nickName:nickName}})
-    console.log("NUCKNAME",nick)
+    console.log("IMAGEN",image)
+
     try {
         if(!nick){
             let user;
@@ -16,6 +17,7 @@ server.post("/", async (req, res) => {
             if (!user) {
                 const rondasHash = 12
                 user = await User.create({
+                    image:image,
                     email: email,
                     firstName: firstName,
                     lastName: lastName,
