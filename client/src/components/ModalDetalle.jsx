@@ -41,7 +41,7 @@ export default function DetalleDr({ img, attack, defense, type, name}) {
     return (
         <div>
             
-            <button onClick={handleOpen} className='btn-ver-detalle'>Ver Detalle</button>
+            <a onClick={handleOpen} >Ver Detalle</a>
 
             <Modal
                 open={open}

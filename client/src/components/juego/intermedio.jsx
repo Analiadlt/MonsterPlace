@@ -5,7 +5,10 @@ import socket from "../Socket";
 import { Link, useHistory } from 'react-router-dom';
 import { empezarPartida } from "../../redux/actions";
 import Spinner from "./spinner";
+import { restarSaldo } from "../../redux/actions";
+
 export default function Intermedio(){
+    const userLogeado = useSelector(state => state.userLogueado)
     
     const history = useHistory()
     const partida = useSelector(state=>state.partida)
@@ -28,13 +31,21 @@ export default function Intermedio(){
             localStorage.setItem("mazo", JSON.stringify(mazo));
             
         })
+        socket.on('room', (room,jugador) =>{
+            localStorage.setItem('idroom', room);
+            localStorage.setItem('numero_jugador',jugador);
+
+            
+        })
         
     })
     function cancelar(){
         socket.emit('cancelar-busqueda', localStorage.getItem('idroom'))
         history.push('/')
     }
+   
     function entrar(){
+        
         history.push('/chat')
         socket.emit('usuario-dentro', localStorage.getItem('idroom'))
     }
@@ -53,14 +64,29 @@ export default function Intermedio(){
             :
             <div className="contenedor-cheto">
                 <h1>Detalles de la Partida</h1>
+                
                 <div className="grid-intermedio">
                     <div className="jugador">
                         <h1>Jugador 1</h1>
                         <h2>{infoRoom.jugador1}</h2>
+                        <h3>CrypsCoins a descontar: 6</h3>
+                     
+
+
+                    </div>
+                    <div className="detalle">
+                        <h2>Tiempo por ronda: 30s</h2>
+                        <h2>CrypsCoins para el ganador: 10</h2>
+
+                        
                     </div>
                     <div className="jugador">
                         <h1>Jugador 2</h1>
                         <h2>{infoRoom.jugador2}</h2>
+                        <h3>CrypsCoins a descontar: 6</h3>
+                       
+
+
                     </div>
 
                 </div>

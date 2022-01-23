@@ -70,6 +70,9 @@ Order.belongsTo(User);
 Order.hasMany(Card);
 Card.belongsTo(Order);
 
+// User.hasMany(Card);
+// Card.belongsTo(User);
+
 User.belongsToMany(Card, {through: 'user_card'});
 User.belongsToMany(Card, {through: 'user_card'});
 

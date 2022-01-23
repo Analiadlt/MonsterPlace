@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
-import { getCard, sellOrder } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { getOrder, sellOrder, pagar } from "../redux/actions";
+import { Link, useHistory } from "react-router-dom";
 import NavCheto from './NavCheto';
-
+import CartaTienda from "./cartaTienda";
 
 export default function Compra() {
+    const history = useHistory();
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.carrito)
     const dispatch = useDispatch()
     const carrito = useSelector(state => state.carrito)
     const email = useSelector(state => state.userLogueado.email)
     const cards = useSelector(state => state.carrito)
+    
+    // const id = useSelector(state => state.carrito.id)
     let allCards = []
 
     function sumarCarrito(carrito) {
@@ -28,6 +31,7 @@ export default function Compra() {
         let array = []
       for (let i = 0; i < cards.length; i++) {
           array.push(cards[i].id)
+          
   
       }
       return array
@@ -39,12 +43,25 @@ export default function Compra() {
         allCards: cargarCards(cards),
      })
 
+    //  useEffect(() => {
+    //     dispatch(sellOrder(state))
+    // }, [dispatch, state])
+
+    // const orderDetail = useSelector((state) => state.order.id);
+
+    // console.log("Odren de Compra ID ", orderDetail)
+
+
+
+
      const onSubmit = (e) => {
         e.preventDefault()
         if (state.email && state.allCards.length > 0) {
-            console.log("dede form: ", state.email, state.allCards)
-            dispatch(sellOrder(state))
+            console.log("Email y Cards desde Compras: ", state.email, state.allCards)
+            dispatch(sellOrder(state)) 
             alert(`${email} Orden enviada`)
+            history.push("/DetalleCompra")
+
         }
         else {
             console.log('ERROR')
@@ -68,7 +85,9 @@ export default function Compra() {
                             <div className="grid-tienda">
                                 {
                                     dragones.map(dragon =>
-                                        <Card name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                        <div className="cart-tienda">
+                                        <CartaTienda name={dragon.name} atack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} />
+                                        </div>
                                     )
                                 }
                             </div>

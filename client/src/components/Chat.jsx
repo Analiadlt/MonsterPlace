@@ -10,10 +10,10 @@ import Chatear from "./chat/chatear";
 import CartaFondo from './juego/FondoCarta';
 import Spinner from "./juego/spinner";
 import CartaGame from "./juego/interface";
-import { empezarPartida } from "../redux/actions";
+import { empezarPartida,restarSaldo } from "../redux/actions";
 
 export default function Chat() {
-
+    const userLogeado = useSelector(state => state.userLogueado)
     const infoRoom = JSON.parse(localStorage.getItem("info-room"));
     const [mazo, setMazo] = useState(JSON.parse(localStorage.getItem("mazo")));
     const [mensaje, setMensaje] = useState('');
@@ -41,8 +41,10 @@ export default function Chat() {
     const[val,setVal]= useState(false)
     const[vida1,setvida1]= useState(100)
     const[vida2,setvida2]= useState(100)
+    const[rondaganada1,setrondaganada1]= useState(0)
+    const[rondaganada2,setrondaganada2]= useState(0)
 
-    const[segundos,setsegundos]= useState(60)
+    const[segundos,setsegundos]= useState(30)
     const[perdedor,setperdedor]= useState(false)
     //false jugador 2
     //true jugador 1
@@ -54,7 +56,7 @@ export default function Chat() {
 
  
   const reset = () => {
-    setsegundos(60);
+    setsegundos(30);
     
   }
     
@@ -76,6 +78,18 @@ export default function Chat() {
 
   },[segundos,listos])
 
+  useEffect(()=>{
+      if(vida1===0){
+        localStorage.setItem('perdedor', infoRoom.jugador1);
+        history.push('/ganador')
+      }
+      if(vida2===0){
+        localStorage.setItem('perdedor', infoRoom.jugador2);
+        history.push('/ganador')
+      }
+
+  },[vida1,vida2])
+
   
 
 
@@ -86,6 +100,19 @@ export default function Chat() {
 
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
+            
+
+            //rondaganada
+            if(resultado.mensaje.jugador === infoRoom.jugador1 ){
+                setrondaganada1(rondaganada1+1)
+            }
+            if(resultado.mensaje.jugador === infoRoom.jugador2 ){
+                setrondaganada2(rondaganada2+1)
+            }
+
+
+            //--------
+
             //restar vida--------
             
             if(resultado.restarvida1){
@@ -139,6 +166,10 @@ export default function Chat() {
 
     })
 
+ console.log('rondaganada1...',rondaganada1) 
+ console.log('rondaganada2...',rondaganada2) 
+
+
 
 
     useEffect(() => {
@@ -172,14 +203,30 @@ export default function Chat() {
     useEffect(() => {
         if (numeroDeRonda === 4) {
             setPartida(true)
-            setTimeout(() => {
-                history.push('/')
-                }, 2000);
-            socket.emit('fin-partida', idpartida)
-            
+            if(vida1>vida2){
+                localStorage.setItem('perdedor', infoRoom.jugador2);
+                history.push('/ganador')
+            }
+            if(vida2>vida1){
+                localStorage.setItem('perdedor', infoRoom.jugador1);
+                history.push('/ganador')
+            }
+            if(vida2===vida1){
+                if(rondaganada1>rondaganada2){
+
+                    localStorage.setItem('perdedor', infoRoom.jugador2);
+                    history.push('/ganador')
+                }
+                if(rondaganada2>rondaganada1){
+                    localStorage.setItem('perdedor', infoRoom.jugador1);
+                    history.push('/ganador')
+                }
+            }
         }
-    })
+    },[numeroDeRonda])
         
+   
+
 
 
 
@@ -249,7 +296,21 @@ export default function Chat() {
         }, 1400)
     }
 
+ let aux = {
+        email: userLogeado.email,
+        saldo_cryps:6
+    }
 
+let restarCoins = ()=>{
+    dispatch(restarSaldo(aux))
+}
+useEffect(() => {
+  if(listos){
+    restarCoins()
+  }
+
+
+}, [listos])
 
 
 
@@ -257,7 +318,7 @@ export default function Chat() {
 
 return (
     <div>
-        
+       
             
         <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
             <h2>Jugador 1</h2>

@@ -109,3 +109,12 @@
         bottom: 70px
     }
 }
+
+@media only screen and (min-width: 0px) and (max-width: 567px){
+    .container-slider{
+        position: relative;
+        margin-top: 10px;
+        bottom: 115px
+    }
+
+}

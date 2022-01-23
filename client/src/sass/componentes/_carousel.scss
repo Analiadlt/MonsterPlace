@@ -1,4 +1,4 @@
-
+@use '../estilosBase/variables' as v;
 .swiper{
     width: 100%;
     margin-top: 3rem;
@@ -13,7 +13,7 @@
 
 .swiper-button-next ,.swiper-button-prev{
     color: rgb(0, 0, 0);
-    background-color: #ffb52073 ;
+    background-color: v.$color-bordes ;
     padding: 5px 10px;
     border-radius:50%;
     width: 60px;

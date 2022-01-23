@@ -13,7 +13,7 @@ import huevoRojo from '../img/huevoRojo.png'
 import huevoBlanco from '../img/huevoBlanco.png'
 import {app} from "../firebase/firebase";
 
-import { loginReset } from '../redux/actions';
+import { loginReset ,cargarSaldo} from '../redux/actions';
 
 const validate = values => {
 
@@ -76,8 +76,23 @@ const ForLogin = () => {
 					.signInWithEmailAndPassword(values.email, values.password);
 				  if(user.user.emailVerified === false){
 					cambiarLogeo()
+					Swal.fire({
+						title: '<strong>Debes validar el email</strong>',
+					   imageUrl: `${huevoRojo}`,
+					   width: 500,
+					   imageWidth: 300,
+					   imageHeight: 400,
+					   
+					  
+						 
+					   })
 				  }else{
+					let aux = {
+						email: values.email,
+						saldo_cryps:6
+					  }
 				  	dispatch(loginUser(values));
+				  	dispatch(cargarSaldo(aux));
 					setLogeado(true)
 				  }
 				//   alert("Bienvenido!");

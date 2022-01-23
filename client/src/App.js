@@ -24,10 +24,14 @@ import NavCheto from "./components/NavCheto";
 import Compra from "./components/Compra";
 import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
-import { getUserLogin } from "./redux/actions";
-import Comprar from "./components/compra/ordenCompra";
-import GanadorJuego from "./components/juego/GanadorJuego";
 import LoginMetamask from "./components/NFT/PaginaLoginMetamask.jsx";
+import { getUserLogin, pagar, PAGAR } from './redux/actions';
+import Comprar from './components/compra/ordenCompra';
+import GanadorJuego from './components/juego/GanadorJuego';
+import BotonPagar from './components/BotonPagar';
+import DetalleCompra from './components/detalleCompra';
+import CartaFondo from './components/juego/FondoCarta';
+
 
 
 function App() {
@@ -43,46 +47,44 @@ function App() {
     } catch (error) {
       console.log("error", error);
     }
+
   };
-  useEffect(() => {
-    if (app) {
-      app.auth().onAuthStateChanged((authUser) => {
-        if (
-          authUser &&
-          logueado.length > 5 &&
-          authUser.emailVerified === true
-        ) {
-          dispatch(getUserLogin(authUser.email));
-        }
-      });
+    useEffect(() => {
+
+      if (app) {
+        app.auth().onAuthStateChanged((authUser) => {
+
+          if (authUser && logueado.length >5 && authUser.emailVerified === true) {
+            dispatch(getUserLogin(authUser.email))
+          }
+          })}},[dispatch, logueado])
+
+
+      return (
+        <div className="App">
+          <Route path="/ganador" component={GanadorJuego} />
+          <Route path="/storage" component={MyPage} />
+          <Route path="/auth" component={MyAuthPage} />
+          <Route path="/Carrito" component={Carrito} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Tienda" component={Tienda} />
+          <Route path="/Registro" component={FormRegistro} />
+          <Route path="/Login" component={ForLogin} />
+          <Route path="/PassReset" component={PassReset} />
+          <Route path="/Detail/" component={userDetail} />
+          <Route path="/chat" component={Chat} />
+          <Route path="/juego" component={CartaFondo} />
+          <Route  exact path="/TiendaNFT" component={TiendaNFT} />
+          <Route  exact path="/CrearNFT" component={crearNFT} />
+          <Route  exact path="/TableroNFT" component={tableroNFT} />
+          <Route  exact path="/MisNFT" component={misNFT} />
+          <Route  exact path="/Matchmaking" component={Intermedio} />
+          <Route  exact path="/Compra" component={Compra} />
+          <Route  exact path="/Chatear" component={ChatApp} />
+          <Route  exact path="/Comprar" component={Comprar} />
+          <Route exact path= "/BotonPagar" component={BotonPagar} />
+          <Route exact path= "/Detallecompra" component={DetalleCompra} />
+          <Route exact path="/LoginMetamask" component={LoginMetamask} /> 
+        </div>
+      );
     }
-  }, [dispatch, logueado]);
-
-  return (
-    <div className="App">
-      <Route path="/ganador" component={GanadorJuego} />
-      <Route path="/storage" component={MyPage} />
-      <Route path="/auth" component={MyAuthPage} />
-      <Route path="/Carrito" component={Carrito} />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/Tienda" component={Tienda} />
-      <Route path="/Registro" component={FormRegistro} />
-      <Route path="/Login" component={ForLogin} />
-      <Route path="/PassReset" component={PassReset} />
-      <Route path="/Detail/" component={userDetail} />
-      <Route path="/chat" component={Chat} />
-      <Route path="/juego" component={NavCheto} />
-      <Route exact path="/TiendaNFT" component={TiendaNFT} />
-      <Route exact path="/CrearNFT" component={crearNFT} />
-      <Route exact path="/TableroNFT" component={tableroNFT} />
-      <Route exact path="/MisNFT" component={misNFT} />
-      <Route exact path="/Matchmaking" component={Intermedio} />
-      <Route exact path="/Compra" component={Compra} />
-      <Route exact path="/Chatear" component={ChatApp} />
-      <Route exact path="/Comprar" component={Comprar} />
-      <Route exact path="/LoginMetamask" component={LoginMetamask} />
-    </div>
-  );
-}
-
-export default App;

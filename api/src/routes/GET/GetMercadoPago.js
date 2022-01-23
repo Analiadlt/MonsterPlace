@@ -1,13 +1,11 @@
-const { Order, Card} = require("../../db");
+const { User, Order, Card } = require("../../db");
 const router = require('express').Router();
 
 // SDK de Mercado Pago
-const mercadopago = require ('mercadopago');
+const mercadopago = require('mercadopago');
 //const Card = require("../../models/Card");
 
-const { ACCESS_TOKEN , REACT_APP_CLIENT} = process.env;
-// REACT_APP_CLIENT = "http://localhost:3000"
-// REACT_APP_API = "http://localhost:3001"
+const { ACCESS_TOKEN, REACT_APP_CLIENT } = process.env;
 
 //Agrega credenciales
 mercadopago.configure({
@@ -16,123 +14,141 @@ mercadopago.configure({
 
 
 //Ruta que genera la URL de MercadoPago
-router.get("/:id", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
+  const { id_order } = req.query
+  //const id_order = req.params.id;
+  console.log("IDORDER", id_order)
+  // const id_orden = 3;
+  try {
 
-  const id_orden = req.params.id;
+    const order = await Order.findOne({
+      where: {
+        id: id_order
+      }
+    })
+    console.log("Orden desde Get del Mercadopago: ", order)
 
-  const orden = await Order.findOne({
-    where: {
-      id: id_orden
-    }
-  })
+    const carrito = await Card.findAll({
+      where: {
+        orderId: id_order
+      }
+    })
+    console.log('nroorden', order)
+    console.log('carrito', carrito)
 
-  const carrito = await Card.findAll({
-    where: {
-      orderId: id_orden
-    }
-  })
-  console.log('nroorden', orden)
-  console.log('carrito', carrito)
-  // ejemplo de carrito = [
-  //   {id: 1, title: "plover", quantity: 1, price: 100},
-  //   {id: 2, title: "warlockk", quantity: 1, price: 500}
-  // ]
-  
-  const items_ml = carrito?.map(i => ({
-    title: i.name,
-    unit_price: Math.ceil(i.sellPrice),
-    quantity: 1,
-  }))
+    const items_ml = carrito?.map(i => ({
+      title: i.name,
+      unit_price: Math.ceil(i.sellPrice),
+      quantity: 1,
+    }))
 
-  // Crea un objeto de preferencia
-  let preference = {
-    items: items_ml,
-    external_reference : `${id_orden}`,
-    payment_methods: {
-      excluded_payment_types: [
-        {
-          id: "atm"
-        }
-      ],
-      installments: 24  //Cantidad máximo de cuotas
-    },
-    back_urls: {
-      success: '/mercadopago/pagos',
-      failure: '/mercadopago/pagos',
-      pending: '/mercadopago/pagos',
-    },
-  };
+    // Crea un objeto de preferencia
+    let preference = {
+      items: items_ml,
+      external_reference: `${id_order}`,
+      payment_methods: {
+        excluded_payment_types: [
+          {
+            id: "atm"
+          }
+        ],
+        installments: 3  //Cantidad máximo de cuotas
+      },
+      back_urls: {
+        success: '/localhost:3001/mercadopago/pagos',
+        failure: '/localhost:3001/mercadopago/pagos',
+        pending: '/localhost:3001/mercadopago/pagos',
+      },
+    };
 
-  mercadopago.preferences.create(preference)
 
-  .then(function(response){
-    
-    console.info('respondio')
+    const response = await mercadopago.preferences.create(preference)
+    console.log("REPONDIO", response)
+    res.json({ id: response.body.id })
 
-  //Este valor reemplazará el string"<%= global.id %>" en tu HTML
-    global.id = response.body.id;
-    res.json({ id: global.id });
-
-  })
-  .catch(function(error){
-    console.log(error);
-  })
-}) 
-
+  } catch (error) {
+    res.send("No se genero correctamente ID-MP")
+  }
+})
 
 //Ruta que recibe la información del pago
-router.get("/pagos", (req, res)=>{
+router.get("/pagos", async (req, res) => {
+
   console.info("EN LA RUTA PAGOS ", req)
-  const payment_id= req.query.payment_id
-  const payment_status= req.query.status
-  const external_reference = req.query.external_reference
-  const merchant_order_id= req.query.merchant_order_id
+  const {
+    payment_id,
+    payment_type,
+    status,
+    external_reference,
+    merchant_order_id
+  } = req.query
+
   //console.log("EXTERNAL REFERENCE ", external_reference)
 
   //Aquí edito el status de mi orden
   //proceso los datos del pago 
   //redirijo de nuevo a react con mensaje de exito, falla o pendiente
-  Order.findByPk(external_reference)
-  .then((order) => {
-    order.payment_id= payment_id
-    order.payment_status= payment_status
+  try {
+    const order = await Order.findByPk(external_reference)
+    order.payment_id = payment_id
+    order.pay_method = payment_type
+    order.payment_status = status
     order.merchant_order_id = merchant_order_id
     order.status = "completed"
-    console.info('Salvando order')
-    order.save()
-    .then((_) => {
-      console.info('redirect success')
+
+    console.log("ORDER", order)
+
+    try {
+      console.info('Salvando order')
+      await order.save()
+
+      if (order.payment_status === "approved") {
+        const user = await User.findByPk(order.userId)
+        console.log("USER", user)
+        const cards = await Card.findAll({ where: { orderId: order.id } })
+        console.log("CARDS", cards)
+        for (const card of cards) {
+          console.log("BUCLE", card)
+          user.addCards(card)
+        }
+        return res.redirect(`${REACT_APP_CLIENT}/Detail`)
       
-      return res.redirect(REACT_APP_CLIENT)
-    })
-    .catch((err) =>{
-      console.error('error al salvar', err)
+      } else {
+        res.json({ error: "No se pudo completar la transaccion" })
+      }
+
+    }
+    catch (error) {
+      console.error('error al salvar', error)
       return res.redirect(`${REACT_APP_CLIENT}/?error=${err}&where=al+salvar`)
-    })
-  })
-  .catch(err =>{
-    console.error('error al buscar', err)
+    }
+
+  } catch (error) {
+    console.error('error al buscar', error)
     return res.redirect(`${REACT_APP_CLIENT}/?error=${err}&where=al+buscar`)
-  })
+  }
+
 })
 
 
+
+
 //Busco información de una orden de pago
-router.get("/pagos/:id", (req, res)=>{
+router.get("/pagos/:id", (req, res) => {
   const mp = new mercadopago(ACCESS_TOKEN)
   const id = req.params.id
   console.info("Buscando el id", id)
-  mp.get(`/v1/payments/search`, {'status': 'pending'}) //{"external_reference":id})
-  .then(resultado  => {
-    console.info('resultado', resultado)
-    res.json({"resultado": resultado})
-  })
-  .catch(err => {
-    console.error('No se consulto:', err)
-    res.json({
-      error: err
+  mp.get(`/v1/payments/search`, { 'status': 'pending' }) //{"external_reference":id})
+    .then(resultado => {
+      console.info('resultado', resultado)
+      res.json({ "resultado": resultado })
     })
-  })
+    .catch(err => {
+      console.error('No se consulto:', err)
+      res.json({
+        error: err
+      })
+    })
 })
 
 module.exports = router;

@@ -1,4 +1,5 @@
-.detalle-container{
+@use '../estilosBase/variables' as v;
+/* .detalle-container{
     *{
         margin: 0;
         padding: 0;
@@ -8,7 +9,7 @@
        
       }
 
-}
+} */
 .avatar{
     display: flex;
     flex-direction: column;
@@ -18,7 +19,7 @@
 
     p{
         font-size: 2rem;
-        color: white;
+        color: v.$color-tercero;
         text-align: center;
         border-bottom: 0.5px solid rgba(128, 128, 128, 0.158);
         padding: 20px;
@@ -57,7 +58,7 @@
     list-style:none;
 }    
 .wrapper .sidebar i {
-    color:#FFB520;
+    color: v.$color-tercero;
     margin-right: 5px;
 }
 .wrapper .sidebar ul li a{
@@ -75,20 +76,26 @@
 }
   
 .wrapper .sidebar ul li:hover{
-    background-color: #75510983;
     transition: 0.5s;
-    color: white;
+    color: v.$color-tercero;
 }
 .activo-profile{
-    background-color: #a06f0e;
+    background-color: v.$color-titulo;
+    box-shadow: 5px 5px 50px v.$color-titulo;
     
+    color: black;
     i{
         margin-right: 10px;
+        color: black;
+        
+    }
+    li, ul{
+        color: black;
     }
    
 }     
 .wrapper .sidebar ul li:hover a{
-    color: #fff;
+    color: v.$color-tercero;
 }
    
 .wrapper .sidebar .social_media{
@@ -102,12 +109,12 @@
 .wrapper .sidebar .social_media a{
     display: block;
     width: 40px;
-    background: #594f8d;
+    
     height: 40px;
     line-height: 45px;
     text-align: center;
     margin: 0 5px;
-    color: #bdb8d7;
+    
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -148,4 +155,55 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5rem 2rem;
+}
+
+.campo{
+    display: flex;
+    font-size: 2.5rem;
+    background-color: v.$color-secundario;
+    border-radius: 10px;
+    width: 80%;
+    padding: 15px;
+    box-shadow: 5px 5px 10px v.$color-fondo;
+    i{
+        color: v.$color-tercero;
+        margin: 0 2rem;
+        cursor: pointer;
+    }
+    justify-content: left;
+    align-items: center;
+    span{
+        margin-left: 20px;
+        color: v.$color-tercero;
+    }
+}
+.grid-info{
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 5rem 0;
+    
+}
+.cabeza-profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .cryps{
+        font-size: 2.5rem;
+        color: v.$color-tercero;
+        /* border: 1px solid v.$color-titulo; */
+        background-color: v.$color-secundario;
+        border-radius: 15px;
+        padding: 10px;
+        i{
+            color: v.$color-titulo;
+            margin-left: 10px;
+        }
+    }
+}
+.contrase{
+    background: v.$color-titulo;
+    color: v.$color-fondo;
+    box-shadow: 5px 5px 15px v.$color-titulo;
+    
 }
