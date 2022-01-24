@@ -24,18 +24,21 @@ import NavCheto from "./components/NavCheto";
 import Compra from "./components/Compra";
 import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
-import { getUserLogin, pagar, PAGAR } from './redux/actions';
-import Comprar from './components/compra/ordenCompra';
-import GanadorJuego from './components/juego/GanadorJuego';
-import BotonPagar from './components/BotonPagar';
-import DetalleCompra from './components/detalleCompra';
-import CartaFondo from './components/juego/FondoCarta';
+import { getUserLogin, pagar, PAGAR, getUserLoginMetamask } from "./redux/actions";
+import Comprar from "./components/compra/ordenCompra";
+import GanadorJuego from "./components/juego/GanadorJuego";
+import BotonPagar from "./components/BotonPagar";
+import DetalleCompra from "./components/detalleCompra";
+import CartaFondo from "./components/juego/FondoCarta";
 import CartaNft from "./components/CartaNft";
+import { useMoralis } from "react-moralis";
 import Panel from "./components/panel/panel";
+
 
 function App() {
   const logueado = useSelector((state) => state.users);
   const dispatch = useDispatch();
+  const { isAuthenticated, user } = useMoralis();
   let cambiarLogeo = async () => {
     try {
       if (app) {
@@ -46,17 +49,28 @@ function App() {
     } catch (error) {
       console.log("error", error);
     }
-
   };
-    useEffect(() => {
 
-      if (app) {
-        app.auth().onAuthStateChanged((authUser) => {
+   useEffect(() => {
+    if (app) {
+      app.auth().onAuthStateChanged((authUser) => {
+        if (
+          authUser &&
+          logueado.length > 5 &&
+          authUser.emailVerified === true
+        ) {
+          dispatch(getUserLogin(authUser.email));
+        }
+      });
+    }
 
-          if (authUser && logueado.length >5 && authUser.emailVerified === true) {
-            dispatch(getUserLogin(authUser.email))
-          }
-          })}},[dispatch, logueado])
+    else if (isAuthenticated === true) {
+     
+          dispatch(getUserLoginMetamask({cuentaMetamask: user.attributes.accounts[0]}));
+        
+      };
+    
+  }, [dispatch, logueado]);
 
 
       return (
@@ -86,7 +100,5 @@ function App() {
           <Route exact path= "/Panel" component={Panel} />
         </div>
       );
-    }
 
-    
 export default App;
