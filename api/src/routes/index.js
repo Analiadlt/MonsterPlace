@@ -22,7 +22,8 @@ const postLogicGame = require("./POST/PostLogicGame");
 const putSumaMonedas = require("./PUT/PutSumaMonedas");
 const putRestaMonedas = require("./PUT/PutRestaMonedas");
 const getMonedas = require ("./GET/GetMonedas");
-const putMetamask = require ("./PUT/PutMetamask")
+const putMetamask = require ("./PUT/PutMetamask");
+const putResultado = require("./PUT/PutResultado");
 
 const router = Router();
 
@@ -42,6 +43,7 @@ router.use("/putsumamonedas",putSumaMonedas)
 router.use("/putrestamonedas",putRestaMonedas)
 router.use("/getmonedas",getMonedas)
 router.use("/putmetamask",putMetamask)
+router.use("/resultado",putResultado)
 // router.use('/')
 
 module.exports = router;
