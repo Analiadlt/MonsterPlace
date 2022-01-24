@@ -100,5 +100,5 @@ function App() {
           <Route exact path= "/Panel" component={Panel} />
         </div>
       );
-
+}
 export default App;
