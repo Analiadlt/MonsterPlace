@@ -9,7 +9,7 @@ router.post("/loginInformation", async (req,res) => {
     console.log(email)
     const info = await User.findAll({
         where:{email:email},
-        attributes:{exclude:['password','createdAt','updatedAt','dateBirth','token','id']}
+        attributes:{exclude:['password','createdAt','updatedAt','dateBirth','token']}
     })
     try {
         res.status(200).send(info)
