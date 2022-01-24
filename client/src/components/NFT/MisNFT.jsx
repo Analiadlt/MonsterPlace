@@ -41,6 +41,7 @@ export default function MyAssets() {
           seller: i.seller,
           owner: i.owner,
           image: meta.data.image,
+          description: meta.data.description,
         };
         return item;
       })
@@ -52,10 +53,10 @@ export default function MyAssets() {
   // if (loadingState === 'loaded' && !nfts.length) return (<h1>No assets owned</h1>)
   return (
     <div>
-      {nfts.map((nft, i) => (
-        <div className="cart-tienda">
+      {nfts?.map((nft, i) => (
+        <div className="cart-tienda" key ={i}>
 
-          <CartaNft nft={nft} />
+          <CartaNft  nft={nft} />
         </div>
       ))}
     </div>
