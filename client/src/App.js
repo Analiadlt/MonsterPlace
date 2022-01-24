@@ -33,6 +33,7 @@ import CartaFondo from "./components/juego/FondoCarta";
 import CartaNft from "./components/CartaNft";
 import { useMoralis } from "react-moralis";
 import Panel from "./components/panel/panel";
+import preintermedio from "./components/juego/preintermedio";
 
 
 function App() {
@@ -97,7 +98,10 @@ function App() {
           <Route  exact path="/Comprar" component={Comprar} />
           <Route exact path= "/BotonPagar" component={BotonPagar} />
           <Route exact path= "/Detallecompra" component={DetalleCompra} />
+          <Route exact path= "/preintermedio" component={preintermedio}/>
           <Route exact path= "/Panel" component={Panel} />
+
+          
         </div>
       );
 }

@@ -58,8 +58,8 @@ export default function ProfileHome() {
         if(userLogeado.saldo_cryps > 5){
 
         // dispatch(restarSaldo())
-        socket.emit('buscar-rooms', userLogeado.nickName);
-        history.push('/Matchmaking')
+        
+        history.push('/preintermedio')
         }
         else{
             Swal.fire({

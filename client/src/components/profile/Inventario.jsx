@@ -24,7 +24,7 @@ const resultado = users.find( e=> e.email === user );
 // console.log ("Encontrado desde inventario", resultado.id)
 
 
-const uId = resultado.id
+const uId = resultado?.id
 
 // console.log("Id del usuario: " , uId.id)
 
