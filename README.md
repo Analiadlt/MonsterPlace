@@ -1,6 +1,6 @@
 # CryptoGame
 
-CryptoGame es una plataforma web que ofrece un servicio de entretenimiento. Se trata de un juego entre dos jugadores que poseen cartas con puntos de ataque y puntos de defensa.  Hay dos tipos de cartas: clásicas y NFT.
+CryptoGame es una plataforma web que ofrece un servicio de entretenimiento. Es un juego entre dos jugadores que poseen cartas con puntos de ataque y puntos de defensa. Existen dos tipos de cartas: clásicas y NFT.
 Para poder jugar, debes ser mayor de 18 años, registrarte con un email y password. Debes ser propietario de por lo menos tres cartas de cualquiera de los dos tipos.
 Para adquirir cartas, debes acceder a cualquiera de las dos tiendas y realizar la compra. 
 
