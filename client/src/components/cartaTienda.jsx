@@ -6,31 +6,12 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 import { useDispatch } from "react-redux";
 
 import { addCart } from "../redux/actions";
-import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-import { nftaddress, nftmarketaddress } from "../config";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+
 
 export default function CartaTienda({ img, name, attack, defense, efect, price, type, botones }) {
     const dispatch = useDispatch()
     // const ataqueDefensa = nfts.description.split(",");
-    async function buyNft(nft) {
-        //para conectar la wallet
-        const web3Modal = new Web3Modal();
-        const connection = await web3Modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-        const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
-        const transaction = await contract.createMarketSale(
-          nftaddress,
-          nft.itemId,
-          {
-            value: price,
-          }
-        );
-        await transaction.wait();
-      }
+
     
     
     
@@ -39,7 +20,7 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
         <div id={name} className="carta3d">
             <div id='carta3d' className={`contenido3d ${efect} girar`}>
                 <div className="frontCarta logo-carta">
-                    q
+               
                 </div>
                 <div className="backCarta">
                     <div className="contenedor-imagen">

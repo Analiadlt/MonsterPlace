@@ -31,7 +31,7 @@ import BotonPagar from './components/BotonPagar';
 import DetalleCompra from './components/detalleCompra';
 import CartaFondo from './components/juego/FondoCarta';
 import CartaNft from "./components/CartaNft";
-
+import Panel from "./components/panel/panel";
 
 function App() {
   const logueado = useSelector((state) => state.users);
@@ -83,7 +83,7 @@ function App() {
           <Route  exact path="/Comprar" component={Comprar} />
           <Route exact path= "/BotonPagar" component={BotonPagar} />
           <Route exact path= "/Detallecompra" component={DetalleCompra} />
-           
+          <Route exact path= "/Panel" component={Panel} />
         </div>
       );
     }
