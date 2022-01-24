@@ -54,7 +54,7 @@ export function addMetamaskAccount(payload) {
  console.log(payload)
   return async (dispatch) => {
     try {
-      var json = await axios.post(`/users`, payload);
+      var json = await axios.post(`/putmetamask`, payload);
       return dispatch({
         type: ADD_METAMASK_ACCOUNT, 
         payload: json,
