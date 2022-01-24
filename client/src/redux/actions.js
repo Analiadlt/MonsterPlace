@@ -20,6 +20,7 @@ export const GET_ORDERS = "GET_ORDERS"
 export const GET_PAGAR = "GET_PAGAR"
 export const RESTAR_SALDO = "RESTAR_SALDO"
 export const CARGAR_SALDO = "CARGAR_SALDO"
+export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT"
 
 
 
@@ -46,6 +47,23 @@ export function addUser(payload) {
       }
 
     }
+
+}
+
+export function addMetamaskAccount(payload) {
+ console.log(payload)
+  return async (dispatch) => {
+    try {
+      var json = await axios.post(`/putmetamask`, payload);
+      return dispatch({
+        type: ADD_METAMASK_ACCOUNT, 
+        payload: json,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
 }
 export function getCard() {
