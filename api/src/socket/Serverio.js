@@ -78,7 +78,6 @@ const mazo2 = [
 
 
 
-
 var connections = [];
 let roomincompleto = '';
 let room = [];

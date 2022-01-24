@@ -23,7 +23,9 @@ export default function Inventario() {
 
 
 
+
 // const uId = resultado?.id
+
 
 
 // console.log("Id del usuario: " , uId.id)
