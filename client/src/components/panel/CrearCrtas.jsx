@@ -38,7 +38,7 @@ function validate(formInput) {
   return errorValidate;
 }
 
-export default function CreateItem() {
+export default function CrearCarta() {
   const [fileUrl, setFileUrl] = useState(null);
   const [error, setError] = useState({});
   const [formInput, updateFormInput] = useState({
@@ -49,81 +49,13 @@ export default function CreateItem() {
   });
   const router = useHistory();
 
-  async function onChange(e) {
-    const file = e.target.files[0];
-    setError(
-      validate({
-        ...formInput,
-        [e.target.name]: e.target.value,
-      })
-    );
-    try {
-      const added = await client.add(file, {
-        progress: (prog) => console.log(`received: ${prog}`),
-      });
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      setFileUrl(url);
-    } catch (error) {
-      console.log("Error uploading file: ", error);
-    }
-  }
-  async function createMarket() {
-    const { name, attack, defense } = formInput;
-    //validation:
-    setError(
-      validate({
-        ...formInput,
-      })
-    );
-    if (Object.getOwnPropertyNames(error).length) {
-      alert("Input Error, Verify Information");
-    } else {
-      const data = JSON.stringify({
-        name,
-        description: attack + "," + defense,
-        image: fileUrl,
-      });
-      try {
-        const added = await client.add(data);
-        const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-        /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-        createSale(url);
-      } catch (error) {
-        console.log("Error uploading file: ", error);
-      }
-    }
-  }
 
-  async function createSale(url) {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
 
-    /* next, create the item */
-    let contract = new ethers.Contract(nftaddress, NFT.abi, signer);
-    let transaction = await contract.createToken(url);
-    let tx = await transaction.wait();
-    let event = tx.events[0];
-    let value = event.args[2];
-    let tokenId = value.toNumber();
-
-    const price = ethers.utils.parseUnits(formInput.price, "ether");
-
-    /* then list the item for sale on the marketplace */
-    contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-    let listingPrice = await contract.getListingPrice();
-    listingPrice = listingPrice.toString();
-
-    transaction = await contract.createMarketItem(nftaddress, tokenId, price, {
-      value: listingPrice,
-    });
-    await transaction.wait();
-    router.push("/TiendaNFT");
-  }
+ 
 
   return (
     <div>
+
       <div
         className="navContainerNFT"
         style={{
@@ -145,7 +77,7 @@ export default function CreateItem() {
       >
         <div className="login-box">
           <div className="form">
-            <h2>Crear NFT</h2>
+            <h2>Crear Cartas</h2>
 
             <div className="user-box">
               <label>Nombre</label>
@@ -205,7 +137,7 @@ export default function CreateItem() {
                 type="file"
                 name="Asset"
                 className="my-4"
-                onChange={onChange}
+                
               />
             </div>
             {fileUrl && <img src={fileUrl} alt="" />}
@@ -217,12 +149,12 @@ export default function CreateItem() {
                 alignItems: "center",
               }}
             >
-              <button type="submit" className="botonn" onClick={createMarket}>
+              <button type="submit" className="botonn">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-                Create Digital Asset
+                Crear Carta
               </button>
             </div>
           </div>
