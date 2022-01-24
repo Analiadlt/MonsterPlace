@@ -7,6 +7,8 @@ import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 export default function CartaNft({nft}) {
+
+    console.log(nft)
     const dispatch = useDispatch()
     const ataqueDefensa = nft.description.split(",");
     async function buyNft(nft) {
@@ -30,7 +32,7 @@ export default function CartaNft({nft}) {
     return (
 
         <div id='oxonomy' className="carta3d">
-            <div id='carta3d' className={`contenido3d  `}>
+            <div id='carta3d' className={`contenido3d  girar`}>
                 <div className="frontCarta logo-carta nft-front">
 
                 </div>
@@ -43,11 +45,11 @@ export default function CartaNft({nft}) {
                         <div className="radios">
                             <div className="caracteristicasFondo">
                                 <div className="caract">
-                                    <i class="fab fa-fort-awesome icono-cart" ></i><span>ataqueDefensa[0]</span>
+                                    <i class="fab fa-fort-awesome icono-cart" ></i><span>{ataqueDefensa[0]}</span>
 
                                 </div>
                                 <div className="caract">
-                                    <i class="fab fa-gripfire icono-cart"></i><span>ataqueDefensa[1]</span>
+                                    <i class="fab fa-gripfire icono-cart"></i><span>{ataqueDefensa[1]}</span>
                                 </div>
                             </div>
                             <div className="precio-carta">

@@ -53,7 +53,7 @@ export default function Detalle() {
 			
 			
 			<div className="avatar">
-				<Avatar sx={{ width: 100, height: 100, fontSize:"2.5rem", backgroundColor:'#FF6363',":hover":'rgba(0, 0, 0)', backgroundSize:'cover' }}>{detail !==[] ? <img style={{width:'100%',height:'100%'}} src={detail.image} alt={detail.nickname?.charAt(0)} />:'I'}</Avatar>
+				<Avatar sx={{ width: 102, height: 100, fontSize:"2.5rem", backgroundColor:'#FF6363',":hover":'rgba(0, 0, 0)', backgroundSize:'cover' }}>{detail !==[] ? <img style={{width:'100%',height:'100%'}} src={detail.image} alt={detail.nickname?.charAt(0)} />:'I'}</Avatar>
 				<p className='log-usuario'>{detail.nickName? detail.nickName:'Invitado'}</p>
 			</div>
 			
