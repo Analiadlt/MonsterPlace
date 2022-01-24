@@ -1,7 +1,9 @@
 
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
-   LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
-    RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR} from './actions'
+    LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
+     RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,
+     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD
+ } from './actions'
 
 
 
@@ -52,6 +54,10 @@ const initialState = {
 
     //pago
     getpago: [],
+
+     //trae las cardas segun el id de usuario
+
+    userCards: [],
 
 
 
@@ -184,6 +190,14 @@ export default function Reducer(state=initialState, action){
                     ...state,
                     getpago: action.payload
                 }
+                case GET_USER_CARD:
+                    //console.log("Desde Reducer ID usuario", action.payload)
+                return {
+                     ...state, 
+                    userCards: action.payload,
+                                  
+                };
+
           default:
             return state;
 
