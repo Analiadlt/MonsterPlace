@@ -53,7 +53,7 @@ export default function Detalle() {
 			
 			
 			<div className="avatar">
-				<Avatar sx={{ width: 60, height: 60, fontSize:"2.5rem", backgroundColor:'#FF6363',":hover":'rgba(0, 0, 0)' }}>{detail !==[] ? detail.nickName?.charAt(0) :'I'}</Avatar>
+				<Avatar sx={{ width: 100, height: 100, fontSize:"2.5rem", backgroundColor:'#FF6363',":hover":'rgba(0, 0, 0)', backgroundSize:'cover' }}>{detail !==[] ? <img style={{width:'100%',height:'100%'}} src={detail.image} alt={detail.nickname?.charAt(0)} />:'I'}</Avatar>
 				<p className='log-usuario'>{detail.nickName? detail.nickName:'Invitado'}</p>
 			</div>
 			
@@ -61,11 +61,11 @@ export default function Detalle() {
 				<div class="sidebar">
 					
 					<ul>
-						<li onClick={()=>{setNavegacion('home')}}  className={`${navegacion === 'home'? 'activo-profile' : null}`} ><a href="#"><i class="fas fa-home"></i>Home</a></li>
-						<li onClick={()=>{setNavegacion('profile')}} className={`${navegacion === 'profile'? 'activo-profile' : null}`} ><a href="#"><i class="fas fa-user"></i>Profile</a></li>
-						<li onClick={()=>{setNavegacion('inventario')}} className={`${navegacion === 'inventario'? 'activo-profile' : null}`}><a href="#"><i class="fas fa-boxes"></i>Inventario</a></li>
-						<li onClick={()=>{setNavegacion('misNft')}}className={`${navegacion === 'misNft'? 'activo-profile' : null}`}><a href="#"><i class="fas fa-hat-wizard"></i>Mis NFT</a></li>
-						<li onClick={()=>{setNavegacion('estadisticas')}} className={`${navegacion === 'estadisticas'? 'activo-profile' : null}`}><a href="#"><i class="far fa-chart-bar"></i>Estadisticas</a></li>
+						<li onClick={()=>{setNavegacion('home')}}  className={`${navegacion === 'home'? 'activo-profile' : null}`} ><i class="fas fa-home"></i>Home</li>
+						<li onClick={()=>{setNavegacion('profile')}} className={`${navegacion === 'profile'? 'activo-profile' : null}`} ><i class="fas fa-user"></i>Profile</li>
+						<li onClick={()=>{setNavegacion('inventario')}} className={`${navegacion === 'inventario'? 'activo-profile' : null}`}><i class="fas fa-boxes"></i>Inventario</li>
+						<li onClick={()=>{setNavegacion('misNft')}}className={`${navegacion === 'misNft'? 'activo-profile' : null}`}><i class="fas fa-hat-wizard"></i>Mis NFT</li>
+						<li onClick={()=>{setNavegacion('estadisticas')}} className={`${navegacion === 'estadisticas'? 'activo-profile' : null}`}><i class="far fa-chart-bar"></i>Estadisticas</li>
 
 					</ul>
 

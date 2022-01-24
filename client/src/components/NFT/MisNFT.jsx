@@ -7,7 +7,7 @@ import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import Nav from "../Nav";
 import { Link } from "react-router-dom";
-
+import CartaNft from '../CartaNft'
 export default function MyAssets() {
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
@@ -53,11 +53,9 @@ export default function MyAssets() {
   return (
     <div>
       {nfts.map((nft, i) => (
-        <div key={i}>
-          <img src={nft.image} alt="" />
-          <div>
-            <p>Price - {nft.price} Eth</p>
-          </div>
+        <div className="cart-tienda">
+
+          <CartaNft nft={nft} />
         </div>
       ))}
     </div>
