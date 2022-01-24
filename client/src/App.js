@@ -32,6 +32,8 @@ import DetalleCompra from "./components/detalleCompra";
 import CartaFondo from "./components/juego/FondoCarta";
 import CartaNft from "./components/CartaNft";
 import { useMoralis } from "react-moralis";
+import Panel from "./components/panel/panel";
+
 
 function App() {
   const logueado = useSelector((state) => state.users);
@@ -48,7 +50,8 @@ function App() {
       console.log("error", error);
     }
   };
-  useEffect(() => {
+
+   useEffect(() => {
     if (app) {
       app.auth().onAuthStateChanged((authUser) => {
         if (
@@ -69,32 +72,33 @@ function App() {
     
   }, [dispatch, logueado]);
 
-  return (
-    <div className="App">
-      <Route path="/ganador" component={GanadorJuego} />
-      <Route path="/storage" component={MyPage} />
-      <Route path="/auth" component={MyAuthPage} />
-      <Route path="/Carrito" component={Carrito} />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/Tienda" component={Tienda} />
-      <Route path="/Registro" component={FormRegistro} />
-      <Route path="/Login" component={ForLogin} />
-      <Route path="/PassReset" component={PassReset} />
-      <Route path="/Detail/" component={userDetail} />
-      <Route path="/chat" component={Chat} />
-      <Route path="/juego" component={CartaNft} />
-      <Route exact path="/TiendaNFT" component={TiendaNFT} />
-      <Route exact path="/CrearNFT" component={crearNFT} />
-      <Route exact path="/TableroNFT" component={tableroNFT} />
-      <Route exact path="/MisNFT" component={misNFT} />
-      <Route exact path="/Matchmaking" component={Intermedio} />
-      <Route exact path="/Compra" component={Compra} />
-      <Route exact path="/Chatear" component={ChatApp} />
-      <Route exact path="/Comprar" component={Comprar} />
-      <Route exact path="/BotonPagar" component={BotonPagar} />
-      <Route exact path="/Detallecompra" component={DetalleCompra} />
-    </div>
-  );
-}
+
+      return (
+        <div className="App">
+          <Route path="/ganador" component={GanadorJuego} />
+          <Route path="/storage" component={MyPage} />
+          <Route path="/auth" component={MyAuthPage} />
+          <Route path="/Carrito" component={Carrito} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Tienda" component={Tienda} />
+          <Route path="/Registro" component={FormRegistro} />
+          <Route path="/Login" component={ForLogin} />
+          <Route path="/PassReset" component={PassReset} />
+          <Route path="/Detail/" component={userDetail} />
+          <Route path="/chat" component={Chat} />
+          <Route path="/juego" component={CartaNft} />
+          <Route  exact path="/TiendaNFT" component={TiendaNFT} />
+          <Route  exact path="/CrearNFT" component={crearNFT} />
+          <Route  exact path="/TableroNFT" component={tableroNFT} />
+          <Route  exact path="/MisNFT" component={misNFT} />
+          <Route  exact path="/Matchmaking" component={Intermedio} />
+          <Route  exact path="/Compra" component={Compra} />
+          <Route  exact path="/Chatear" component={ChatApp} />
+          <Route  exact path="/Comprar" component={Comprar} />
+          <Route exact path= "/BotonPagar" component={BotonPagar} />
+          <Route exact path= "/Detallecompra" component={DetalleCompra} />
+          <Route exact path= "/Panel" component={Panel} />
+        </div>
+      );
 
 export default App;

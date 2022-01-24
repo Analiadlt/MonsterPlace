@@ -46,25 +46,37 @@ let reset = ()=>{
 
                perdedor === 'false'|| perdedor === infoRoom.jugador2 ?
                <div>
-               <h1>{infoRoom?.jugador2} esta en un cumpleaños</h1>
-                <h2>Gano {infoRoom?.jugador1}</h2>
-                {
-                    jugador === 'jugador1'?enviarSaldo():null
+                    <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+                    <h2>Ganador</h2><h2>Perdedor</h2>
+                    {jugador === 'jugador1'?enviarSaldo():null}
+                    </div>
+                    <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+                    <h2 style={{position:'relative',top:'-30px',left:'15px'}}>{infoRoom?.jugador1}</h2>
+                    <h2 style={{position:'relative',top:'-30px', right:'20px'}}>{infoRoom?.jugador2}</h2>
                     
-
-                }
-                </div>
+                    </div>
+               </div>
+           
                :
                <div>
-               <h1>{infoRoom?.jugador1} esta en un cumpleaños</h1>
-                <h2>Gano {infoRoom?.jugador2}</h2>
-                {
-                    jugador === 'jugador2'? enviarSaldo() :null
-                    
 
-                }
+               <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+               <h1>Ganador</h1><h1>Perdedor</h1>
+               {jugador === 'jugador2'?enviarSaldo():null }
                 </div>
+                <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+               <h2 style={{position:'relative',top:'-30px',left:'15px'}}>{infoRoom?.jugador2}</h2>
+               <h2 style={{position:'relative',top:'-30px', right:'20px'}}>{infoRoom?.jugador1}</h2>
+               
+                </div>
+
+
+                </div>
+
+            
             }
+            <h1>Premio</h1>
+            <i class="fas fa-coins" style={{color:'yellow',fontSize:'30px',marginLeft:'180px'}}>10 CrypsCoins</i>
             <div style={{ display: 'flex',justifyContent:'space-around',alignItems:'center',flexDirection:'row' }}>
             <div>
 								<Link to='#'><div className='boton_ganador' onClick={reset} >
