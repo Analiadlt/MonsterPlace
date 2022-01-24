@@ -20,6 +20,8 @@ export const RESTAR_SALDO = "RESTAR_SALDO";
 export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
 
+
+
 export function cambiarFondo() {
   return { type: CAMBIAR_FONDO, payload: "MODO" };
 }
@@ -85,6 +87,23 @@ export function loginUser(payload) {
   };
 }
 
+export function loginUserMetamask(payload) {
+  console.log("loginUserMetamask", payload);
+
+  return async (dispatch) => {
+    try {
+      var json = await axios.post('/loginMetamask', payload);
+      console.log("respuesta de login user meta", json)
+      return dispatch({
+        type: LOGIN_USER,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log('problemas action loginUserMetamask', error)
+    }
+  };
+}
+
 //Obtener todos los usuarios
 export function getUser() {
   return function (dispatch) {
@@ -122,6 +141,21 @@ export function getUserLogin(em) {
       console.log("email desde actions", email);
       var json = await axios.post(`/loginInfo/loginInformation`, email);
       console.log("Data Desde Actions", json.data);
+      return dispatch({
+        type: LOGIN_USER,
+        payload: json.data[0],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getUserLoginMetamask(payload) {
+   console.log(payload);
+  return async (dispatch) => {
+    try {
+      var json = await axios.post(`/loginInformationMetamask`, payload);
       return dispatch({
         type: LOGIN_USER,
         payload: json.data[0],
@@ -235,6 +269,8 @@ export function cargarSaldo(payload) {
     });
   };
 }
+
+
 
 export function restarSaldo(payload) {
   // return{ type: RESTAR_SALDO, payload:6 }
