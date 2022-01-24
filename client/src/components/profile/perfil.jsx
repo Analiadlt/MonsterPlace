@@ -6,11 +6,11 @@ import { addMetamaskAccount } from "../../redux/actions";
 export default function Perfil() {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.userLogueado);
-  const { authenticate, authError, logout, user, isAuthenticated } = useMoralis();
+  const { authenticate, authError, logout, user, isAuthenticated } =
+    useMoralis();
   console.log(isAuthenticated);
 
   if (isAuthenticated === true) {
-    
     dispatch(
       addMetamaskAccount({
         metamaskAccount: user.attributes.accounts[0],
@@ -50,9 +50,17 @@ export default function Perfil() {
               {authError.message}
             </p>
           )}
-         
         </div>
-        <button onClick={logout}>Sign Out</button>
+        <div className="campo meta" onClick={logout}>
+          <i class="fas fa-wallet"></i> <h2>Desconectar Wallet</h2>
+        </div>
+        <div className="campo meta">
+          <i class="fas fa-wallet"></i>{" "}
+          <h2>
+            Conexión de Wallet:{" "}
+            {isAuthenticated === true ? "conectado" : "desconectado"}
+          </h2>
+        </div>
       </div>
     </div>
   );
