@@ -44,6 +44,8 @@ PutSumaMonedas : http://localhost:3001/putsumamonedas
 
 PutRestaMonedas : http://localhost:3001/putrestamonedas
 
+PutMetamask : http://localhost:3001/putmetamask
+
 RUTAS DELETE
 
 DeleteUser : http://localhost:3001/delete/user/:id

@@ -5,7 +5,7 @@ const router = require('express').Router();
 const mercadopago = require('mercadopago');
 //const Card = require("../../models/Card");
 
-const { ACCESS_TOKEN, REACT_APP_CLIENT } = process.env;
+const { ACCESS_TOKEN, REACT_APP_CLIENT, REACT_APP_API } = process.env;
 
 //Agrega credenciales
 mercadopago.configure({
@@ -17,7 +17,7 @@ mercadopago.configure({
 router.get("/", async (req, res, next) => {
   const { id_order } = req.query
   //const id_order = req.params.id;
-  console.log("IDORDER", id_order)
+  //console.log("IDORDER", id_order)
   // const id_orden = 3;
   try {
 
@@ -26,15 +26,15 @@ router.get("/", async (req, res, next) => {
         id: id_order
       }
     })
-    console.log("Orden desde Get del Mercadopago: ", order)
+    //console.log("Orden desde Get del Mercadopago: ", order)
 
     const carrito = await Card.findAll({
       where: {
         orderId: id_order
       }
     })
-    console.log('nroorden', order)
-    console.log('carrito', carrito)
+    //console.log('nroorden', order)
+    //console.log('carrito', carrito)
 
     const items_ml = carrito?.map(i => ({
       title: i.name,
@@ -55,15 +55,15 @@ router.get("/", async (req, res, next) => {
         installments: 3  //Cantidad máximo de cuotas
       },
       back_urls: {
-        success: '/localhost:3001/mercadopago/pagos',
-        failure: '/localhost:3001/mercadopago/pagos',
-        pending: '/localhost:3001/mercadopago/pagos',
+        success: REACT_APP_API + '/mercadopago/pagos',
+        failure: REACT_APP_API + '/mercadopago/pagos',
+        pending: REACT_APP_API + '/mercadopago/pagos',
       },
     };
 
 
     const response = await mercadopago.preferences.create(preference)
-    console.log("REPONDIO", response)
+    //console.log("REPONDIO", response)
     res.json({ id: response.body.id })
 
   } catch (error) {
@@ -96,7 +96,7 @@ router.get("/pagos", async (req, res) => {
     order.merchant_order_id = merchant_order_id
     order.status = "completed"
 
-    console.log("ORDER", order)
+    //console.log("ORDER", order)
 
     try {
       console.info('Salvando order')
@@ -104,11 +104,11 @@ router.get("/pagos", async (req, res) => {
 
       if (order.payment_status === "approved") {
         const user = await User.findByPk(order.userId)
-        console.log("USER", user)
+        //console.log("USER", user)
         const cards = await Card.findAll({ where: { orderId: order.id } })
-        console.log("CARDS", cards)
+        //console.log("CARDS", cards)
         for (const card of cards) {
-          console.log("BUCLE", card)
+          //console.log("BUCLE", card)
           user.addCards(card)
         }
         return res.redirect(`${REACT_APP_CLIENT}/Detail`)

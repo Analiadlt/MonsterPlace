@@ -9,7 +9,7 @@ const Chatear = ({nombre,idpartida}) => {
     const [mensajeschat, setMensajeschat] = useState([]);
   
     useEffect(() => {
-      socket.emit("conectado", nombre);
+      socket.emit("conectado", nombre, socket.id);
     }, [nombre]);
 
   
@@ -34,7 +34,7 @@ const Chatear = ({nombre,idpartida}) => {
   
     const submit = (e) => {
       e.preventDefault();
-      socket.emit("mensajechat", nombre, mensajechat,idpartida);
+      socket.emit("mensajechat", nombre, mensajechat, idpartida);
       setMensajechat("");
     };
   

@@ -12,8 +12,11 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import huevoVerde from '../img/huevoVerde.png'
 import { app } from "../firebase/firebase";
 
+let imgCargada= false;
 const validate = values => {
 
+	
+	
 
 
 	const errors = {};
@@ -58,6 +61,9 @@ const validate = values => {
 	}
 	if (values.email !== values.confiEmail) {
 		errors.confiEmail = 'Email no coinciden.';
+	}
+	if (values.image ==='' || imgCargada === false ) {
+		errors.image = 'Debes colocar una imagen';
 	}
 
 	if (!values.dateBirth) {
@@ -181,17 +187,24 @@ const Formulario = () => {
 	const [url, setUrl] = useState("");
 	const [progress, setProgress] = useState(0);
 
+	
+
 	const handleChangeImage = e => {
 		if (e.target.files[0]) {
+			imgCargada= true;
 			setImage(e.target.files[0]);
 		}
-		console.log(e.target.files[0])
+		else{
+			imgCargada = false;
+			setUrl('')
+		}
+		
+		
 	};
 
-
-
-
 	const handleUpload = () => {
+
+		if(image){
 		const uploadTask = app.storage().ref(`images/${image.name}`).put(image);
 		uploadTask.on(
 			"state_changed",
@@ -216,9 +229,14 @@ const Formulario = () => {
 
 			},
 		);
+		}
 	};
+
+
+
+	
 	formik.values.image=url
-	console.log("FORMIKKKK",formik)
+	console.log("imagen...",image)
 
 
 	//-----------------------------------------------
@@ -230,16 +248,7 @@ const Formulario = () => {
 				<div className='login-box'>
 					<h2 >Registrarse</h2>
 
-					<div >
-						<progress value={progress} max="100" />
-						<br />
-						<br />
-						<input type="file" onChange={handleChangeImage}/>
-						<button onClick={handleUpload}>Upload</button>
-						<br />
-						<br />
-						<img src={url || "http://via.placeholder.com/300"} alt="firebase-image" />
-					</div>
+					
 
 
 
@@ -357,6 +366,22 @@ const Formulario = () => {
 							) : null}
 
 						</div>
+
+						<div >
+					<label htmlFor="">Imagen de perfil</label>
+						<br />
+						<br />
+						<div>
+						<input type="file" onChange={handleChangeImage}/>
+						<p className='botonImagen' onClick={handleUpload}>Cargar</p>
+						</div>
+						{formik.touched.image && formik.errors.image ? (
+								<div className="campoErr"><ErrorOutlineOutlinedIcon />{formik.errors.image}</div>
+							) : null}
+						<br />
+						<br />
+						{url!==""?<img src={url || "http://via.placeholder.com/300"} alt="firebase-image" />:null}
+					</div>
 
 						<div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
 							<button type="submit" className='botonn'>

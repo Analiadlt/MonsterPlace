@@ -1,5 +1,4 @@
 import React from "react";
-import dragon from '../img/bichorojo.png'
 import DetalleDr from "./ModalDetalle";
 import { Link } from "react-router-dom";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';

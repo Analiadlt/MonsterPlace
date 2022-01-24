@@ -24,14 +24,13 @@ import NavCheto from "./components/NavCheto";
 import Compra from "./components/Compra";
 import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
-import LoginMetamask from "./components/NFT/PaginaLoginMetamask.jsx";
 import { getUserLogin, pagar, PAGAR } from './redux/actions';
 import Comprar from './components/compra/ordenCompra';
 import GanadorJuego from './components/juego/GanadorJuego';
 import BotonPagar from './components/BotonPagar';
 import DetalleCompra from './components/detalleCompra';
 import CartaFondo from './components/juego/FondoCarta';
-
+import CartaNft from "./components/CartaNft";
 
 
 function App() {
@@ -73,7 +72,7 @@ function App() {
           <Route path="/PassReset" component={PassReset} />
           <Route path="/Detail/" component={userDetail} />
           <Route path="/chat" component={Chat} />
-          <Route path="/juego" component={CartaFondo} />
+          <Route path="/juego" component={CartaNft} />
           <Route  exact path="/TiendaNFT" component={TiendaNFT} />
           <Route  exact path="/CrearNFT" component={crearNFT} />
           <Route  exact path="/TableroNFT" component={tableroNFT} />
@@ -84,7 +83,7 @@ function App() {
           <Route  exact path="/Comprar" component={Comprar} />
           <Route exact path= "/BotonPagar" component={BotonPagar} />
           <Route exact path= "/Detallecompra" component={DetalleCompra} />
-          <Route exact path="/LoginMetamask" component={LoginMetamask} /> 
+           
         </div>
       );
     }
