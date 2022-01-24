@@ -1,5 +1,5 @@
 import React from "react";
-import dragon from '../../img/bichorojo.png'
+
 import SpinnerT from "./SpinnerTurno";
 export default function CartaFondo({ img, name, attack, defense, efect, price }) {
 
