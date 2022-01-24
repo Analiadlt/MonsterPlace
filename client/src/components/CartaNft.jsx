@@ -6,7 +6,7 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
-export default function CartaNft({nft}) {
+export default function CartaNft({ nft, transaccion }) {
 
     console.log(nft)
     const dispatch = useDispatch()
@@ -20,14 +20,14 @@ export default function CartaNft({nft}) {
         const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
         const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
         const transaction = await contract.createMarketSale(
-          nftaddress,
-          nft.itemId,
-          {
-            value: price,
-          }
+            nftaddress,
+            nft.itemId,
+            {
+                value: price,
+            }
         );
         await transaction.wait();
-      }
+    }
 
     return (
 
@@ -55,11 +55,17 @@ export default function CartaNft({nft}) {
                             <div className="precio-carta">
                                 eTh${nft.price}
                             </div>
-                            <div className="botones">
-                                <button className="btn-cart btn-detalle">Ver detalle</button>
-                                <button className="btn-cart btn-comprar"  onClick={() => buyNft(nft)}>Comprar</button>
-                            </div>
-
+                            {transaccion === 'compra' ?
+                                <div className="botones">
+                                    <button className="btn-cart btn-detalle">Ver detalle</button>
+                                    <button className="btn-cart btn-comprar" onClick={() => buyNft(nft)}>Comprar</button>
+                                </div>
+                                :
+                                <div className="botones">
+                                    <button className="btn-cart btn-detalle">Ver detalle</button>
+                                    <button className="btn-cart btn-comprar" onClick={() => buyNft(nft)}>Vender</button>
+                                </div>
+                            }
                         </div>
                     </div>
 

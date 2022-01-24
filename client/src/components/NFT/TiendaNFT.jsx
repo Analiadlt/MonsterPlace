@@ -92,7 +92,7 @@ export default function TiendaNFT() {
                             nfts.map(nft =>
                                 <div className="cart-tienda">
                                  
-                                    <CartaNft nft={nft}/>
+                                    <CartaNft nft={nft} transaccion={'compra'}/>
                                 </div>
                             )
                         }

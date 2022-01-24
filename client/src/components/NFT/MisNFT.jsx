@@ -56,7 +56,7 @@ export default function MyAssets() {
       {nfts?.map((nft, i) => (
         <div className="cart-tienda" key ={i}>
 
-          <CartaNft  nft={nft} />
+          <CartaNft  nft={nft} transaccion={'venta'} />
         </div>
       ))}
     </div>
