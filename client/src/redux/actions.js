@@ -19,6 +19,7 @@ export const GET_PAGAR = "GET_PAGAR";
 export const RESTAR_SALDO = "RESTAR_SALDO";
 export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
+export const GET_USER_CARD = "GET_USER_CARD"
 
 
 
@@ -285,4 +286,22 @@ export function restarSaldo(payload) {
       payload: json.data[0].saldo_cryps,
     });
   };
+}
+
+export function getUserCard(cId){
+  //console.log('User id desde actions', cId);
+  return async (dispatch) => {
+    try {
+      var json = await axios.get(`/CardUser/userCard/${cId}`);
+      console.log("Data Desde Actions", json.data[0].cards);
+      console.log("Longitud Data Desde Actions", json.data[0].cards.length);
+      return dispatch({
+        type: GET_USER_CARD,
+        payload: json.data[0].cards,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 }
