@@ -30,7 +30,7 @@ import GanadorJuego from './components/juego/GanadorJuego';
 import BotonPagar from './components/BotonPagar';
 import DetalleCompra from './components/detalleCompra';
 import CartaFondo from './components/juego/FondoCarta';
-
+import CartaNft from "./components/CartaNft";
 
 
 function App() {
@@ -72,7 +72,7 @@ function App() {
           <Route path="/PassReset" component={PassReset} />
           <Route path="/Detail/" component={userDetail} />
           <Route path="/chat" component={Chat} />
-          <Route path="/juego" component={CartaFondo} />
+          <Route path="/juego" component={CartaNft} />
           <Route  exact path="/TiendaNFT" component={TiendaNFT} />
           <Route  exact path="/CrearNFT" component={crearNFT} />
           <Route  exact path="/TableroNFT" component={tableroNFT} />

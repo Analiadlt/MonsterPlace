@@ -8,9 +8,8 @@ import axios from "axios";
 import { nftaddress, nftmarketaddress } from "../../config";
 import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
-import CardNFT from "./NFTcard";
+import CartaNft from '../CartaNft'
 
-import CartaTienda from "../cartaTienda";
 
 let rpcEndpoint = null;
 
@@ -82,9 +81,7 @@ export default function TiendaNFT() {
 
             <div className="titulo-tienda">
                 <h1>Tienda</h1>
-                {/* <Link to='/Carrito'> */}
-              
-                {/* </Link> */}
+
             </div>
           
             
@@ -95,7 +92,7 @@ export default function TiendaNFT() {
                             nfts.map(nft =>
                                 <div className="cart-tienda">
                                  
-                                    <CartaTienda name={nft.name} attack={"10"} defense={"20"} img={nft.image} price={nft.price} botones={true} />
+                                    <CartaNft nft={nft}/>
                                 </div>
                             )
                         }
