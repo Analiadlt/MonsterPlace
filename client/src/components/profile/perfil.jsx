@@ -1,25 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMoralis } from "react-moralis";
-import { addMetamaskAccount } from '../../redux/actions';
+import { addMetamaskAccount } from "../../redux/actions";
 
 export default function Perfil() {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const usuario = useSelector((state) => state.userLogueado);
-  const { authenticate, authError, logout } = useMoralis();
-  const { user } =useMoralis()
-  console.log(user)
-  console.log(authError)
-  console.log(usuario.email)
+  const { authenticate, authError, logout, user, isAuthenticated } =
+    useMoralis();
+  console.log(isAuthenticated);
 
-  function handleChange(e) {
-      authenticate()
-      console.log(authenticate)
-    if (!authError && authenticate === 'true') {
-        console.log(user.attributes.accounts[0])
-        dispatch(addMetamaskAccount({metamaskAccount:user.attributes.accounts[0], email: usuario.email}))
-    }
-}
+  if (isAuthenticated === true) {
+    dispatch(
+      addMetamaskAccount({
+        metamaskAccount: user.attributes.accounts[0],
+        email: usuario.email,
+      })
+    );
+  }
 
   return (
     <div className="profile">
@@ -44,16 +42,15 @@ const dispatch = useDispatch();
         <div className="campo contrase">
           <i class="fas fa-edit"></i> Modificar Contraseña
         </div>
-        <div className="campo meta" onClick={handleChange}>
+        <div className="campo meta" onClick={authenticate}>
           <i class="fas fa-wallet"></i> <h2>Conectar Wallet</h2>
           {authError && (
             <p className="error">
               {authError.name}
               {authError.message}
             </p>
-            
           )}
-           <button onClick={logout}>Sign Out</button>
+          <button onClick={logout}>Sign Out</button>
         </div>
       </div>
     </div>
