@@ -33,6 +33,7 @@ module.exports = {
         lastName:Joi.string().required(),
         nickName:Joi.string().required(),
         dateBirth:Joi.string().required(),
+        country:Joi.string()
     }),
 
     putUserPasswordSchema:Joi.object({
