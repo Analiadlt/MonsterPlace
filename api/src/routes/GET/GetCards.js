@@ -117,12 +117,20 @@ router.get("/get", async (req, res) => {
 
   try {
     const cards1 = await Card.findAll({
+<<<<<<< HEAD
       
+=======
+      // attributes: ["id", "name", "attack", "defense", "img", "state", "type", "sellPrice", "orderId"],
+>>>>>>> 9e5b31b5f27756ae6359166cd38d8d1d4d0e1d3a
     })
     if (cards1.length < 11) {
       CreateCards()
       const allCards = await Card.findAll({
+<<<<<<< HEAD
         
+=======
+        // attributes: ["id", "name", "attack", "defense", "img", "state", "type", "sellPrice", "orderId"],
+>>>>>>> 9e5b31b5f27756ae6359166cd38d8d1d4d0e1d3a
       })
       res.status(200).send(allCards)
     }
