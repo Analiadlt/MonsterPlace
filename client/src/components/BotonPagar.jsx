@@ -1,7 +1,7 @@
 import { useEffect} from 'react'
 
-export default function BotonPagar({ data }){
-  console.log("Data desde BotonPagar: ", data)
+export default function BotonPagar({ data, pais}){
+  console.log("Data desde BotonPagar: ", data, pais)
  useEffect(()=>{
   const script = document.createElement('script'); //Crea un elemento html script
   
@@ -10,7 +10,12 @@ export default function BotonPagar({ data }){
   console.log("ID de MercadoPago: ", attr_data_preference.value)
 
   //Agrega atributos al elemento script
-  script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"; 
+  if(pais === "colombia"){
+  script.src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"; 
+  }else{
+   script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";  
+  }
+  console.log(script.src)
   // script.src="https://sdk.mercadopago.com/js/v2";  
   script.setAttributeNode(attr_data_preference)  
   
