@@ -8,8 +8,6 @@ var cardGame = function (CardOne, CardTwo) {
 
     while (bandera === 0) {
 
-        if (turno === 0) { console.log("EL JUEGO INICIA") }
-
         P1 = CardOne;
         P2 = CardTwo;
 
@@ -30,19 +28,15 @@ var cardGame = function (CardOne, CardTwo) {
             bandera = 1
         }
 
-        console.log("ROUND: " + turno)
-        turno++
-
 
         if (P1.attack > P2.defense) {
             lifeUserTwo = lifeUserTwo - (P1.attack - P2.defense);
-            console.log("LIFE CARD TWO: ", lifeUserTwo)
-
+            CardOne.restarVida2=lifeUserTwo
         }
 
         if (P2.attack > P1.defense) {
             lifeUserOne = lifeUserOne - (P2.attack - P1.defense);
-            console.log("LIFE CARD ONE: ", lifeUserOne)
+            CardTwo.restarVida1=lifeUserOne
         }
 
         if (bandera === 1) {
@@ -57,3 +51,4 @@ var cardGame = function (CardOne, CardTwo) {
 
 
 module.exports = cardGame
+
