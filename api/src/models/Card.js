@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
     sellCount: { type: DataTypes.INTEGER }, //cantidad de Ventas
     currency: {type: DataTypes.STRING,  defaultValue: 'ARS'},
     nftContract: { type: DataTypes.STRING},
-    createdNFT: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: true },
+    createdNFT: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
   }
  );
 };
