@@ -8,8 +8,6 @@ var cardGame = function (CardOne, CardTwo) {
 
     while (bandera === 0) {
 
-        if (turno === 0) { console.log("EL JUEGO INICIA") }
-
         P1 = CardOne;
         P2 = CardTwo;
 
