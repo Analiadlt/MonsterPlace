@@ -19,8 +19,11 @@ export const GET_PAGAR = "GET_PAGAR";
 export const RESTAR_SALDO = "RESTAR_SALDO";
 export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
+export const GET_USER_CARD = "GET_USER_CARD";
+export const AGREGAR_MAZO = "AGREGAR_MAZO";
 export const ADD_CARD_NFT = "ADD_CARD_NFT"
 export const GET_USER_CARD = "GET_USER_CARD"
+
 
 
 
@@ -321,4 +324,15 @@ export function getUserCard(cId){
     }
   };
 
+}
+
+export function subirmazo(payload) {
+  
+  return async (dispatch) => {
+   
+    return dispatch({
+      type: AGREGAR_MAZO,
+      payload: payload
+    });
+  };
 }

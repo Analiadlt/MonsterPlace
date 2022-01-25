@@ -24,13 +24,13 @@ export default function Tienda() {
         <div>
             <NavCheto />
             <div className="nav-tienda">
-
+                
                 <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className='link-tienda'>Crypis</Link></h3>
-
+                
                 <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link-tienda'>NFT</Link></h3>
-
+    
             </div>
-            {/*             <div className="muestra contenedor-cheto" >
+{/*             <div className="muestra contenedor-cheto" >
                 <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'}/>
     
             </div> */}
@@ -38,17 +38,13 @@ export default function Tienda() {
                 <div className="contenedor-tienda">
 
                     <div className="titulo-tienda">
-                        <div>
-                            <h1>Tienda</h1>
-                        </div>
+                        <h1>Tienda</h1>
                         {/* <Link to='/Carrito'> */}
-                        <span className="stick">
-                            <Modal1 />
-                        </span>
+                        <Modal1 />
                         {/* </Link> */}
                     </div>
 
-
+                    
                     {loading.loading ? <h1>Cargando...</h1> :
                         <div className="contenedor-tajetas">
                             <div className="grid-tienda">
