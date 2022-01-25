@@ -1,16 +1,64 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import muneco from '../img/VECT/bichoazul1.png'
-import { addCart } from "../redux/actions";
+import { linkUserNFTcard } from "../redux/actions";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
+import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { useMoralis } from "react-moralis";
 export default function CartaNft({ nft, transaccion }) {
-
-    console.log(nft)
+    const { user } = useMoralis();
     const dispatch = useDispatch()
     const ataqueDefensa = nft.description.split(",");
+    const router = useHistory();
+    async function loadNFTs() {
+        const web3Modal = new Web3Modal({
+          network: "mainnet",
+          cacheProvider: true,
+        });
+        const connection = await web3Modal.connect();
+        const provider = new ethers.providers.Web3Provider(connection);
+        const signer = provider.getSigner();
+        const marketContract = new ethers.Contract(
+          nftmarketaddress,
+          Market.abi,
+          signer
+        );
+        const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+        const data = await marketContract.fetchMyNFTs();
+    
+        const items = await Promise.all(
+          data.map(async (i) => {
+            const tokenUri = await tokenContract.tokenURI(i.tokenId);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+            let item = {
+              price,
+              tokenId: i.tokenId.toNumber(),
+              seller: i.seller,
+              owner: i.owner,
+              image: meta.data.image,
+              description: meta.data.description,
+            };
+            return item;
+          })
+        );
+        console.log(items);
+
+        const datosfiltrados = items.map((g) => {
+            return {
+             owner:g.owner,
+              nftContract: g.nftContract,
+              
+              };
+            });
+            dispatch(linkUserNFTcard(datosfiltrados))
+                   
+     }
+
     async function buyNft(nft) {
         //para conectar la wallet
         const web3Modal = new Web3Modal();
@@ -27,6 +75,9 @@ export default function CartaNft({ nft, transaccion }) {
             }
         );
         await transaction.wait();
+    
+    await loadNFTs()
+    router.push("/TiendaNFT")    
     }
 
     return (
