@@ -14,6 +14,7 @@ import huevoBlanco from "../img/huevoBlanco.png";
 import { app } from "../firebase/firebase";
 import { useMoralis } from "react-moralis";
 
+
 import { loginReset, cargarSaldo } from "../redux/actions";
 
 const validate = (values) => {
@@ -37,12 +38,13 @@ const validate = (values) => {
   return errors;
 };
 
+
 const ForLogin = () => {
+  
   const { authenticate, user } = useMoralis();
   const dispatch = useDispatch();
   const history = useHistory();
   const userLogeado = useSelector((state) => state.userLogueado);
-
   const [logeado, setLogeado] = useState(false);
   const [ojo, setojo] = useState(false);
   const switchShown = () => setojo(!ojo);
@@ -59,15 +61,20 @@ const ForLogin = () => {
   };
 
   async function authenticateMetamask(e) {
-	e.preventDefault();
-	await authenticate()
-    dispatch(loginUserMetamask({ metamaskAccount: user.attributes.accounts[0].trim()}));
-    setLogeado(true);
-    setTimeout(() => {
-     history.push(`/`);
-    }, 3000);
-    
-  };
+    e.preventDefault();
+    await authenticate();
+    dispatch(
+      loginUserMetamask({ metamaskAccount: user.attributes.accounts[0].trim() })
+    );
+    if (userLogeado === "400") {
+      alert("Conexión de wallet o registro requerido")
+    } else {
+      setLogeado(true);
+      setTimeout(() => {
+        history.push(`/`);
+      }, 3000);
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
