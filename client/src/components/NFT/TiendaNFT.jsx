@@ -116,14 +116,14 @@ export default function TiendaNFT() {
               </div>
               <div className="grid-tienda">
                 {
-                  dragones.map(dragon =>
+                  dragones.map(dragon =>(
+                    dragon.createdNFT === true ?
                     <div className="cart-tienda">
-                      {dragon.createdNFT === true ?
-                        <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} type={'nft'} />
-                        : null
-                      }
+                      
+                        <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} type={'nft'} />              
                     </div>
-                  )
+                    : null
+                  ))
                 }
               </div>
             </div>
