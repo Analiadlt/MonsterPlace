@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     saldo_cryps: { type: DataTypes.INTEGER, defaultValue: 6 }, //cantidad de Cryps disponibles
     image:{type:DataTypes.STRING},
     metamaskAccount: { type: DataTypes.STRING},
-    country: { type: DataTypes.STRING}
+    country: { type: DataTypes.STRING, defaultValue: 'argentina' },
   },
  );
 };
