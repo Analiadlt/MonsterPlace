@@ -166,8 +166,7 @@ export default function Chat() {
 
     })
 
- console.log('rondaganada1...',rondaganada1) 
- console.log('rondaganada2...',rondaganada2) 
+ 
 
 
 

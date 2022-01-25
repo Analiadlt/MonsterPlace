@@ -12,8 +12,11 @@ export default function Intermedio(){
     
     const history = useHistory()
     const partida = useSelector(state=>state.partida)
+    const mazo = useSelector(state=>state.mazo)
+
     const dispatch = useDispatch()
     let infoRoom = JSON.parse(localStorage.getItem("info-inicio"));
+    localStorage.setItem("mazo", JSON.stringify(mazo));
     localStorage.setItem('turno', false);
     useEffect(() => {
         socket.on('inicio-partida', (roomincompleto, room) => {
@@ -27,10 +30,10 @@ export default function Intermedio(){
             localStorage.setItem('turno', turno);
         
         })
-        socket.on('mazo-juego', mazo =>{
-            localStorage.setItem("mazo", JSON.stringify(mazo));
+        // socket.on('mazo-juego', mazo =>{
+        //     localStorage.setItem("mazo", JSON.stringify(mazo));
             
-        })
+        // })
         socket.on('room', (room,jugador) =>{
             localStorage.setItem('idroom', room);
             localStorage.setItem('numero_jugador',jugador);
@@ -50,7 +53,7 @@ export default function Intermedio(){
         socket.emit('usuario-dentro', localStorage.getItem('idroom'))
     }
 
-   console.log('partida', partida)
+   
 
     return(
         <div>
