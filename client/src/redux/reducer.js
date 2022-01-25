@@ -198,7 +198,7 @@ export default function Reducer(state=initialState, action){
                      ...state, 
                     userCards: action.payload,
                                   
-                };
+                }
                 case AGREGAR_MAZO:
                     
                 return {
