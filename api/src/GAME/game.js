@@ -30,19 +30,18 @@ var cardGame = function (CardOne, CardTwo) {
             bandera = 1
         }
 
-        console.log("ROUND: " + turno)
-        turno++
-
 
         if (P1.attack > P2.defense) {
             lifeUserTwo = lifeUserTwo - (P1.attack - P2.defense);
-            console.log("LIFE CARD TWO: ", lifeUserTwo)
+            CardOne.restarVida2=lifeUserTwo
+            console.log("CARD ONE: ", CardOne)
 
         }
 
         if (P2.attack > P1.defense) {
             lifeUserOne = lifeUserOne - (P2.attack - P1.defense);
-            console.log("LIFE CARD ONE: ", lifeUserOne)
+            CardTwo.restarVida1=lifeUserOne
+            console.log("CARD TWO: ",CardTwo)
         }
 
         if (bandera === 1) {
@@ -51,9 +50,11 @@ var cardGame = function (CardOne, CardTwo) {
     }
 };
 
-// var CardOne = { attack: 45, defense: 18 }
+ var CardOne = { attack: 45, defense: 18 }
 
-// var CardTwo = { attack: 40, defense: 15 }
+ var CardTwo = { attack: 40, defense: 15 }
 
 
 module.exports = cardGame
+
+cardGame(CardOne,CardTwo)
