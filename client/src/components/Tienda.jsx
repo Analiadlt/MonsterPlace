@@ -12,10 +12,11 @@ import NavCheto from './NavCheto';
 import CartaTienda from "./cartaTienda";
 export default function Tienda() {
     const loading = useSelector(state => state.loading)
-    const dragones = useSelector(state => state.dragonesbd)
+    const bichos = useSelector(state => state.dragonesbd)
+    const dragones = bichos.filter(bi => bi.createdNFT === false)
     const dispatch = useDispatch()
     useEffect(() => {
-        if (!dragones.length && !loading.loading) {
+        if (!bichos.length && !loading.loading) {
             dispatch(getCard())
         }
     })
@@ -24,13 +25,13 @@ export default function Tienda() {
         <div>
             <NavCheto />
             <div className="nav-tienda">
-                
+
                 <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className='link-tienda'>Crypis</Link></h3>
-                
+
                 <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link-tienda'>NFT</Link></h3>
-    
+
             </div>
-{/*             <div className="muestra contenedor-cheto" >
+            {/*             <div className="muestra contenedor-cheto" >
                 <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'}/>
     
             </div> */}
@@ -44,15 +45,19 @@ export default function Tienda() {
                         {/* </Link> */}
                     </div>
 
-                    
+
                     {loading.loading ? <h1>Cargando...</h1> :
                         <div className="contenedor-tajetas">
                             <div className="grid-tienda">
                                 {
-                                    dragones.map(dragon =>
+                                    dragones.map(dragon => (
+
                                         <div className="cart-tienda">
+
                                             <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
                                         </div>
+
+                                    )
                                     )
                                 }
                             </div>
