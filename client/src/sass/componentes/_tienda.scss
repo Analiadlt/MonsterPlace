@@ -4,17 +4,10 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-
     h1{
         font-weight: normal;
         font-size: 5rem;
     }
-    .stick{
-        position: fixed;
-        z-index: 50;
-        right: 50px;
-    }
-
 }
 .contenedor-tienda{
     width: 90%;
@@ -36,14 +29,12 @@
     font-size: 7rem;
     font-weight: normal;
     color: v.$color-titulo;
-
     cursor: pointer;
-    
+    position: static;
     &:hover{
         color: v.$blanco;
     }
 }
-
 .contenedor-tarjetas{
     display: block;
     margin: 0 auto;

@@ -22,6 +22,10 @@ export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
 export const ADD_CARD_NFT = "ADD_CARD_NFT"
 export const GET_USER_CARD = "GET_USER_CARD"
 export const LINK_USER_CARDNFT ="LINK_USER_CARDNFT"
+export const AGREGAR_MAZO ="AGREGAR_MAZO";
+
+
+
 
 
 
@@ -328,6 +332,7 @@ export function getUserCard(cId){
 
 }
 
+
 export function linkUserNFTcard(payload){
   console.log('User id desde actions', payload);
   return async (dispatch) => {
@@ -344,3 +349,15 @@ export function linkUserNFTcard(payload){
   };
 
 }
+
+
+export function subirmazo(payload) {
+  return async (dispatch) => {
+   
+    return dispatch({
+      type: AGREGAR_MAZO,
+      payload: payload
+    });
+  };
+}
+

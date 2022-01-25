@@ -6,8 +6,8 @@ const router = Router();
 
 router.put("/putUser",async(req,res)=>{
     try {
-        let{ email, firstName, lastName, nickName, dateBirth }=req.body
-        let response=await User.update({ firstName, lastName, nickName, dateBirth },
+        let{ email, firstName, lastName, nickName, dateBirth, country }=req.body
+        let response=await User.update({ firstName, lastName, nickName, dateBirth, country },
             {
             where: {
                 email:email,

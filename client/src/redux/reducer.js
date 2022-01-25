@@ -2,7 +2,7 @@
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
      RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,
-     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD
+     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD,AGREGAR_MAZO
  } from './actions'
 
 
@@ -58,6 +58,8 @@ const initialState = {
      //trae las cardas segun el id de usuario
 
     userCards: [],
+
+    mazo:[]
 
 
 
@@ -195,6 +197,13 @@ export default function Reducer(state=initialState, action){
                 return {
                      ...state, 
                     userCards: action.payload,
+                                  
+                }
+                case AGREGAR_MAZO:
+                    
+                return {
+                     ...state, 
+                    mazo: action.payload,
                                   
                 };
 
