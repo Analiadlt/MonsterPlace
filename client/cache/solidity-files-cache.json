@@ -1,8 +1,13 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+<<<<<<< HEAD
     "C:\\Users\\LuiSandro\\Desktop\\PF\\client\\contracts\\NFT.sol": {
       "lastModificationDate": 1642142710346,
+=======
+    "C:\\Users\\rocio\\OneDrive\\Escritorio\\proyecto final\\PF\\client\\contracts\\NFT.sol": {
+      "lastModificationDate": 1642181051257,
+>>>>>>> dcba6cb93634fac221551cbd1057165377ef1e7a
       "contentHash": "45ada5bb1d7aecdfe522809e8d51ee32",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
@@ -477,8 +482,13 @@
         "IERC165"
       ]
     },
+<<<<<<< HEAD
     "C:\\Users\\LuiSandro\\Desktop\\PF\\client\\contracts\\NFTMarket.sol": {
       "lastModificationDate": 1642142710348,
+=======
+    "C:\\Users\\rocio\\OneDrive\\Escritorio\\proyecto final\\PF\\client\\contracts\\NFTMarket.sol": {
+      "lastModificationDate": 1642181051482,
+>>>>>>> dcba6cb93634fac221551cbd1057165377ef1e7a
       "contentHash": "c5df38870e67a57bfc81308c3b4ada2d",
       "sourceName": "contracts/NFTMarket.sol",
       "solcConfig": {

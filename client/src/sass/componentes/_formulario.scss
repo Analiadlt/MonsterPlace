@@ -131,6 +131,18 @@
     margin-top: 40px;
     letter-spacing: 4px
   }
+
+  .botonImagen{
+    position: relative;
+    left: 350px;
+    top:-50px;
+    cursor: pointer;
+    color: v.$color-titulo; 
+    padding: 5px 10px;
+    width: 82px;
+    border: 1px solid v.$color-titulo;;
+    
+  }
   
 
   .boton_ganador{

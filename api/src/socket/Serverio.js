@@ -78,12 +78,15 @@ const mazo2 = [
 
 
 
-
 var connections = [];
 let roomincompleto = '';
 let room = [];
 let usu = 0;
-
+let socketInfo = {
+  socketId: '',
+  socketNickName: ''
+};
+let arrSocket = [];
 
 
 let diferencia
@@ -115,6 +118,8 @@ const io = require('socket.io')(http,{
     },
 
 });
+
+
 
 
 //apertura del socket
@@ -204,6 +209,7 @@ socket.onAny((event, ...args) => {
 
     )
 
+
     socket.on('mensaje', (mensaje, idpartida, enviarMensaje,perdedor)=>{
 
       console.log('mensaje...',mensaje)
@@ -220,7 +226,7 @@ socket.onAny((event, ...args) => {
 //Chat
 //----------------------------------------------------------
 let nombre;
-
+var clients = [ ];
 socket.on("conectado", (nomb) => {
   nombre = nomb;
   console.log(nomb)
@@ -229,8 +235,33 @@ socket.on("conectado", (nomb) => {
     nombre: nombre,
     mensajechat: `${nombre} ha entrado en la sala del chat`,
   });
-
+  
+  socketInfo = ({
+  socketId: socket.id,
+  socketNickName: nombre
+  }) 
+ 
+clients.push(socketInfo);
+console.log("Clientes: ", clients);
+console.log("arrSocket: ", arrSocket);
 });
+
+
+
+
+ 
+// const userslist = io.of("/nomb").on("connection", (socket) => {	
+//   socket.on("nombre:list", () => {}
+//   );  //lista de usuarios)
+//   socket.on("nombre:add", (nombre) => {
+//     socket.broadcast.emit("nombre:add", nombre);
+//   });
+// });
+// console.log("Lista de usuarios: ",userslist);
+
+
+
+
 
 socket.on("mensajechat", (nombre, mensajechat) => {  
   //io.emit manda el mensaje a todos los clientes conectados al chat

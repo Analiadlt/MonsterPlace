@@ -100,7 +100,7 @@ export default function Compra() {
                     </div>
                     <div>
 
-                        <button onClick={onSubmit}>Realizar Compra</button>
+                        <button className='boton-detalle' onClick={onSubmit}>Realizar Compra</button>
 
                     </div>
                 </div>

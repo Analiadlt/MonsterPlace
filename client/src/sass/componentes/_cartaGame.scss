@@ -229,7 +229,7 @@
 
 .carta3d{
  
-
+  margin: 56px;
   width: 400px;
   height: 540px;
   display: block;
@@ -243,7 +243,9 @@
   transition: transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
 }
 
-
+.cart-juego{
+  height: 400px;
+}
 
 
 
@@ -259,12 +261,12 @@
 }
 
 .frontCarta{
-  background-image: url(../../img/logo.png);
+  background-image: url(../../img/backNormal.png);
   background-position: center;
   background-size:cover;
   background-repeat: no-repeat;
   background-color: black;
-  border: 2px solid v.$color-titulo;
+  
   border-radius: 10px;
   width: 400px;
   height: 540px;
@@ -355,6 +357,7 @@
     margin: 0px 30px;
     display: flex;
     flex-direction: column;
+ 
     color: black;
     .icono-cart{
       font-weight: normal;
@@ -443,3 +446,12 @@
   margin-top: 20px;
 }
 
+.nft-back{
+  background-image: url('../../img/fondoNft.png');
+}
+.nft-front{
+  background: url('../../img/backNft.png');
+  background-size: 420px 550px;
+  background-position: center;
+
+}

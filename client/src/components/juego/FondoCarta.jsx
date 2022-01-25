@@ -1,16 +1,16 @@
 import React from "react";
-import dragon from '../../img/bichorojo.png'
+
 import SpinnerT from "./SpinnerTurno";
-export default function CartaFondo({ img, name, attack, defense, efect, price }) {
+export default function CartaFondo({ img, name, attack, defense, efect, price, type }) {
 
     return (
 
-        <div id={name} className="carta3d">
-            <div id='carta3d' className={`contenido3d ${efect}`}>
-                <div className="frontCarta logo-carta">
-
+        <div id={name} className="carta3d cart-juego">
+            <div id='carta3d' className={`contenido3d ${efect}`} style={{height:'450px'}}>
+                <div className={`frontCarta logo-carta ${type === 'nft' ? 'nft-front': null}`} style={{height:'450px'}}>
+ 
                 </div>
-                <div className="backCarta">
+                <div className={`backCarta ${type === 'nft' ? 'nft-back': null}`} style={{height:'450px'}}>
                     <div className="contenedor-imagen">
                         <img src={img} alt="" />
                     </div>
@@ -19,19 +19,12 @@ export default function CartaFondo({ img, name, attack, defense, efect, price })
                         <div className="radios">
                             <div className="caracteristicasFondo">
                                 <div className="caract">
-                                    <i class="fab fa-fort-awesome"></i><span>{defense}</span>
+                                    <i class="fab fa-fort-awesome icono-cart"></i><span>{defense}</span>
 
                                 </div>
                                 <div className="caract">
-                                    <i class="fab fa-gripfire"></i><span>{attack}</span>
+                                    <i class="fab fa-gripfire icono-cart"></i><span>{attack}</span>
                                 </div>
-                            </div>
-                            <div className="precio-carta">
-                                Ars${price}
-                            </div>
-                            <div className="botones">
-                                <button className="btn-cart btn-detalle">Ver detalle</button>
-                                <button className="btn-cart btn-comprar">Comprar</button>
                             </div>
 
                         </div>

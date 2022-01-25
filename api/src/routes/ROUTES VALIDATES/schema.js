@@ -13,6 +13,7 @@ module.exports = {
     }),
 
     postUserSchema:Joi.object({
+        image:Joi.string().required(),
         email:Joi.string().email().required(),
         firstName:Joi.string().required(),
         lastName:Joi.string().required(),
@@ -32,6 +33,7 @@ module.exports = {
         lastName:Joi.string().required(),
         nickName:Joi.string().required(),
         dateBirth:Joi.string().required(),
+        country:Joi.string()
     }),
 
     putUserPasswordSchema:Joi.object({
