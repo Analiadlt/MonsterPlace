@@ -35,7 +35,8 @@ const CreateCards = async () => {
       state: "activa",
       type: "legendary",
       sellCount: 1,
-      sellPrice: 300
+      sellPrice: 300,
+      createdNFT: true
     },
 
     {
@@ -46,7 +47,8 @@ const CreateCards = async () => {
       state: "activa",
       type: "legendary",
       sellCount: 1,
-      sellPrice: 400
+      sellPrice: 400,
+      createdNFT: true
     },
 
     {
@@ -57,7 +59,8 @@ const CreateCards = async () => {
       state: "activa",
       type: "legendary",
       sellCount: 1,
-      sellPrice: 350
+      sellPrice: 350,
+      createdNFT: true
     },
 
     {

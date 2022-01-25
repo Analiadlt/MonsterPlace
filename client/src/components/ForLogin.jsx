@@ -246,11 +246,13 @@ const ForLogin = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   width: "15%",
+                  
                 }}
+                onClick={(e) => authenticateMetamask(e)}
               />
               <p
                 style={{ fontSize: "1.5rem", color: "grey" }}
-                onClick={(e) => authenticateMetamask(e)}
+                
               >
                 Iniciar con metamask
               </p>
