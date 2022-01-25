@@ -21,7 +21,7 @@ if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
 export default function TiendaNFT() {
   const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-   const [nfts, setNfts] = useState([]);
+  const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
   useEffect(() => {
     loadNFTs();
@@ -54,16 +54,16 @@ export default function TiendaNFT() {
         return item;
       })
     );
-   
+
     //logica limpieza de datos: 
     const datosfiltrados = items.map((g) => {
-    return {
-      name: g.name,
-      description: g.description.split(","),
-      img: g.image,
-      nftContract: g.nftContract,
-      sellPrice: g.price,
-      createNFT: true,
+      return {
+        name: g.name,
+        description: g.description.split(","),
+        img: g.image,
+        nftContract: g.nftContract,
+        sellPrice: g.price,
+        createNFT: true,
       };
     });
     dispatch(postCardNFT(datosfiltrados))
@@ -76,18 +76,16 @@ export default function TiendaNFT() {
       <NavCheto />
       <div className="nav-tienda">
         <h3
-          className={`tiendaNft ${
-            window.location.pathname === "/Tienda" ? "activoTienda" : null
-          }`}
+          className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null
+            }`}
         >
           <Link to="/Tienda" className="link-tienda">
             Crypis
           </Link>
         </h3>
         <h3
-          className={`tiendaNft ${
-            window.location.pathname === "/TiendaNft" ? "activoTienda" : null
-          }`}
+          className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null
+            }`}
         >
           <Link to="/TiendaNft" className="link-tienda">
             NFT
@@ -113,6 +111,17 @@ export default function TiendaNFT() {
                     <CartaNft nft={nft} transaccion={"compra"} />
                   </div>
                 ))}
+
+                {
+                  dragones.map(dragon => (
+                    dragon.createdNFT === true ?
+                      <div className="cart-tienda">
+
+                        <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} type={'nft'} />
+                      </div>
+                      : null
+                  ))
+                }
               </div>
             </div>
           )}
