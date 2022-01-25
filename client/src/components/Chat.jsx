@@ -355,7 +355,7 @@ return (
                     {
                         mensajes.map((dragon, i) => (
                             <div classList='carta-grid'>
-                                <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} />
+                                <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} type={dragon.type} />
                             </div>
                         ))
                     }
