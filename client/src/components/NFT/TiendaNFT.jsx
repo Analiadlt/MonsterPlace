@@ -103,21 +103,18 @@ export default function TiendaNFT() {
           <div className="titulo-tienda">
             <h1>Tienda</h1>
           </div>
-          {loading.loading ? (
-            <h1>Cargando...</h1>
-          ) : (
             <div className="contenedor-tajetas">
               <div className="grid-tienda">
-                {nfts?.map((nft) => (
-                  <div className="cart-tienda">
+                {nfts?.map((nft, i) => (
+                  <div key={i} className="cart-tienda">
                     <CartaNft nft={nft} transaccion={"compra"} />
                   </div>
                 ))}
 
                 {
-                  dragones.map(dragon => (
+                  dragones.map((dragon, i) => (
                     dragon.createdNFT === true ?
-                      <div className="cart-tienda">
+                      <div key={i} className="cart-tienda">
 
                         <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} type={'nft'} />
                       </div>
@@ -125,20 +122,9 @@ export default function TiendaNFT() {
                   ))
                 }
               </div>
-              <div className="grid-tienda">
-                {
-                  dragones.map(dragon =>(
-                    dragon.createdNFT === true ?
-                    <div className="cart-tienda">
-                      
-                        <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} type={'nft'} />              
-                    </div>
-                    : null
-                  ))
-                }
-              </div>
+              
             </div>
-          )}
+          
         </div>
       </div>
     </div>
