@@ -21,6 +21,10 @@ export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
 export const GET_USER_CARD = "GET_USER_CARD";
 export const AGREGAR_MAZO = "AGREGAR_MAZO";
+export const ADD_CARD_NFT = "ADD_CARD_NFT"
+export const GET_USER_CARD = "GET_USER_CARD"
+
+
 
 
 
@@ -42,6 +46,21 @@ export function addUser(payload) {
     }
   };
 }
+
+export function postCardNFT(payload) {
+  return async (dispatch) => {
+    try {
+      var json = await axios.post('/postcards', payload);
+      return dispatch({
+        type: ADD_CARD_NFT,
+        payload: json,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 
 export function addMetamaskAccount(payload) {
   return async (dispatch) => {

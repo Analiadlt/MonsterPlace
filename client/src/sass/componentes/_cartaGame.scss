@@ -243,7 +243,9 @@
   transition: transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
 }
 
-
+.cart-juego{
+  height: 400px;
+}
 
 
 
@@ -448,7 +450,7 @@
   background-image: url('../../img/fondoNft.png');
 }
 .nft-front{
-  background: url('../../img/backNormal.png');
+  background: url('../../img/backNft.png');
   background-size: 420px 550px;
   background-position: center;
 
