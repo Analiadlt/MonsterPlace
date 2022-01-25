@@ -161,7 +161,7 @@ export function getUserLogin(em) {
 
   return async (dispatch) => {
     try {
-      console.log("email desde actions", email);
+      // console.log("email desde actions", email);
       var json = await axios.post(`/loginInfo/loginInformation`, email);
       console.log("Data Desde Actions", json.data);
       return dispatch({
@@ -328,11 +328,11 @@ export function getUserCard(cId){
 
 }
 
-export function linkUserNFTcard(cId){
-  //console.log('User id desde actions', cId);
+export function linkUserNFTcard(payload){
+  console.log('User id desde actions', payload);
   return async (dispatch) => {
     try {
-      var json = await axios.put("/putlinkusercardNFT");
+      var json = await axios.put("/putlinkusercardNFT", payload);
       console.log("link card action", json)
       return dispatch({
         type: LINK_USER_CARDNFT,
