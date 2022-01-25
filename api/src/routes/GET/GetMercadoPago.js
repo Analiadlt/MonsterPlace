@@ -5,7 +5,7 @@ const router = require('express').Router();
 const mercadopago = require('mercadopago');
 //const Card = require("../../models/Card");
 
-const { ACCESS_TOKEN, REACT_APP_CLIENT, REACT_APP_API, COL_ACCESS_TOKEN } = process.env;
+const { ACCESS_TOKEN, REACT_APP_CLIENT, REACT_APP_API } = process.env;
 
 //Agrega credenciales
 mercadopago.configure({
