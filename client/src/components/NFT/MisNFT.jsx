@@ -46,6 +46,7 @@ export default function MyAssets() {
         const meta = await axios.get(tokenUri);
         let price = ethers.utils.formatUnits(i.price.toString(), "ether");
         let item = {
+          name: meta.data.name,
           price,
           tokenId: i.tokenId.toNumber(),
           seller: i.seller,
@@ -56,7 +57,7 @@ export default function MyAssets() {
         return item;
       })
     );
-    console.log(items);
+    console.log("Items desde Mis NFT", items);
     setNfts(items);
     setLoadingState("loaded");
     }
