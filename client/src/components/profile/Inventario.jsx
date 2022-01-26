@@ -116,12 +116,19 @@ const uId = resultado?.id
         <div className="grid-inventario">
 {
                 cardsDetail?.map(c => 
-                   
+                    c.createdNFT === false ?
                    <CartaTienda
                              
-                   name={c.name} attack={c.attack} defense={c.defense} img={c.img} price={c.sellPrice} type={c.type} 
+                   name={c.name} attack={c.attack} defense={c.defense} img={c.img} price={c.sellPrice}
 
                     />
+                    :
+                    <CartaTienda
+                             
+                    name={c.name} attack={c.attack} defense={c.defense} img={c.img} price={c.sellPrice} type={'nft'} 
+ 
+                     />
+
             )
                 }
     </div>
