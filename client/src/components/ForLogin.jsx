@@ -13,6 +13,9 @@ import huevoRojo from "../img/huevoRojo.png";
 import huevoBlanco from "../img/huevoBlanco.png";
 import { app } from "../firebase/firebase";
 import { useMoralis } from "react-moralis";
+import detectEthereumProvider from "@metamask/detect-provider";
+import meta from "../img/MetaMask_Fox.png"
+
 
 
 import { loginReset, cargarSaldo } from "../redux/actions";
@@ -41,6 +44,7 @@ const validate = (values) => {
 
 const ForLogin = () => {
   
+  
   const { authenticate, user } = useMoralis();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -61,6 +65,23 @@ const ForLogin = () => {
   };
 
   async function authenticateMetamask(e) {
+    const provider1 = await detectEthereumProvider();
+    if (!provider1) {
+      Swal.fire({
+        imageUrl: `${meta}`,
+        title: "Debes Instalar metamask..",
+        width: 500,
+        confirmButtonText: "Continuar",
+        imageWidth: 300,
+        imageHeight: 400,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    
+    } else {
     e.preventDefault();
     await authenticate();
     dispatch(
@@ -74,7 +95,7 @@ const ForLogin = () => {
         history.push(`/`);
       }, 3000);
     }
-  }
+  }}
 
   const formik = useFormik({
     initialValues: {
