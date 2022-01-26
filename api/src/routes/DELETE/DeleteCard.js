@@ -7,7 +7,6 @@ const router = Router();
 router.delete("/card/:id",async(req,res)=>{
 
     let id=req.params.id
-    console.log(id)
     try {
         await Card.destroy(
             {
