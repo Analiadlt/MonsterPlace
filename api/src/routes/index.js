@@ -27,7 +27,7 @@ const putMetamask = require ("./PUT/PutMetamask")
 const postCardsNft =require ("./POST/PostCardsNFT.js")
 const putResultado = require("./PUT/PutResultado");
 const putLinkUserCardNFT = require("./PUT/PutLinkUserCardNFT")
-
+const deleteCard = require("./DELETE/DeleteCard")
 
 const router = Router();
 
@@ -36,7 +36,7 @@ router.use('/postcards', postCardsNft);
 router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword); 
 router.use('/user',validateInformation(putUserInformationSchema),putUserInformation);
 router.use('/login',validateInformation(postLoginSchema), postLogin);
-router.use('/delete',deleteUser)
+router.use('/delete',deleteUser,deleteCard)
 router.use("/recover", postRecoverUser)
 router.use("/loginInfo",loginInfo)
 router.use("/loginInfo",loginInfoMetamask)
