@@ -12,15 +12,14 @@ import misNFT from "./components/NFT/MisNFT";
 import Carrito from "./components/Carrito";
 import ForLogin from "./components/ForLogin";
 import PassReset from "./components/PassReset";
-import Juego from "./components/juego/interface";
+// import Juego from "./components/juego/interface";
 import userDetail from "./components/profile/userDetail";
 import Chat from "./components/Chat";
-import MyPage from "./firebase/storage/MyPage";
 import MyAuthPage from "./firebase/auth/MyAuthPage";
 import Intermedio from "./components/juego/intermedio";
 // import Chatear from './components/chat/chatear';
 import ChatApp from "./components/chat/index";
-import NavCheto from "./components/NavCheto";
+// import NavCheto from "./components/NavCheto";
 import Compra from "./components/Compra";
 import { useSelector, useDispatch } from "react-redux";
 import { app } from "./firebase/firebase";
@@ -29,7 +28,7 @@ import Comprar from "./components/compra/ordenCompra";
 import GanadorJuego from "./components/juego/GanadorJuego";
 import BotonPagar from "./components/BotonPagar";
 import DetalleCompra from "./components/detalleCompra";
-import CartaFondo from "./components/juego/FondoCarta";
+// import CartaFondo from "./components/juego/FondoCarta";
 import CartaNft from "./components/CartaNft";
 import { useMoralis } from "react-moralis";
 import Panel from "./components/panel/panel";
@@ -77,7 +76,6 @@ function App() {
       return (
         <div className="App">
           <Route path="/ganador" component={GanadorJuego} />
-          <Route path="/storage" component={MyPage} />
           <Route path="/auth" component={MyAuthPage} />
           <Route path="/Carrito" component={Carrito} />
           <Route exact path="/" component={Home} />

@@ -1,7 +1,7 @@
 @use '../estilosBase/variables' as v;
 .titulo-tienda{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 90%;
     h1{
@@ -50,9 +50,16 @@
     
     
 }
+
+.car{
+    position: fixed;
+    z-index: 50;
+    right: 50px;
+}
+
 .cart-tienda{
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .carrito-num{
     font-size: 2rem;
@@ -113,7 +120,28 @@
     }
 
 }
+.contenedor-filtros{
+    display: flex;
+    justify-content: left;
+    width: 50%;
+    h5{
+        margin-right: 10px;
+    }
+}
+.filtros{
+    display: flex;
+    flex: 1;
+    padding: 5px;
+    border-radius: 10px;
+    color: v.$color-titulo;
+    margin: 0;
+    width: 20%;
+    background-color: #ff636327;
+    
 
+    border: 1px solid v.$color-bordes;
+
+}
 
 /* Tablets y phablets */
 @media only screen and (min-width: 0px) and (max-width: 1067px){

@@ -1,162 +1,291 @@
-import { useState } from "react";
-import { ethers } from "ethers";
-import { create as ipfsHttpClient } from "ipfs-http-client";
-import { useHistory } from "react-router-dom";
-import Web3Modal from "web3modal";
-import { nftaddress, nftmarketaddress } from "../../config";
-import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
+
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import NavCheto from "../NavCheto";
-import { Link } from "react-router-dom";
-const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import huevoRojo from "../../img/huevoRojo.png"
+import huevoVerde from "../../img/huevoVerde.png";
+import { postCardNormal } from "../../redux/actions";
 
-function validate(formInput) {
-  let errorValidate = {};
-  var letters = /^[A-Za-z]+$/;
 
-  if (!formInput.name.trim()) {
-    errorValidate.name = "Name required";
-  } else if (formInput.name.length > 30) {
-    errorValidate.name = "Name too long. Maximun 30 characters";
-  } else if (!formInput.name.match(letters)) {
-    errorValidate.name = "Only letters allowed";
-  } else if (!formInput.attack) {
-    errorValidate.attack = "attack is required";
-  } else if (isNaN(parseInt(formInput.attack))) {
-    errorValidate.attack = "attack must be a number";
-  } else if (formInput.attack <= 0) {
-    errorValidate.attack = "attack must be greather than 0";
-  } else if (!formInput.defense) {
-    errorValidate.defense = "defense is required";
-  } else if (isNaN(parseInt(formInput.defense))) {
-    errorValidate.defense = "defense must be a number";
-  } else if (formInput.defense <= 0) {
-    errorValidate.defense = "defense must be greather than 0";
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.name) {
+    errors.name = "Nombre obligatorio.";
+  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/i.test(values.name)) {
+    errors.name = "El nombre solo puede contener letras y espacios.";
   }
 
-  return errorValidate;
-}
+  if (!values.attack) {
+    errors.attack = "attack obligatoria.";
+  } 
+  else if (values.attack < 1) {
+    errors.attack =
+      "attack debe ser mayor a 0";
+  }
+  
+  else if (!/^[0-9]+$/ .test(values.attack)) {
+    errors.attack =
+      "Solo puedes colocar numeros enteros";
+  }
+
+  if (!values.defense) {
+    errors.defense = "defense obligatoria.";
+  } 
+  else if (values.defense < 1) {
+    errors.defense =
+      "defense debe ser mayor a 0";
+  }
+  
+  else if (!/^[0-9]+$/ .test(values.defense)) {
+    errors.defense =
+      "Solo puedes colocar numeros enteros";
+  }
+
+  if (!values.sellPrice) {
+    errors.sellPrice = "precio obligatoria.";
+  } 
+  else if (values.sellPrice < 1) {
+    errors.sellPrice =
+      "precio debe ser mayor a 0";
+  }
+  
+  else if (!/^[0-9]+$/ .test(values.sellPrice)) {
+    errors.sellPrice =
+      "Solo puedes colocar numeros enteros";
+  }
+
+  if (!values.img) {
+    errors.img = "img obligatoria.";
+  }
+  
+
+  return errors;
+};
+
+
 
 export default function CrearCarta() {
-  const [fileUrl, setFileUrl] = useState(null);
-  const [error, setError] = useState({});
-  const [formInput, updateFormInput] = useState({
-    price: "",
-    name: "",
-    attack: "",
-    defense: "",
+ 
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const addCard = useSelector((state) => state.addCard);
+  const [carta, setcarta] = useState(false);
+  const [ojo, setojo] = useState(false);
+  const switchShown = () => setojo(!ojo);
+ 
+
+  
+
+  const formik = useFormik({
+    initialValues: {
+      
+      name: "",
+      attack: "",
+      defense: "",
+      img:"",
+      sellPrice:"",
+      state: "activa",
+      type: "legendary",
+      sellCount: 1,
+    },
+    validate,
+    onSubmit: async (values) => {
+      setcarta(true);
+      console.log('valores....',values)
+      dispatch(postCardNormal(values))
+     
+    },
   });
-  const router = useHistory();
 
+  useEffect(() => {
+    if (carta && addCard) {
+      Swal.fire({
+        imageUrl: `${huevoVerde}`,
+        title: "Carta Creada",
+        width: 500,
+        confirmButtonText: "Continuar",
+        imageWidth: 300,
+        imageHeight: 400,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
 
+      setTimeout(() => {
+				formik.resetForm()
+
+			}, 3000);
+    
+
+      setcarta(false);
+    }
+
+    if (carta && !addCard) {
+      Swal.fire({
+        title: "<strong>La carta no pudo ser creada</strong>",
+        imageUrl: `${huevoRojo}`,
+        width: 500,
+        imageWidth: 300,
+        imageHeight: 400,
+      });
+    }
+  }, [addCard,carta]);
 
  
 
   return (
     <div>
-
-      <div
-        className="navContainerNFT"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
+     
+      <div className="contenedor-cheto container-log">
         <div className="login-box">
-          <div className="form">
-            <h2>Crear Cartas</h2>
+          <form className="formulario" onSubmit={formik.handleSubmit}>
+            <h2>Login</h2>
 
             <div className="user-box">
-              <label>Nombre</label>
+              <label htmlFor="name">Nombre</label>
               <input
-                onChange={(e) =>
-                  updateFormInput({ ...formInput, name: e.target.value })
-                }
+                id="name"
+                name="name"
+                type="name"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
               />
-              {error.name && (
-                <p className="campoErr">
-                  {" "}
+              {formik.touched.name && formik.errors.name ? (
+                <div className="campoErr">
                   <ErrorOutlineOutlinedIcon />
-                  {error.name}
-                </p>
-              )}
+                  {formik.errors.name}
+                </div>
+              ) : null}
             </div>
-            <div className="user-box">
-              <label>Ataque</label>
-              <input
-                onChange={(e) =>
-                  updateFormInput({ ...formInput, attack: e.target.value })
-                }
-              />
-              {error.attack && (
-                <p className="campoErr">
-                  {" "}
-                  <ErrorOutlineOutlinedIcon />
-                  {error.attack}
-                </p>
-              )}
-            </div>
-            <div className="user-box">
-              <label>Defensa</label>
-              <input
-                onChange={(e) =>
-                  updateFormInput({ ...formInput, defense: e.target.value })
-                }
-              />
-              {error.defense && (
-                <p className="campoErr">
-                  {" "}
-                  <ErrorOutlineOutlinedIcon />
-                  {error.defense}
-                </p>
-              )}
-            </div>
-            <div className="user-box">
-              <label>Precio en Ethereum</label>
-              <input
-                onChange={(e) =>
-                  updateFormInput({ ...formInput, price: e.target.value })
-                }
-              />
-            </div>
-            <div className="user-box">
-              <input
-                type="file"
-                name="Asset"
-                className="my-4"
-                
-              />
-            </div>
-            {fileUrl && <img src={fileUrl} alt="" />}
 
+            <div className="user-box">
+              <label htmlFor="attack">Attack</label>
+              <div style={{ display: "flex" }}>
+                <input
+                  id="attack"
+                  name="attack"
+                  type= "attack"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.attack}
+                />
+               
+              </div>
+              {formik.touched.attack && formik.errors.attack ? (
+                <div className="campoErr">
+                  <ErrorOutlineOutlinedIcon />
+                  {formik.errors.attack}
+                </div>
+              ) : null}
+            </div>
+
+            
+
+            <div className="user-box">
+              <label htmlFor="defense">Defense</label>
+              <div style={{ display: "flex" }}>
+                <input
+                  id="defense"
+                  name="defense"
+                  type= "defense"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.defense}
+                />
+               
+              </div>
+              {formik.touched.defense && formik.errors.defense ? (
+                <div className="campoErr">
+                  <ErrorOutlineOutlinedIcon />
+                  {formik.errors.defense}
+                </div>
+              ) : null}
+            </div>
+
+            <div className="user-box">
+              <label htmlFor="sellPrice">Precio en Pesos</label>
+              <div style={{ display: "flex" }}>
+                <input
+                  id="sellPrice"
+                  name="sellPrice"
+                  type= "sellPrice"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.sellPrice}
+                />
+               
+              </div>
+              {formik.touched.sellPrice && formik.errors.sellPrice ? (
+                <div className="campoErr">
+                  <ErrorOutlineOutlinedIcon />
+                  {formik.errors.sellPrice}
+                </div>
+              ) : null}
+            </div>
+
+            <div className="user-box">
+              <label htmlFor="img">Img Url</label>
+              <div style={{ display: "flex" }}>
+                <input
+                  id="img"
+                  name="img"
+                  type= "img"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.img}
+                />
+               
+              </div>
+              {formik.touched.img && formik.errors.img ? (
+                <div className="campoErr">
+                  <ErrorOutlineOutlinedIcon />
+                  {formik.errors.img}
+                </div>
+              ) : null}
+            </div>
+
+           
+          
+              
+           
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-around",
+                justifyContent: "center",
                 alignItems: "center",
+                flexDirection: "column",
               }}
             >
-              <button type="submit" className="botonn">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Crear Carta
-              </button>
+             
+              <div>
+              <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               
+                  <button  type="submit" className="botonn">Crear Carta</button>
+                
+              </div>
             </div>
+          </form>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "2rem",
+            }}
+          >
+           
           </div>
         </div>
       </div>

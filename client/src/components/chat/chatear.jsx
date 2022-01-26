@@ -4,13 +4,18 @@ import socket from "../Socket";
 
 
 
-const Chatear = ({nombre,idpartida}) => {
+const Chatear = ({nombre,idpartida, socketid}) => {
     const [mensajechat, setMensajechat] = useState("");
     const [mensajeschat, setMensajeschat] = useState([]);
+
   
+  let arrUsers =[]
+
     useEffect(() => {
       socket.emit("conectado", nombre, socket.id);
     }, [nombre]);
+
+
 
   
     useEffect(() => {
@@ -41,6 +46,7 @@ const Chatear = ({nombre,idpartida}) => {
     return (
       <div>
         <div style={{ display: 'block', margin: '20px', marginTop: '20px', width: '55%' }}>
+          
           {mensajeschat.map((e, i) => (
             <div key={i}>
               <div style={{color: "yellow"}}>{e.nombre}</div>

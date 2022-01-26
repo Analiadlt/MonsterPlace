@@ -3,16 +3,40 @@ import DetalleDr from "./ModalDetalle";
 import { Link } from "react-router-dom";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
-import { useDispatch } from "react-redux";
-
+import { useDispatch , useSelector} from "react-redux";
+import Swal from "sweetalert2";
 import { addCart } from "../redux/actions";
+import huevoRojo from "../img/huevoRojo.png";
+
 
 
 export default function CartaTienda({ img, name, attack, defense, efect, price, type, botones }) {
+    const usuario = useSelector((state) => state.userLogueado);
     const dispatch = useDispatch()
     // const ataqueDefensa = nfts.description.split(",");
 
-    
+    let enviar = (name)=>{
+        console.log('dentro')
+        if(!usuario.email){
+            Swal.fire({
+                imageUrl: `${huevoRojo}`,
+                title: "<strong>Debes loguearte para poder comprar</strong>",
+                width: 500,
+                confirmButtonText: "Continuar",
+                imageWidth: 300,
+                imageHeight: 400,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading();
+                },
+              });
+        }
+        else{
+
+            dispatch(addCart(name))
+        }
+    }
     
     
     return (
@@ -22,8 +46,8 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
                 <div className="frontCarta logo-carta">
                
                 </div>
-                <div className="backCarta">
-                    <div className="contenedor-imagen">
+                <div className={`backCarta ${type === 'nft' ? 'nft-back': null}`}>
+                    <div className={`contenedor-imagen`}>
                         <img src={img} alt="" />
                     </div>
                     <div className="contenido-to">
@@ -43,9 +67,9 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
                             </div>
                             { botones === true ? 
                             <div className="botones">
-                                <button className="btn-cart btn-detalle"><DetalleDr name={name} attack={attack} defense={defense} img={img} type={type} /></button>
+                                <button className="btn-cart btn-detalle"><DetalleDr name={name} attack={attack} defense={defense} img={img}/></button>
                                 
-                                <button className="btn-cart btn-comprar" onClick={() => dispatch(addCart(name))}>Comprar</button>
+                                <button className="btn-cart btn-comprar" onClick={() => enviar(name)}>Comprar</button>
                                 {/* <button
                 className="btn-gl btn-comprar"
                 onClick={() => buyNft(nft)}

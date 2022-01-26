@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Inventario from "./Inventario";
 import Mazo from "./Mazo";
 import Perfil from "./perfil";
+
 /* import Estadisticas from "./estadisticas/Estadisticas"; */
 // import { 
 //     getById,
@@ -22,7 +23,7 @@ export default function Detalle() {
 	const detail = useSelector((state) => state.userLogueado);
 
 	const [navegacion,setNavegacion] = useState('home')
-	
+
 
 
 
@@ -75,14 +76,15 @@ export default function Detalle() {
 						navegacion === 'home' ? <h1>Home</h1> : 
 						navegacion === 'profile' ? <Perfil/> : 
 						navegacion === 'inventario' ? <Inventario/> : 
-						navegacion === 'misNft' ? <MisNFT/> : 
+						navegacion === 'misNft' ?  <MisNFT/> :
+						
 						navegacion === 'estadisticas' ? <h1>Hola</h1>: null
 						
 					}
 					
 				</div>
 				</div>
-			</div>∫
+			</div>
 			
 			</div>
 		
