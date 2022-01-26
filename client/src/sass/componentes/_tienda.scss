@@ -50,6 +50,13 @@
     
     
 }
+
+.car{
+    position: fixed;
+    z-index: 50;
+    right: 50px;
+}
+
 .cart-tienda{
   display: flex;
   justify-content: center;
