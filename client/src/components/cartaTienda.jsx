@@ -17,7 +17,7 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
 
     let enviar = (name)=>{
         console.log('dentro')
-        if(!usuario.length){
+        if(!usuario.email){
             Swal.fire({
                 imageUrl: `${huevoRojo}`,
                 title: "<strong>Debes loguearte para poder comprar</strong>",
