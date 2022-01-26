@@ -9,6 +9,9 @@ import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useMoralis } from "react-moralis";
+import Swal from "sweetalert2";
+import huevoRojo from "../img/huevoRojo.png";
+
 
 export default function CartaNft({ nft, transaccion }) {
   const { isAuthenticated} = useMoralis();
@@ -60,10 +63,27 @@ export default function CartaNft({ nft, transaccion }) {
   }
   async function buyNft(nft) {
     //para conectar la wallet
+    console.log('dentro de buy')
+    if(!usuario.length){
+      Swal.fire({
+          imageUrl: `${huevoRojo}`,
+          title: "<strong>Debes loguearte para poder comprar</strong>",
+          width: 500,
+          confirmButtonText: "Continuar",
+          imageWidth: 300,
+          imageHeight: 400,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+  }
     if(isAuthenticated === false || !usuario){
         alert("Debes hacer login o conectar la wallet para poder ejecutar compra")
         router.push("/Login");
-    } else {
+    } 
+    else {
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
