@@ -15,10 +15,11 @@ export default function MyAssets() {
     loadNFTs();
   }, []);
   async function loadNFTs() {
+    try{
     const web3Modal = new Web3Modal({
       network: "mainnet",
       cacheProvider: true,
-    });
+    })
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
@@ -49,6 +50,9 @@ export default function MyAssets() {
     console.log(items);
     setNfts(items);
     setLoadingState("loaded");
+    }catch{
+      setNfts([])
+      }
   }
   // if (loadingState === 'loaded' && !nfts.length) return (<h1>No assets owned</h1>)
   return (
