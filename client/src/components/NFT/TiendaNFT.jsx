@@ -70,7 +70,7 @@ export default function TiendaNFT() {
           img: g?.image,
           nftContract: g?.nftContract,
           sellPrice: g?.price,
-          createNFT: true,
+          createdNFT: true,
         };
       });
       dispatch(postCardNFT(datosfiltrados))
