@@ -64,7 +64,7 @@ export default function CartaNft({ nft, transaccion }) {
   async function buyNft(nft) {
     //para conectar la wallet
     console.log('dentro de buy')
-    if(!usuario.length){
+    if(!usuario.email){
       Swal.fire({
           imageUrl: `${huevoRojo}`,
           title: "<strong>Debes loguearte para poder comprar</strong>",
@@ -79,9 +79,23 @@ export default function CartaNft({ nft, transaccion }) {
           },
         });
   }
-    if(isAuthenticated === false || !usuario){
-        alert("Debes hacer login o conectar la wallet para poder ejecutar compra")
-        router.push("/Login");
+    if(isAuthenticated === false ){
+        // alert("Debes hacer login o conectar la wallet para poder ejecutar compra")
+
+        // router.push("/Login");
+        Swal.fire({
+          imageUrl: `${huevoRojo}`,
+          title: "<strong>Debes conectar la wallet para compra</strong>",
+          width: 500,
+          confirmButtonText: "Continuar",
+          imageWidth: 300,
+          imageHeight: 400,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
     } 
     else {
     const web3Modal = new Web3Modal();

@@ -107,7 +107,9 @@ return (
                     >   
                         {!userLogeado.nickName ?
                         <Avatar sx={{ width: 62, height: 60, fontSize: "2.5rem", color:'#FF6363', background:'#19111d'}}></Avatar>
+
                         : <img style={{width:'62px',height:'60px'}} src={userLogeado.image} alt={userLogeado.nickname?.charAt(0)} />
+
                         }
                     </IconButton>
 
