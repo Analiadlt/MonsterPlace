@@ -4,7 +4,6 @@ const server = express();
 const dataHelper = require("./dataHelper/userDataHelper")
 
 // const allUsers = async () => {
-
 //   const infoCreate = dataHelper.map(index => {
 //     return {
 //       email: index.email,
