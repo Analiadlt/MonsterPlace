@@ -19,9 +19,11 @@ export const GET_PAGAR = "GET_PAGAR";
 export const RESTAR_SALDO = "RESTAR_SALDO";
 export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
-export const ADD_CARD_NFT = "ADD_CARD_NFT";
-export const GET_USER_CARD = "GET_USER_CARD";
+export const ADD_CARD_NFT = "ADD_CARD_NFT"
+export const GET_USER_CARD = "GET_USER_CARD"
+export const LINK_USER_CARDNFT ="LINK_USER_CARDNFT"
 export const AGREGAR_MAZO ="AGREGAR_MAZO";
+
 
 
 
@@ -121,6 +123,10 @@ export function loginUserMetamask(payload) {
       });
     } catch (error) {
       console.log('problemas action loginUserMetamask', error)
+      return dispatch({
+        type: LOGIN_USER,
+        payload: "400",
+      });
     }
   };
 }
@@ -159,7 +165,7 @@ export function getUserLogin(em) {
 
   return async (dispatch) => {
     try {
-      console.log("email desde actions", email);
+      // console.log("email desde actions", email);
       var json = await axios.post(`/loginInfo/loginInformation`, email);
       console.log("Data Desde Actions", json.data);
       return dispatch({
@@ -327,8 +333,25 @@ export function getUserCard(cId){
 }
 
 
+export function linkUserNFTcard(payload){
+  console.log('User id desde actions', payload);
+  return async (dispatch) => {
+    try {
+      var json = await axios.put("/putlinkusercardNFT", payload);
+      console.log("link card action", json)
+      return dispatch({
+        type: LINK_USER_CARDNFT,
+        payload: json.data[0].cards,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
+
 export function subirmazo(payload) {
-  
   return async (dispatch) => {
    
     return dispatch({
@@ -337,3 +360,4 @@ export function subirmazo(payload) {
     });
   };
 }
+

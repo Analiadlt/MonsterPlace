@@ -11,6 +11,7 @@ import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import CartaNft from "../CartaNft";
 import { useDispatch } from "react-redux";
 import { postCardNFT } from "../../redux/actions";
+import CartaTienda from '../cartaTienda'
 
 let rpcEndpoint = null;
 
@@ -21,8 +22,9 @@ if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
 export default function TiendaNFT() {
   const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-   const [nfts, setNfts] = useState([]);
+  const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
+  const dragones = useSelector(state => state.dragonesbd)
   useEffect(() => {
     loadNFTs();
   }, []);
@@ -54,16 +56,16 @@ export default function TiendaNFT() {
         return item;
       })
     );
-   
+
     //logica limpieza de datos: 
     const datosfiltrados = items.map((g) => {
-    return {
-      name: g.name,
-      description: g.description.split(","),
-      img: g.image,
-      nftContract: g.nftContract,
-      sellPrice: g.price,
-      createNFT: true,
+      return {
+        name: g.name,
+        description: g.description.split(","),
+        img: g.image,
+        nftContract: g.nftContract,
+        sellPrice: g.price,
+        createNFT: true,
       };
     });
     dispatch(postCardNFT(datosfiltrados))
@@ -76,18 +78,16 @@ export default function TiendaNFT() {
       <NavCheto />
       <div className="nav-tienda">
         <h3
-          className={`tiendaNft ${
-            window.location.pathname === "/Tienda" ? "activoTienda" : null
-          }`}
+          className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null
+            }`}
         >
           <Link to="/Tienda" className="link-tienda">
             Crypis
           </Link>
         </h3>
         <h3
-          className={`tiendaNft ${
-            window.location.pathname === "/TiendaNft" ? "activoTienda" : null
-          }`}
+          className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null
+            }`}
         >
           <Link to="/TiendaNft" className="link-tienda">
             NFT
@@ -103,19 +103,28 @@ export default function TiendaNFT() {
           <div className="titulo-tienda">
             <h1>Tienda</h1>
           </div>
-          {loading.loading ? (
-            <h1>Cargando...</h1>
-          ) : (
             <div className="contenedor-tajetas">
               <div className="grid-tienda">
-                {nfts.map((nft) => (
-                  <div className="cart-tienda">
-                    <CartaNft nft={nft} transaccion={"compra"} />
+                {nfts?.map((nft, i) => (
+                  <div key={i} className="cart-tienda">
+                    <CartaNft key={i} nft={nft} transaccion={"compra"} />
                   </div>
                 ))}
+
+                {
+                  dragones.map((dragon, i) => (
+                    dragon.createdNFT === true ?
+                      <div key={i} className="cart-tienda">
+
+                        <CartaTienda key={i} name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} type={'nft'} />
+                      </div>
+                      : null
+                  ))
+                }
               </div>
+              
             </div>
-          )}
+          
         </div>
       </div>
     </div>
