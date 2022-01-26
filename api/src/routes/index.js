@@ -11,7 +11,6 @@ const putUserPassword = require('./PUT/PutUserPassword')
 const deleteUser = require('./DELETE/DeleteUser')
 const postCards = require('./POST/PostCards')
 const postLogin = require('./POST/PostLogin')
-const postLoginMetamask = require('./POST/PostLoginMetamask')
 const getDestacadas = require('./GET/GetDestacadas')
 const postRecoverUser = require("./POST/PostRecoverUser")
 const loginInfo= require("./GET/LoginInformation")
@@ -24,20 +23,23 @@ const postLogicGame = require("./POST/PostLogicGame");
 const putSumaMonedas = require("./PUT/PutSumaMonedas");
 const putRestaMonedas = require("./PUT/PutRestaMonedas");
 const getMonedas = require ("./GET/GetMonedas");
-const putMetamask = require ("./PUT/PutMetamask");
+const putMetamask = require ("./PUT/PutMetamask")
+const postCardsNft =require ("./POST/PostCardsNFT.js")
 const putResultado = require("./PUT/PutResultado");
+const putLinkUserCardNFT = require("./PUT/PutLinkUserCardNFT")
+
 
 const router = Router();
 
-router.use('/cards', getCards,getDestacadas,validateInformation(postCardSchema),postCards); 
+router.use('/cards', getCards,getDestacadas,validateInformation(postCardSchema),postCards);
+router.use('/postcards', postCardsNft);  
 router.use('/users', getUser,validateInformation(postUserSchema), postUser,validateInformation(putUserPasswordSchema), putUserPassword); 
 router.use('/user',validateInformation(putUserInformationSchema),putUserInformation);
 router.use('/login',validateInformation(postLoginSchema), postLogin);
-router.use('/loginMetamask', postLoginMetamask);
 router.use('/delete',deleteUser)
 router.use("/recover", postRecoverUser)
 router.use("/loginInfo",loginInfo)
-router.use("/loginInformationMetamask",loginInfoMetamask)
+router.use("/loginInfo",loginInfoMetamask)
 router.use('/order', postOrder);
 router.use('/mercadopago', mercadopago);
 router.use("/usercard", postUserCard)
@@ -48,6 +50,7 @@ router.use("/putrestamonedas",putRestaMonedas)
 router.use("/getmonedas",getMonedas)
 router.use("/putmetamask",putMetamask)
 router.use("/resultado",putResultado)
+router.use("/putlinkusercardNFT", putLinkUserCardNFT)
 // router.use('/')
 
 module.exports = router;

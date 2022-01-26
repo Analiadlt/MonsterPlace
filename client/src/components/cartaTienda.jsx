@@ -22,8 +22,8 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
                 <div className="frontCarta logo-carta">
                
                 </div>
-                <div className="backCarta">
-                    <div className="contenedor-imagen">
+                <div className={`backCarta ${type === 'nft' ? 'nft-back': null}`}>
+                    <div className={`contenedor-imagen`}>
                         <img src={img} alt="" />
                     </div>
                     <div className="contenido-to">
@@ -43,7 +43,7 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
                             </div>
                             { botones === true ? 
                             <div className="botones">
-                                <button className="btn-cart btn-detalle"><DetalleDr name={name} attack={attack} defense={defense} img={img} type={type} /></button>
+                                <button className="btn-cart btn-detalle"><DetalleDr name={name} attack={attack} defense={defense} img={img}/></button>
                                 
                                 <button className="btn-cart btn-comprar" onClick={() => dispatch(addCart(name))}>Comprar</button>
                                 {/* <button

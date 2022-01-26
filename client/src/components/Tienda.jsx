@@ -12,7 +12,8 @@ import NavCheto from './NavCheto';
 import CartaTienda from "./cartaTienda";
 export default function Tienda() {
     const loading = useSelector(state => state.loading)
-    const dragones = useSelector(state => state.dragonesbd)
+    const bichos = useSelector(state => state.dragonesbd)
+    const dragones = bichos.filter(bi => bi.createdNFT === false)
     const dispatch = useDispatch()
     const [orden, setOrden] = useState('ASC');
     useEffect(() => {
@@ -27,17 +28,18 @@ export default function Tienda() {
 		setOrden(e.target.value);
 	};
 
+
     return (
         <div>
             <NavCheto />
             <div className="nav-tienda">
-                
+
                 <h3 className={`tiendaNft ${window.location.pathname === "/Tienda" ? "activoTienda" : null}`}><Link to='/Tienda' className='link-tienda'>Crypis</Link></h3>
-                
+
                 <h3 className={`tiendaNft ${window.location.pathname === "/TiendaNft" ? "activoTienda" : null}`}><Link to='/TiendaNft' className='link-tienda'>NFT</Link></h3>
-    
+
             </div>
-{/*             <div className="muestra contenedor-cheto" >
+            {/*             <div className="muestra contenedor-cheto" >
                 <CartaFondo name={dragones[0]?.name} attack={dragones[0]?.attack} defense={dragones[0]?.defense} img={dragones[0]?.img} price={dragones[0]?.sellPrice} type={dragones[0]?.type} efect={'cine'}/>
     
             </div> */}
@@ -45,11 +47,14 @@ export default function Tienda() {
                 <div className="contenedor-tienda">
 
                     <div className="titulo-tienda">
+                    
                         <h1>Tienda</h1>
-                        {/* <Link to='/Carrito'> */}
-                        <Modal1 />
-                        {/* </Link> */}
+  
+                        <span className="car">
+                            <Modal1 />
+                        </span>
                     </div>
+
 
                     {loading.loading ? <h1>Cargando...</h1> :
                         <div className="contenedor-tajetas">
@@ -64,10 +69,14 @@ export default function Tienda() {
                             </select>  
                             <div className="grid-tienda">                                                                  
                                 {
-                                    dragones.map(dragon =>
+                                    dragones.map(dragon => (
+
                                         <div className="cart-tienda">
+
                                             <CartaTienda name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
                                         </div>
+
+                                    )
                                     )
                                 }
                             </div>

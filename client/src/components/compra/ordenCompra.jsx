@@ -10,7 +10,10 @@ export default function Comprar() {
   const email = useSelector(state => state.userLogueado.email)
   const cards = useSelector(state => state.carrito)
   const dragones = useSelector(state => state.carrito)
+  const datos = useSelector(state => state.userLogueado)
 let allCards = []
+
+console.log("UserLoeado desde odernCompra: ", datos)
 
   function cargarCards(cards) {
       let array = []

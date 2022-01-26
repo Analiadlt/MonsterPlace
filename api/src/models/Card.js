@@ -9,11 +9,13 @@ module.exports = (sequelize) => {
     attack: { type: DataTypes.INTEGER, allowNull: false },
     defense: { type: DataTypes.INTEGER, allowNull: false },
     img: { type: DataTypes.STRING, allowNull: false }, 
-    state: { type: DataTypes.ENUM('activa', 'agotada', 'muerta'), allowNull: false },
+    // state: { type: DataTypes.ENUM('activa', 'agotada', 'muerta'), allowNull: true},
     type: { type: DataTypes.STRING},
     sellPrice: {type: DataTypes.DECIMAL(20, 2)},
     sellCount: { type: DataTypes.INTEGER }, //cantidad de Ventas
-    currency: {type: DataTypes.STRING,  defaultValue: 'ARS'}
+    currency: {type: DataTypes.STRING,  defaultValue: 'ARS'},
+    nftContract: { type: DataTypes.STRING},
+    createdNFT: { type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false },
   }
  );
 };
