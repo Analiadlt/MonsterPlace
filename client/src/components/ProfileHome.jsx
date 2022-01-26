@@ -104,9 +104,11 @@ return (
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
-                    >
-                        <Avatar sx={{ width: 62, height: 60, fontSize: "2.5rem", backgroundColor: '#FF6363', ":hover": 'rgba(0, 0, 0)' }}>{userLogeado !==[] ? <img style={{width:'100%',height:'100%'}} src={userLogeado.image} alt={userLogeado.nickname?.charAt(0)} />:'I'}</Avatar>
-
+                    >   
+                        {!userLogeado.img ?
+                        <Avatar sx={{ width: 62, height: 60, fontSize: "2.5rem", color:'#FF6363', background:'#19111d'}}></Avatar>
+                        : <Avatar sx={{ width: 62, height: 60, fontSize: "2.5rem", color:'black',background:'#19111d'}}><img style={{width:'100%',height:'100%'}} src={userLogeado.image} alt={userLogeado.nickname?.charAt(0)} /></Avatar>
+                        }
                     </IconButton>
 
                 </Tooltip>
