@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import Card from '../components/Card'
+// import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+// import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
-import { getCard, getCardOrden } from "../redux/actions";
+import { getCard } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 import Modal1 from "./Modal";
-import { Modal } from "@mui/material";
-import Filtros from "./filtrosTienda";
+// import { Modal } from "@mui/material";
+// import Filtros from "./filtrosTienda";
 import NavCheto from './NavCheto';
 import CartaTienda from "./cartaTienda";
 export default function Tienda() {
