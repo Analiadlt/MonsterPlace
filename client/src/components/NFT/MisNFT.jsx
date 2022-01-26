@@ -17,50 +17,52 @@ export default function MyAssets() {
   }, []);
 
   async function loadNFTs() {
-    //validacion para verificar si metamask esta instalado
+    try{
+         //validacion para verificar si metamask esta instalado
     const provider1 = await detectEthereumProvider();
     if (!provider1) {
       alert("Instalar metamask es requerido");
     } else {
-      console.log("metamask instalado");
-      //--------------------------------------------------
+      console.log("metamask instalado"); 
+        //--------------------------------------------------
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    })
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+    const marketContract = new ethers.Contract(
+      nftmarketaddress,
+      Market.abi,
+      signer
+    );
+    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+    const data = await marketContract.fetchMyNFTs();
 
-      const web3Modal = new Web3Modal({
-        network: "mainnet",
-        cacheProvider: true,
-      });
-      const connection = await web3Modal.connect();
-
-      const provider = new ethers.providers.Web3Provider(connection);
-      const signer = provider.getSigner();
-      const marketContract = new ethers.Contract(
-        nftmarketaddress,
-        Market.abi,
-        signer
-      );
-      const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
-      const data = await marketContract.fetchMyNFTs();
-
-      const items = await Promise.all(
-        data.map(async (i) => {
-          const tokenUri = await tokenContract.tokenURI(i.tokenId);
-          const meta = await axios.get(tokenUri);
-          let price = ethers.utils.formatUnits(i.price.toString(), "ether");
-          let item = {
-            price,
-            tokenId: i.tokenId.toNumber(),
-            seller: i.seller,
-            owner: i.owner,
-            image: meta.data.image,
-            description: meta.data.description,
-          };
-          return item;
-        })
-      );
-      console.log(items);
-      setNfts(items);
-      setLoadingState("loaded");
+    const items = await Promise.all(
+      data.map(async (i) => {
+        const tokenUri = await tokenContract.tokenURI(i.tokenId);
+        const meta = await axios.get(tokenUri);
+        let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+        let item = {
+          price,
+          tokenId: i.tokenId.toNumber(),
+          seller: i.seller,
+          owner: i.owner,
+          image: meta.data.image,
+          description: meta.data.description,
+        };
+        return item;
+      })
+    );
+    console.log(items);
+    setNfts(items);
+    setLoadingState("loaded");
     }
+    }catch{
+      setNfts([])
+      }
   }
   // if (loadingState === 'loaded' && !nfts.length) return (<h1>No assets owned</h1>)
   return (
