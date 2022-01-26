@@ -56,9 +56,7 @@ const initialState = {
 
     userCards: [],
 
-    mazo:[]
-
-
+    mazo:[],
 
 
 }
@@ -203,15 +201,7 @@ export default function Reducer(state=initialState, action){
                     mazo: action.payload,
                                   
                 };
-            case GET_CARD_ORDEN:
-                return{
-                    ...state,
-                    dragonesbd: action.payload,
-                    loading:{
-                        loading: false,
-                        message: ''
-                        } 
-                }
+            
           default:
             return state;
 
