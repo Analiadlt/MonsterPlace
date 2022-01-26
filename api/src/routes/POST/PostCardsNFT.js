@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   const datosFront = req.body;
-  
+  console.log("Datos desde Post NFT", datosFront)
   try {
      datosFront.map((g) => {
         Card.findOrCreate({

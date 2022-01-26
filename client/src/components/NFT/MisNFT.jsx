@@ -9,6 +9,9 @@ import Nav from "../Nav";
 import { Link } from "react-router-dom";
 import CartaNft from "../CartaNft";
 import detectEthereumProvider from "@metamask/detect-provider";
+import Swal from "sweetalert2";
+import meta from "../../img/MetaMask_Fox.png"
+
 export default function MyAssets() {
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
@@ -21,7 +24,20 @@ export default function MyAssets() {
          //validacion para verificar si metamask esta instalado
     const provider1 = await detectEthereumProvider();
     if (!provider1) {
-      alert("Instalar metamask es requerido");
+      Swal.fire({
+        imageUrl: `${meta}`,
+        title: "Debes Instalar metamask..",
+        width: 500,
+        confirmButtonText: "Continuar",
+        imageWidth: 300,
+        imageHeight: 400,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    
     } else {
       console.log("metamask instalado"); 
         //--------------------------------------------------
@@ -46,6 +62,7 @@ export default function MyAssets() {
         const meta = await axios.get(tokenUri);
         let price = ethers.utils.formatUnits(i.price.toString(), "ether");
         let item = {
+          name: meta.data.name,
           price,
           tokenId: i.tokenId.toNumber(),
           seller: i.seller,
@@ -56,7 +73,7 @@ export default function MyAssets() {
         return item;
       })
     );
-    console.log(items);
+    console.log("Items desde Mis NFT", items);
     setNfts(items);
     setLoadingState("loaded");
     }
