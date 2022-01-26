@@ -13,14 +13,16 @@ import CartaTienda from "./cartaTienda";
 export default function Tienda() {
     const loading = useSelector(state => state.loading)
     const bichos = useSelector(state => state.dragonesbd)
+    // const bichos = useSelector(state => state.cardsorden)
     const dragones = bichos.filter(bi => bi.createdNFT === false)
     const dispatch = useDispatch()
     const [orden, setOrden] = useState('ASC');
+
     useEffect(() => {
-        if (!dragones.length && !loading.loading) {
-            dispatch(getCardOrden(orden))
-       }
-    }, [dispatch, orden]);
+        // if (!bichos.length && !loading.loading) {
+            dispatch(getCard(orden))
+    //    }
+    }, [dispatch, orden])
 
 	//ordenamiento
 	function changeOrder (e) {
@@ -54,10 +56,6 @@ export default function Tienda() {
                             <Modal1 />
                         </span>
                     </div>
-
-
-                    {loading.loading ? <h1>Cargando...</h1> :
-                        <div className="contenedor-tajetas">
                             <h5>Ordenar por</h5>
                             <select onChange={(e) => changeOrder(e)}>
                                 <option value='ASC'>Menor Precio</option>
@@ -67,6 +65,10 @@ export default function Tienda() {
                                 <option value='D_ASC'>Menor Defensa</option>
                                 <option value='D_DESC'>Mayor Defensa</option>
                             </select>  
+
+                    {loading.loading ? <h1>Cargando...</h1> :
+                        <div className="contenedor-tajetas">
+
                             <div className="grid-tienda">                                                                  
                                 {
                                     dragones.map(dragon => (

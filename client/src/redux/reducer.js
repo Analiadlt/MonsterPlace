@@ -62,9 +62,6 @@ const initialState = {
 
     addCard:false,
 
-
-
-
 }
 
 export default function Reducer(state=initialState, action){    
@@ -205,9 +202,9 @@ export default function Reducer(state=initialState, action){
                 return {
                      ...state, 
                     mazo: action.payload,
-                                  
 
-                }
+                };        
+                
                 case ADD_CARD:
                     
                 return {
@@ -215,9 +212,7 @@ export default function Reducer(state=initialState, action){
                      addCard: action.payload,
                                   
                 }
-
-
-                
+             
 
                 case GET_CARD_ORDEN:
                 return{
@@ -228,6 +223,7 @@ export default function Reducer(state=initialState, action){
                         message: ''
                         } 
                 }
+
 
           default:
             return state;
