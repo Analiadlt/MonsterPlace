@@ -105,9 +105,9 @@ return (
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >   
-                        {!userLogeado.img ?
+                        {!userLogeado.nickName ?
                         <Avatar sx={{ width: 62, height: 60, fontSize: "2.5rem", color:'#FF6363', background:'#19111d'}}></Avatar>
-                        : <Avatar sx={{ width: 62, height: 60, fontSize: "2.5rem", color:'black',background:'#19111d'}}><img style={{width:'100%',height:'100%'}} src={userLogeado.image} alt={userLogeado.nickname?.charAt(0)} /></Avatar>
+                        : <img style={{width:'62px',height:'60px'}} src={userLogeado.image} alt={userLogeado.nickname?.charAt(0)} />
                         }
                     </IconButton>
 
