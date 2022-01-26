@@ -7,18 +7,28 @@ import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import Nav from "../Nav";
 import { Link } from "react-router-dom";
-import CartaNft from '../CartaNft'
+import CartaNft from "../CartaNft";
+import detectEthereumProvider from "@metamask/detect-provider";
 export default function MyAssets() {
   const [nfts, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
   useEffect(() => {
     loadNFTs();
   }, []);
+
   async function loadNFTs() {
+    try{
+         //validacion para verificar si metamask esta instalado
+    const provider1 = await detectEthereumProvider();
+    if (!provider1) {
+      alert("Instalar metamask es requerido");
+    } else {
+      console.log("metamask instalado"); 
+        //--------------------------------------------------
     const web3Modal = new Web3Modal({
       network: "mainnet",
       cacheProvider: true,
-    });
+    })
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
@@ -49,14 +59,17 @@ export default function MyAssets() {
     console.log(items);
     setNfts(items);
     setLoadingState("loaded");
+    }
+    }catch{
+      setNfts([])
+      }
   }
   // if (loadingState === 'loaded' && !nfts.length) return (<h1>No assets owned</h1>)
   return (
     <div>
       {nfts?.map((nft, i) => (
-        <div className="cart-tienda" key ={i}>
-
-          <CartaNft  nft={nft} transaccion={'venta'} />
+        <div className="cart-tienda" key={i}>
+          <CartaNft nft={nft} transaccion={"venta"} />
         </div>
       ))}
     </div>

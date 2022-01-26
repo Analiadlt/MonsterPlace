@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useMoralis } from "react-moralis";
 
 export default function CartaNft({ nft, transaccion }) {
-  const { user, authenticate, isAuthenticated} = useMoralis();
+  const { isAuthenticated} = useMoralis();
   const usuario = useSelector((state) => state.userLogueado);
   const dispatch = useDispatch();
   const ataqueDefensa = nft.description.split(",");
