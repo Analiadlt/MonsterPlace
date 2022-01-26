@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
-import { getCard } from "../redux/actions";
+import { getCard, getCardOrden } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 import Modal1 from "./Modal";
@@ -14,11 +14,18 @@ export default function Tienda() {
     const loading = useSelector(state => state.loading)
     const dragones = useSelector(state => state.dragonesbd)
     const dispatch = useDispatch()
+    const [orden, setOrden] = useState('ASC');
     useEffect(() => {
         if (!dragones.length && !loading.loading) {
-            dispatch(getCard())
-        }
-    })
+            dispatch(getCardOrden(orden))
+       }
+    }, [dispatch, orden]);
+
+	//ordenamiento
+	function changeOrder (e) {
+		e.preventDefault();
+		setOrden(e.target.value);
+	};
 
     return (
         <div>
@@ -44,10 +51,18 @@ export default function Tienda() {
                         {/* </Link> */}
                     </div>
 
-                    
                     {loading.loading ? <h1>Cargando...</h1> :
                         <div className="contenedor-tajetas">
-                            <div className="grid-tienda">
+                            <h5>Ordenar por</h5>
+                            <select onChange={(e) => changeOrder(e)}>
+                                <option value='ASC'>Menor Precio</option>
+                                <option value='DESC'>Mayor Precio</option>
+                                <option value='A_ASC'>Menor Ataque</option>
+                                <option value='A_DESC'>Mayor Ataque</option>
+                                <option value='D_ASC'>Menor Defensa</option>
+                                <option value='D_DESC'>Mayor Defensa</option>
+                            </select>  
+                            <div className="grid-tienda">                                                                  
                                 {
                                     dragones.map(dragon =>
                                         <div className="cart-tienda">
@@ -57,6 +72,7 @@ export default function Tienda() {
                                 }
                             </div>
                         </div>
+
                     }
                 </div>
             </div>

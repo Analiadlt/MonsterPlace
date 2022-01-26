@@ -49,10 +49,11 @@ router.get("/", async (req, res, next) => {
       payment_methods: {
         excluded_payment_types: [
           {
-            id: "atm"
+            id: "atm", 
+            id: "ticket"
           }
         ],
-        installments: 3  //Cantidad máximo de cuotas
+        installments: 1  //Cantidad máximo de cuotas
       },
       back_urls: {
         success: REACT_APP_API + '/mercadopago/pagos',

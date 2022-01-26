@@ -2,7 +2,7 @@
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
      RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,
-     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD
+     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, GET_CARD_ORDEN
  } from './actions'
 
 
@@ -190,14 +190,22 @@ export default function Reducer(state=initialState, action){
                     ...state,
                     getpago: action.payload
                 }
-                case GET_USER_CARD:
+            case GET_USER_CARD:
                     //console.log("Desde Reducer ID usuario", action.payload)
                 return {
                      ...state, 
                     userCards: action.payload,
                                   
                 };
-
+            case GET_CARD_ORDEN:
+                return{
+                    ...state,
+                    dragonesbd: action.payload,
+                    loading:{
+                        loading: false,
+                        message: ''
+                        } 
+                }
           default:
             return state;
 
