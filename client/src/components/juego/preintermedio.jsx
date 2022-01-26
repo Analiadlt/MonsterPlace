@@ -91,7 +91,11 @@ console.log('array,array', mazo)
                cartas.length? cartas?.map((c ,i) => 
                 
                         <div style={{cursor:'pointer',marginLeft:'11rem'}} key={i} onClick={()=>agregarMazo(c)}>
-                       <CartaTienda  name={c.name} attack={c.attack} defense={c.defense} img={c.img} price={c.sellPrice} type={c.type}/>
+                        {c.createdNFT === true ?  
+                       <CartaTienda  name={c.name} attack={c.attack} defense={c.defense} img={c.img} price={c.sellPrice}/>
+                       :   
+                       <CartaTienda  name={c.name} attack={c.attack} defense={c.defense} img={c.img} price={c.sellPrice} type={'nft'}/>  
+                        }
                        </div>
 
                
