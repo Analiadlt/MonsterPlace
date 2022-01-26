@@ -39,10 +39,12 @@ export default function Tienda() {
                 <div className="contenedor-tienda">
 
                     <div className="titulo-tienda">
+                    
                         <h1>Tienda</h1>
-                        {/* <Link to='/Carrito'> */}
-                        <Modal1 />
-                        {/* </Link> */}
+  
+                        <span className="car">
+                            <Modal1 />
+                        </span>
                     </div>
 
 

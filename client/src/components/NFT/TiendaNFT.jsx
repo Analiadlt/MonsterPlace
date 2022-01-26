@@ -26,7 +26,11 @@ export default function TiendaNFT() {
   const [loadingState, setLoadingState] = useState("not-loaded");
   const dragones = useSelector(state => state.dragonesbd)
   useEffect(() => {
+    try{
     loadNFTs();
+    }catch{
+      console.log('no server')
+    }
   }, []);
   async function loadNFTs() {
     //funcion para cargar los nft
@@ -37,12 +41,12 @@ export default function TiendaNFT() {
       Market.abi,
       provider
     );
-    const data = await marketContract.fetchMarketItems();
+    const data = await marketContract?.fetchMarketItems();
     const items = await Promise.all(
       data.map(async (i) => {
-        const tokenUri = await tokenContract.tokenURI(i.tokenId);
+        const tokenUri = await tokenContract?.tokenURI(i.tokenId);
         const meta = await axios.get(tokenUri);
-        let price = ethers.utils.formatUnits(i.price.toString(), "ether");
+        let price = ethers.utils?.formatUnits(i.price.toString(), "ether");
         let item = {
           price,
           itemId: i.itemId.toNumber(),
@@ -60,11 +64,11 @@ export default function TiendaNFT() {
     //logica limpieza de datos: 
     const datosfiltrados = items.map((g) => {
       return {
-        name: g.name,
-        description: g.description.split(","),
-        img: g.image,
-        nftContract: g.nftContract,
-        sellPrice: g.price,
+        name: g?.name,
+        description: g?.description.split(","),
+        img: g?.image,
+        nftContract: g?.nftContract,
+        sellPrice: g?.price,
         createNFT: true,
       };
     });
