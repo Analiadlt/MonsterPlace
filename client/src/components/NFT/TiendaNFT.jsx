@@ -26,11 +26,11 @@ export default function TiendaNFT() {
   const [loadingState, setLoadingState] = useState("not-loaded");
   const dragones = useSelector(state => state.dragonesbd)
   useEffect(() => {
-    /*     try{
+         try{
         loadNFTs();
         }catch{
           console.log('no server')
-        } */
+        } 
   }, []);
   async function loadNFTs() {
     //funcion para cargar los nft

@@ -84,7 +84,7 @@ export default function Detalle() {
 					
 				</div>
 				</div>
-			</div>∫
+			</div>
 			
 			</div>
 		
