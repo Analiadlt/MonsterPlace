@@ -217,8 +217,9 @@ export default function Reducer(state=initialState, action){
                 }
 
 
-                };
-            case GET_CARD_ORDEN:
+                
+
+                case GET_CARD_ORDEN:
                 return{
                     ...state,
                     dragonesbd: action.payload,
