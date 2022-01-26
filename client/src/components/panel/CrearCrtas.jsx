@@ -9,7 +9,8 @@ import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import huevoRojo from "../../img/huevoRojo.png"
-import huevoBlanco from "../../img/huevoBlanco.png";
+import huevoVerde from "../../img/huevoVerde.png";
+import { postCardNormal } from "../../redux/actions";
 
 
 const validate = (values) => {
@@ -47,32 +48,35 @@ const validate = (values) => {
       "Solo puedes colocar numeros enteros";
   }
 
-  if (!values.precio) {
-    errors.defense = "precio obligatoria.";
+  if (!values.sellPrice) {
+    errors.sellPrice = "precio obligatoria.";
   } 
-  else if (values.precio < 1) {
-    errors.defense =
+  else if (values.sellPrice < 1) {
+    errors.sellPrice =
       "precio debe ser mayor a 0";
   }
   
-  else if (!/^[0-9]+$/ .test(values.precio)) {
-    errors.precio =
+  else if (!/^[0-9]+$/ .test(values.sellPrice)) {
+    errors.sellPrice =
       "Solo puedes colocar numeros enteros";
   }
 
   if (!values.img) {
     errors.img = "img obligatoria.";
   }
+  
 
   return errors;
 };
+
+
 
 export default function CrearCarta() {
  
   const dispatch = useDispatch();
   const history = useHistory();
-  const userLogeado = useSelector((state) => state.userLogueado);
-  const [logeado, setLogeado] = useState(false);
+  const addCard = useSelector((state) => state.addCard);
+  const [carta, setcarta] = useState(false);
   const [ojo, setojo] = useState(false);
   const switchShown = () => setojo(!ojo);
  
@@ -81,25 +85,30 @@ export default function CrearCarta() {
 
   const formik = useFormik({
     initialValues: {
+      
       name: "",
       attack: "",
       defense: "",
       img:"",
-      precio:"",
+      sellPrice:"",
+      state: "activa",
+      type: "legendary",
+      sellCount: 1,
     },
     validate,
     onSubmit: async (values) => {
-     
-      
+      setcarta(true);
+      console.log('valores....',values)
+      dispatch(postCardNormal(values))
      
     },
   });
 
   useEffect(() => {
-    if (logeado && userLogeado.id) {
+    if (carta && addCard) {
       Swal.fire({
-        imageUrl: `${huevoBlanco}`,
-        title: "Conectando..",
+        imageUrl: `${huevoVerde}`,
+        title: "Carta Creada",
         width: 500,
         confirmButtonText: "Continuar",
         imageWidth: 300,
@@ -112,26 +121,24 @@ export default function CrearCarta() {
       });
 
       setTimeout(() => {
-        history.push(`/`);
-      }, 3000);
+				formik.resetForm()
 
-      setLogeado(false);
+			}, 3000);
+    
+
+      setcarta(false);
     }
 
-    if (
-      (logeado && userLogeado === "400") ||
-      userLogeado === "Contraseña incorrecta" ||
-      userLogeado === '"email" must be a valid email'
-    ) {
+    if (carta && !addCard) {
       Swal.fire({
-        title: "<strong>Contraseña o Email incorrecto</strong>",
+        title: "<strong>La carta no pudo ser creada</strong>",
         imageUrl: `${huevoRojo}`,
         width: 500,
         imageWidth: 300,
         imageHeight: 400,
       });
     }
-  }, [userLogeado, history]);
+  }, [addCard,carta]);
 
  
 
@@ -151,7 +158,7 @@ export default function CrearCarta() {
                 type="name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.email}
+                value={formik.values.name}
               />
               {formik.touched.name && formik.errors.name ? (
                 <div className="campoErr">
@@ -206,22 +213,22 @@ export default function CrearCarta() {
             </div>
 
             <div className="user-box">
-              <label htmlFor="precio">Precio en Pesos</label>
+              <label htmlFor="sellPrice">Precio en Pesos</label>
               <div style={{ display: "flex" }}>
                 <input
-                  id="precio"
-                  name="precio"
-                  type= "precio"
+                  id="sellPrice"
+                  name="sellPrice"
+                  type= "sellPrice"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.precio}
+                  value={formik.values.sellPrice}
                 />
                
               </div>
-              {formik.touched.precio && formik.errors.precio ? (
+              {formik.touched.sellPrice && formik.errors.sellPrice ? (
                 <div className="campoErr">
                   <ErrorOutlineOutlinedIcon />
-                  {formik.errors.precio}
+                  {formik.errors.sellPrice}
                 </div>
               ) : null}
             </div>
