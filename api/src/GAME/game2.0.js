@@ -22,25 +22,21 @@
 var cardGame = (carta1, carta2) => {
     if (carta1.attack > carta2.defense) {
         const difPower2 = carta1.attack - carta2.defense
-        console.log("difpowe2", difPower2)
         carta1.restarVida2 = difPower2
         return { carta1Win: carta1 }
     }
     else if (carta2.attack > carta1.defense) {
         const difPower1 = carta2.attack - carta1.defense
-        console.log("difpowe1", difPower1)
         carta2.restarVida1 = difPower1
         return { carta2Win: carta2 }
     }
     else if(carta1.attack > carta2.attack) {
         const difPower2 = carta1.attack - carta2.defense
-        console.log("difpowe2", difPower2)
         carta1.restarVida2 = difPower2
         return { carta1Win: carta1 }
     }
     else if(carta2.attack > carta1.attack) {
         const difPower1 = carta2.attack - carta1.defense
-        console.log("difpowe1", difPower1)
         carta2.restarVida1 = difPower1
         return { carta2Win: carta2 }
     }
