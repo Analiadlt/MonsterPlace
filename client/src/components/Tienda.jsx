@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-// import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-// import Card from '../components/Card'
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import Card from '../components/Card'
 import { useSelector, useDispatch } from "react-redux";
-import { getCard } from "../redux/actions";
+import { getCard, getCardOrden } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 import Modal1 from "./Modal";
-// import { Modal } from "@mui/material";
-// import Filtros from "./filtrosTienda";
+import { Modal } from "@mui/material";
+import Filtros from "./filtrosTienda";
 import NavCheto from './NavCheto';
 import CartaTienda from "./cartaTienda";
 export default function Tienda() {
@@ -20,15 +20,15 @@ export default function Tienda() {
 
     useEffect(() => {
         // if (!bichos.length && !loading.loading) {
-            dispatch(getCard(orden))
-    //    }
+        dispatch(getCard(orden))
+        //    }
     }, [dispatch, orden])
 
-	//ordenamiento
-	function changeOrder (e) {
-		e.preventDefault();
-		setOrden(e.target.value);
-	};
+    //ordenamiento
+    function changeOrder(e) {
+        e.preventDefault();
+        setOrden(e.target.value);
+    };
 
 
     return (
@@ -49,27 +49,30 @@ export default function Tienda() {
                 <div className="contenedor-tienda">
 
                     <div className="titulo-tienda">
-                    
+
                         <h1>Tienda</h1>
-  
+
                         <span className="car">
                             <Modal1 />
                         </span>
-                    </div>
+                        <div className="contenedor-filtros">
                             <h5>Ordenar por</h5>
-                            <select onChange={(e) => changeOrder(e)}>
+                            <select onChange={(e) => changeOrder(e)} className="filtros">
                                 <option value='ASC'>Menor Precio</option>
                                 <option value='DESC'>Mayor Precio</option>
                                 <option value='A_ASC'>Menor Ataque</option>
                                 <option value='A_DESC'>Mayor Ataque</option>
                                 <option value='D_ASC'>Menor Defensa</option>
                                 <option value='D_DESC'>Mayor Defensa</option>
-                            </select>  
+                            </select>
+                        </div>
+                    </div>
+
 
                     {loading.loading ? <h1>Cargando...</h1> :
                         <div className="contenedor-tajetas">
 
-                            <div className="grid-tienda">                                                                  
+                            <div className="grid-tienda">
                                 {
                                     dragones.map(dragon => (
 
