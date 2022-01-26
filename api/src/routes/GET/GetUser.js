@@ -3,31 +3,30 @@ const { User } = require("../../db");
 const server = express();
 const dataHelper = require("./dataHelper/userDataHelper")
 
-const allUsers = async () => {
-
-  const infoCreate = dataHelper.map(index => {
-    return {
-      email: index.email,
-      firstName: index.firstName,
-      lastName: index.lastName,
-      nickName: index.nickName,
-      dateBirth: index.dateBirth,
-      password: index.password
-    }
-  })
-  const infoDataBase = await User.bulkCreate(infoCreate)
-  return infoDataBase
-}
+// const allUsers = async () => {
+//   const infoCreate = dataHelper.map(index => {
+//     return {
+//       email: index.email,
+//       firstName: index.firstName,
+//       lastName: index.lastName,
+//       nickName: index.nickName,
+//       dateBirth: index.dateBirth,
+//       password: index.password
+//     }
+//   })
+//   const infoDataBase = await User.bulkCreate(infoCreate)
+//   return infoDataBase
+// }
 
 server.get("/", async (req, res) => {
   try {
     const usuario = await User.findAll()
-    if (usuario.length < 5 ) {
-      allUsers()
+    // if (usuario.length < 5 ) {
+      // allUsers()
       const allUser = await User.findAll()
         res.status(200).send(allUser)
-    }
-    else res.status(200). send(usuario)
+    // }
+    // else res.status(200). send(usuario)
         
 
   } catch (error) {
