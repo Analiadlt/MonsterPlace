@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@metamask/detect-provider": "^1.2.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "@mui/styled-engine-sc": "^5.1.0",
@@ -23,8 +24,8 @@
     "formik": "^2.2.9",
     "hardhat": "^2.8.2",
     "ipfs-http-client": "^50.1.2",
-    "moralis": "^1.1.0",
     "mercadopago": "^1.5.11",
+    "moralis": "^1.1.0",
     "react": "^17.0.1",
     "react-bootstrap": "^2.1.0",
     "react-dom": "^17.0.1",

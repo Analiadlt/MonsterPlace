@@ -23,6 +23,8 @@ export const ADD_CARD_NFT = "ADD_CARD_NFT"
 export const GET_USER_CARD = "GET_USER_CARD"
 export const LINK_USER_CARDNFT ="LINK_USER_CARDNFT"
 export const AGREGAR_MAZO ="AGREGAR_MAZO";
+export const ADD_CARD ="ADD_CARD"
+
 
 
 
@@ -356,4 +358,28 @@ export function subirmazo(payload) {
     });
   };
 }
+
+export function postCardNormal(payload) {
+  return async (dispatch) => {
+   
+      var json = await axios.post('/cards', payload);
+
+      console.log('crear carta',json)
+      if(json.data.id){
+
+        return dispatch({
+          type: ADD_CARD,
+          payload: true,
+        });
+      }else{
+        return dispatch({
+          type: ADD_CARD,
+          payload: false,
+        });
+      }
+
+
+    } 
+  };
+
 
