@@ -21,13 +21,11 @@ export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
 export const ADD_CARD_NFT = "ADD_CARD_NFT"
 export const GET_USER_CARD = "GET_USER_CARD"
+export const GET_CARD_ORDEN = "GET_CARD_ORDEN"
+
 export const LINK_USER_CARDNFT ="LINK_USER_CARDNFT"
 export const AGREGAR_MAZO ="AGREGAR_MAZO";
 export const ADD_CARD ="ADD_CARD"
-
-
-
-
 
 
 
@@ -86,6 +84,16 @@ export function getCard() {
       .get("/cards/get")
       .then((res) => res.data)
       .then((data) => dispatch({ type: GET_CARDS, payload: data }));
+  };
+}
+
+export function getCardOrden(orden) {
+  return function (dispatch) {
+    /* dispatch({ type: LOADING, payload: 'Buscando Cartas...' }) */
+    return axios
+      .get("/cards/get?orden=" + orden)
+      .then((res) => res.data)
+      .then((data) => dispatch({ type: GET_CARD_ORDEN, payload: data }));
   };
 }
 
