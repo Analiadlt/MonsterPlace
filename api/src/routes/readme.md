@@ -14,6 +14,7 @@ GetUser-Card: http://localhost:3001/CardUser/userCard/:id
 
 GetUser: http://localhost:3001/users Y FILTRADO : http://localhost:3001/users/:id
 
+GetUserStats: http://localhost:3001/stats/:email
 
 RUTAS POST
 
