@@ -151,28 +151,22 @@ router.get("/get", async (req, res) => {
     }
     default:
       orden = 'ASC'
-  }
+  }  
   try {
-    const allCards = await Card.findAll({
-      order: [[ordenarpor, orden]]
+    const cards1 = await Card.findAll({
+
+      order:[[ordenarpor, orden]]
     })
-
-    if (allCards.lenght !== 0) {
-      // const cardsBuy = allCards.filter(index => index.orderId === null)
-      // if (cardsBuy.lenght !== 0) {
-      //   res.status(200).send(cardsBuy)
-      // }
-      const cardsBuy = await Card.findAll({
-        where: {orderId: null},
-        order: [[ordenarpor, orden]]
+    if (cards1.length < 11) {
+      CreateCards()
+      const allCards = await Card.findAll({
+ 
+        order:[[ordenarpor, orden]]
       })
-      if (cardsBuy.lenght !== 0){
-        res.status(200).send(cardsBuy)
-      }
+      res.status(200).send(allCards)
     }
-
-    res.status(200).send(allCards)
-
+    else res.status(200).send(cards1)
+    
   } catch (error) {
     res.send("Error en la ruta getCard")
   }
