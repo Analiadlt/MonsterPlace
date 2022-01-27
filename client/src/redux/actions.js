@@ -407,11 +407,27 @@ export function postCardNormal(payload) {
         return dispatch({
           type: "DELETE_CARD",
           payload: json.data,
-          }) ;
+        });
       } catch (error) {
         alert("No se encuentra la carta")
         console.log(error);
       }
     };
+  }
+
+
+
+  export function resultadoJuego(payload){
+    console.log('mando a api', payload);
+    return async (dispatch) => {
+      try {
+        var json = await axios.put("/resultado", payload);
+        console.log("recibo de api", json)
+       
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
   }
 
