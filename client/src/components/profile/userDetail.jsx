@@ -23,7 +23,7 @@ export default function Detalle() {
 	const logueado = useSelector(state => state.users)
 	const detail = useSelector((state) => state.userLogueado);
 
-	const [navegacion,setNavegacion] = useState('home')
+	const [navegacion,setNavegacion] = useState('profile')
 
 
 
@@ -63,7 +63,7 @@ export default function Detalle() {
 				<div class="sidebar">
 					
 					<ul>
-						<li onClick={()=>{setNavegacion('home')}}  className={`${navegacion === 'home'? 'activo-profile' : null}`} ><i class="fas fa-home"></i>Home</li>
+						{/* <li onClick={()=>{setNavegacion('home')}}  className={`${navegacion === 'home'? 'activo-profile' : null}`} ><i class="fas fa-home"></i>Home</li> */}
 						<li onClick={()=>{setNavegacion('profile')}} className={`${navegacion === 'profile'? 'activo-profile' : null}`} ><i class="fas fa-user"></i>Profile</li>
 						<li onClick={()=>{setNavegacion('inventario')}} className={`${navegacion === 'inventario'? 'activo-profile' : null}`}><i class="fas fa-boxes"></i>Inventario</li>
 						<li onClick={()=>{setNavegacion('misNft')}}className={`${navegacion === 'misNft'? 'activo-profile' : null}`}><i class="fas fa-hat-wizard"></i>Mis NFT</li>
@@ -74,7 +74,7 @@ export default function Detalle() {
 				</div>
 				<div className="contenido-profile">
 					{
-						navegacion === 'home' ? <h1>Home</h1> : 
+						// navegacion === 'home' ? <h1>Home</h1> : 
 						navegacion === 'profile' ? <Perfil/> : 
 						navegacion === 'inventario' ? <Inventario/> : 
 						navegacion === 'misNft' ?  <MisNFT/> :
