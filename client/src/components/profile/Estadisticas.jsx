@@ -61,7 +61,7 @@ export default function Estadisticas() {
               <span>${sumar(cards)}</span>
            </div> 
            <div className="campo">
-           <i class="fas fa-edit"></i>Últimas
+           <i class="fas fa-edit"></i>Últimas cartas
            <ul>{cards.map(c => <li>{c.name} ${Math.ceil(c.sellPrice)}</li>)}</ul>
           </div> 
           </>
