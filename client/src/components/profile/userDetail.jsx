@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Inventario from "./Inventario";
 import Mazo from "./Mazo";
 import Perfil from "./perfil";
+import Estadisticas from "./Estadisticas";
 
 /* import Estadisticas from "./estadisticas/Estadisticas"; */
 // import { 
@@ -77,8 +78,8 @@ export default function Detalle() {
 						navegacion === 'profile' ? <Perfil/> : 
 						navegacion === 'inventario' ? <Inventario/> : 
 						navegacion === 'misNft' ?  <MisNFT/> :
-						
-						navegacion === 'estadisticas' ? <h1>Hola</h1>: null
+						navegacion === 'estadisticas' ? <Estadisticas/>: null
+						// navegacion === 'estadisticas' ? <h1>Hola</h1>: null
 						
 					}
 					
