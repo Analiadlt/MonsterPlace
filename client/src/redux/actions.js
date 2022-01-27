@@ -401,4 +401,20 @@ export function postCardNormal(payload) {
   }
 
 
+  export function resultadoJuego(payload){
+    console.log('mando a api', payload);
+    return async (dispatch) => {
+      try {
+        var json = await axios.put("/resultado", payload);
+        console.log("recibo de api", json)
+        // return dispatch({
+        //   type: LINK_USER_CARDNFT,
+        //   payload: json.data[0].cards,
+        // });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+  }
 
