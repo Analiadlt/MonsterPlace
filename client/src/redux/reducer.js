@@ -2,7 +2,7 @@
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
      RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,
-     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, GET_CARD_ORDEN, AGREGAR_MAZO
+     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, GET_CARD_ORDEN, AGREGAR_MAZO,  GET_USER_STATS
  } from './actions'
 
 const initialState = {
@@ -56,10 +56,9 @@ const initialState = {
 
     userCards: [],
 
-    mazo:[]
+    mazo:[],
 
-
-
+    stats:[]
 
 }
 
@@ -212,6 +211,12 @@ export default function Reducer(state=initialState, action){
                         message: ''
                         } 
                 }
+            case GET_USER_STATS: 
+                
+                    return {
+                        ...state,
+                        stats: action.payload 
+              }
           default:
             return state;
 

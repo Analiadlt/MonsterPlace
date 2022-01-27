@@ -26,7 +26,8 @@ const getMonedas = require ("./GET/GetMonedas");
 const putMetamask = require ("./PUT/PutMetamask")
 const postCardsNft =require ("./POST/PostCardsNFT.js")
 const putResultado = require("./PUT/PutResultado");
-const putLinkUserCardNFT = require("./PUT/PutLinkUserCardNFT")
+const putLinkUserCardNFT = require("./PUT/PutLinkUserCardNFT");
+const getUserStats = require("./GET/GetUserStats")
 
 
 const router = Router();
@@ -51,6 +52,7 @@ router.use("/getmonedas",getMonedas)
 router.use("/putmetamask",putMetamask)
 router.use("/resultado",putResultado)
 router.use("/putlinkusercardNFT", putLinkUserCardNFT)
+router.use('/stats', getUserStats);
 // router.use('/')
 
 module.exports = router;
