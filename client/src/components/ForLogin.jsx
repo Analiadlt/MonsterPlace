@@ -119,12 +119,12 @@ const ForLogin = () => {
               imageHeight: 400,
             });
           } else {
-            let aux = {
-              email: values.email,
-              saldo_cryps: 6,
-            };
+            // let aux = {
+            //   email: values.email,
+            //   saldo_cryps: 6,
+            // };
             dispatch(loginUser(values));
-            dispatch(cargarSaldo(aux));
+            // dispatch(cargarSaldo(aux));
             setLogeado(true);
           }
           //   alert("Bienvenido!");
