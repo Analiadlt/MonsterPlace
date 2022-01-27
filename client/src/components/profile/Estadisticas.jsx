@@ -40,13 +40,6 @@ export default function Estadisticas() {
     <div className="profile">
       
       <div className="grid-info">
-        <div className="campo">
-          <i class="fas fa-edit"> </i>Nombre Completo:{" "}
-          <span>{`${usuario.firstName}  ${usuario.lastName}`}</span>
-        </div>
-        <div className="campo">
-          <i class="fas fa-envelope"></i>Email: <span>{usuario.email}</span>
-        </div>
         <div className="campo contrase">
           <i class="fas fa-edit"></i> Partidas ganadas: <span>{usuario.win_games}</span>
         </div>
