@@ -22,7 +22,9 @@
     border-radius: var(--br);
     
     cursor: pointer;
-    background: #333;
+    background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+    mix-blend-mode: normal;
+    backdrop-filter: blur(40px);
     h1,
     h2,
     h3,
@@ -37,7 +39,9 @@
     right: 1rem;
     font-weight: bold;
     font-size: 1.15rem;
-    background: rgba(0, 0, 0, 0.6);
+    background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+    mix-blend-mode: normal;
+    backdrop-filter: blur(40px);
     padding: 0.5rem 0.5rem 0.75rem;
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 52% 85%, 0 100%);
     z-index: 99;
@@ -138,7 +142,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #333;
+    background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+    mix-blend-mode: normal;
+    backdrop-filter: blur(40px);
     opacity: 0;
     transform: scale(0.2, 0.9);
     border-radius: var(--br);
@@ -231,7 +237,7 @@
  
   margin: 56px;
   width: 400px;
-  height: 540px;
+  height: 450px;
   display: block;
   perspective: 500px;
   box-shadow: 5px 5px 40px rgba(0, 0, 0, 0.404);
@@ -261,15 +267,14 @@
 }
 
 .frontCarta{
-  background-image: url(../../img/backNormal.png);
+  background-image: url(../../img/fondoCarta.png);
   background-position: center;
-  background-size:cover;
   background-repeat: no-repeat;
   background-color: black;
-  
-  border-radius: 10px;
+  background-size: 420px 470px;
+  border-radius: 20px;
   width: 400px;
-  height: 540px;
+  height: 470px;
   position: absolute;
   backface-visibility: hidden;  
 }
@@ -442,16 +447,22 @@
 .grid-chat{
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  gap: 10rem;
-  margin-top: 20px;
+  gap: 0 10rem;
+  position: relative;
+  bottom: 40px;
+ 
+}
+.carta-grid{
+  position: relative;
+  bottom: 50px;
 }
 
 .nft-back{
   background-image: url('../../img/fondoNft.png');
 }
 .nft-front{
-  background: url('../../img/backNft.png');
-  background-size: 420px 550px;
+  background: url('../../img/NFT-FONDO.png');
+  background-size: 435px 470px;
   background-position: center;
 
 }
