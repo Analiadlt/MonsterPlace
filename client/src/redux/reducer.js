@@ -2,7 +2,8 @@
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
      RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,
-     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, AGREGAR_MAZO,ADD_CARD
+     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, 
+     AGREGAR_MAZO,ADD_CARD, DELETE_CARD
 
  } from './actions'
 
@@ -60,6 +61,8 @@ const initialState = {
     mazo:[],
 
     addCard:false,
+
+    deleteCard:[],
 
 }
 
@@ -211,6 +214,14 @@ export default function Reducer(state=initialState, action){
                      addCard: action.payload,
                                   
                 }
+
+                case DELETE_CARD:
+                    console.log("MENSAJE DESDE EL REDUCER: ", action.payload)
+                    return {
+                        ...state,
+                        deleteCard: action.payload
+                        
+                };     
 
 
           default:

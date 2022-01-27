@@ -23,7 +23,8 @@ export const ADD_CARD_NFT = "ADD_CARD_NFT"
 export const GET_USER_CARD = "GET_USER_CARD"
 export const LINK_USER_CARDNFT ="LINK_USER_CARDNFT"
 export const AGREGAR_MAZO ="AGREGAR_MAZO";
-export const ADD_CARD ="ADD_CARD"
+export const ADD_CARD ="ADD_CARD";
+export const DELETE_CARD = "DELETE_CARD";
 
 
 
@@ -381,5 +382,23 @@ export function postCardNormal(payload) {
 
     } 
   };
+
+  export function deleteCard(id) {
+    console.log("ID CARTA DESDE ACTIONS: ", id)
+    return async (dispatch) => {
+      try {
+        var json = await axios.delete(`/delete/card/${id}`);
+      
+        return dispatch({
+          type: "DELETE_CARD",
+          payload: json.data,
+        });
+      } catch (error) {
+        alert("No se encuentra la carta")
+        console.log(error);
+      }
+    };
+  }
+
 
 
