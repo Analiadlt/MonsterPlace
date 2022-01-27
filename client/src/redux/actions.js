@@ -399,6 +399,3 @@ export function postCardNormal(payload) {
       }
     };
   }
-
-
-

@@ -369,19 +369,110 @@
 }
 
 .chat{
-  width: 80%;
-  position: relative;
-  right:0;
-  left: 10%;
-  height: 450px;
+  width: 100%;
+ height: 486px;
   
   
-  border: 2px solid rgba(0, 0, 0, 0.24);
-  border-radius: 10px;
+  // border: 2px solid rgba(190, 39, 39, 0.24);
+  border-radius: 20px;
   margin-top: 2.5rem;
  color:#FFB520;
  display: flex;
   justify-content: center;
+  background-image: url('../../img/Rectangulojuego.png');
+
+}
+
+.divTotal{
+  display:block;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 30px;
+  background-image: url('https://wallpaperboat.com/wp-content/uploads/2021/08/05/78116/iOS-13-liquid-21.jpg');
+}
+
+.divNombre{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2rem;
+  
+}
+
+.divteimer{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  width: 250px;
+  height: 130px;
+  border-radius: 20px;
+  background-image: url('../../img/Rectangulojuego.png');
+  background-size: cover;
+  background-position:center;
+  line-height: 5px;
+}
+.divIzq{
+  display:flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  margin-top: 20px;
+  padding: 15px 10px;
+  width: 250px;
+  height: 130px;
+  border-radius: 20px;
+  background-image: url('../../img/Rectangulojuego.png');
+  background-size: cover;
+  background-position:center;
+  line-height: 5px;
+ 
+  h2{
+    position: relative;
+    right: 30px;
+    text-align: right;
+  }
+}
+
+.divDer{
+  display:flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  // position: relative;
+  // right: 0%;
+  margin-top: 20px;
+  padding: 15px 10px;
+  
+  width: 250px;
+  height: 130px;
+  border-radius: 20px;
+  background-image: url('../../img/Rectangulojuego.png');
+  background-size: cover;
+  background-position:center;
+  line-height: 5px;
+  
+  h2{
+    position: relative;
+    left: 30px;
+    text-align: left;
+  }
+}
+
+.barraVidaizq{
+  display: flex;
+  width: 80%;
+  align-items: center;
+}
+.barraVidader{
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: right;
 }
 
 .caja-chat{
