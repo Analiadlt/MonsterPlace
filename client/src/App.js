@@ -99,7 +99,7 @@ function App() {
       <Route exact path="/BotonPagar" component={BotonPagar} />
       <Route exact path="/Detallecompra" component={DetalleCompra} />
       <Route exact path="/preintermedio" component={preintermedio} />
-      {log.nickname === 'administrador' ?
+      {log.nickName === 'administrador' ?
         <Route exact path="/Panel" component={Panel} />
         : <Route exact path="/Panel" component={Home} />
       }
