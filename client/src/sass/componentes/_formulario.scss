@@ -376,20 +376,25 @@
   // border: 2px solid rgba(190, 39, 39, 0.24);
   border-radius: 20px;
   margin-top: 2.5rem;
- color:#FFB520;
- display: flex;
+  color:#FFB520;
+  display: flex;
   justify-content: center;
-  background-image: url('../../img/Rectangulojuego.png');
+  background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+  mix-blend-mode: normal;
+  backdrop-filter: blur(40px);
 
 }
 
 .divTotal{
   display:block;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   border-radius: 20px;
-  padding: 30px;
-  background-image: url('https://wallpaperboat.com/wp-content/uploads/2021/08/05/78116/iOS-13-liquid-21.jpg');
+  padding: 50px;
+  background:v.$color-secundario;
+  background-color: rgba(0, 0, 0, 0.61);
+  
+  box-shadow: 0px 10px 10px -6px black;
 }
 
 .divNombre{
@@ -398,6 +403,7 @@
   justify-content: space-between;
   grid-template-columns: repeat(3,1fr);
   gap: 2rem;
+  color:v.$color-fondo;
   
 }
 
@@ -411,10 +417,16 @@
   width: 250px;
   height: 130px;
   border-radius: 20px;
-  background-image: url('../../img/Rectangulojuego.png');
+  background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+  mix-blend-mode: normal;
+  backdrop-filter: blur(40px);
   background-size: cover;
   background-position:center;
   line-height: 5px;
+  color:v.$color-fondo;
+  h1{
+    color:v.$blanco;
+  }
 }
 .divIzq{
   display:flex;
@@ -423,18 +435,23 @@
   align-items: center;
   margin-top: 20px;
   padding: 15px 10px;
-  width: 250px;
+  width: 350px;
   height: 130px;
   border-radius: 20px;
-  background-image: url('../../img/Rectangulojuego.png');
+  background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+  mix-blend-mode: normal;
+  backdrop-filter: blur(40px);
   background-size: cover;
   background-position:center;
   line-height: 5px;
+
  
   h2{
     position: relative;
     right: 30px;
     text-align: right;
+    color:v.$blanco;
+    
   }
 }
 
@@ -448,10 +465,12 @@
   margin-top: 20px;
   padding: 15px 10px;
   
-  width: 250px;
+  width: 350px;
   height: 130px;
   border-radius: 20px;
-  background-image: url('../../img/Rectangulojuego.png');
+  background:linear-gradient(110.62deg, rgba(255, 255, 255, 0.25) 6.39%, rgba(255, 255, 255, 0) 53.34%);
+  mix-blend-mode: normal;
+  backdrop-filter: blur(40px);
   background-size: cover;
   background-position:center;
   line-height: 5px;
@@ -460,6 +479,7 @@
     position: relative;
     left: 30px;
     text-align: left;
+    color:v.$blanco;
   }
 }
 
@@ -467,12 +487,20 @@
   display: flex;
   width: 80%;
   align-items: center;
+  span{
+    margin: 0 10px;
+    color:white;
+  }
 }
 .barraVidader{
   display: flex;
   width: 80%;
   align-items: center;
   justify-content: right;
+  span{
+    margin: 0 10px;
+    color:white;
+  }
 }
 
 .caja-chat{
