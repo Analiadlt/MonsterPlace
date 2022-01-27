@@ -38,6 +38,8 @@ import preintermedio from "./components/juego/preintermedio";
 function App() {
   const logueado = useSelector((state) => state.users);
   const dispatch = useDispatch();
+  const log = useSelector((state) => state.userLogueado);
+
   const { isAuthenticated, user } = useMoralis();
   let cambiarLogeo = async () => {
     try {
@@ -51,12 +53,12 @@ function App() {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     if (app) {
       app.auth().onAuthStateChanged((authUser) => {
         if (
           authUser &&
-          logueado.length > 5 &&
+
           authUser.emailVerified === true
         ) {
           dispatch(getUserLogin(authUser.email));
@@ -65,42 +67,45 @@ function App() {
     }
 
     else if (isAuthenticated === true) {
-     
-          dispatch(getUserLoginMetamask({cuentaMetamask: user.attributes.accounts[0]}));
-        
-      };
-    
+
+      dispatch(getUserLoginMetamask({ cuentaMetamask: user.attributes.accounts[0] }));
+
+    };
+
   }, [dispatch, logueado]);
 
 
-      return (
-        <div className="App">
-          <Route path="/ganador" component={GanadorJuego} />
-          <Route path="/auth" component={MyAuthPage} />
-          <Route path="/Carrito" component={Carrito} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/Tienda" component={Tienda} />
-          <Route path="/Registro" component={FormRegistro} />
-          <Route path="/Login" component={ForLogin} />
-          <Route path="/PassReset" component={PassReset} />
-          <Route path="/Detail/" component={userDetail} />
-          <Route path="/chat" component={Chat} />
-          <Route path="/juego" component={CartaNft} />
-          <Route  exact path="/TiendaNFT" component={TiendaNFT} />
-          <Route  exact path="/CrearNFT" component={crearNFT} />
-          <Route  exact path="/TableroNFT" component={tableroNFT} />
-          <Route  exact path="/MisNFT" component={misNFT} />
-          <Route  exact path="/Matchmaking" component={Intermedio} />
-          <Route  exact path="/Compra" component={Compra} />
-          <Route  exact path="/Chatear" component={ChatApp} />
-          <Route  exact path="/Comprar" component={Comprar} />
-          <Route exact path= "/BotonPagar" component={BotonPagar} />
-          <Route exact path= "/Detallecompra" component={DetalleCompra} />
-          <Route exact path= "/preintermedio" component={preintermedio}/>
-          <Route exact path= "/Panel" component={Panel} />
+  return (
+    <div className="App">
+      <Route path="/ganador" component={GanadorJuego} />
+      <Route path="/auth" component={MyAuthPage} />
+      <Route path="/Carrito" component={Carrito} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/Tienda" component={Tienda} />
+      <Route path="/Registro" component={FormRegistro} />
+      <Route path="/Login" component={ForLogin} />
+      <Route path="/PassReset" component={PassReset} />
+      <Route path="/Detail/" component={userDetail} />
+      <Route path="/chat" component={Chat} />
+      <Route path="/juego" component={CartaNft} />
+      <Route exact path="/TiendaNFT" component={TiendaNFT} />
+      <Route exact path="/CrearNFT" component={crearNFT} />
+      <Route exact path="/TableroNFT" component={tableroNFT} />
+      <Route exact path="/MisNFT" component={misNFT} />
+      <Route exact path="/Matchmaking" component={Intermedio} />
+      <Route exact path="/Compra" component={Compra} />
+      <Route exact path="/Chatear" component={ChatApp} />
+      <Route exact path="/Comprar" component={Comprar} />
+      <Route exact path="/BotonPagar" component={BotonPagar} />
+      <Route exact path="/Detallecompra" component={DetalleCompra} />
+      <Route exact path="/preintermedio" component={preintermedio} />
+      {log.nickName === 'administrador' ?
+        <Route exact path="/Panel" component={Panel} />
+        : <Route exact path="/Panel" component={Home} />
+      }
 
-          
-        </div>
-      );
+
+    </div>
+  );
 }
 export default App;
