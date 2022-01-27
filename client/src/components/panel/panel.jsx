@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import NavCheto from "../NavCheto";
 import CreateItem from "../NFT/CrearNFT";
 import CrearCarta from "./CrearCrtas";
+import BorrarCarta from "./borrarCarta";
 
 export default function Panel(){
     const [navPanel, setNavpanel] =  useState('home')
@@ -14,7 +15,7 @@ export default function Panel(){
             <div className="nav-tienda">
                 <h3 className={`${navPanel === 'home' ?  "activoTienda" : null}`} onClick={()=> setNavpanel('home')}>Home</h3>
                 <h3 className={`${navPanel === 'home' ?  "activoTienda" : null}`} onClick={()=> setNavpanel('crearcartas')}>Crear Cartas</h3>
-                
+                <h3 className={`${navPanel === 'home' ?  "activoTienda" : null}`} onClick={()=> setNavpanel('borrarcartas')}>Borrar Cartas</h3>
                 <h3 className={`${navPanel === 'home' ?  "activoTienda" : null}`} onClick={()=> setNavpanel('crearnft')}>Crear Nft</h3>
                 
     
@@ -22,6 +23,7 @@ export default function Panel(){
             <div>
                 {navPanel === 'home'? <h1>Hola home</h1> : null }
                 {navPanel === 'crearcartas'? <CrearCarta/>: null }
+                {navPanel === 'borrarcartas'? <BorrarCarta/>: null }
                 {navPanel === 'crearnft'? <CreateItem/>: null }
             </div>
 
