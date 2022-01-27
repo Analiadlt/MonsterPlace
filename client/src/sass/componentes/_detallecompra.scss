@@ -1,0 +1,117 @@
+@use '../estilosBase/variables' as v;
+
+.contenedor-detalle{
+    display: block;
+    width: 90%;
+}
+
+.orden-titulo{
+    display: flex;
+    justify-content: center;
+    font-size: 5rem;
+    font-weight: normal;
+    color: v.$color-tercero;
+}
+.datos-user{
+    border: 1px solid v.$color-bordes;
+    border-radius: 20px;
+    padding: 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h1{
+        text-align: left;
+        color: v.$color-titulo;
+        justify-content: space-between;
+    }
+    width:  70%;
+    
+    h2{
+        display: flex;
+        text-align: left;
+        margin-left: 60px;
+        font-weight: normal;
+        color: v.$color-tercero;
+        flex: 1 0 0 ;
+        justify-content: space-between;
+    }
+    span{
+        flex: 3 1 1;
+        margin-left: 30px;
+    }
+}
+.contenedor-articulos{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h1{
+        text-align: left;
+        color:v.$color-titulo;
+        
+    }
+    ul{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    
+    .articulos{
+        border: 1px solid v.$color-tercero;
+        border-radius: 20px;
+        list-style:none;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+        
+    
+    
+    h3{
+        justify-content: space-between;
+        text-transform: uppercase;
+        color: v.$color-titulo;
+        font-weight: normal;
+    }
+    span{
+        color: v.$color-tercero;
+        margin-left: 50px;
+    }
+
+}
+
+.fondo-detalle{
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    border: 1px solid v.$color-bordes;
+    border-radius: 20px;
+    padding: 20px;
+    h1{
+        text-align: left;
+        font-size: 3rem;
+        font-weight: normal;
+        letter-spacing: 2px;
+    }
+    .seccion-compra{
+        display: flex;
+        justify-content: space-between;
+        h1{
+            color: v.$color-titulo;
+        }
+        h3{
+            color: v.$color-tercero;
+        }
+    }
+    button{
+        display: block;
+        margin: 0 auto;
+        padding: 10px 0;
+        width: 90%;
+        border-radius: 10px;
+        font-size: 2rem;
+        transition: 1s;
+        &:hover{
+            background-color: v.$color-titulo;
+        }
+    }
+}

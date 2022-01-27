@@ -101,7 +101,7 @@ export default function Chat() {
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
             
-
+            console.log('resultadoooo',resultado)
             //rondaganada
             if(resultado.mensaje.jugador === infoRoom.jugador1 ){
                 setrondaganada1(rondaganada1+1)
@@ -115,11 +115,11 @@ export default function Chat() {
 
             //restar vida--------
             
-            if(resultado.restarvida1){
-                setvida1(vida1-(resultado.restarvida1 / 2))
+            if(resultado.mensaje.restarvida1){
+                setvida1(vida1-(resultado.mensaje.restarvida1 / 2))
             }
-            if(resultado.restarvida2){
-                setvida2(vida2-(resultado.restarvida2 / 2))
+            if(resultado.mensaje.restarvida2){
+                setvida2(vida2-(resultado.mensaje.restarvida2 / 2))
             }
             
 

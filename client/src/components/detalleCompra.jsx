@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPagar} from '../redux/actions'
+import { getPagar } from '../redux/actions'
 import BotonPagar from './BotonPagar'
 // import { useParams } from 'react-router-dom'
 
@@ -28,72 +28,87 @@ export default function DetalleCompra() {
         }
         return Math.round(total);
     }
-// Generar ID de mercadopago
+    // Generar ID de mercadopago
 
     useEffect(() => {
-        
+
         if (orderId) {
 
-        dispatch(getPagar(orderId));
-        
-        
-      }
-    //   else {
-    //     alert("No hay orden")
-    //   }
+            dispatch(getPagar(orderId));
+
+
+        }
+        //   else {
+        //     alert("No hay orden")
+        //   }
     }, [orderId]);
-    
-     
+
+
 
     const mId = useSelector((state) => state.getpago)
     const pais = useSelector((state) => state.userLogueado.country)
-   console.log("ID para Mercadopago:", mId);
-    
+    console.log("ID para Mercadopago:", mId);
+
 
     return (
         <div>
-        <NavCheto />
-        <div className="background-tienda">
-            <div>
+            <NavCheto />
+            <div className="background-tienda">
+                <div className='contenedor-detalle'>
 
-                <div>
-                    <div style={{alignItems: 'center'}}>
-                      <h2>{userData.nickName}</h2>  
-                    </div>
                     <div>
-                    <h3>Confirma tu Orden de Compra</h3>
+                        <h2 className='orden-titulo'>Confirmacion de Orden</h2>
+                        
+                        <div className='datos-user'>
+                            <h1 className='titulo-articulos'>Datos del comprador:</h1>
+                            <h2>Usuario: <span>{userData.firstName} {userData.lastName}</span></h2>
+                            <h2>Email: <span>{userData.email}</span></h2>
+                        </div>
+
+                    </div>
+                    <div className='contenedor-articulos'>
+                        <h1 className='titulo-articulos'>Articulos de la orden:</h1>
+                        <ul>
+                            {
+                                carrito?.map(c =>
+
+                                    <li className='articulos'>
+                                        <h3>{c.name}  : <span>$ {c.sellPrice}</span></h3>
+                                    </li>
+
+                                )
+                            }
+                        </ul>
+                    </div>
+                    <div className='fondo-detalle'>
+                        <div className="seccion-compra">
+
+                            <h1>Tipo de pago:</h1>
+                            <h3>MercadoPago</h3>
+                        </div>
+                        <div className="seccion-compra">
+
+                            <h1>Acreditacion:</h1>
+                            <h3>Inmediata</h3>
+                        </div>
+                        <div className="seccion-compra">
+
+                            <h1>Total:</h1>
+                            <h3>$  {sumarCarrito(carrito)}</h3>
+                        </div>
+                        <div>
+                            {!mId.id
+                                ? <p>Aguarde un momento....</p>
+                                : <BotonPagar data={mId} pais={pais} />
+                            }
+                        </div>
                     </div>
                 </div>
-                <div style={{ alignItems: 'left' }}>
-                {
-                carrito?.map(c => 
-                   
-                   <div >
-                       <h3>{c.name}  : $ {c.sellPrice}</h3>
-                   </div>
-                    
-                )
-                }
-                </div>
-
-
-                <div className="seccion-compra">
-                    <h1>Total:</h1>
-                    <h3>$  {sumarCarrito(carrito)}</h3>
-                </div>
-                <div>
-                    { !mId.id
-                        ? <p>Aguarde un momento....</p> 
-                        : <BotonPagar data={mId} pais={pais} />
-                    }
-                </div>
-
             </div>
+
+
         </div>
-
-
-    </div>
     )
- 
-  
+
+
 }
