@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { addUser, reset } from '../redux/actions';
+import { addUser, reset,cargarSaldo } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -120,6 +120,8 @@ const Formulario = () => {
 
 	const switchShown = () => setojo(!ojo)
 
+	
+
 	const formik = useFormik({
 		initialValues: {
 
@@ -137,6 +139,17 @@ const Formulario = () => {
 			dispatch(addUser({ image, firstName, lastName, email, nickName, dateBirth, password }))
 			signUp(email, password)
 
+			console.log('email....',email )
+			let aux = {
+				email: email,
+				saldo_cryps: 200,
+			  };
+           
+			
+			setTimeout(() => {
+				dispatch(cargarSaldo(aux));
+
+			}, 1000);
 
 
 		},
