@@ -6,6 +6,10 @@ import { getOrder, sellOrder, pagar } from "../redux/actions";
 import { Link, useHistory } from "react-router-dom";
 import NavCheto from './NavCheto';
 import CartaTienda from "./cartaTienda";
+import Swal from "sweetalert2";
+import huevoBlanco from "../img/huevoBlanco.png";
+
+
 
 export default function Compra() {
     const history = useHistory();
@@ -59,8 +63,26 @@ export default function Compra() {
         if (state.email && state.allCards.length > 0) {
             console.log("Email y Cards desde Compras: ", state.email, state.allCards)
             dispatch(sellOrder(state)) 
-            alert(`${email} Orden enviada`)
-            history.push("/DetalleCompra")
+            
+            
+
+            Swal.fire({
+                imageUrl: `${huevoBlanco}`,
+                title: "Procesando Orden..",
+                width: 500,
+                confirmButtonText: "Continuar",
+                imageWidth: 300,
+                imageHeight: 400,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading();
+                },
+              });
+        
+              setTimeout(() => {
+                history.push("/DetalleCompra")
+              }, 3000);
 
         }
         else {

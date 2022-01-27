@@ -21,11 +21,11 @@ export const CARGAR_SALDO = "CARGAR_SALDO";
 export const ADD_METAMASK_ACCOUNT = "METAMASK_ACCOUNT";
 export const ADD_CARD_NFT = "ADD_CARD_NFT"
 export const GET_USER_CARD = "GET_USER_CARD"
-export const GET_CARD_ORDEN = "GET_CARD_ORDEN"
-
 export const LINK_USER_CARDNFT ="LINK_USER_CARDNFT"
 export const AGREGAR_MAZO ="AGREGAR_MAZO";
 export const GET_USER_STATS = "GET_USER_STATS"
+export const ADD_CARD ="ADD_CARD";
+export const DELETE_CARD = "DELETE_CARD";
 
 
 export function cambiarFondo() {
@@ -75,23 +75,13 @@ export function addMetamaskAccount(payload) {
     }
   };
 }
-export function getCard() {
-  return function (dispatch) {
-    /* dispatch({ type: LOADING, payload: 'Buscando Cartas...' }) */
-    return axios
-      .get("/cards/get")
-      .then((res) => res.data)
-      .then((data) => dispatch({ type: GET_CARDS, payload: data }));
-  };
-}
-
-export function getCardOrden(orden) {
+export function getCard(orden) {
   return function (dispatch) {
     /* dispatch({ type: LOADING, payload: 'Buscando Cartas...' }) */
     return axios
       .get("/cards/get?orden=" + orden)
       .then((res) => res.data)
-      .then((data) => dispatch({ type: GET_CARD_ORDEN, payload: data }));
+      .then((data) => dispatch({ type: GET_CARDS, payload: data }));
   };
 }
 
@@ -384,3 +374,44 @@ export function getUserStats(email) {
     }
   };
 }
+
+export function postCardNormal(payload) {
+  return async (dispatch) => {
+   
+      var json = await axios.post('/cards', payload);
+
+      console.log('crear carta',json)
+      if(json.data.id){
+
+        return dispatch({
+          type: ADD_CARD,
+          payload: true,
+        });
+      }else{
+        return dispatch({
+          type: ADD_CARD,
+          payload: false,
+        });
+      }
+
+
+    } 
+  };
+
+  export function deleteCard(id) {
+    console.log("ID CARTA DESDE ACTIONS: ", id)
+    return async (dispatch) => {
+      try {
+        var json = await axios.delete(`/delete/card/${id}`);
+      
+        return dispatch({
+          type: "DELETE_CARD",
+          payload: json.data,
+          }) ;
+      } catch (error) {
+        alert("No se encuentra la carta")
+        console.log(error);
+      }
+    };
+  }
+

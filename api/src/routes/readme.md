@@ -56,3 +56,5 @@ PutUserPassword : http://localhost:3001/users/putUserPassword
 RUTAS DELETE
 
 DeleteUser : http://localhost:3001/delete/user/:id
+
+DeleteCard :http://localhost:3001/delete/card/:id

@@ -1,5 +1,5 @@
 .casillero{
-    border-bottom: 1px solid #ffb5202a;
+    border-bottom: 1px solid #FF6363 ;
 
     &:last-of-type {
         border-bottom: none;
@@ -10,7 +10,7 @@
 .casillero:hover{
     transform: translateY(-3px);
     transition: 0.4s ease-out;
-    box-shadow: 0 15px 40px 0 #bd9635, 0 17px 17px 0 #bd9635;
+    box-shadow: 0 15px 40px 0 #FF6363 , 0 17px 17px 0 #FF6363 ;
     z-index: 100;
 }
 .user{
@@ -25,7 +25,7 @@
     text-align: center;
     font-weight: normal;
     margin-left: 20px;
-    border-bottom:1px solid #bd9635 ;
+    border-bottom:1px solid #FF6363 ;
     width: 100%;
     padding-bottom: 20px;
     letter-spacing: 3px;

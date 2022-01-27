@@ -117,6 +117,7 @@ const CreateCards = async () => {
      const hola = await cards.map((g) => Card.create(g));
 };
 router.get("/get", async (req, res) => {
+  console.log("Query desde getCards", req.query);
   let orden = req.query.orden || 'ASC'
   let ordenarpor = 'sellPrice'
   switch (orden) {
@@ -153,13 +154,13 @@ router.get("/get", async (req, res) => {
   }  
   try {
     const cards1 = await Card.findAll({
-      //attributes: ["id", "name", "attack", "defense", "img", "state", "type", "sellPrice", "orderId"],
+
       order:[[ordenarpor, orden]]
     })
     if (cards1.length < 11) {
       CreateCards()
       const allCards = await Card.findAll({
-        //attributes: ["id", "name", "attack", "defense", "img", "state", "type", "sellPrice", "orderId"],
+ 
         order:[[ordenarpor, orden]]
       })
       res.status(200).send(allCards)

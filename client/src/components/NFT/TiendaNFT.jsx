@@ -10,7 +10,7 @@ import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import CartaNft from "../CartaNft";
 import { useDispatch } from "react-redux";
-import { postCardNFT } from "../../redux/actions";
+import { postCardNFT ,getCard } from "../../redux/actions";
 import CartaTienda from '../cartaTienda'
 
 let rpcEndpoint = null;
@@ -26,11 +26,12 @@ export default function TiendaNFT() {
   const [loadingState, setLoadingState] = useState("not-loaded");
   const dragones = useSelector(state => state.dragonesbd)
   useEffect(() => {
-    /*     try{
+         try{
+          dispatch(getCard())
         loadNFTs();
         }catch{
           console.log('no server')
-        } */
+        } 
   }, []);
   async function loadNFTs() {
     //funcion para cargar los nft
@@ -70,7 +71,7 @@ export default function TiendaNFT() {
           img: g?.image,
           nftContract: g?.nftContract,
           sellPrice: g?.price,
-          createNFT: true,
+          createdNFT: true,
         };
       });
       dispatch(postCardNFT(datosfiltrados))

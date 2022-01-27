@@ -22,7 +22,7 @@ export default function NavCheto() {
 
             <header class="header">
                 <Link to="/">
-                    <h1 className="titulo">CryptoGame</h1>
+                    <h1 className="titulo">Monster Place <i class="fab fa-optin-monster logo-icon"></i></h1>
                 </Link>
 
                 <div class="hamburger only-mobile" onClick={() => {

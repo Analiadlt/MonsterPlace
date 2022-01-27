@@ -9,9 +9,12 @@ import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useMoralis } from "react-moralis";
+import Swal from "sweetalert2";
+import huevoRojo from "../img/huevoRojo.png";
+
 
 export default function CartaNft({ nft, transaccion }) {
-  const { user, authenticate, isAuthenticated} = useMoralis();
+  const { isAuthenticated} = useMoralis();
   const usuario = useSelector((state) => state.userLogueado);
   const dispatch = useDispatch();
   const ataqueDefensa = nft.description.split(",");
@@ -60,10 +63,41 @@ export default function CartaNft({ nft, transaccion }) {
   }
   async function buyNft(nft) {
     //para conectar la wallet
-    if(isAuthenticated === false || !usuario){
-        alert("Debes hacer login o conectar la wallet para poder ejecutar compra")
-        router.push("/Login");
-    } else {
+    console.log('dentro de buy')
+    if(!usuario.email){
+      Swal.fire({
+          imageUrl: `${huevoRojo}`,
+          title: "<strong>Debes loguearte para poder comprar</strong>",
+          width: 500,
+          confirmButtonText: "Continuar",
+          imageWidth: 300,
+          imageHeight: 400,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+  }
+    if(isAuthenticated === false ){
+        // alert("Debes hacer login o conectar la wallet para poder ejecutar compra")
+
+        // router.push("/Login");
+        Swal.fire({
+          imageUrl: `${huevoRojo}`,
+          title: "<strong>Debes conectar la wallet para compra</strong>",
+          width: 500,
+          confirmButtonText: "Continuar",
+          imageWidth: 300,
+          imageHeight: 400,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+    } 
+    else {
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);

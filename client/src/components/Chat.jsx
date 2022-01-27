@@ -101,7 +101,7 @@ export default function Chat() {
         socket.on('resultado', resultado => {
             setResultado([...resultadoo, resultado])
             
-
+            console.log('resultadoooo',resultado)
             //rondaganada
             if(resultado.mensaje.jugador === infoRoom.jugador1 ){
                 setrondaganada1(rondaganada1+1)
@@ -115,11 +115,11 @@ export default function Chat() {
 
             //restar vida--------
             
-            if(resultado.restarvida1){
-                setvida1(vida1-(resultado.restarvida1 / 2))
+            if(resultado.mensaje.restarvida1){
+                setvida1(vida1-(resultado.mensaje.restarvida1 / 2))
             }
-            if(resultado.restarvida2){
-                setvida2(vida2-(resultado.restarvida2 / 2))
+            if(resultado.mensaje.restarvida2){
+                setvida2(vida2-(resultado.mensaje.restarvida2 / 2))
             }
             
 
@@ -316,32 +316,45 @@ useEffect(() => {
 
 
 return (
-    <div>
+    <div className="divTotal">
        
             
-        <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
+        {/* <div style={{display:'flex', justifyContent:'space-between', margin :'0 50px'}}>
             <h2>Jugador 1</h2>
-        <h1 style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</h1>
             <h2>Jugador 2</h2>
-        </div>
-        <div style={{display:'flex', justifyContent:'space-between'}}>
-            <h2 style={{position:'relative',top:'-50px',left:'50px'}}>{infoRoom.jugador1} </h2>
-            <div class="bloque">
-            <div >{segundos}</div>
+        </div> */}
+        
+
+        <div className="divNombre" >
+            <div className="divIzq">
+            <h2 >{infoRoom.jugador1} </h2>
+            <div className="barraVidaizq">
+            <progress className="progress" max="100" value={vida1} />
+            <span  >{vida1}</span>
+            </div>
+
+            </div>
+
+            <div className="divteimer">
+            <h1>{segundos}</h1>
+            <p style={{display:'flex' , justifyContent:'center'}}>Ronda {numeroDeRonda}</p>
             
-        </div>
-            <h2 style={{position:'relative',top:'-50px', right:'50px'}}>{infoRoom.jugador2}</h2>
+            </div>
+
+            <div className="divDer">
+
+            <h2>{infoRoom.jugador2}</h2>
+
+            <div className="barraVidader">
+            <span >{vida2}</span>
+            <progress className="progress" max="100" value={vida2} />
+            </div>
+
+            </div>
+
 
         </div>
         
-        <div style={{display:'flex', justifyContent:'space-between'}}>
-        <progress className="progress" max="100" value={vida1} style={{position:'relative',top:'-80px',left:'50px',width:'100px'}} />
-        <progress className="progress" max="100" value={vida2} style={{position:'relative',top:'-80px', right:'50px', width:'100px'}} />
-        </div>
-        <div style={{display:'flex', justifyContent:'space-between'}}>
-        <span style={{position:'relative',top:'-100px',left:'150px',width:'100px'}} >{vida1}</span>
-        <span style={{position:'relative',top:'-100px', right:'80px', width:'100px'}}>{vida2}</span>
-        </div>
 
         {partida ? <h1>Partida Finalizada</h1> : 
         <div className='caja-chat'>
@@ -354,8 +367,12 @@ return (
                     {
                         mensajes.map((dragon, i) => (
                             <div classList='carta-grid'>
-                                <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} type={dragon.type} />
-                            </div>
+                                {dragon.createdNFT === true ?
+                                <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} />
+                                    :
+                                    <CartaFondo key={i} img={dragon.mensaje.img} name={dragon.mensaje.name} attack={dragon.mensaje.attack} defense={dragon.mensaje.defense} type={'nft'} />
+                                }
+                                </div>
                         ))
                     }
                 </div>

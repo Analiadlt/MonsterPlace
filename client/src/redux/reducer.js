@@ -2,7 +2,7 @@
 import {CAMBIAR_FONDO, ADD_USER, GET_USER, LOADING, ADD_CART , 
     LOGIN_USER, REMOVE_CART , RESET_USER, GET_CARDS, GET_BY_ID,      
      RESET_LOGIN, USER_LOG, PARTIDA , SELL_ORDER, GET_ORDERS,
-     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, GET_CARD_ORDEN, AGREGAR_MAZO,  GET_USER_STATS
+     RESTAR_SALDO,CARGAR_SALDO, GET_PAGAR, GET_USER_CARD, GET_CARD_ORDEN, AGREGAR_MAZO,  GET_USER_STATS,ADD_CARD, DELETE_CARD
  } from './actions'
 
 const initialState = {
@@ -58,7 +58,11 @@ const initialState = {
 
     mazo:[],
 
-    stats:[]
+    stats:[],
+
+    addCard:false,
+
+    deleteCard:[],
 
 }
 
@@ -200,25 +204,37 @@ export default function Reducer(state=initialState, action){
                 return {
                      ...state, 
                     mazo: action.payload,
+
+                };        
+                
+                case ADD_CARD:
+                    
+                return {
+                     ...state, 
+                     addCard: action.payload,
                                   
-                };
-            case GET_CARD_ORDEN:
-                return{
-                    ...state,
-                    dragonesbd: action.payload,
-                    loading:{
-                        loading: false,
-                        message: ''
-                        } 
                 }
+
             case GET_USER_STATS: 
                 
                     return {
                         ...state,
                         stats: action.payload 
               }
+
+
+                case DELETE_CARD:
+                    console.log("MENSAJE DESDE EL REDUCER: ", action.payload)
+                    return {
+                        ...state,
+                        deleteCard: action.payload
+                        
+                };     
+
+
           default:
             return state;
 
 }}
+
 
