@@ -56,7 +56,7 @@ function App() {
       app.auth().onAuthStateChanged((authUser) => {
         if (
           authUser &&
-          logueado.length > 5 &&
+          
           authUser.emailVerified === true
         ) {
           dispatch(getUserLogin(authUser.email));

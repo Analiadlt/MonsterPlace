@@ -392,7 +392,7 @@ export function postCardNormal(payload) {
         return dispatch({
           type: "DELETE_CARD",
           payload: json.data,
-        });
+          }) ;
       } catch (error) {
         alert("No se encuentra la carta")
         console.log(error);
