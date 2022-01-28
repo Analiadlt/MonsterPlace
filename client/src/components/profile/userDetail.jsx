@@ -64,10 +64,10 @@ export default function Detalle() {
 					
 					<ul>
 						{/* <li onClick={()=>{setNavegacion('home')}}  className={`${navegacion === 'home'? 'activo-profile' : null}`} ><i class="fas fa-home"></i>Home</li> */}
-						<li onClick={()=>{setNavegacion('profile')}} className={`${navegacion === 'profile'? 'activo-profile' : null}`} ><i class="fas fa-user"></i>Profile</li>
-						<li onClick={()=>{setNavegacion('inventario')}} className={`${navegacion === 'inventario'? 'activo-profile' : null}`}><i class="fas fa-boxes"></i>Inventario</li>
-						<li onClick={()=>{setNavegacion('misNft')}}className={`${navegacion === 'misNft'? 'activo-profile' : null}`}><i class="fas fa-hat-wizard"></i>Mis NFT</li>
-						<li onClick={()=>{setNavegacion('estadisticas')}} className={`${navegacion === 'estadisticas'? 'activo-profile' : null}`}><i class="far fa-chart-bar"></i>Estadisticas</li>
+						<li onClick={()=>{setNavegacion('profile')}} style={{cursor:'pointer'}} className={`${navegacion === 'profile'? 'activo-profile' : null}`} ><i class="fas fa-user"></i>Profile</li>
+						<li onClick={()=>{setNavegacion('inventario')}} style={{cursor:'pointer'}} className={`${navegacion === 'inventario'? 'activo-profile' : null}`}><i class="fas fa-boxes"></i>Inventario</li>
+						<li onClick={()=>{setNavegacion('misNft')}} style={{cursor:'pointer'}} className={`${navegacion === 'misNft'? 'activo-profile' : null}`}><i class="fas fa-hat-wizard"></i>Mis NFT</li>
+						<li onClick={()=>{setNavegacion('estadisticas')}} style={{cursor:'pointer'}} className={`${navegacion === 'estadisticas'? 'activo-profile' : null}`}><i class="far fa-chart-bar"></i>Estadisticas</li>
 
 					</ul>
 
