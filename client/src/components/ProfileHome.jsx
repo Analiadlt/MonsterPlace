@@ -185,26 +185,21 @@ return (
                     </Link>}
 
 
+                    {
+                        userLogeado.nickName === 'administrador'?
 
-                <Divider />
-                {/*                     <MenuItem fontSize="2rem">
-                        <ListItemIcon>
-                            <PersonAdd fontSize="bold" />
-                        </ListItemIcon>
-                        Add another account
-                    </MenuItem> */}
-                <MenuItem fontSize="2rem">
-                    <ListItemIcon >
-                        <Settings fontSize="small" />
-                    </ListItemIcon>
-                    <p className='setting'> Settings </p>
-                </MenuItem>
-                {/*                     <MenuItem>
-                        <ListItemIcon>
-                            <Logout fontSize="small" />
-                        </ListItemIcon>
-                        Logout
-                    </MenuItem> */}
+                    <div>
+                 <Divider />
+                    <Link to='/Panel'>
+                        <MenuItem fontSize="2rem">
+                            <Avatar /> <p className='menu'> Settings</p>
+                        </MenuItem>
+                    </Link>
+                    </div>
+
+                    :null
+
+                }
             </Menu>
         </React.Fragment>
     </div>

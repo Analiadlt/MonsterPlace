@@ -148,7 +148,7 @@ export default function CrearCarta() {
       <div className="contenedor-cheto container-log">
         <div className="login-box">
           <form className="formulario" onSubmit={formik.handleSubmit}>
-            <h2>Login</h2>
+            <h2>Crear Cartas</h2>
 
             <div className="user-box">
               <label htmlFor="name">Nombre</label>
