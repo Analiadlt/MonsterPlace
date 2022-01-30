@@ -176,5 +176,23 @@ router.get("/get", async (req, res) => {
   }
 })
 
+router.get("/get/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    if (id) {
+      const cardID = await Card.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (cardID.length !== 0) res.json(cardID);
+      else res.send([{ error: "El ID dela carta no existe" }]);
+    } else res.json(allCards);
+  } catch (error) {
+    res.status(400).send("Error en la base de datos");
+  }
+});
+
+
 
 module.exports = router
