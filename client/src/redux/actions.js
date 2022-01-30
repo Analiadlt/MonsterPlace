@@ -26,6 +26,7 @@ export const AGREGAR_MAZO ="AGREGAR_MAZO";
 export const GET_USER_STATS = "GET_USER_STATS"
 export const ADD_CARD ="ADD_CARD";
 export const DELETE_CARD = "DELETE_CARD";
+export const GET_CARD_ID = "GET_CARD_ID";
 
 
 export function cambiarFondo() {
@@ -429,5 +430,22 @@ export function postCardNormal(payload) {
       }
     };
   
+  }
+
+  export function getCardId(id){
+    return async (dispatch) => {
+      try {
+        var json = await axios.get(`/cards/get/${id}`);
+      
+        return dispatch({
+          type: "GET_CARD_ID",
+          payload: json.data,
+        });
+      } catch (error) {
+        alert("No se encuentra la carta")
+        console.log(error);
+      }
+    };
+
   }
 

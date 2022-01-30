@@ -33,6 +33,7 @@ import CartaNft from "./components/CartaNft";
 import { useMoralis } from "react-moralis";
 import Panel from "./components/panel/panel";
 import preintermedio from "./components/juego/preintermedio";
+import DetallePanel from "./components/panel/DetallePanel"
 
 
 function App() {
@@ -100,10 +101,10 @@ function App() {
       <Route exact path="/Detallecompra" component={DetalleCompra} />
       <Route exact path="/preintermedio" component={preintermedio} />
       {log.nickName === 'administrador' ?
-        <Route exact path="/Panel" component={Panel} />
+        <Route exact path="/Panel" component={Panel} /> 
         : <Route exact path="/Panel" component={Home} />
       }
-
+      <Route exact path="/Panel/:id" component={DetallePanel}/>
 
     </div>
   );
