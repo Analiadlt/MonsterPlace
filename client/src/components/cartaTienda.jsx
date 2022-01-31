@@ -63,7 +63,7 @@ export default function CartaTienda({ img, name, attack, defense, efect, price, 
                                 </div>
                             </div>
                             <div className="precio-carta">
-                                Ars${price}
+                              {type === 'nft' ?'ETH '+price : 'ARS '+ price }  
                             </div>
                             { botones === true ? 
                             <div className="botones">
