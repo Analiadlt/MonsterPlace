@@ -110,7 +110,7 @@ export default function TiendaNFT() {
       <div className="background-tienda">
         <div className="contenedor-tienda">
           <div className="titulo-tienda">
-            <h1>Tienda</h1>
+            <h1>Tienda NFT</h1>
           </div>
           <div className="contenedor-tajetas">
             <div className="grid-tienda">
