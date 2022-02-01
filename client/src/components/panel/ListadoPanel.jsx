@@ -39,7 +39,13 @@ export default function ListadoPanel() {
 
   return (
     <div>
-       <div className="contenedor-filtros">
+      <div className="background-tienda">
+                <div className="contenedor-tienda">
+
+                    <div className="titulo-tienda">
+                      <h2>Listado Cartas</h2>
+                    
+                    <div className="contenedor-filtros">
                             <h5>Ordenar por</h5>
                             <select onChange={(e) => changeOrder(e)} className="filtros">
                                 <option value='ASC'>Menor Precio</option>
@@ -49,18 +55,19 @@ export default function ListadoPanel() {
                                 <option value='D_ASC'>Menor Defensa</option>
                                 <option value='D_DESC'>Mayor Defensa</option>
                             </select>
-            </div>
-     {loading.loading ? <h1>Cargando...</h1> :
-                        <div className="contenedor-tajetas">
+                          </div>
+                    </div>      
+                          {loading.loading ? <h1>Cargando...</h1> :
+                          <div className="contenedor-tajetas">
 
                             <div className="grid-tienda">
                                 {
                                     dragones.map(dragon => (
                                         
                                         <div className="cart-tienda">
-                                            <Link className="Link" to={"/panel/" + dragon.id}>
-                                            <CartaPanel name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
-                                            </Link>
+                                            {/* <Link className="Link" to={"/panel/" + dragon.id}> */}
+                                            <CartaPanel id={dragon.id} name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
+                                            {/* </Link> */}
                                         </div>
 
                                     )
@@ -70,6 +77,9 @@ export default function ListadoPanel() {
                         </div>
 
                     }
+        </div>
+      </div>
     </div>
+    
   );
 }
