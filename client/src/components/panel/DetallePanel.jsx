@@ -39,7 +39,7 @@ export default function DetallePanel (){
     <div>
         <NavCheto />
         
-        <div  >
+        <div>
              <div className="nav-tienda">
                 <h3 className={`${navPanel === 'home' ?  "activoTienda" : null}`} onClick={()=> setNavpanel('home')}>Home</h3>
                 <h3 className={`${navPanel === 'home' ?  "activoTienda" : null}`} onClick={()=> setNavpanel('crearcartas')}>Crear Cartas</h3>
@@ -52,13 +52,21 @@ export default function DetallePanel (){
                 {navPanel === 'crearcartas'? <CrearCarta/>: null }
                 {navPanel === 'crearnft'? <CreateItem/>: null }
             </div>
-    
-        <h2>Detalle</h2>
+            
+        <div className="background-tienda">
 
-    <div className="cart-tienda">
+        <div className="contenedor-tienda">
+
+        <div className="titulo-tienda">
+            <h2>Carta a Eliminar</h2>
+
+      
+
+   
         
 
             <div className="carta3d">
+                 
                 <div  className={`contenido3d girar`}>
                     <div className={`backCarta `}>  
                                 
@@ -115,6 +123,8 @@ export default function DetallePanel (){
             
         </div>        
 
+    </div>
+    </div>
     </div>
     </div>
 
