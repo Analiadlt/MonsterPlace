@@ -6,6 +6,7 @@ import NavCheto from "../NavCheto";
 import CreateItem from "../NFT/CrearNFT";
 import CrearCarta from "./CrearCrtas";
 import { Link } from "react-router-dom";
+// import ListadoPanel from "./ListadoPanel";
 
 
 export default function DetallePanel (){
@@ -15,7 +16,7 @@ export default function DetallePanel (){
     const history = useHistory();
     const detail = useSelector((state) => state.getcardid);
     console.log( "ID carta desde Detalle: ", id, cid)
-    const [navPanel, setNavpanel] =  useState('home')
+    const [navPanel, setNavpanel] =  useState('borrar')
 
     useEffect(() => {
         dispatch(getCardId(cid));
@@ -47,34 +48,58 @@ export default function DetallePanel (){
     
             </div>
             <div>
-                {navPanel === 'home'? <h1>Listado Cartas</h1> : null }
+                {navPanel === 'home'? <div></div>: null }
                 {navPanel === 'crearcartas'? <CrearCarta/>: null }
                 {navPanel === 'crearnft'? <CreateItem/>: null }
             </div>
+    
+        <h2>Detalle</h2>
 
-            <div >
-                <div className="usuario-box">
-                <div>
-                    <h1>Detalle Carta</h1>
-                    <h2 className="card-nombre">{detail.name}</h2>
-                 </div>
-              <div className="card-contenido">
-                    <div className="card_img">
+    <div className="cart-tienda">
+        
+
+            <div className="carta3d">
+                <div  className={`contenido3d girar`}>
+                    <div className={`backCarta `}>  
+                                
+                    <div className={`contenedor-imagen`}>
                         <img src={detail.img} alt="" width="250px" height="250px" />
                     </div>
-                    <div >
-                    <div >
-                        <h4 >defense = {detail.defense}</h4>
-                     
+                    <div  className="contenido-to">
+
+                        <h2 >{detail.name}</h2>
+               
+                        <div className="radios">
+                            <div className="caracteristicasFondo">
+                                <div className="caract">
+                                    <i class="fab fa-fort-awesome icono-cart"></i><span>{detail.defense}</span>
+
+                                </div>
+                                <div className="caract">
+                                    <i class="fab fa-gripfire icono-cart"></i><span>{detail.attack}</span>
+                                </div>
+                                
+                            </div>
+                            <div className="precio-carta">
+                                    Ars$ {detail.sellPrice}
+                                </div>
+                        </div>
+                        
+                            <div className="botones">
+                                <button className="btn-cart btn-detalle" onClick={e => {handleSubmit(e)}}>Delete</button>
+                                <button className="btn-cart btn-comprar">
+                                <Link  to={"/panel/"}>
+                                        Cancel
+                                </Link>
+                                </button>
+                            </div> 
+                   
+
                     </div>
 
-                    <div >
-                        <h4 >attack = {detail.attack}</h4>
-                       
-                    </div>
-                    </div>
 
-                    <div className='botonn'>
+
+                    {/* <div className='botonn'>
                         <button className='boton-delete' 
                          onClick={e => {handleSubmit(e)}}>Delete</button>
                     </div>   
@@ -82,14 +107,16 @@ export default function DetallePanel (){
                         <Link className="Link" to={"/panel/"}>
                         <button className='boton-detalle'>Cancel</button>
                         </Link>
-                    </div>             
+                    </div>    */}
 
-              </div>
-              </div>
+                </div>
+              </div>  
+            </div>
             
-          </div>        
+        </div>        
 
-        </div>
     </div>
+    </div>
+
   );
 }

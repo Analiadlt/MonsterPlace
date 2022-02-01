@@ -58,9 +58,9 @@ export default function ListadoPanel() {
                                     dragones.map(dragon => (
                                         
                                         <div className="cart-tienda">
-                                            <Link className="Link" to={"/panel/" + dragon.id}>
-                                            <CartaPanel name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
-                                            </Link>
+                                            {/* <Link className="Link" to={"/panel/" + dragon.id}> */}
+                                            <CartaPanel id={dragon.id} name={dragon.name} attack={dragon.attack} defense={dragon.defense} img={dragon.img} price={dragon.sellPrice} botones={true} />
+                                            {/* </Link> */}
                                         </div>
 
                                     )
