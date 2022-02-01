@@ -138,7 +138,7 @@ export default function CartaNft({ nft, transaccion }) {
                   <span>{ataqueDefensa[1]}</span>
                 </div>
               </div>
-              <div className="precio-carta">eTh${nft.price}</div>
+              <div className="precio-carta">ETH ${nft?.price}</div>
               {transaccion === "compra" ? (
                 <div className="botones">
                   <button className="btn-cart btn-detalle">Ver detalle</button>
