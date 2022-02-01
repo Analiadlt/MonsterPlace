@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 import NavCheto from "../NavCheto";
 import CreateItem from "../NFT/CrearNFT";

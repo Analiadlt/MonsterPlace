@@ -7,11 +7,11 @@ import { useDispatch , useSelector} from "react-redux";
 import Swal from "sweetalert2";
 import { addCart } from "../../redux/actions";
 import huevoRojo from "../../img/huevoRojo.png";
-// import DetallePanel from "./DetallePanel"
+import DetallePanel from "./DetallePanel"
 
 
 
-export default function CartaPanel({ img, name, attack, defense, efect, price, type, botones }) {
+export default function CartaPanel({ id, img, name, attack, defense, efect, price, type, botones }) {
     const usuario = useSelector((state) => state.userLogueado);
     const dispatch = useDispatch()
     // const ataqueDefensa = nfts.description.split(",");
@@ -69,15 +69,14 @@ export default function CartaPanel({ img, name, attack, defense, efect, price, t
                             { botones === true ? 
                             <div className="botones">
                                 <button className="btn-cart btn-detalle"><DetalleDr  name={name} attack={attack} defense={defense} img={img}/></button>
-                                
-                                {/* <button className="btn-cart btn-comprar" onClick={() => enviar(name)}>Comprar</button> */}
-                                {/* <button
-                className="btn-gl btn-comprar"
-                onClick={() => buyNft(nft)}
-              >
-                Buy{" "}
-              </button> */}
-                            </div> : null
+                                <button className="btn-cart btn-comprar">
+                                <Link  to={"/panel/" + id}>
+                                        Borrar
+                                </Link>
+                                </button>
+                            </div> 
+  
+                            : null
                             }
                         </div>
                     </div>
