@@ -5,6 +5,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { getUserCard, subirmazo } from '../../redux/actions';
 import CartaTienda from '../cartaTienda';
 import CartaNft from '../cartaTienda';
+import Swal from "sweetalert2";
+import huevoRojo from "../../img/huevoRojo.png";
 
 
 
@@ -34,7 +36,14 @@ export default function Preintermedio() {
             history.push('/Matchmaking')
         }
         else {
-            alert('debes tener 3 cartas en el mazo para jugar')
+         
+            Swal.fire({
+                title: "<strong>Debes tener 3 cartas en el mazo para jugar</strong>",
+                imageUrl: `${huevoRojo}`,
+                width: 500,
+                imageWidth: 300,
+                imageHeight: 400,
+              });
         }
 
 
@@ -65,7 +74,14 @@ export default function Preintermedio() {
                 setmazo([...mazo, c])
             }
             else {
-                alert("Mazo lleno")
+                
+                Swal.fire({
+                    title: "<strong>Mazo lleno</strong>",
+                    imageUrl: `${huevoRojo}`,
+                    width: 500,
+                    imageWidth: 300,
+                    imageHeight: 400,
+                  });
             }
         }
     }

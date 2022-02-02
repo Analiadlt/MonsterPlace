@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { empezarPartida } from "../../redux/actions";
 import Spinner from "./spinner";
 import { restarSaldo } from "../../redux/actions";
+import CartaFondo from "./FondoCarta";
 
 export default function Intermedio(){
     const userLogeado = useSelector(state => state.userLogueado)
@@ -65,26 +66,27 @@ export default function Intermedio(){
                 </div>
             </div>
             :
-            <div className="contenedor-cheto">
-                <h1>Detalles de la Partida</h1>
+            <div>
+            <div className="contenedor-cheto" style={{ border: '1px solid #e92b2d',marginTop:'5rem',marginBottom:'3rem'}}>
+                <h1 className='detalle_partida' >Detalles de la Partida</h1>
                 
                 <div className="grid-intermedio">
-                    <div className="jugador">
-                        <h1>Jugador 1</h1>
+                    <div className="jugador" style={{marginBottom:'4rem'}}>
+                        <h1 style={{fontSize:'50px'}}>Jugador 1</h1>
                         <h2>{infoRoom.jugador1}</h2>
                         <h3>CrypsCoins a descontar: 6</h3>
-                     
+                        
 
 
                     </div>
-                    <div className="detalle">
+                    <div className="detalle" style={{marginTop:'5rem'}} >
                         <h2>Tiempo por ronda: 30s</h2>
                         <h2>CrypsCoins para el ganador: 10</h2>
 
                         
                     </div>
-                    <div className="jugador">
-                        <h1>Jugador 2</h1>
+                    <div className="jugador" style={{marginBottom:'4rem'}}>
+                        <h1 style={{fontSize:'50px'}}>Jugador 2</h1>
                         <h2>{infoRoom.jugador2}</h2>
                         <h3>CrypsCoins a descontar: 6</h3>
                        
@@ -93,6 +95,7 @@ export default function Intermedio(){
                     </div>
 
                 </div>
+            </div>
             <button className="boton-partida btn-registrarse draw meet" onClick={()=>entrar()}> Empezar Partida</button>
             </div>
             }
