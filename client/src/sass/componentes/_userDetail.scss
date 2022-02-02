@@ -204,6 +204,25 @@
 .contrase{
     background: v.$color-titulo;
     color: v.$color-fondo;
-    box-shadow: 5px 5px 15px v.$color-titulo;
+    box-shadow: 1px 1px 15px v.$color-titulo;
     
+}
+.meta-conect{
+    background: v.$boton-verde;
+    height: 80px;
+    box-shadow: 1px 1px 20px v.$boton-verde;
+    h2{
+        color: black;
+    }
+    i{color: black}
+}
+
+.meta-desconect{
+    background: rgb(228, 49, 49);
+    height: 80px;
+    box-shadow: 1px 1px 20px rgb(228, 49, 49);
+    h2{
+        color: black;
+    }
+    i{color: black}
 }

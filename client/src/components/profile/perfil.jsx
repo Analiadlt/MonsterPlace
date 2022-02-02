@@ -41,27 +41,45 @@ export default function Perfil() {
         </div>
         <div className="campo contrase">
           <i class="fas fa-edit"></i> Modificar Contraseña
+
         </div>
-        <div style={{cursor:'pointer'}} className="campo meta" onClick={authenticate}>
-          <i class="fas fa-wallet"></i> <h2 >Conectar Wallet</h2>
-          {authError && (
-            <p className="error">
-              {authError.name}
-              {authError.message}
-            </p>
-          )}
-        </div>
-        <div style={{cursor:'pointer'}} className="campo meta" onClick={logout}>
-          <i class="fas fa-wallet"></i> <h2 >Desconectar Wallet</h2>
-        </div>
-        <div className="campo meta">
-          <i class="fas fa-wallet"></i>{" "}
-          <h2>
-            Conexión de Wallet:{" "}
-            {isAuthenticated === true ? "conectado" : "desconectado"}
-          </h2>
-        </div>
+        {isAuthenticated === false ?
+          <div style={{ cursor: 'pointer' }} className="campo meta-conect" onClick={authenticate}>
+            <i class="fas fa-wallet"></i> <h2 >Conectar Wallet</h2>
+            {authError && (
+              <p className="error">
+                {authError.name}
+                {authError.message}
+              </p>
+            )}
+          </div>
+          :
+          <div style={{ cursor: 'pointer' }} className="campo meta-desconect" onClick={logout}>
+            <i class="fas fa-wallet"></i> <h2 >Desconectar Wallet</h2>
+          </div>
+  }
       </div>
+      
     </div>
   );
 }
+
+
+{/* <div style={{ cursor: 'pointer' }} className="campo meta" onClick={authenticate}>
+<i class="fas fa-wallet"></i> <h2 >Conectar Wallet</h2>
+{authError && (
+  <p className="error">
+    {authError.name}
+    {authError.message}
+  </p>
+)}
+</div> */}
+
+
+{/* <div className="campo meta">
+<i class="fas fa-wallet"></i>{" "}
+<h2>
+  Conexión de Wallet:{" "}
+  {isAuthenticated === true ? "conectado" : "desconectado"}
+</h2>
+</div> */}
