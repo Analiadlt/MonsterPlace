@@ -142,7 +142,7 @@ const Formulario = () => {
 			console.log('email....',email )
 			let aux = {
 				email: email,
-				saldo_cryps: 200,
+				saldo_cryps: 194,
 			  };
            
 			
