@@ -22,7 +22,7 @@
     "ethers": "^5.5.3",
     "firebase": "^9.6.2",
     "formik": "^2.2.9",
-    "hardhat": "^2.8.2",
+    "hardhat": "^2.8.3",
     "ipfs-http-client": "^50.1.2",
     "mercadopago": "^1.5.11",
     "moment": "^2.29.1",

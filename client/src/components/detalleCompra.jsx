@@ -41,7 +41,7 @@ export default function DetalleCompra() {
         //   else {
         //     alert("No hay orden")
         //   }
-    }, [orderId]);
+    }, [dispatch,orderId]);
 
 
 
